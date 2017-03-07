@@ -1,0 +1,39 @@
+
+tr.enseignant {
+  cursor: pointer;
+
+  &:hover {
+    color: #116;
+  }
+}
+
+tr.formation {
+  cursor: pointer;
+
+  &:hover {
+    color: #116;
+  }
+}
+
+.add {
+  cursor: pointer;
+  color: #5D5;
+
+  &:hover {
+    color: #3C3;
+  }
+}
+
+.remove {
+  cursor: pointer;
+  color: #D55;
+}
+
+/* Animation pour "secouer" le login lors d'un mauvais user/password. */
+.shake {
+  .animation(shake 0.5s);
+}
+
+/* L'animation elle-même (translation à droite, à gauche, ...). */
+.keyframes(~'shake, 0% {    transform: translate(0px);  }  15% {    transform: translate(10px);  }  30% {    transform: translate(-10px);  }  45% {    transform: translate(10px);  }  60% {    transform: translate(-10px);  }  75% {    transform: translate(10px);  }  90% {    transform: translate(-10px);  }  100% {    transform: translate(0px);  }');
+

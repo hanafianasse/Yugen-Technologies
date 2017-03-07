@@ -1,0 +1,116 @@
+<div class="page page-table" data-ng-controller="FormationsController">
+
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
+        <span class="add fa fa-user-plus pull-right" ng-click="ajoutFormation()"></span>
+        </div>
+
+        <!-- <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="search"
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Affiche {{filtered.length}}/{{enseignants.length}}
+                    </span>              
+                </div>
+            </div>
+        </div> -->
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Code
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('code') "
+                              data-ng-class="{active: row == 'code'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-code') "
+                              data-ng-class="{active: row == '-code'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Diplôme / année
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('diplome') "
+                              data-ng-class="{active: row == 'diplome'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-diplome') "
+                              data-ng-class="{active: row == '-diplome'}"></span>
+                    </div></th>                    
+                    <th><div class="th">
+                        Nom formation
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('email') "
+                              data-ng-class="{active: row == 'email'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-email') "
+                              data-ng-class="{active: row == '-email'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Double diplôme
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('email') "
+                              data-ng-class="{active: row == 'email'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-email') "
+                              data-ng-class="{active: row == '-email'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Accréditation
+                        <span class="glyphicon glyphicon-chevron-up"
+                              data-ng-click=" order('email') "
+                              data-ng-class="{active: row == 'email'}"></span>
+                        <span class="glyphicon glyphicon-chevron-down"
+                              data-ng-click=" order('-email') "
+                              data-ng-class="{active: row == '-email'}"></span>
+                    </div></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="f in formations" class="formation">
+                    <td ng-click="edit(f)">{{f.codeFormation}}</td>
+                    <td ng-click="edit(f)">{{f.diplome}}{{f.n0Annee}}</td>
+                    <td ng-click="edit(f)">{{f.nomFormation}}</td>
+                    <td ng-click="edit(f)">{{f.doubleDiplome}}</td>
+                    <td ng-click="edit(f)">{{f.debutAccreditation}} => {{f.finAccreditation}}</td>
+                    <td><span class="remove fa fa-remove" ng-click="supprime(f)"></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                ng-model="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                ng-change="select(currentPage)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+</div>

@@ -1,0 +1,170 @@
+<div class="page" ng-controller="EnsDetailsController">
+  <div class="panel panel-default ens-edit">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Enseignant</strong></div>
+    <div class="panel-body">
+        <!-- Consultation -->
+        <div class="media animate" ng-hide="edit">
+            <button class="btn btn-warning pull-right" ng-click="edition()"><span class="glyphicon glyphicon-pencil"></span> Editer</button>
+            <div class="media-body"> 
+                <ul class="list-unstyled list-info">
+                    <li>
+                        <span class="icon glyphicon glyphicon-user"></span>
+                        <label>Nom</label>
+                        {{enseignant.sexe == "H" ? 'M.' : 'Mme'}} {{enseignant.nom}} {{enseignant.prenom}} ( {{enseignant.type}} )<br/>
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>E-mail</label>                        
+                        {{enseignant.emailUbo}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-home"></span>
+                        <label>Adresse</label>
+                        {{enseignant.adresse}} {{enseignant.codePostal}} {{enseignant.ville}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-earphone"></span>
+                        <label>Téléphone</label>
+                        {{enseignant.telephone}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pays</label>
+                        {{enseignant.pays}}
+                    </li>                    
+                </ul>                
+            </div>
+            <div class="row">
+                <div class="col-md-6" ng-show="enseignant.promotions.length">            
+                    <div class="panel-body table-responsive" >
+                        <strong><span class="fa fa-graduation-cap"></span> Promotions</strong>
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <th>Année</th>
+                                    <th>Code</th>
+                                    <th>Designation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="p in enseignant.promotions">
+                                    <td>{{p.promotionPK.anneeUniversitaire}}</td>
+                                    <td>{{p.promotionPK.codeFormation}}</td>
+                                    <td>{{p.siglePromotion}}</td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-show="enseignant.ue.length">
+                    <div class="panel-body table-responsive">
+                        <strong><span class="fa fa-university"></span> Unités d'Enseignement</strong>
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <th>Semestre</th>
+                                    <th>Code</th>
+                                    <th>Designation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="ue in enseignant.ue">
+                                    <td>{{ue.semestre}}</td>
+                                    <td>{{ue.uniteEnseignementPK.codeUe}}</td>
+                                    <td>{{ue.designation}}</td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-primary" href="#/admin/enseignants"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+        </div>
+
+        <!-- Edition -->
+        <div ng-show="edit">            
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Nom</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" 
+                               ng-model="enseignant.nom">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Prénom</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.prenom">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Sexe</label>
+                    <div class="col-sm-10">
+                        <label class="ui-radio"><input name="radio1" type="radio" value="H" ng-model="enseignant.sexe"><span>Homme</span></label>
+                        <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="enseignant.sexe"><span>Femme</span></label>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Type</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.type" placeholder="Type de contrat (eg. MCF, PRAG, ...)">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">E-mail</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.emailUbo">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Téléphone</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.telephone">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Mobile</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.mobile">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Adresse</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.adresse">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Code postal</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.codePostal">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Ville</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.ville">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Pays</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="enseignant.pays">
+                    </div>                    
+                </div>
+            </form>
+            <a class="btn btn-success" ng-click="submit()"><span class="glyphicon glyphicon-ok"></span> Valider</a>
+            <button class="btn btn-danger pull-right" ng-click="cancel()"> Annuler</button>
+        </div>
+    </div>
+  </div>
+</div>

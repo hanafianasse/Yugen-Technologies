@@ -1,0 +1,12 @@
+node_modules
+dist
+.tmp
+.sass-cache
+src/main/resources/client/bower_components/
+
+.DS_Store
+npm-debug.log
+/preview/preview.zip
+/documentation/index.htmlGruntfile.coffee~
+*~
+target
