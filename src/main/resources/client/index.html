@@ -1,0 +1,98 @@
+<!doctype html>
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>SPI</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- needs images, font... therefore can not be part of ui.css -->
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css">
+        <!-- end needs images -->
+
+        <link rel="stylesheet" href="styles/main.css">
+
+    </head>
+    <body data-ng-app="app" id="app" data-custom-background data-off-canvas-nav>
+        <!--[if lt IE 9]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div data-ng-controller="AppCtrl">
+            <div data-ng-hide="isSpecificPage()"
+                 data-ng-cloak
+                 class="no-print">
+                <section data-ng-include=" 'views/header.html' "
+                     id="header" class="top-header"></section>
+
+                <aside data-ng-include=" 'views/nav.html' "
+                     id="nav-container"></aside>
+            </div>
+
+            <div class="view-container">
+                <section data-ng-view id="content" class="animate-fade-up"></section>
+            </div>
+        </div>
+
+
+        <!-- build:js scripts/vendor.js -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/underscore/underscore-min.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js scripts/ui.js -->
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="bower_components/jquery-spinner/dist/js/jquery.spinner.min.js"></script>
+        <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+        <script src="bower_components/jquery-steps/build/jquery.steps.min.js"></script>
+        <script src="bower_components/toastr/toastr.min.js"></script>
+        <script src="bower_components/bootstrap-file-input/bootstrap.file-input.js"></script>
+        <script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="bower_components/holderjs/holder.js"></script>
+        <script src="bower_components/raphael/raphael-min.js"></script>
+        <script src="bower_components/morris.js/morris.js"></script>
+        <script src="bower_components/flot/jquery.flot.js"></script>
+        <script src="bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="bower_components/flot/jquery.flot.stack.js"></script>
+        <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+        <script src="bower_components/flot/jquery.flot.time.js"></script>
+        <script src="bower_components/gauge.js/dist/gauge.min.js"></script>
+        <script src="bower_components/jquery.easy-pie-chart/dist/angular.easypiechart.min.js"></script>
+        <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+        <script src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
+        <script src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+        <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+        <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
+        <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,client}) scripts/app.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/auth.js"></script>
+        <script src="scripts/Enseignants/EnseignantsController.js"></script>
+        <script src="scripts/Formations/FormationsController.js"></script>
+        <script src="scripts/UE/UEController.js"></script>
+        <script src="scripts/shared/authentication.js"></script>
+        <script src="scripts/shared/main.js"></script>
+        <script src="scripts/shared/directives.js"></script>
+        <script src="scripts/shared/localize.js"></script>
+        <script src="scripts/UI/UICtrl.js"></script>
+        <script src="scripts/UI/UIDirective.js"></script>
+        <script src="scripts/UI/UIService.js"></script>
+        <script src="scripts/Form/FormDirective.js"></script>
+        <script src="scripts/Form/FormCtrl.js"></script>
+        <script src="scripts/Form/FormValidation.js"></script>
+        <script src="scripts/Table/TableCtrl.js"></script>
+        <script src="scripts/Task/Task.js"></script>
+        <script src="scripts/Chart/ChartCtrl.js"></script>
+        <script src="scripts/Chart/ChartDirective.js"></script>
+        <script src="scripts/Page/PageCtrl.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

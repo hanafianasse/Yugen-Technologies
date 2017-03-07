@@ -1,0 +1,63 @@
+<div class="page" ng-controller="FormationDetailsController">
+  <div class="panel panel-default ens-edit">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formation</strong></div>
+    <div class="panel-body">        
+        <!-- Edition -->
+        <div>            
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Code</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" 
+                               ng-model="formation.codeFormation">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Diplome</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.diplome">
+                    </div>                    
+                </div>                
+                <div class="form-group">
+                    <label for="" class="col-sm-2">No. année</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.n0Annee" placeholder="Numéro d'année">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Nom formation</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.nomFormation">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Double diplôme</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.doubleDiplome">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Début d'accréditation</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.debutAccreditation">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Fin d'accréditation</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                               ng-model="formation.finAccreditation">
+                    </div>                    
+                </div>                
+            </form>
+            <a class="btn btn-success" ng-click="submit()"><span class="glyphicon glyphicon-ok"></span> Valider</a>
+            <button class="btn btn-danger pull-right" ng-click="cancel()"> Annuler</button>
+        </div>
+    </div>
+  </div>
+</div>

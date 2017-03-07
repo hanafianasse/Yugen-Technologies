@@ -1,0 +1,61 @@
+<div class="page-signin" ng-controller="AuthenticationController as ac">
+
+    <div class="signin-header">
+        <div class="container text-center">
+            <section class="logo">
+                <a href="#/">Suivi et Préparation à
+l’Insertion Professionnelle</a>
+            </section>
+        </div>
+    </div>
+
+    <div class="main-body">
+        <div class="container">
+            <div class="form-container">
+
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <!-- Utilisation de ng-model pour enregistrer la valeur du champ automatiquement (databinding). -->
+                                <input type="text"
+                                       ng-model="login.username"
+                                       class="form-control"
+                                       placeholder="Nom d'utilisateur"
+                                       >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <!-- Utilisation de ng-model pour enregistrer la valeur du champ automatiquement (databinding). -->
+                                <input type="password"
+                                       ng-model="login.password"
+                                       class="form-control"
+                                       placeholder="Mot de passe"
+                                       >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group">
+                        <!-- Utilisation de ng-click pour déclencher l'action de login : appel d'une méthode du controleur défini au début de ce fichier : "AuthenticationController as ac". -->
+                            <button ng-click="ac.submit()" class="btn btn-primary btn-lg btn-block">Connexion</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <section>
+                    <p class="text-center"><a href="#/pages/forgot">Mot de passe oublié?</a></p>                    
+                </section>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
