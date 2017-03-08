@@ -19,7 +19,10 @@ public class UserService {
 		mapBouchonUser.put("zou", new User("zou", "1234", Arrays.asList("visiteur")));
 		mapBouchonUser.put("mouad", new User("mouad", "1234", Arrays.asList("Prof")));
 		mapBouchonUser.put("SpiUser", new User("SpiUser", "spiuser", Arrays.asList("Admin")));
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5e1f82f5e6372dbd08d48092ace79c4b366efb6
 	}
 
 	/**

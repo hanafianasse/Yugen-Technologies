@@ -10,3 +10,7 @@ npm-debug.log
 /documentation/index.htmlGruntfile.coffee~
 *~
 target
+<<<<<<< HEAD
+=======
+log/
+>>>>>>> a5e1f82f5e6372dbd08d48092ace79c4b366efb6
