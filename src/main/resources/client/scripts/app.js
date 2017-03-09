@@ -25,6 +25,8 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
+				}).when('/admin/promotion', {
+					templateUrl : 'views/promotion/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
 				}).when('/dashboard', {
