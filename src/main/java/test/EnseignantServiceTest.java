@@ -28,7 +28,6 @@ public class EnseignantServiceTest {
 
 	private static EnseignantService enseignantService = new EnseignantService();
 	private final Enseignant enseignant = new Enseignant();
-
 	@Test
 	public final void addserviceTest() throws ClientProtocolException, IOException {
 
@@ -73,7 +72,7 @@ public class EnseignantServiceTest {
 	}
 
 	@Test
-	public final void deleteEnseignanrTest() throws ClientProtocolException, IOException {
+	public final void deleteEnseignantTest() throws ClientProtocolException, IOException {
 
 		// Création du client et éxécution d'une requete GET
 		final HttpClient client = HttpClientBuilder.create().build();
