@@ -27,11 +27,12 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
+				}).when('/admin/promotion', {
+					templateUrl : 'views/promotion/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/etu/:id', {
                     templateUrl : 'views/ue/ajoutEtudiant.html'
-
 				}).when('/dashboard', {
 					templateUrl : 'views/dashboard.html'
 				}).when('/ui/typography', {
