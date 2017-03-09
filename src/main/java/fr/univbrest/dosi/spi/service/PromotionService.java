@@ -40,6 +40,7 @@ public class PromotionService {
 	public final List<Promotion> getPromotionByEnseignant(final Integer noEnseignant) {
 		return promotionRepository.findByNoEnseignant(noEnseignant);
 	}
+	
 	public final List<Promotion> getPromotionByCodeFormation(final Formation f) {
 		return promotionRepository.findByFormation(f);
 	}
@@ -53,5 +54,7 @@ public class PromotionService {
 		final Iterable<Promotion> promotions = promotionRepository.findAll();
 		return promotions;
 	}
+
+	
 
 }
