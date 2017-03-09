@@ -21,6 +21,8 @@
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
 					templateUrl : 'views/formations/list.html'
+                }).when('/admin/etudiants', {
+                    templateUrl : 'views/Etudiant/list.html'
 				}).when('/admin/formation/:id', {
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/ue', {
@@ -29,8 +31,6 @@
 					templateUrl : 'views/promotion/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
-				}).when('/admin/etudiants', {
-					templateUrl : 'views/etudiant/list.html'
 				}).when('/dashboard', {
 					templateUrl : 'views/dashboard.html'
 				}).when('/ui/typography', {

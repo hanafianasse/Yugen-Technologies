@@ -2,7 +2,6 @@
 
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
-        <span class="add fa fa-user-plus pull-right" ng-click="ajoutFormation()"></span>
         </div>
 
         <table class="table table-bordered table-striped table-responsive">
@@ -174,7 +173,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="e in Etudiants" class="formation">
+                <tr data-ng-repeat="e in etudiants" class="formation">
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
