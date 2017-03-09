@@ -25,8 +25,8 @@ angular.module('app')
             return $http.delete(urlBase, id);
         };
 
-        dataFactory.getEtudiants = function (id) {
-            return $http.get(urlBase, id);
+        dataFactory.getEtudiants = function (CodeFormation,anneeUniversitaire) {
+            return $http.get(urlBase+'/'+CodeFormation+'/'+anneeUniversitaire);
         };
 
         return dataFactory;
