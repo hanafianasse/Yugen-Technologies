@@ -25,6 +25,10 @@ angular.module('app')
             return $http.delete(urlBase, id);
         };
 
+        dataFactory.getEtudiants = function (id) {
+            return $http.get(urlBase, id);
+        };
+
         return dataFactory;
     }]);
 
