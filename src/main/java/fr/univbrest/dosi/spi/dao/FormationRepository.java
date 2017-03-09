@@ -11,5 +11,5 @@ import fr.univbrest.dosi.spi.bean.Formation;
  */
 @RepositoryRestResource(collectionResourceRel = "formation", path = "formation")
 public interface FormationRepository extends PagingAndSortingRepository<Formation, String> {
-
+	
 }
