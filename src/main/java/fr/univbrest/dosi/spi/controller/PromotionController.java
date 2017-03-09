@@ -54,19 +54,19 @@ public class PromotionController {
 	}
 	
 	//Ajouter une nouvelle promotion 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value="/addpromotions")
 	public Promotion addPromotion(Promotion promotion) {
 		return promotionService.addPromotion(promotion);
 	}
 	
 	//Modifier une promotion
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT, value="/updpromotions")
 	public Promotion UpdatePromotion(Promotion promotion) {
 		return promotionService.UpdatePromotion(promotion);
 	}
  
  //Supprimer une promotion 
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE, value="/delpromotions")
 	public void DeletePromotion(PromotionPK promotionPK) {
 		 promotionService.deletePromotion(promotionPK);
 	}

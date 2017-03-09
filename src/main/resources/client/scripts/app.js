@@ -27,6 +27,8 @@
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
+				}).when('/admin/etudiants', {
+					templateUrl : 'views/etudiant/list.html'
 				}).when('/dashboard', {
 					templateUrl : 'views/dashboard.html'
 				}).when('/ui/typography', {
