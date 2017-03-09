@@ -57,6 +57,11 @@
 		var promise = promotionService.getEtudiants(promotion.promotionPK.codeFormation,promotion.promotionPK.anneeUniversitaire);
 		promise.success(function(data,status) {
 			$scope.etudiants = data;
+			for(var index = 0; index < $scope.etudiants.length; index++){
+				if($scope.etudiants[index].telephone == null){
+					$scope.etudiants[index].telephone = "--";
+				}
+			}
 		}).error(function(data,status){
 			console.log("get Etudiants d'une Promotion : erreur");
 		});
