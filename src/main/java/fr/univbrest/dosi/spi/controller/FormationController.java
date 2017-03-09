@@ -63,7 +63,7 @@ public class FormationController {
 	/**
 	 *
 	 * @param codeFormation
-	 *            l'id de formation
+	 *            l'id de promotion
 	 * @return une liste de promotion
 	 */
 	@RequestMapping(value = "/formation/{codeFormation}/promotion", produces = { MediaType.APPLICATION_JSON_VALUE })
