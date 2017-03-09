@@ -24,6 +24,7 @@ import fr.univbrest.dosi.spi.service.EnseignantService;
  * @author DOSI
  *
  */
+
 public class EnseignantControllerTest {
 
 	private static EnseignantService enseignantService = new EnseignantService();
