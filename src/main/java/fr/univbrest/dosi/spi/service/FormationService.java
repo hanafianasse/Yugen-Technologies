@@ -1,9 +1,12 @@
 package fr.univbrest.dosi.spi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Formation;
+import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.dao.FormationRepository;
 
 /**
@@ -43,4 +46,8 @@ public class FormationService {
 
 	}
 
+	public final List<Promotion> getPromotions(final String codeFormation) {
+		Formation formation = formationRepository.findOne(codeFormation);
+		return (List<Promotion>) formation.getPromotionCollection();
+	}
 }
