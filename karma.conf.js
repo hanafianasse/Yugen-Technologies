@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Thu Mar 09 2017 10:25:11 GMT+0100 (Paris, Madrid)
+// Generated on Thu Mar 09 2017 10:44:20 GMT+0100 (Paris, Madrid)
 
 module.exports = function(config) {
   config.set({
@@ -15,11 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'src/main/resources/client/scripts/**/*Service.js',
-      'src/main/resources/client/scripts/**/*.test.js'
-],
+    ],
 
 
     // list of files to exclude
@@ -53,7 +49,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
