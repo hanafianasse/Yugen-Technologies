@@ -9,7 +9,7 @@ import fr.univbrest.dosi.spi.bean.Etudiant;
  * @author DOSI
  *
  */
-@RepositoryRestResource(collectionResourceRel = "etudiant", path = "etudiant")
+
 public interface EtudiantRepository extends PagingAndSortingRepository<Etudiant, String> {
 
 }

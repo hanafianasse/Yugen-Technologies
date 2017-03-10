@@ -22,13 +22,13 @@ public class EtudiantServiceTest {
 	
 
 
-	/*@Test
+	@Test
 	public void doitAjouterEtudiant() {
 		EtudiantRepository entrepot = new EtudiantDAOStub();
 		EtudiantService etudiantService = new EtudiantService(entrepot);
 		etudiantService.addEtudiant(new Etudiant());
 		Assert.assertEquals(1, entrepot.count());
-	}*/
+	}
 	
 	@Test
 	public void doitRécupérerLesEtudiants(){
@@ -40,5 +40,14 @@ public class EtudiantServiceTest {
 		
 	}
 	
+	@Test
+	public void doitSupprimerUnEtudiant(){
+		List<Etudiant> etudiants=Lists.newArrayList(new Etudiant("12"),new Etudiant("13"),new Etudiant("14"));
+		EtudiantRepository entrepot = new EtudiantDAOStub(etudiants);
+		EtudiantService etudiantService = new EtudiantService(entrepot);
+		etudiantService.deleteEtudiant("12");
+		Assert.assertEquals(2,etudiantService.getAll().size());
+		
+	}
 	
 }

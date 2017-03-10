@@ -25,6 +25,7 @@ public class EtudiantService {
 	}
 
 	public final Etudiant addEtudiant(final Etudiant etudiant) {
+	
 		return etudiantRepository.save(etudiant);
 	}
 
