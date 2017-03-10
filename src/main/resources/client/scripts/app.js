@@ -25,6 +25,8 @@
                     templateUrl : 'views/Etudiant/list.html'
 				}).when('/admin/formation/:id', {
 					templateUrl : 'views/formations/details.html'
+				}).when('/admin/questionsStandard', {
+					templateUrl : 'views/question/list.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {

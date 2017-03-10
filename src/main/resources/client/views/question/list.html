@@ -1,0 +1,30 @@
+<div class="page page-table" data-ng-controller="QuestionController">
+
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Question Standards</strong>
+        </div>
+        <div style="overflow: auto ;max-height: 250px;">
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Intitulé
+                    </div></th>
+                    <th><div class="th">
+                        Min
+                    </div></th>                    
+                    <th><div class="th">
+                        Max
+                    </div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="q in mesQuestions" class="formation">
+                    <td ng-click="">{{q.question.intitule}}</td>
+                    <td ng-click="">{{q.qualificatif.min}}</td>
+                    <td ng-click="">{{q.qualificatif.max}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -3,7 +3,7 @@
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -25,12 +25,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations" class="formation">
+                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : 'n0Annee'" class="formation">
                     <td ng-click="select(f)">{{f.codeFormation}}</td>
                     <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
                     <td ng-click="select(f)">{{f.nomFormation}}</td>
                     <td ng-click="select(f)">{{f.doubleDiplome}}</td>
-                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} => {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
+                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} - {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
                 </tr>
             </tbody>
         </table>
@@ -40,7 +40,7 @@
     <section class="panel panel-default table-dynamic" ng-if="promotions">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Promotions</strong>
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -70,7 +70,7 @@
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiants</strong>
           <span class="add fa fa-user-plus pull-right" ng-click="ajouterEtudiant()"></span>
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -89,6 +89,9 @@
                   <th>
                     <div class="th">Nationalité</div>
                   </th>
+                  <th>
+                    <div class="th">Université d'origine</div>
+                  </th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -100,6 +103,7 @@
                     <td ng-click="">{{e.telephone}}</td>
                     <td ng-click="">{{e.email}}</td>
                     <td ng-click="">{{e.nationalite}}</td>
+                    <td ng-click="">{{e.universiteOrigine}}</td>
                     <td><span class="glyphicon glyphicon-pencil"></span></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
