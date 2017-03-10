@@ -47,6 +47,7 @@
 	}
 
 	$scope.selectEtudiants = function(promotion){
+		$rootScope.promotionselected = promotion;
 		for(var index = 0; index < $scope.promotions.length; index++) {
 			console.log(($scope.promotions[index]).promotionPK.anneeUniversitaire);
 			var tr = document.getElementById(($scope.promotions[index]).promotionPK.anneeUniversitaire);
@@ -67,24 +68,29 @@
 		});
 	}
 
+	$rootScope.selectEtudiants = $scope.selectEtudiants; 
+
 	$scope.ouvrirModelSuppresion = function(etudiant){
 		$rootScope.EtudiantToBeDeleted = etudiant;
+		$rootScope.etat = null;
 		$modal.open({
 			templateUrl: 'myModalContent.html',
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,EtudiantsService) {
 				$scope.annulerSuppresion = function () {
 					$modalInstance.dismiss('cancel');
+					$rootScope.selectEtudiants($rootScope.promotionselected);	
 				};
 				$scope.doSupprimer = function(){
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
 					var promise = EtudiantsService.deleteEtudiant($rootScope.EtudiantToBeDeleted.noEtudiant);
-	    			promise.success(function(status){
-	    				console.log('Yes Working'+ status);
+					promise.success(function(status){
+						$rootScope.message = "Etudiant supprimé";
+						$rootScope.etat = "done";
 					}).error(function(data,status){
-						console.log("supprimer etudiant : erreur");
+						$rootScope.message = "impossible de supprimer cet étudiant(e)";
+						$rootScope.etat = "not done";
 					});
-					$modalInstance.dismiss('cancel');
 				};
 			}
 		});	
