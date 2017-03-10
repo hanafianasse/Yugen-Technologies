@@ -55,7 +55,7 @@ public class EtudiantController {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
 
-	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{noEtudiant}")
+	@RequestMapping(method=RequestMethod.DELETE,value="/{noEtudiant}")
 	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant){
 		if(authentificationService.getAuthentificationByNoEtudiant(noEtudiant) != null)
 			authentificationService.deleteAuthentification(authentificationService.getAuthentificationByNoEtudiant(noEtudiant).getIdConnection());
