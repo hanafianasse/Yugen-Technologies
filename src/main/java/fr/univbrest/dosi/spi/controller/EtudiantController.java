@@ -46,7 +46,7 @@ public class EtudiantController {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE)
+	@RequestMapping(method=RequestMethod.DELETE,value="/{noEtudiant}")
 	public void deleteEtudiant(@RequestBody String noEtudiant){
 		etudiantService.deleteEtudiant(noEtudiant);
 	}

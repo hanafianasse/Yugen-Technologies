@@ -38,7 +38,7 @@
 	}
 	
 	$scope.supprime = function(etudiant){
-		var promise = EtudiantsService.deleteEtudiant(etudiant);
+		var promise = EtudiantsService.deleteEtudiant(etudiant.noEtudiant);
 	    promise.success(function(status) 
 		{
 		//$scope.etudiants = data;
