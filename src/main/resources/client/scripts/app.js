@@ -21,8 +21,6 @@
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
 					templateUrl : 'views/formations/list.html'
-                }).when('/admin/etudiants', {
-                    templateUrl : 'views/Etudiant/list.html'
 				}).when('/admin/formation/:id', {
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/ue', {
