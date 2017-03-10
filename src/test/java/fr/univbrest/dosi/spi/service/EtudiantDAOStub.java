@@ -1,5 +1,6 @@
 package fr.univbrest.dosi.spi.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import fr.univbrest.dosi.spi.dao.EtudiantRepository;
 public class EtudiantDAOStub implements EtudiantRepository {
 
 	private List<Etudiant> donnees;
+	Etudiant etudiant;
 
 	EtudiantDAOStub() {
 		this.donnees = Lists.newArrayList();
@@ -36,9 +38,14 @@ public class EtudiantDAOStub implements EtudiantRepository {
 	}
 
 	@Override
-	public void delete(String arg0) {
-		// TODO Auto-generated method stub
-
+	public void delete(String noEtudiant) {
+		for(Iterator<Etudiant> iter = donnees.listIterator(); iter.hasNext();)
+		{
+			Etudiant e = iter.next();
+			
+			if(e.getNoEtudiant().equals(noEtudiant))
+					iter.remove();
+		}
 	}
 
 	@Override
@@ -77,9 +84,9 @@ public class EtudiantDAOStub implements EtudiantRepository {
 	}
 
 	@Override
-	public Etudiant findOne(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Etudiant findOne(String noEtudiant) {
+		
+		return this.donnees.get(0);
 	}
 
 	@Override

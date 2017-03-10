@@ -63,10 +63,10 @@ public class FormationController {
 	/**
 	 *
 	 * @param codeFormation
-	 *            l'id de formation
+	 *            l'id de promotion
 	 * @return une liste de promotion
 	 */
-	@RequestMapping(value = "/formation/{codeFormation}/promotion", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/formations/{codeFormation}/promotion", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public final List<Promotion> getPromtionsduneFormation(@PathVariable(value = "codeFormation") final String codeFormation) {
 		return formationService.getPromotions(codeFormation);
 	}

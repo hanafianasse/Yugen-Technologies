@@ -3,15 +3,18 @@ package fr.univbrest.dosi.spi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.univbrest.dosi.spi.bean.PromotionPK;
-import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.bean.Etudiant;
+import fr.univbrest.dosi.spi.bean.Promotion;
+import fr.univbrest.dosi.spi.bean.PromotionEtudiant;
+import fr.univbrest.dosi.spi.bean.PromotionPK;
+import fr.univbrest.dosi.spi.service.AuthentificationService;
 import fr.univbrest.dosi.spi.service.EtudiantService;
 import fr.univbrest.dosi.spi.service.PromotionService;
 
@@ -26,15 +29,22 @@ public class EtudiantController
 	@Autowired
 	private PromotionService promotionService;
 
+	@Autowired
+	private AuthentificationService authentificationService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Etudiant> getAll()
 	{
 		return etudiantService.getAll();
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public Etudiant addEtudiant(Etudiant etudiant)
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant)
 	{
+		Promotion promotion = promotionService.getPromotion(promotionEtudiant
+				.getPromotion().getPromotionPK());
+		Etudiant etudiant = promotionEtudiant.getEtudiant();
+		etudiant.setPromotion(promotion);
 		return etudiantService.addEtudiant(etudiant);
 	}
 
@@ -55,9 +65,14 @@ public class EtudiantController
 		return etudiantService.getEtudiant(noEtudiant);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE)
-	public void deleteEtudiant(@RequestBody String noEtudiant)
+	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{noEtudiant}")
+	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant)
 	{
+		if (authentificationService.getAuthentificationByNoEtudiant(noEtudiant) != null)
+			authentificationService
+					.deleteAuthentification(authentificationService
+							.getAuthentificationByNoEtudiant(noEtudiant)
+							.getIdConnection());
 		etudiantService.deleteEtudiant(noEtudiant);
 	}
 

@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -81,18 +82,24 @@ public class Promotion implements Serializable {
     @Size(max = 255)
     @Column(name = "COMMENTAIRE")
     private String commentaire;
+    
     @JsonBackReference(value="promotion-etudiant")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion",fetch=FetchType.LAZY)
     private Collection<Etudiant> etudiantCollection;
-    @JsonManagedReference(value="enseignant-promotion")
+    
+   
     @JoinColumn(name = "NO_ENSEIGNANT", referencedColumnName = "NO_ENSEIGNANT")
     @ManyToOne
+    @JsonIgnore
     private Enseignant noEnseignant;
-    @JsonManagedReference(value="formation-promotion")
+   
+    
     @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = false, updatable = false)
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Formation formation;
-    @JsonBackReference(value="promotion-candidat")
+	
+    @JsonBackReference(value = "promotion-candidat")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion",fetch=FetchType.LAZY)
     private Collection<Candidat> candidatCollection;
 
