@@ -17,6 +17,11 @@ public class PromotionService {
 	@Autowired
 	private PromotionRepository promotionRepository;
 
+	@Autowired
+	public PromotionService(PromotionRepository entrepot) {
+		this.promotionRepository = entrepot;
+	}
+
 	public final Promotion addPromotion(final Promotion promotion) {
 		return promotionRepository.save(promotion);
 	}
@@ -24,10 +29,10 @@ public class PromotionService {
 	public final Promotion UpdatePromotion(final Promotion promotion) {
 		return promotionRepository.save(promotion);
 	}
+
 	public final void deletePromotion(final PromotionPK promotionPK) {
 		promotionRepository.delete(promotionPK);
 	}
-	
 
 	public final Boolean existPromotion(final PromotionPK promotionPK) {
 		return promotionRepository.exists(promotionPK);
@@ -37,24 +42,23 @@ public class PromotionService {
 		return promotionRepository.findOne(promotionPK);
 	}
 
-	public final List<Promotion> getPromotionByEnseignant(final Integer noEnseignant) {
+	public final List<Promotion> getPromotionByEnseignant(
+			final Integer noEnseignant) {
 		return promotionRepository.findByNoEnseignant(noEnseignant);
 	}
-	
+
 	public final List<Promotion> getPromotionByCodeFormation(final Formation f) {
 		return promotionRepository.findByFormation(f);
 	}
-	
-	public final List<Etudiant> getEtudiants(PromotionPK promotionPK ) {
+
+	public final List<Etudiant> getEtudiants(PromotionPK promotionPK) {
 		Promotion promotion = promotionRepository.findOne(promotionPK);
-		return (List<Etudiant>)promotion.getEtudiantCollection();
+		return (List<Etudiant>) promotion.getEtudiantCollection();
 	}
-	
-	public final Iterable<Promotion> listPromotions(){
+
+	public final Iterable<Promotion> listPromotions() {
 		final Iterable<Promotion> promotions = promotionRepository.findAll();
 		return promotions;
 	}
-
-	
 
 }
