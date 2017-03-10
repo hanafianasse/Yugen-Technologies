@@ -25,7 +25,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -57,10 +60,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Etudiant implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
+	
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 50)
-	@Column(name = "NO_ETUDIANT", unique = true)
+	@Column(name = "NO_ETUDIANT")
 	private String noEtudiant;
 	@Basic(optional = false)
 	@NotNull
@@ -137,11 +141,13 @@ public class Etudiant implements Serializable {
 	@Column(name = "GROUPE_ANGLAIS")
 	private BigInteger groupeAnglais;
 
-	@JsonManagedReference(value = "promotion-etudiant")
 	@JoinColumns({
 			@JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE"),
 			@JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION") })
+	
+	@RestResource(exported=false)
 	@ManyToOne(optional = false)
+	@JsonIgnore
 	private Promotion promotion;
 
 	public Etudiant() {

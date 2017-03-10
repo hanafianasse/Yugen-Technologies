@@ -26,6 +26,10 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/app.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="726">
+              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+=======
             <state relative-caret-position="748">
               <caret line="34" column="63" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
               <folding />
@@ -60,6 +64,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> master
               <folding />
             </state>
           </provider>
@@ -68,8 +73,13 @@
       <file leaf-file-name="nav.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/nav.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="374">
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+=======
             <state relative-caret-position="440">
               <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> master
               <folding />
             </state>
           </provider>
@@ -155,6 +165,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
@@ -173,6 +185,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+>>>>>>> master
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -245,12 +258,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1489069687976</updated>
+<<<<<<< HEAD
+      <workItem from="1489069689382" duration="6134000" />
+=======
       <workItem from="1489069689382" duration="5879000" />
+>>>>>>> master
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="6134000" />
+=======
     <option name="totallyTimeSpent" value="5879000" />
+>>>>>>> master
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -302,9 +323,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+<<<<<<< HEAD
+          <folding />
+=======
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -326,16 +351,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/nav.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="374">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+=======
         <state relative-caret-position="440">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+>>>>>>> master
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="726">
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+=======
         <state relative-caret-position="748">
           <caret line="34" column="63" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
+>>>>>>> master
           <folding />
         </state>
       </provider>
