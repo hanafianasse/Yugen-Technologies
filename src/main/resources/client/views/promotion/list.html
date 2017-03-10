@@ -2,101 +2,46 @@
 
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
-        <span class="add fa fa-user-plus pull-right" ng-click="ajoutFormation()"></span>
         </div>
-
-        <table class="table table-bordered table-striped table-responsive">
+        <div style="overflow: scroll ;max-height: 250px;">
+        <table class="table table-hover table-responsive">
             <thead>
                 <tr>
                     <th><div class="th">
                         Code
-                        <span class="glyphicon glyphicon-chevron-up"
-                              data-ng-click=" order('code') "
-                              data-ng-class="{active: row == 'code'}"></span>
-                        <span class="glyphicon glyphicon-chevron-down"
-                              data-ng-click=" order('-code') "
-                              data-ng-class="{active: row == '-code'}"></span>
                     </div></th>
                     <th><div class="th">
                         Diplôme / année
-                        <span class="glyphicon glyphicon-chevron-up"
-                              data-ng-click=" order('diplome') "
-                              data-ng-class="{active: row == 'diplome'}"></span>
-                        <span class="glyphicon glyphicon-chevron-down"
-                              data-ng-click=" order('-diplome') "
-                              data-ng-class="{active: row == '-diplome'}"></span>
                     </div></th>                    
                     <th><div class="th">
                         Nom formation
-                        <span class="glyphicon glyphicon-chevron-up"
-                              data-ng-click=" order('email') "
-                              data-ng-class="{active: row == 'email'}"></span>
-                        <span class="glyphicon glyphicon-chevron-down"
-                              data-ng-click=" order('-email') "
-                              data-ng-class="{active: row == '-email'}"></span>
                     </div></th>
                     <th><div class="th">
                         Double diplôme
-                        <span class="glyphicon glyphicon-chevron-up"
-                              data-ng-click=" order('email') "
-                              data-ng-class="{active: row == 'email'}"></span>
-                        <span class="glyphicon glyphicon-chevron-down"
-                              data-ng-click=" order('-email') "
-                              data-ng-class="{active: row == '-email'}"></span>
                     </div></th>
                     <th><div class="th">
                         Accréditation
-                        <span class="glyphicon glyphicon-chevron-up"
-                              data-ng-click=" order('email') "
-                              data-ng-class="{active: row == 'email'}"></span>
-                        <span class="glyphicon glyphicon-chevron-down"
-                              data-ng-click=" order('-email') "
-                              data-ng-class="{active: row == '-email'}"></span>
                     </div></th>
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="f in formations" class="formation">
+                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations" class="formation">
                     <td ng-click="select(f)">{{f.codeFormation}}</td>
                     <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
                     <td ng-click="select(f)">{{f.nomFormation}}</td>
                     <td ng-click="select(f)">{{f.doubleDiplome}}</td>
-                    <td ng-click="select(f)">{{f.debutAccreditation}} => {{f.finAccreditation}}</td>
+                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} => {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
                 </tr>
             </tbody>
         </table>
-
-        <footer class="table-footer">
-            <div class="row">
-                <div class="col-md-6 page-num-info">
-                    <span>
-                        Show 
-                        <select data-ng-model="numPerPage"
-                                data-ng-options="num for num in numPerPageOpt"
-                                data-ng-change="onNumPerPageChange()">
-                        </select> 
-                        entries per page
-                    </span>
-                </div>
-                <div class="col-md-6 text-right pagination-container">
-                    <pagination class="pagination-sm"
-                                ng-model="currentPage"
-                                total-items="filteredStores.length"
-                                max-size="4"
-                                ng-change="select(currentPage)"
-                                items-per-page="numPerPage"
-                                rotate="false"
-                                boundary-links="true"></pagination>
-                </div>
-            </div>
-        </footer>
+    </div>
     </section>
-
+    <div ng-if="promotions.length == 0" class="success">Aucune promotion pour cette formation</div>
     <section class="panel panel-default table-dynamic" ng-if="promotions">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Promotions</strong>
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Promotions</strong>
         </div>
-
-        <table class="table table-bordered table-striped table-responsive">
+        <div style="overflow: scroll ;max-height: 250px;">
+        <table class="table table-hover table-responsive">
             <thead>
                 <tr>
                     <th>
@@ -111,48 +56,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="p in promotions" class="formation">
+                <tr id="{{p.promotionPK.anneeUniversitaire}}" data-ng-repeat="p in promotions | orderBy : '-debutAnneeUniversitaire' " class="formation">
                     <td ng-click="selectEtudiants(p)">{{p.promotionPK.anneeUniversitaire}}</td>
-                    <td ng-click="selectEtudiants(p)">{{p.dateRentree}}</td>
+                    <td ng-click="selectEtudiants(p)">{{p.dateRentree | date: "dd/MM/yyyy"}}</td>
                     <td ng-click="selectEtudiants(p)">{{p.lieuRentree}}</td>
                 </tr>
             </tbody>
         </table>
-
-        <footer class="table-footer">
-            <div class="row">
-                <div class="col-md-6 page-num-info">
-                    <span>
-                        Show 
-                        <select data-ng-model="numPerPage"
-                                data-ng-options="num for num in numPerPageOpt"
-                                data-ng-change="onNumPerPageChange()">
-                        </select> 
-                        entries per page
-                    </span>
-                </div>
-                <div class="col-md-6 text-right pagination-container">
-                    <pagination class="pagination-sm"
-                                ng-model="currentPage"
-                                total-items="filteredStores.length"
-                                max-size="4"
-                                ng-change="select(currentPage)"
-                                items-per-page="numPerPage"
-                                rotate="false"
-                                boundary-links="true"></pagination>
-                </div>
-            </div>
-        </footer>
+        </div>
     </section>
-
-
-
+    <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
     <section class="panel panel-default table-dynamic" ng-if="etudiants">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Etudiants</strong>
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiants</strong>
           <span class="add fa fa-user-plus pull-right" ng-click="ajouterEtudiant()"></span>
         </div>
-
-        <table class="table table-bordered table-striped table-responsive">
+        <div style="overflow: scroll ;max-height: 250px;">
+        <table class="table table-hover table-responsive">
             <thead>
                 <tr>
                     <th>
@@ -174,40 +93,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="e in Etudiants" class="formation">
+                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'prenom' " class="formation">
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
                     <td ng-click="">{{e.email}}</td>
                     <td ng-click="">{{e.nationalite}}</td>
-                    <td><span class="remove fa fa-remove" ng-click="supprime(e)"></span></td>
+                    <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
             </tbody>
         </table>
-
-        <footer class="table-footer">
-            <div class="row">
-                <div class="col-md-6 page-num-info">
-                    <span>
-                        Show 
-                        <select data-ng-model="numPerPage"
-                                data-ng-options="num for num in numPerPageOpt"
-                                data-ng-change="onNumPerPageChange()">
-                        </select> 
-                        entries per page
-                    </span>
-                </div>
-                <div class="col-md-6 text-right pagination-container">
-                    <pagination class="pagination-sm"
-                                ng-model="currentPage"
-                                total-items="filteredStores.length"
-                                max-size="4"
-                                ng-change="select(currentPage)"
-                                items-per-page="numPerPage"
-                                rotate="false"
-                                boundary-links="true"></pagination>
-                </div>
-            </div>
-        </footer>
+    </div>
     </section>
 </div>
+
+
+
+<script type="text/ng-template" id="myModalContent.html">
+<div class="modal-header">
+  <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+  <h4 class="modal-title">Confirmation</h4>
+</div>
+<div class="modal-body">
+    <p>3afak wach n supprimer ??</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
+</div>
+</script>
