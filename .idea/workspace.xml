@@ -399,7 +399,7 @@
     <option name="totallyTimeSpent" value="3956000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1918" height="1024" extended-state="0" />
+    <frame x="1" y="1" width="1918" height="1024" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24473684" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
