@@ -1,5 +1,7 @@
 package fr.univbrest.dosi.spi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.univbrest.dosi.spi.bean.Formation;
+import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.service.FormationService;
 
 /**
@@ -55,6 +58,17 @@ public class FormationController {
 	public final Formation formation(@PathVariable(value = "codeFormation") final String codeFormation) {
 		return formationService.getFormation(codeFormation);
 
+	}
+	
+	/**
+	 *
+	 * @param codeFormation
+	 *            l'id de promotion
+	 * @return une liste de promotion
+	 */
+	@RequestMapping(value = "/formations/{codeFormation}/promotion", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public final List<Promotion> getPromtionsduneFormation(@PathVariable(value = "codeFormation") final String codeFormation) {
+		return formationService.getPromotions(codeFormation);
 	}
 
 	/*
