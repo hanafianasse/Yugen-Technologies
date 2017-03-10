@@ -1,4 +1,4 @@
-package test;
+package fr.univbrest.dosi.spi.service;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class FormationServiceTest {
 		formation.setDiplome("M");
 		formation.setDoubleDiplome('O');
 		formation.setN0Annee((short) 2);
-		formation.setNomFormation("2eme Systeme informatique reseaux");
+		formation.setNomFormation("2eme annee Science de l'information...");
 		formation.setDebutAccreditation(new java.util.Date(2011, 02, 03));
 		formation.setFinAccreditation(new java.util.Date(11, 11, 2019));
 		formationService.addFormation(formation);
@@ -104,7 +104,7 @@ public class FormationServiceTest {
 		formation.setDiplome("M");
 		formation.setDoubleDiplome('N');
 		formation.setN0Annee((short) 1);
-		formation.setNomFormation("Systemes Informatiques..");
+		formation.setNomFormation("2eme annee Science de l'information...");
 		formation.setDebutAccreditation(new java.util.Date(2011, 02, 03));
 		formation.setFinAccreditation(new java.util.Date(11, 11, 2019));
 		formationService.updateFormation(formation);
