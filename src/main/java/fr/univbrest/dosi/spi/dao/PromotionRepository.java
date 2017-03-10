@@ -25,5 +25,6 @@ public interface PromotionRepository extends PagingAndSortingRepository<Promotio
 	 */
 	List<Promotion> findByNoEnseignant(@Param("noEnseignant") Integer noEnseignant);
 	List<Promotion> findByFormation(@Param("CodeFormation") Formation f);
+
 }
 
