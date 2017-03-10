@@ -13,5 +13,6 @@
 		<class>fr.univbrest.dosi.spi.bean.UniteEnseignementPK</class>
 		<class>fr.univbrest.dosi.spi.bean.Qualificatif</class>
 		<class>fr.univbrest.dosi.spi.bean.Authentification</class>
+		<class>fr.univbrest.dosi.spi.bean.Question</class>
 	</persistence-unit>
 </persistence>
