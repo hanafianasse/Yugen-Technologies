@@ -33,6 +33,8 @@
 					templateUrl : 'views/promotion/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
+                }).when('/admin/newQuesstion', {
+					templateUrl : 'views/question/ajouter.html'
                 }).when('/admin/etu/:id', {
                     templateUrl : 'views/ue/ajoutEtudiant.html'
 				}).when('/dashboard', {

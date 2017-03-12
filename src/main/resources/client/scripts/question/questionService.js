@@ -21,7 +21,7 @@ angular.module('app')
         };
 
         dataFactory.deleteQuestion = function (id) {
-            return $http.delete(urlBase,id);
+            return $http.delete(urlBase + '/delete/' + id);
         };
         return dataFactory;
     }]);
