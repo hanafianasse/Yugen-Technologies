@@ -39,8 +39,7 @@ public class PromotionDAOStub implements PromotionRepository {
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+	return data.size();
 	}
 
 	@Override
@@ -75,8 +74,7 @@ public class PromotionDAOStub implements PromotionRepository {
 
 	@Override
 	public Iterable<Promotion> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.data;
 	}
 
 	@Override
@@ -92,9 +90,9 @@ public class PromotionDAOStub implements PromotionRepository {
 	}
 
 	@Override
-	public <S extends Promotion> S save(S arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public <S extends Promotion> S save(S entity) {
+		this.data.add(entity);
+		return entity;
 	}
 
 	@Override
