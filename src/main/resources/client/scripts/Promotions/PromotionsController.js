@@ -67,6 +67,8 @@
 		});
 	}
 
+
+
 	$scope.ouvrirModelSuppresion = function(etudiant){
 		$rootScope.EtudiantToBeDeleted = etudiant;
 		$modal.open({

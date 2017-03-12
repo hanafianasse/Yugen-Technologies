@@ -90,15 +90,17 @@
                     <div class="th">Nationalité</div>
                   </th>
                   <th></th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'prenom' " class="formation">
+                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
                     <td ng-click="">{{e.email}}</td>
                     <td ng-click="">{{e.nationalite}}</td>
+                    <td><span class="glyphicon glyphicon-pencil"></span></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
             </tbody>
@@ -115,10 +117,12 @@
   <h4 class="modal-title">Confirmation</h4>
 </div>
 <div class="modal-body">
-    <p>3afak wach n supprimer ??</p>
+    <p ng-if="etat == null" >Confirmer la suppression ?</p>
+    <p ng-if="etat != null" >{{message}}</p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
   <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
 </div>
 </script>
