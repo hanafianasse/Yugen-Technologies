@@ -71,9 +71,7 @@ public class FormationController {
 		return formationService.getPromotions(codeFormation);
 	}
 
-	/*
-	 * @RequestMapping(value = "/formations", produces = { MediaType.APPLICATION_JSON_VALUE }) public Iterable<Formation> getAll(){ return formationService.listFormations(); }
-	 */
+	
 	/**
 	 *
 	 * @return list de formation
