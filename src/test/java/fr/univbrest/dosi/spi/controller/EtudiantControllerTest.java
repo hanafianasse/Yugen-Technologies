@@ -1,4 +1,4 @@
-package fr.univbrest.dosi.spi.service;
+package fr.univbrest.dosi.spi.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,25 +19,27 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.univbrest.dosi.spi.bean.Enseignant;
 import fr.univbrest.dosi.spi.bean.Etudiant;
 import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.bean.PromotionEtudiant;
 import fr.univbrest.dosi.spi.bean.PromotionPK;
 
-public class EtudiantControllerTest {
+public class EtudiantControllerTest
+{
 	String noEtudiant;
 
 	@Before
-	public void init() {
+	public void init()
+	{
 
 		noEtudiant = "14578999";
 
 	}
 
 	@Test
-	public void addEtudiantTest() throws ClientProtocolException, IOException {
+	public void addEtudiantTest() throws ClientProtocolException, IOException
+	{
 
 		Formation formation = new Formation();
 		formation.setCodeFormation("M2DOSI");
@@ -80,59 +82,66 @@ public class EtudiantControllerTest {
 		com.fasterxml.jackson.databind.ObjectWriter ow = mapper.writer()
 				.withDefaultPrettyPrinter();
 		String jsonInString = ow.writeValueAsString(promotionEtudiant);
-		//System.err.println(jsonInString);
+		// System.err.println(jsonInString);
 
-		//Etudiant etu = mapper.readValue(jsonInString, Etudiant.class);
+		// Etudiant etu = mapper.readValue(jsonInString, Etudiant.class);
 
 		// etablition de la requette (header+body)
 		mockRequestPost.addHeader("Content-Type", "application/json");
-		//mockRequestPost.addHeader("Accepts", "application/json");
+		// mockRequestPost.addHeader("Accepts", "application/json");
 		mockRequestPost.setEntity(new StringEntity(jsonInString));
-		
+
 		// creation de la reponse
 		final HttpResponse mockResponse = client.execute(mockRequestPost);
 		Assert.assertEquals(200, mockResponse.getStatusLine().getStatusCode());
 	}
 
-	
-	  @Test public void listeEtudiantTest() throws ClientProtocolException,
-	 IOException {
-	  
-	  final HttpClient client = HttpClientBuilder.create().build(); final
-	 HttpGet mockRequest = new HttpGet("http://localhost:8090/etudiant");
-	 final HttpResponse mockResponse = client.execute(mockRequest);
-	 
-	  // Le code retour HTTP doit être un succès (200) Assert.assertEquals(200,mockResponse.getStatusLine().getStatusCode());
-	  
-	  final BufferedReader rd = new BufferedReader(new
-	  InputStreamReader(mockResponse.getEntity().getContent())); final
-	  ObjectMapper mapper = new ObjectMapper(); final Iterable<Etudiant>
-	  etudiant = mapper.readValue(rd, Iterable.class);
-	  
-	  Assert.assertNotNull(etudiant);
-	  
-	  }
-	 
-	  @Test public void recupererEtudiantTest() throws ClientProtocolException,
-	  IOException{ final HttpClient client=HttpClientBuilder.create().build();
-	  final HttpGet mockRequest= new
-	  HttpGet("http://localhost:8090/etudiant/"+noEtudiant); final
-	  HttpResponse mockResponse = client.execute(mockRequest);
-	  Assert.assertEquals(200, mockResponse.getStatusLine().getStatusCode()); }
-	 
-	
 	@Test
-	public final void deleteEtudiantTest() throws ClientProtocolException, IOException {
-	
+	public void listeEtudiantTest() throws ClientProtocolException, IOException
+	{
+
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpGet mockRequest = new HttpGet(
+				"http://localhost:8090/etudiant");
+		final HttpResponse mockResponse = client.execute(mockRequest);
+
+		// Le code retour HTTP doit être un succès (200)
+		// Assert.assertEquals(200,mockResponse.getStatusLine().getStatusCode());
+
+		final BufferedReader rd = new BufferedReader(new InputStreamReader(
+				mockResponse.getEntity().getContent()));
+		final ObjectMapper mapper = new ObjectMapper();
+		final Iterable<Etudiant> etudiant = mapper
+				.readValue(rd, Iterable.class);
+
+		Assert.assertNotNull(etudiant);
+
+	}
+
+	@Test
+	public void recupererEtudiantTest() throws ClientProtocolException,
+			IOException
+	{
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpGet mockRequest = new HttpGet(
+				"http://localhost:8090/etudiant/" + noEtudiant);
+		final HttpResponse mockResponse = client.execute(mockRequest);
+		Assert.assertEquals(200, mockResponse.getStatusLine().getStatusCode());
+	}
+
+	@Test
+	public final void deleteEtudiantTest() throws ClientProtocolException,
+			IOException
+	{
+
 		// Création du client et éxécution d'une requete GET
 		final HttpClient client = HttpClientBuilder.create().build();
-		final HttpGet mockRequest = new HttpGet("http://localhost:8090/etudiant/delete/"+noEtudiant);
+		final HttpGet mockRequest = new HttpGet(
+				"http://localhost:8090/etudiant/delete/" + noEtudiant);
 		final HttpResponse mockResponse = client.execute(mockRequest);
-	
+
 		// Le code retour HTTP doit être un succès (200)
 		Assert.assertEquals(200, mockResponse.getStatusLine().getStatusCode());
-	
-	
-	
+
 	}
 }
