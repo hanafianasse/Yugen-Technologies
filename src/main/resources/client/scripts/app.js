@@ -27,6 +27,10 @@
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
 					templateUrl : 'views/promotion/list.html'
+				}).when('/admin/promotion/ajout/:codeFormation/:anneeUniversitaire', {
+					templateUrl : 'views/promotion/ajout.html'
+				}).when('/admin/promotion/modif/:codeFormation/:anneeUniversitaire/:noEtudiant', {
+					templateUrl : 'views/promotion/modif.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
 				}).when('/dashboard', {

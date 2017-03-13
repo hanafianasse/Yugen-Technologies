@@ -51,6 +51,14 @@ public class PromotionController {
 		return promotionService.getEtudiants(promotionPk);
 	}
 	
+	@RequestMapping(value = "/getpromotionby/{codeFormation}/{anneeUniversitaire}",method = RequestMethod.GET,produces="application/json")
+	 public final Promotion getPromotion(
+			 @PathVariable(value="codeFormation") final String CodeFormation,
+			 @PathVariable(value="anneeUniversitaire") final String anneeUniversitaire){
+		PromotionPK promotionPk = new PromotionPK(CodeFormation,anneeUniversitaire);
+		return promotionService.getPromotion(promotionPk);
+	}
+	
 	//Ajouter une nouvelle promotion 
 	@RequestMapping(method = RequestMethod.POST, value="/addpromotions")
 	public Promotion addPromotion(Promotion promotion) {

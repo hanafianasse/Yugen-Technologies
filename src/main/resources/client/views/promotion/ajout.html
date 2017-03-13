@@ -1,0 +1,141 @@
+<div class="page" ng-controller="addEtudiantsCtrl">
+  <div class="panel panel-default ens-edit">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
+    <div class="panel-body">
+        <!-- Consultation -->
+        <div class="media animate" ng-hide="edit">
+
+        <!-- Creation -->
+        <div>            
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Numéro Etudiant<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.noEtudiant">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Code Formation<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" disabled="disabled" ng-model="codeFormation">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Année Universitaire<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" disabled="disabled" ng-model="anneeUniversitaire">
+                    </div>                   
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Nom<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.nom">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Prénom<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.prenom">
+                    </div>                    
+                </div>
+                
+               <div class="form-group">
+                    <label for="" class="col-sm-2">Sexe<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <label class="ui-radio"><input name="radio1" type="radio" value="H" ng-model="etudiant.sexe"><span>Homme</span></label>
+                        <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="etudiant.sexe"><span>Femme</span></label>
+                    </div>                    
+                </div>                   
+                
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Date de Naissance<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                    	<input type="date" class="form-control" ng-model="etudiant.dateNaissance">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Lieu de Naissance<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.lieuNaissance">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Nationnalité<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.nationalite">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Téléphone</label>
+                    <div class="col-sm-10">
+                        <input type="number" placeholder="xx xx xx xx xx" class="form-control"  pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" ng-model="etudiant.telephone">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Mobile</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.mobile">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">E-mail<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="email" required class="form-control" ng-model="etudiant.email">
+                        
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">E-mail UBO</label>
+                    <div class="col-sm-10">
+                        <input type="email" required class="form-control" ng-model="etudiant.emailUbo">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Adresse<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.adresse">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Code postal</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.codePostal">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Ville<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.ville">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Pays origine<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.paysOrigine">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Université Origine<span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="etudiant.universiteOrigine">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Groupe TP</label>
+                    <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-model="etudiant.groupeTp" step="1" value="0" min="0" max="9999999999">
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2">Groupe Anglais</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" ng-model="etudiant.groupeAnglais" step="1" value="0" min="0" max="9999999999">
+                    </div>                    
+                </div>
+            </form>
+            <a class="btn btn-success" ng-click="ajouterEtudiant()"><span class="glyphicon glyphicon-ok"></span> Valider</a>
+            <a class="btn btn-danger pull-right" href="#/admin/promotion"> Annuler</a>
+        </div>
+    </div>
+  </div>
+</div>

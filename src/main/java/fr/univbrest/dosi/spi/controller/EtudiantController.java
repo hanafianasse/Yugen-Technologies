@@ -27,10 +27,10 @@ public class EtudiantController {
 
 	@Autowired
 	private PromotionService promotionService;
-	
+
 	@Autowired
 	private AuthentificationService authentificationService;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Etudiant> getAll() {
 		return etudiantService.getAll();
@@ -38,33 +38,47 @@ public class EtudiantController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant) {
-		Promotion promotion=promotionService.getPromotion(promotionEtudiant.getPromotion().getPromotionPK());
-		Etudiant etudiant=promotionEtudiant.getEtudiant();
+		Promotion promotion = promotionService.getPromotion(promotionEtudiant
+				.getPromotion().getPromotionPK());
+		Etudiant etudiant = promotionEtudiant.getEtudiant();
 		etudiant.setPromotion(promotion);
 		return etudiantService.addEtudiant(etudiant);
 	}
-	
-	@RequestMapping(method=RequestMethod.GET,value="/{codeFormation}/{anneeUniversitaire}")
-	public List<Etudiant> getEtudiantByPromotion(@PathVariable("codeFormation") String codeFormation,@PathVariable("anneeUniversitaire") String anneeUniversitaire){
-		PromotionPK promotionPk=new PromotionPK(codeFormation,anneeUniversitaire);
-		Promotion promotion=promotionService.getPromotion(promotionPk);	
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{codeFormation}/{anneeUniversitaire}")
+	public List<Etudiant> getEtudiantByPromotion(
+			@PathVariable("codeFormation") String codeFormation,
+			@PathVariable("anneeUniversitaire") String anneeUniversitaire) {
+		PromotionPK promotionPk = new PromotionPK(codeFormation,
+				anneeUniversitaire);
+		Promotion promotion = promotionService.getPromotion(promotionPk);
 		return etudiantService.getEtudiantByPromotion(promotion);
 	}
-	@RequestMapping(method=RequestMethod.GET,value="/{noEtudiant}")
-	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant){
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{noEtudiant}")
+	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
-	
-	@RequestMapping(method=RequestMethod.DELETE,value="/delete/{noEtudiant}")
-	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant){
-		if(authentificationService.getAuthentificationByNoEtudiant(noEtudiant) != null)
-			authentificationService.deleteAuthentification(authentificationService.getAuthentificationByNoEtudiant(noEtudiant).getIdConnection());
-		
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{noEtudiant}")
+	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
+		if (authentificationService.getAuthentificationByNoEtudiant(noEtudiant) != null)
+			authentificationService
+					.deleteAuthentification(authentificationService
+							.getAuthentificationByNoEtudiant(noEtudiant)
+							.getIdConnection());
+
 		etudiantService.deleteEtudiant(noEtudiant);
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Etudiant updateEtudiant(Etudiant etudiant){
+
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Etudiant updateEtudiant(
+			@RequestBody PromotionEtudiant promotionEtudiant) {
+		Promotion promotion = promotionService.getPromotion(promotionEtudiant
+				.getPromotion().getPromotionPK());
+		Etudiant etudiant = promotionEtudiant.getEtudiant();
+		etudiant.setPromotion(promotion);
+
 		return etudiantService.updateEtudiant(etudiant);
 	}
 }
