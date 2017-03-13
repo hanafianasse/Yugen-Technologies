@@ -1,0 +1,52 @@
+<div class="page page-table" data-ng-controller="QualificatifsCtrl">
+
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Qualificatifs</strong>
+            <a class="add fa fa-user-plus pull-right" href="#/admin/qualificatif/AjouterQualificatif"></span></a>
+        </div>
+        <div >
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                <tr>
+
+                    <th><div class="th">
+                        Qualificatif Maximal
+                    </div></th>
+                    <th><div class="th">
+                        Qualificatif Minimal
+                    </div></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="{{q.idQualificatif}}" data-ng-repeat='q in qualificatifs' >
+
+                    <td>{{q.maximal}}</td>
+                    <td>{{q.minimal}}</td>
+                    <td><a href="#/admin/qualificatif/updateQualificatif/{{q.idQualificatif}}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+                    <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(q)"></span></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+    </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+        <h4 class="modal-title">Confirmation</h4>
+    </div>
+    <div class="modal-body">
+        <p ng-if="etat == null" >Confirmer la suppression ?</p>
+        <p ng-if="etat != null" >{{message}}</p>
+    </div>
+    <div class="modal-footer">
+        <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+        <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
+        <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
+    </div>
+</script>
