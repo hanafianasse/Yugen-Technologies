@@ -3,7 +3,7 @@
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -12,7 +12,7 @@
                     </div></th>
                     <th><div class="th">
                         Diplôme / année
-                    </div></th>                    
+                    </div></th>
                     <th><div class="th">
                         Nom formation
                     </div></th>
@@ -25,12 +25,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations" class="formation">
+                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : 'n0Annee'" class="formation">
                     <td ng-click="select(f)">{{f.codeFormation}}</td>
                     <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
                     <td ng-click="select(f)">{{f.nomFormation}}</td>
                     <td ng-click="select(f)">{{f.doubleDiplome}}</td>
-                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} => {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
+                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} - {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
                 </tr>
             </tbody>
         </table>
@@ -40,7 +40,7 @@
     <section class="panel panel-default table-dynamic" ng-if="promotions">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Promotions</strong>
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -71,7 +71,7 @@
           <a href="#/admin/promotion/ajout/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}"><span class="add fa fa-user-plus pull-right"></span></a>
           <!-- ajout des parametres /{{codeformation}}/{{anneeuniv}} -->
         </div>
-        <div style="overflow: scroll ;max-height: 250px;">
+        <div style="overflow: auto ;max-height: 250px;">
         <table class="table table-hover table-responsive">
             <thead>
                 <tr>
@@ -90,11 +90,15 @@
                   <th>
                     <div class="th">Nationalité</div>
                   </th>
+                  <th>
+                    <div class="th">Université d'origine</div>
+                  </th>
+                  <th></th>
                   <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'prenom' " class="formation">
+                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
@@ -102,6 +106,8 @@
                     <td ng-click="">{{e.nationalite}}</td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span>
                     <a href="#/admin/promotion/modif/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}/{{e.noEtudiant}}"><span style="color:#008080" class="fa fa-pencil-square-o"></span></a></td>
+                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
             </tbody>
         </table>
@@ -117,10 +123,12 @@
   <h4 class="modal-title">Confirmation</h4>
 </div>
 <div class="modal-body">
-    <p>3afak wach n supprimer ??</p>
+    <p ng-if="etat == null" >Confirmer la suppression ?</p>
+    <p ng-if="etat != null" >{{message}}</p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
   <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
 </div>
 </script>

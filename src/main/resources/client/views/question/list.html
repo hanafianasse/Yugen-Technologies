@@ -1,0 +1,51 @@
+<div class="page page-table" data-ng-controller="QuestionController">
+
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Questions Standards</strong>
+        <a href="#/admin/newQuesstion"><span class="add fa fa-user-plus pull-right"></span></a>
+        </div>
+        <div style="overflow: auto ;max-height: 250px;">
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Intitulé
+                    </div></th>
+                    <th><div class="th">
+                        Min
+                    </div></th>                    
+                    <th><div class="th">
+                        Max
+                    </div></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="q in mesQuestions track by $index" class="formation">
+                    <td ng-click="">{{q.question.intitule}}</td>
+                    <td ng-click="">{{q.qualificatif.minimal}}</td>
+                    <td ng-click="">{{q.qualificatif.maximal}}</td>
+                    <td><a href="#TODO"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                    <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(q)"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+<div class="modal-header">
+  <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+  <h4 class="modal-title">Confirmation</h4>
+</div>
+<div class="modal-body">
+    <p ng-if="etat == null" >Confirmer la suppression ?</p>
+    <p ng-if="etat != null" >{{message}}</p>
+</div>
+<div class="modal-footer">
+  <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+  <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
+  <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
+</div>
+</script>
