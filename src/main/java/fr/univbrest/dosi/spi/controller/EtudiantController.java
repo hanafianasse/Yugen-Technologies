@@ -1,5 +1,7 @@
 package fr.univbrest.dosi.spi.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import fr.univbrest.dosi.spi.service.PromotionService;
 
 @RestController
 @RequestMapping(value = "/etudiant")
+@Api(value = "etudiant", description = "Description de la ressource etudiant.")
 public class EtudiantController
 {
 
@@ -41,7 +44,8 @@ public class EtudiantController
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant)
 	{
-		Promotion promotion = promotionService.getPromotion(promotionEtudiant.getPromotion().getPromotionPK());
+		Promotion promotion = promotionService.getPromotion(promotionEtudiant
+				.getPromotion().getPromotionPK());
 		Etudiant etudiant = promotionEtudiant.getEtudiant();
 		etudiant.setPromotion(promotion);
 		return etudiantService.addEtudiant(etudiant);

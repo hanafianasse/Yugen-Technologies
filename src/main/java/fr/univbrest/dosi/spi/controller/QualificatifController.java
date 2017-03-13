@@ -3,6 +3,8 @@
  */
 package fr.univbrest.dosi.spi.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import fr.univbrest.dosi.spi.service.QualificatifService;
  */
 @RestController
 @RequestMapping(value = "/qualificatif")
+@Api(value = "qualificatif", description = "Description de la ressource qualificatif.")
 public class QualificatifController
 {
 	@Autowired

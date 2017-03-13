@@ -6,16 +6,16 @@
 	console.log("je suis dans la promotion");
 
 	$scope.formations = null;
-	$scope.promotions = null; 
+	$scope.promotions = null;
 	$scope.etudiants = null;
 
 	var promise = formationService.getAll();
-	promise.success(function(data) { 
+	promise.success(function(data) {
 		$scope.formations = data;
 	}).error(function(data) {
 		console.log("get formtions : erreur");
-	}); 
-	
+	});
+
 	// Affiche les promotions
 	$scope.select = function(formation){
 		for(var index = 0; index < $scope.formations.length; index++) {
@@ -68,9 +68,9 @@
 		});
 	}
 
-	$rootScope.selectEtudiants = $scope.selectEtudiants; 
+	$rootScope.selectEtudiants = $scope.selectEtudiants;
 
-	$scope.ouvrirModelSuppresion = function(etudiant){
+    	$scope.ouvrirModelSuppresion = function(etudiant){
 		$rootScope.EtudiantToBeDeleted = etudiant;
 		$rootScope.etat = null;
 		$modal.open({
@@ -78,7 +78,11 @@
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,EtudiantsService) {
 				$scope.annulerSuppresion = function () {
-					$modalInstance.dismiss('cancel');	
+
+					$modalInstance.dismiss('cancel');
+					$rootScope.selectEtudiants($rootScope.promotionselected);
+					$modalInstance.dismiss('cancel');
+
 				};
 				$scope.doSupprimer = function(){
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
@@ -93,8 +97,8 @@
 					});
 				};
 			}
-		});	
+		});
 	}
 } ]);
-	
+
 })();

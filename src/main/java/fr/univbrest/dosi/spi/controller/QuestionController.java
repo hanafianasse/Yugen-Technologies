@@ -1,5 +1,7 @@
 package fr.univbrest.dosi.spi.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,28 +20,39 @@ import fr.univbrest.dosi.spi.service.QuestionService;
 
 @RestController
 @RequestMapping(value = "/question")
-public class QuestionController {
+@Api(value = "question", description = "Description de la ressource question.")
+public class QuestionController
+{
 
 	@Autowired
 	private QuestionService questionService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Question> getAll() {
+	public List<Question> getAll()
+	{
 		return questionService.getAll();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void addQuestion(@RequestBody Question qst) {
+	public void addQuestion(@RequestBody Question qst)
+	{
 		questionService.addQuestion(qst);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{idQuestion}")
-	public void deleteQuestion(@PathVariable("idQuestion") Long idQuestion) {
+	public void deleteQuestion(@PathVariable("idQuestion") Long idQuestion)
+	{
 		questionService.deleteQuestion(idQuestion);
 	}
 
+	@RequestMapping(method = RequestMethod.PUT)
+	public Question updateQuestion(@RequestBody Question qst)
+	{
+		return questionService.UpdateQuestion(qst);
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "/{IdQuestion}")
-	public Question getQuestion(@PathVariable("IdQuestion") int idqst)
+	public Question getQuestion(@PathVariable("IdQuestion") Long idqst)
 	{
 		return questionService.getQuestion(idqst);
 	}

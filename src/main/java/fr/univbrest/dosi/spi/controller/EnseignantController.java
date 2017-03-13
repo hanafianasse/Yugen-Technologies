@@ -1,5 +1,7 @@
 package fr.univbrest.dosi.spi.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import fr.univbrest.dosi.spi.service.UniteEnseignementService;
  */
 
 @RestController
+@Api(value = "enseignant", description = "Description de la ressource enseignant.")
 public class EnseignantController {
 	/**
 	 *
