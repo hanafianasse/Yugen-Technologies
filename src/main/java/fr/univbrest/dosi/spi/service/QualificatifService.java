@@ -18,7 +18,6 @@ import fr.univbrest.dosi.spi.exception.SPIException;
 @Service
 public class QualificatifService
 {
-	@Autowired
 	private QualificatifRepository qualificatifRepository;
 
 	@Autowired

@@ -5,93 +5,142 @@ package fr.univbrest.dosi.spi.controller;
 
 import java.io.IOException;
 
-import junit.framework.Assert;
-
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
 
 import fr.univbrest.dosi.spi.bean.Qualificatif;
+import fr.univbrest.dosi.spi.service.QualificatifService;
 
 /**
  * @author Chobaz
  *
- * 10 mars 2017
+ *         10 mars 2017
  */
+@RunWith(MockitoJUnitRunner.class)
 public class QualificatifControllerTest
 {
-	private String url = "http://localhost:8090/qualificatif";
-	
+	@InjectMocks
+	QualificatifController qualificatifController;
+
+	@Mock
+	QualificatifService qualificatifService;
+
+	String url = "http://localhost:8090/qualificatif";
+
 	@Test
-	public void doitAjouterQualificatif() throws ClientProtocolException, IOException
+	public void doitAjouterQualificatif() throws ClientProtocolException,
+			IOException
 	{
 		/**
 		 * Instanciation d'un nouveau qualificatif
 		 */
 		Qualificatif qualificatif = new Qualificatif();
-		
-		qualificatif.setMinimal("Newbie");
 		qualificatif.setMaximal("Expert");
-		
+		qualificatif.setMinimal("Newbie");
+
 		/**
-		 * Instanciation du client et de la requete
+		 * Test de l'ajout du qualificatif
 		 */
-		HttpClient client = HttpClientBuilder.create().build();
-		HttpPost mockRequestPost = new HttpPost(this.url);
-		
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").body(qualificatif).when()
+				.post(url).then().statusCode(200);
+	}
+
+	@Test
+	public void doitModifierQualificatif()
+	{
 		/**
-		 * Instanciation des objets necessaires au mapping objet --> String json
+		 * Instanciation d'un nouveau qualificatif
 		 */
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String jsonInString = ow.writeValueAsString(qualificatif);
-		
+		Qualificatif qualificatif = new Qualificatif();
+		qualificatif.setIdQualificatif(9999);
+		qualificatif.setMaximal("Expert");
+		qualificatif.setMinimal("Newbie");
+
 		/**
-		 * Parametrage de la requete
+		 * Test de l'ajout du qualificatif
 		 */
-		mockRequestPost.addHeader("Content-Type", "application/json");
-		mockRequestPost.setEntity(new StringEntity(jsonInString));
-		
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").body(qualificatif).when()
+				.post(url).then().statusCode(200);
+
 		/**
-		 * Création de la reponse
+		 * Mise à jour de la réponse
 		 */
-		HttpResponse mockResponse = client.execute(mockRequestPost);
+		qualificatif.setMinimal("Noob");
+
+		/**
+		 * Test de la mise à jour
+		 */
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").body(qualificatif).when()
+				.put(url).then().statusCode(200);
+	}
+
+	@Test
+	public void doitSupprimerQualificatif()
+	{
+		/**
+		 * Instanciation d'un nouveau qualificatif
+		 */
+		Qualificatif qualificatif = new Qualificatif();
+		qualificatif.setIdQualificatif(9999);
+		qualificatif.setMaximal("Expert");
+		qualificatif.setMinimal("Newbie");
+
+		/**
+		 * Test de l'ajout du qualificatif
+		 */
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").body(qualificatif).when()
+				.post(url).then().statusCode(200);
+
+		/**
+		 * Test de la suppression du qualificatif
+		 */
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").when().delete(url + "/9999")
+				.then().statusCode(200);
+	}
+
+	@Test
+	public void doitRecupererQualificatif()
+	{
+		/**
+		 * Instanciation d'un nouveau qualificatif
+		 */
+		Qualificatif qualificatif = new Qualificatif();
+		qualificatif.setIdQualificatif(9999);
+		qualificatif.setMaximal("Expert");
+		qualificatif.setMinimal("Newbie");
 		
 		/**
 		 * Test de l'ajout du qualificatif
 		 */
-		Assert.assertEquals(200, mockResponse.getStatusLine().getStatusCode());
-	}
-	
-	@Test
-	public void doitModifierQualificatif()
-	{
+		RestAssuredMockMvc.given().standaloneSetup(qualificatifController)
+				.contentType("application/json").body(qualificatif).when()
+				.post(url).then().statusCode(200);
 		
+		/**
+		 * Vérification du status de la requête
+		 */
+		RestAssured.given().when().get(url + "/9999").then().statusCode(200);
 	}
-	
+
 	@Test
-	public void doitSupprimerQualificatif()
-	{
-		
-	}
-	
-	@Test
-	public void doitRecupererQualificatif()
-	{
-		
-	}
-	
-	@Test 
 	public void doitRecupererQualificatifs()
 	{
-		
+		/**
+		 * Vérification du status de la requête
+		 */
+		RestAssured.given().when().get(url).then().statusCode(200);
 	}
 
 }

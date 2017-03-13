@@ -23,6 +23,7 @@ import fr.univbrest.dosi.spi.dao.QualificatifRepository;
 @SpringApplicationConfiguration(classes = Application.class)
 public class QualificatifServiceTest
 {
+	
 	@Test
 	public void doitAjouterQualificatif()
 	{
