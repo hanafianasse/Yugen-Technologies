@@ -17,7 +17,7 @@ angular.module('app')
         };
 
         dataFactory.updateQuestion = function (entity) {
-            return $http.put(urlBase,entity)
+            return $http.put(urlBase+'/',entity)
         };
 
         dataFactory.deleteQuestion = function (id) {
