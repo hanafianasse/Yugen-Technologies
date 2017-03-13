@@ -33,9 +33,9 @@ public class QuestionController {
 		questionService.addQuestion(qst);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/delete")
-	public void deleteQuestion(@RequestBody Question qst) {
-		questionService.deleteQuestion(qst.getIdQuestion());
+	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{idQuestion}")
+	public void deleteQuestion(@PathVariable("idQuestion") Long idQuestion) {
+		questionService.deleteQuestion(idQuestion);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{IdQuestion}")

@@ -30,7 +30,7 @@ public class EtudiantServiceTest {
 	}
 	
 	@Test
-	public void doitRÃ©cupÃ©rerLesEtudiants(){
+	public void doitRécupérerLesEtudiants(){
 		List<Etudiant> etudiants=Lists.newArrayList(new Etudiant("12"),new Etudiant("13"),new Etudiant("14"));
 		EtudiantRepository entrepot = new EtudiantDAOStub(etudiants);
 		EtudiantService etudiantService = new EtudiantService(entrepot);
