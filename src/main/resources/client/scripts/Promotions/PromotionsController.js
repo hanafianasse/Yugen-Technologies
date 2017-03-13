@@ -68,7 +68,7 @@
 		});
 	}
 
-
+	$rootScope.selectEtudiants = $scope.selectEtudiants; 
 
 	$scope.ouvrirModelSuppresion = function(etudiant){
 		$rootScope.EtudiantToBeDeleted = etudiant;
@@ -86,6 +86,7 @@
 	    			promise.success(function(status){
 						$rootScope.message = "Etudiant supprimé";
 						$rootScope.etat = "done";
+						$rootScope.selectEtudiants($rootScope.promotionselected);
 					}).error(function(data,status){
 						$rootScope.message = "impossible de supprimer cet étudiant(e)";
  						$rootScope.etat = "not done";
