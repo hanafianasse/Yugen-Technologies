@@ -1,11 +1,31 @@
 //Controlleur de la page qui modifie un étudiant
-angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService',
-    function ($scope, $location, EtudiantsService,$routeParams,promotionService) {
+angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService',
+    function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService) {
         $scope.status;
         $scope.error = false;
         $scope.success = false;
         console.log('je suis dans le controller modifier étudiant');
  
+//Récuperation des domaines par UNIVERSITE
+        var promise = domaineService.getDomaine("UNIVERSITE");
+    	promise.success(function(data) { 
+    		console.log("récupération du domaine terminé");
+    		$scope.domaineUniv = data;
+    		console.log($scope.domaineUniv);
+    	}).error(function(data) {
+    		console.log("get domaine : erreur");
+    	});
+    	
+    	
+    	//Récuperation des domaines par UNIVERSITE
+        var promise = domaineService.getDomaine("UNIVERSITE");
+    	promise.success(function(data) { 
+    		console.log("récupération du domaine terminé");
+    		$scope.domaineUniv = data;
+    		console.log($scope.domaineUniv);
+    	}).error(function(data) {
+    		console.log("get domaine : erreur");
+    	});
 
         
         
