@@ -13,6 +13,8 @@
 		<class>fr.univbrest.dosi.spi.bean.PromotionPK</class>
 		<class>fr.univbrest.dosi.spi.bean.UniteEnseignement</class>
 		<class>fr.univbrest.dosi.spi.bean.UniteEnseignementPK</class>
+		<class>fr.univbrest.dosi.spi.bean.Qualificatif</class>
+		
 		
 	</persistence-unit>
 </persistence>
