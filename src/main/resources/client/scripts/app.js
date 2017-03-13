@@ -25,6 +25,10 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/questionsStandard', {
 					templateUrl : 'views/question/list.html'
+				}).when('/admin/rubriquesStandard', {
+					templateUrl : 'views/rubrique/rubrique.html'
+				}).when('/admin/ajoutrubrique', {
+					templateUrl : 'views/rubrique/Ajoutrubrique.html'		
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
