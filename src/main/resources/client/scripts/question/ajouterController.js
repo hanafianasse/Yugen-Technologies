@@ -4,10 +4,8 @@
 'use strict';
 
 angular.module('app')
-	.controller('AddQuestionController', ['$scope','$routeParams','$http','QualificatifService','questionService',
-	function ($scope,$routeParams,$http,QualificatifService,questionService) {
-
-		$scope.qualificatifs
+	.controller('AddQuestionController', ['$scope','$routeParams','$http','QualificatifService','questionService','domaineService','$location',
+	function ($scope,$routeParams,$http,QualificatifService,questionService,domaineService,$location) {
 
 		var promise = QualificatifService.getAll();
 		promise.success(function(data) {
@@ -17,14 +15,11 @@ angular.module('app')
 		});
 
 		$scope.ajouter = function(){
-			/*$scope.question.intitule = "ttestting";
-			$scope.question.type = "QUS";
 			$scope.question.noEnseignant = null;
-			$scope.question.idQualificatif = 2;*/
 			console.log($scope.question);
 			var promise = questionService.addQuestion($scope.question);
 			promise.success(function(data){
-				console.log('question ajouté');
+				$location.path('/admin/questionsStandard');
 			}).error(function(status){
 				console.log('add question : error');
 			});

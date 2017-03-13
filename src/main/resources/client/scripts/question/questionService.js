@@ -9,7 +9,7 @@ angular.module('app')
         };
 
         dataFactory.getQuestion = function (id) {
-            return $http.get(urlBase,id);
+            return $http.get(urlBase +'/'+id);
         };
 
         dataFactory.addQuestion = function (entity) {

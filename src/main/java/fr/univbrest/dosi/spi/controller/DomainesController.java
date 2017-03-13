@@ -38,7 +38,5 @@ public class DomainesController {
 	public final List<CgRefCode> getDomainByRvDomain(@PathVariable(value = "rvDomain") final String rvDomain) {
 		List<CgRefCode> domaines = domainesService.getDomainByRvDomain(rvDomain);
 		return domaines;
-	}
-	
-	
+	}	
 }
