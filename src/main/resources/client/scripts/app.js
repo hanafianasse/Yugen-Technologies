@@ -29,11 +29,19 @@
 					templateUrl : 'views/rubrique/rubrique.html'
 				}).when('/admin/ajoutrubrique', {
 					templateUrl : 'views/rubrique/Ajoutrubrique.html'		
+				}).when('/admin/questionsStandard/maj/:idQuestionToBeUpdated', {
+					templateUrl : 'views/question/update.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
 					templateUrl : 'views/promotion/list.html'
-				}).when('/admin/ue/:id', {
+                }) .when('/admin/qualificatif', {
+                    templateUrl : 'views/qualificatif/list.html'
+				}).when('/admin/qualificatif/AjouterQualificatif', {
+                    templateUrl : 'views/qualificatif/details.html'
+                }).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
+                    templateUrl: 'views/qualificatif/updateQualificatif.html'
+                }).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/newQuesstion', {
 					templateUrl : 'views/question/ajouter.html'
@@ -125,14 +133,12 @@
 					 */
 				$urlRouterProvider.otherwise(function($injector, $location) {
 					var AuthService = $injector.get('AuthService');
-
 					AuthService.getUser().success(function(data) {
 						if (data) {
 							$location.path("/dashboard");
 						} else {
 							$location.path("/pages/signin");
 						}
-
 					}).error(function(data) {
 						$location.path("/pages/signin");
 					});
@@ -145,6 +151,7 @@
 			}
 			AuthService.getUser().success(function(data) {
 				if (data) {
+					$rootScope.logedUser = data;
 					e.preventDefault();
 				} else {
 					$location.path("/pages/signin");
