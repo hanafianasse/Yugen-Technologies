@@ -29,6 +29,8 @@
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
 					templateUrl : 'views/promotion/list.html'
+                }) .when('/admin/qualificatif', {
+                    templateUrl : 'views/qualificatif/list.html'
 				}).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/etu/:id', {
