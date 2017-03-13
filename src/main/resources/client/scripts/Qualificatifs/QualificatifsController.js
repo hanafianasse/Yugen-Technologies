@@ -8,10 +8,6 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
     $scope.qualificatifs = [];
 
 
-
-
-
-
     $scope.getQualificatifs = function(){
 
         console.log("je suis dans qualificatif");
@@ -61,6 +57,13 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
         $location.path("/admin/qualificatif");
 
     }
+
+    $scope.cancel = function() {
+
+        $location.path('/admin/qualificatif');
+
+    }
+
 
 
 }]);

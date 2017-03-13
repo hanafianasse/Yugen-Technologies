@@ -78,12 +78,11 @@
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,EtudiantsService) {
 				$scope.annulerSuppresion = function () {
-<<<<<<< HEAD
+
 					$modalInstance.dismiss('cancel');
 					$rootScope.selectEtudiants($rootScope.promotionselected);
-=======
-					$modalInstance.dismiss('cancel');	
->>>>>>> 9e4c5370a7650aaca884753de9e7c8df71530419
+					$modalInstance.dismiss('cancel');
+
 				};
 				$scope.doSupprimer = function(){
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);

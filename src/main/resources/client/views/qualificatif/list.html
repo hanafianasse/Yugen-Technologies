@@ -21,9 +21,10 @@
                 </thead>
                 <tbody>
                 <tr id="{{q.idQualificatif}}" data-ng-repeat='q in qualificatifs' >
+
                     <td>{{q.maximal}}</td>
                     <td>{{q.minimal}}</td>
-                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td><a href="#/admin/qualificatif/updateQualificatif/{{q.idQualificatif}}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(q)"></span></td>
                 </tr>
 

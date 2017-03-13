@@ -33,6 +33,8 @@
                     templateUrl : 'views/qualificatif/list.html'
 				}).when('/admin/qualificatif/AjouterQualificatif', {
                     templateUrl : 'views/qualificatif/details.html'
+                }).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
+                    templateUrl: 'views/qualificatif/updateQualificatif.html'
                 }).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/newQuesstion', {
