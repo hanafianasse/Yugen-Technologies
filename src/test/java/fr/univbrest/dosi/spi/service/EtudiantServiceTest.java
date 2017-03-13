@@ -2,12 +2,11 @@ package fr.univbrest.dosi.spi.service;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.junit.Assert;
 
 import com.google.common.collect.Lists;
 
@@ -31,7 +30,7 @@ public class EtudiantServiceTest {
 	}
 	
 	@Test
-	public void doitRécupérerLesEtudiants(){
+	public void doitRecupererLesEtudiants(){
 		List<Etudiant> etudiants=Lists.newArrayList(new Etudiant("12"),new Etudiant("13"),new Etudiant("14"));
 		EtudiantRepository entrepot = new EtudiantDAOStub(etudiants);
 		EtudiantService etudiantService = new EtudiantService(entrepot);

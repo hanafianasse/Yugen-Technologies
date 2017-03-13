@@ -25,6 +25,8 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/questionsStandard', {
 					templateUrl : 'views/question/list.html'
+				}).when('/admin/questionsStandard/maj/:idQuestionToBeUpdated', {
+					templateUrl : 'views/question/update.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
@@ -127,14 +129,12 @@
 					 */
 				$urlRouterProvider.otherwise(function($injector, $location) {
 					var AuthService = $injector.get('AuthService');
-
 					AuthService.getUser().success(function(data) {
 						if (data) {
 							$location.path("/dashboard");
 						} else {
 							$location.path("/pages/signin");
 						}
-
 					}).error(function(data) {
 						$location.path("/pages/signin");
 					});
@@ -147,6 +147,7 @@
 			}
 			AuthService.getUser().success(function(data) {
 				if (data) {
+					$rootScope.logedUser = data;
 					e.preventDefault();
 				} else {
 					$location.path("/pages/signin");

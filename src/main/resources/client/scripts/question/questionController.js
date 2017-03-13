@@ -32,9 +32,6 @@ angular.module('app')
 
 			var qualificatifDefered = $q.all(qualificatifRequestsPromise);
 			qualificatifDefered.then(function(data){
-				console.log(qualificatifs);
-				console.log(questions);
-
 				for(var index = 0 ; index < questions.length; index++){
 					var uneQuestion = {
 						question: '',
@@ -62,11 +59,10 @@ angular.module('app')
 					$modalInstance.dismiss('cancel');
 				};
 				$scope.doSupprimer = function(){
-					console.log($rootScope.questionToBeDeleted.idQuestion);
-					var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.idQuestion);
+					console.log($rootScope.questionToBeDeleted);
+					var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.question.idQuestion);
 					promise.success(function(status){
 	    				$scope.message = 'Question supprimé';
-	    				// refresh here !!!!!
 	    				getQuestions();
 					}).error(function(data,status){
 						$scope.message = 'Suppresion Impossible !';

@@ -16,6 +16,11 @@ public class QuestionService {
 	@Autowired
 	private  QuestionRepository QstRepository;
 	
+	@Autowired
+	public QuestionService(QuestionRepository entrepot) {
+		this.QstRepository=entrepot;
+	}
+	
     public final List<Question> getAll(){
 		
 		return (List<Question>) QstRepository.findAll();
@@ -36,4 +41,9 @@ public class QuestionService {
 	public Question getQuestion(final long idQuestion) {
 		return QstRepository.findOne(idQuestion);
 	}
+	
+	public Question UpdateQuestion(Question Qst) {
+		return QstRepository.save(Qst);
+	}
+	
 }
