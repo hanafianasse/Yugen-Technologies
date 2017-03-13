@@ -39,13 +39,9 @@ public class EtudiantController
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant) {
-		Promotion promotion = promotionService.getPromotion(promotionEtudiant
-				.getPromotion().getPromotionPK());
 	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant)
 	{
 		Promotion promotion = promotionService.getPromotion(promotionEtudiant.getPromotion().getPromotionPK());
-
 		Etudiant etudiant = promotionEtudiant.getEtudiant();
 		etudiant.setPromotion(promotion);
 		return etudiantService.addEtudiant(etudiant);
@@ -55,25 +51,18 @@ public class EtudiantController
 	public List<Etudiant> getEtudiantByPromotion(
 			@PathVariable("codeFormation") String codeFormation,
 			@PathVariable("anneeUniversitaire") String anneeUniversitaire) {
-			@PathVariable("anneeUniversitaire") String anneeUniversitaire)
-	{
-		PromotionPK promotionPk = new PromotionPK(codeFormation,
-				anneeUniversitaire);
-		Promotion promotion = promotionService.getPromotion(promotionPk);
-		return etudiantService.getEtudiantByPromotion(promotion);
+				PromotionPK promotionPk = new PromotionPK(codeFormation,anneeUniversitaire);
+				Promotion promotion = promotionService.getPromotion(promotionPk);
+					return etudiantService.getEtudiantByPromotion(promotion);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{noEtudiant}")
 	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
-	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant)
-	{
 		return etudiantService.getEtudiant(noEtudiant);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{noEtudiant}")
 	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
-	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant)
-	{
 		if (authentificationService.getAuthentificationByNoEtudiant(noEtudiant) != null)
 			authentificationService
 					.deleteAuthentification(authentificationService
@@ -90,9 +79,6 @@ public class EtudiantController
 				.getPromotion().getPromotionPK());
 		Etudiant etudiant = promotionEtudiant.getEtudiant();
 		etudiant.setPromotion(promotion);
-	@RequestMapping(method = RequestMethod.PUT)
-	public Etudiant updateEtudiant(Etudiant etudiant)
-	{
 		return etudiantService.updateEtudiant(etudiant);
 	}
 }
