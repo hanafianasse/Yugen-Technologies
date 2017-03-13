@@ -1,7 +1,7 @@
 
-//DataFactory de l'entité Etudiant
+
 angular.module('app')
-    .factory('EtudiantsService', ['$http', function ($http) {
+    .factory('QualificatifService', ['$http','$location', function ($http,$location) {
 
         var urlBase = 'http://localhost:8090/qualificatif';
         var dataFactory = {};
@@ -16,6 +16,7 @@ angular.module('app')
 
         dataFactory.addQualificatif = function (entity) {
             return $http.post(urlBase, entity);
+
         };
 
         dataFactory.updateQualificatif = function (entity) {
@@ -23,7 +24,7 @@ angular.module('app')
         };
 
         dataFactory.deleteQualificatif = function (id) {
-            return $http.delete(urlBase + '/remove/' + id);
+            return $http.delete(urlBase + '/' + id);
         };
 
         return dataFactory;
