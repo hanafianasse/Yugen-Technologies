@@ -14,5 +14,5 @@ import fr.univbrest.dosi.spi.bean.Qualificatif;
  */
 public interface QualificatifRepository extends PagingAndSortingRepository<Qualificatif, Long>
 {
-
+	
 }

@@ -78,18 +78,23 @@
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,EtudiantsService) {
 				$scope.annulerSuppresion = function () {
+<<<<<<< HEAD
 					$modalInstance.dismiss('cancel');
 					$rootScope.selectEtudiants($rootScope.promotionselected);
+=======
+					$modalInstance.dismiss('cancel');	
+>>>>>>> 9e4c5370a7650aaca884753de9e7c8df71530419
 				};
 				$scope.doSupprimer = function(){
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
 					var promise = EtudiantsService.deleteEtudiant($rootScope.EtudiantToBeDeleted.noEtudiant);
-					promise.success(function(status){
+	    			promise.success(function(status){
 						$rootScope.message = "Etudiant supprimé";
 						$rootScope.etat = "done";
+						$rootScope.selectEtudiants($rootScope.promotionselected);
 					}).error(function(data,status){
 						$rootScope.message = "impossible de supprimer cet étudiant(e)";
-						$rootScope.etat = "not done";
+ 						$rootScope.etat = "not done";
 					});
 				};
 			}

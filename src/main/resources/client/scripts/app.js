@@ -21,10 +21,10 @@
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
 					templateUrl : 'views/formations/list.html'
-                }).when('/admin/etudiants', {
-                    templateUrl : 'views/Etudiant/list.html'
 				}).when('/admin/formation/:id', {
 					templateUrl : 'views/formations/details.html'
+				}).when('/admin/questionsStandard', {
+					templateUrl : 'views/question/list.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
@@ -35,6 +35,8 @@
                     templateUrl : 'views/qualificatif/details.html'
                 }).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
+                }).when('/admin/newQuesstion', {
+					templateUrl : 'views/question/ajouter.html'
                 }).when('/admin/etu/:id', {
                     templateUrl : 'views/ue/ajoutEtudiant.html'
 				}).when('/dashboard', {

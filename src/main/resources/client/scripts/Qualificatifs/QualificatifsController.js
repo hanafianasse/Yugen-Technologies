@@ -3,7 +3,6 @@
  */
 'use strict';
 
-
 angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootScope','$routeParams','$http','$location','QualificatifService','$modal',function ($scope,$route,$rootScope,$routeParams,$http,$location, QualificatifService,$modal) {
 
     $scope.qualificatifs = [];
