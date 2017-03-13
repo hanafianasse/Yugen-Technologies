@@ -33,13 +33,18 @@ public class QuestionController {
 		questionService.addQuestion(qst);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/delete")
-	public void deleteQuestion(@RequestBody Question qst) {
-		questionService.deleteQuestion(qst.getIdQuestion());
+	@RequestMapping(method = RequestMethod.DELETE, value ="/delete/{idQuestion}")
+	public void deleteQuestion(@PathVariable("idQuestion") Long idQuestion) {
+		questionService.deleteQuestion(idQuestion);
 	}
 
+	@RequestMapping(method = RequestMethod.PUT)
+	public Question UpdateQuestion(@RequestBody Question qst) {
+		return questionService.UpdateQuestion(qst);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/{IdQuestion}")
-	public Question getQuestion(@PathVariable("IdQuestion") int idqst)
+	public Question getQuestion(@PathVariable("IdQuestion") Long idqst)
 	{
 		return questionService.getQuestion(idqst);
 	}
