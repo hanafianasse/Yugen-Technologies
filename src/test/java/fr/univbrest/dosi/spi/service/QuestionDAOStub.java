@@ -18,11 +18,11 @@ public class QuestionDAOStub implements QuestionRepository {
 	Question Question;
 
 	QuestionDAOStub() {
-		this.setDonnees(Lists.newArrayList());
+		this.donnees = Lists.newArrayList();
 	}
 
 	QuestionDAOStub(List<Question> setUpData) {
-		this.setDonnees(Lists.newArrayList(setUpData));
+		this.donnees = Lists.newArrayList(setUpData);
 	}
 
 
@@ -34,12 +34,12 @@ public class QuestionDAOStub implements QuestionRepository {
 
 	@Override
 	public long count() {
-		return getDonnees().size();
+		return donnees.size();
 	}
 
 	@Override
 	public void delete(Long noQuestion) {
-		for(Iterator<Question> iter = getDonnees().listIterator(); iter.hasNext();)
+		for(Iterator<Question> iter = donnees.listIterator(); iter.hasNext();)
 		{
 			Question e = iter.next();
 			
@@ -69,7 +69,7 @@ public class QuestionDAOStub implements QuestionRepository {
 	
 	@Override
 	public Iterable<Question> findAll() {
-		return this.getDonnees();
+		return this.donnees;
 	}
 
 	
@@ -77,12 +77,12 @@ public class QuestionDAOStub implements QuestionRepository {
 	@Override
 	public Question findOne(Long noQuestion) {
 		
-		return this.getDonnees().get(0);
+		return this.donnees.get(0);
 	}
 
 	@Override
 	public <S extends Question> S save(S entity) {
-		this.getDonnees().add(entity);
+		this.donnees.add(entity);
 
 		return entity;
 	}
@@ -112,12 +112,9 @@ public class QuestionDAOStub implements QuestionRepository {
 		return null;
 	}
 
-	public List<Question> getDonnees() {
-		return donnees;
-	}
-
-	public void setDonnees(List<Question> donnees) {
-		this.donnees = donnees;
+	public List<fr.univbrest.dosi.spi.bean.Question> getDonnees() {
+		// TODO Auto-generated method stub
+		return this.donnees;
 	}
 
 }

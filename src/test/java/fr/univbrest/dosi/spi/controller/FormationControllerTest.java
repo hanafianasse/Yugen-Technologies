@@ -1,10 +1,12 @@
 package fr.univbrest.dosi.spi.controller;
 
 import java.io.IOException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -85,7 +87,7 @@ public class FormationControllerTest {
 	public void getFormationTest() throws ClientProtocolException, IOException {
 		String codeFormation = "M2DOSI";
 		HttpClient client = HttpClientBuilder.create().build();
-		HttpDelete request = new HttpDelete("http://localhost:8090/formation/"
+		HttpGet request = new HttpGet("http://localhost:8090/formation/"
 				+ codeFormation);
 		HttpResponse response = client.execute(request);
 		Assert.assertEquals(200, response.getStatusLine().getStatusCode());
@@ -100,7 +102,7 @@ public class FormationControllerTest {
 	@Test
 	public void listFormationTest() throws ClientProtocolException, IOException {
 		HttpClient client = HttpClientBuilder.create().build();
-		HttpDelete request = new HttpDelete("http://localhost:8090/formations");
+		HttpGet request = new HttpGet("http://localhost:8090/formations");
 		HttpResponse response = client.execute(request);
 		Assert.assertEquals(200, response.getStatusLine().getStatusCode());
 		// la requete est bonne sil retourne 200
