@@ -2,7 +2,7 @@
 
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Rubriques Standards</strong>
-        <a href="#/admin/ajoutrubrique"><span class="add fa fa-user-plus pull-right"></span></a>
+        <a href="#/admin/ajoutrubrique"><span class="add fa fa-plus pull-right"></span></a>
         </div>
         <div style="overflow: auto ;max-height: 600px;">
         <table class="table table-hover table-responsive">
@@ -11,7 +11,7 @@
                     <th><div class="th">
                        Designation Rubrique
                     </div></th>
-                    
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -19,7 +19,7 @@
             <tbody>
                 <tr data-ng-repeat="q in mesrubriques " class="Rubrique">
                     <td ng-click="">{{q.designation}}</td>
-                    
+
                     <td><a href="#/admin/UpdateRubrique/{{q.idRubrique}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(q)"></span></td>
                 </tr>
