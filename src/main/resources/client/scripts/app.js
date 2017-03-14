@@ -25,7 +25,7 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/questionsStandard', {
 					templateUrl : 'views/question/list.html'
-				}).when('/admin/rubriquesStandard', {
+				}).when('/admin/RubriqueStandard', {
 					templateUrl : 'views/rubrique/rubrique.html'
 				}).when('/admin/ajoutrubrique', {
 					templateUrl : 'views/rubrique/Ajoutrubrique.html'		
@@ -97,6 +97,9 @@
 					templateUrl : 'views/pages/features.html'
 				}).when('/pages/signin', {
 					templateUrl : 'views/pages/signin.html',
+					notLoggedNeeded : true
+				}).when('/admin/UpdateRubrique/:idRubrique', {
+					templateUrl : 'views/rubrique/UpdateRubrique.html',
 					notLoggedNeeded : true
 				}).when('/pages/signup', {
 					templateUrl : 'views/pages/signup.html',

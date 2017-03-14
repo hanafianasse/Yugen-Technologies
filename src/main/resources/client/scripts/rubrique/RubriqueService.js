@@ -21,7 +21,7 @@ angular.module('app')
         };
 
         dataFactory.deleteRubrique = function (id) {
-            return $http.delete(urlBase + '/remove/' + id);
+            return $http.delete(urlBase + '/delete/' + id);
         };
 
         return dataFactory;
