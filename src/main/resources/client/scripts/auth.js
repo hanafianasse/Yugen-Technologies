@@ -3,6 +3,7 @@ angular.module('app.auth', [])
 /**
  * A simple example service that returns some data.
  */
+ /*
 .factory('AuthService', function($http, $window) {
 
 	return {
@@ -17,6 +18,35 @@ angular.module('app.auth', [])
 		getUser : function() {
 			config = {
 				url : '/user',
+				method : "GET"
+			}
+			return $http(config);
+		},
+		deconnexion : function() {
+			config = {
+				url : '/deconnexion',
+				method : "GET"
+			}
+			return $http(config);
+		}
+	}
+
+})*/
+
+.factory('AuthService', function($http, $window) {
+
+	return {
+		authLocal : function(requestAuth) {
+			config = {
+				url : '/authentification/auth',
+				method : "POST",
+				data : requestAuth
+			};
+			return $http(config);
+		},
+		getUser : function() {
+			config = {
+				url : '/authentification/user',
 				method : "GET"
 			}
 			return $http(config);
@@ -52,8 +82,8 @@ angular.module('app.auth', [])
 					// Executé lors du click sur le bouton de login
 					this.submit = function() {
 						var authuser = {
-							"username" : $scope.login.username,
-							"pwd" : $scope.login.password,
+							"loginConnection" : $scope.login.username,
+							"motPasse" : $scope.login.password,
 						};
 						AuthService.authLocal(authuser).success(function() {
 							$location.path('/');

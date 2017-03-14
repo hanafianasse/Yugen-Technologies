@@ -142,12 +142,26 @@
 				});
 			} ]).run(function($rootScope, $route, $location, AuthService) {
 		$rootScope.$on("$routeChangeStart", function(e, to) {
+			if( $rootScope.firstConnection === undefined){
+				$rootScope.firstConnection = true;
+			}
 			if (to.notLoggedNeeded) {
 				return;
 			}
 			AuthService.getUser().success(function(data) {
 				if (data) {
-					$rootScope.logedUser = data;
+					if($rootScope.firstConnection){
+						// if first cnx
+						console.log(data);
+						console.log(data.role);
+						$rootScope.connectedUser = data;
+						if(data.role == "ADM"){
+							$location.path("/");
+						}else{
+							$location.path("/views/enseignants/details.html");
+						}
+						$rootScope.firstConnection = false;
+					}
 					e.preventDefault();
 				} else {
 					$location.path("/pages/signin");
@@ -157,5 +171,4 @@
 			});
 		});
 	});
-
 }).call(this);

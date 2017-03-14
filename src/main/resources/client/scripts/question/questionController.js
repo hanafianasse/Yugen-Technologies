@@ -50,11 +50,11 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 
 	$scope.ouvrirModelSuppresion = function(question){
 		$rootScope.questionToBeDeleted = question;
-		$scope.etat = null;
 		$modal.open({
 			templateUrl: 'myModalContentForQuestion.html',
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,questionService) {
+				$scope.etat = null;
 				$scope.annulerSuppresion = function () {
 					$modalInstance.dismiss('cancel');
 				};
@@ -69,7 +69,7 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 					$scope.etat = "done";
 				};
 			}
-		});	
+		});
 	}
 	}]);
 })();
