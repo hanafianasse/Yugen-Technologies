@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.sun.istack.NotNull;
+
 import java.math.BigDecimal;
 
 
@@ -13,13 +15,16 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@NamedQuery(name="Rubrique.findAll", query="SELECT r FROM Rubrique r")
+@NamedQueries({ @NamedQuery(name = "Rubrique.findAll", query = "SELECT r FROM Rubrique r"),
+	 })
+
 public class Rubrique implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_seq_gen6")
-	@SequenceGenerator(name="my_seq_gen6", sequenceName="RUB_SEQ")
+	@NotNull
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	@Column(name="ID_RUBRIQUE")
 	private long idRubrique;
 
