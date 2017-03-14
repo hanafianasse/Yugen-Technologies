@@ -124,28 +124,19 @@
 					templateUrl : 'views/pages/contact.html'
 				}).when('/tasks', {
 					templateUrl : 'views/tasks/tasks.html'
-				});/*
-					 * .otherwise({ redirectTo: '/404' });
-					 */
-				$urlRouterProvider.otherwise(function($injector, $location) {
-					var AuthService = $injector.get('AuthService');
-					AuthService.getUser().success(function(data) {
-						if (data) {
-							$location.path("/dashboard");
-						} else {
-							$location.path("/pages/signin");
-						}
-					}).error(function(data) {
-						$location.path("/pages/signin");
-					});
-
+				}).when('/404', {
+					templateUrl : 'views/pages/404.html'
+				}).when('/500', {
+					templateUrl : 'views/pages/500.html'
+				}).otherwise({
+					redirectTo: '/404'
 				});
-			} ]).run(function($rootScope, $route, $location, AuthService) {
+			}]).run(function($rootScope, $route, $location, AuthService) {
 		$rootScope.$on("$routeChangeStart", function(e, to) {
 			if( $rootScope.firstConnection === undefined){
 				$rootScope.firstConnection = true;
 			}
-			if (to.notLoggedNeeded) {
+			if (to != null && to.notLoggedNeeded) {
 				return;
 			}
 			AuthService.getUser().success(function(data) {
