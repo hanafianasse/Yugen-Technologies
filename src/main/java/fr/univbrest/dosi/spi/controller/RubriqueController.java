@@ -1,8 +1,8 @@
 package fr.univbrest.dosi.spi.controller;
 
+import io.swagger.annotations.Api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import fr.univbrest.dosi.spi.bean.Rubrique;
 
+
+
+import fr.univbrest.dosi.spi.bean.Rubrique;
 import fr.univbrest.dosi.spi.service.RubriqueService;
 
 /**
@@ -20,13 +22,14 @@ import fr.univbrest.dosi.spi.service.RubriqueService;
  */
 @RestController
 @RequestMapping(value = "/rubrique")
+@Api(value = "rubrique", description = "Description de la ressource rubrique.")
 public class RubriqueController {
 	
 	@Autowired
 	private RubriqueService rubriqueService;
 
-	@RequestMapping( method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public final Rubrique addRubrique(@RequestBody final Rubrique rubrique) {
+	@RequestMapping( method = RequestMethod.POST)
+	public final Rubrique addRubrique(@RequestBody  Rubrique rubrique) {
 		return rubriqueService.addRubrique(rubrique);
 	}
 	/**
@@ -43,7 +46,7 @@ public class RubriqueController {
 	
 
 	
-	@RequestMapping(produces = "application/json")
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public final Iterable<Rubrique> GetRubrique() {
 		final Iterable<Rubrique> rubriques = rubriqueService.listRubriques();
 		return rubriques;
@@ -53,6 +56,11 @@ public class RubriqueController {
 	@RequestMapping(value = "/delete/{id_rubrique}",method = RequestMethod.DELETE, headers = "Accept=application/json")
 	public final void removeRubrique(@PathVariable("id_rubrique") final Long id_rubrique) {
 		rubriqueService.deleteRubrique(id_rubrique);
+	}
+	
+	@RequestMapping(value = "/{idRubrique}",method = RequestMethod.GET,produces = "application/json")
+	public final Rubrique rubrique(@PathVariable(value = "idRubrique") final Long idRubrique) {
+		return rubriqueService.getRubrique(idRubrique);
 	}
 }
 
