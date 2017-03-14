@@ -53,7 +53,7 @@ console.log("laa");
     	 var promise = RubriqueService.getRubrique($routeParams.idRubrique);
          promise.success(function(data){
         	 $scope.rubrique=data;
-        	 $scope.rubrique.idRubrique=$routeParams.idRubrique;
+        	// $scope.rubrique.idRubrique=$routeParams.idRubrique;
         	 console.log( $scope.rubrique);
          }).error(function(status){
              console.log(" rubrique : error");

@@ -22,10 +22,9 @@ public class Rubrique implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotNull
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
-	@Column(name="ID_RUBRIQUE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_seq_gen6")
+	@SequenceGenerator(name="my_seq_gen6", sequenceName="RUB_SEQ")
+    @Column(name="ID_RUBRIQUE")
 	private long idRubrique;
 
 	private String designation;
