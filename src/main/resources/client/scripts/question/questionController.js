@@ -1,14 +1,14 @@
 (function() {'use strict';
 angular.module('app')
 	.controller('QuestionController',[ '$scope', '$location', '$http','questionService','QualificatifService','$q','$modal','$rootScope',
-		function($scope, $location, $http,questionService,QualificatifService,$q,$modal,$rootScope) {
-		$scope.mesQuestions = new Array();
+function($scope, $location, $http,questionService,QualificatifService,$q,$modal,$rootScope) {
+	
+
+ 	$scope.getQuestions = function(){
 		var questions = new Array();
 		var qualificatifs = new Array();
 		var qualificatifRequestsPromise = new Array();
-
-
- 	function getQuestions(){
+		$scope.mesQuestions = new Array();
 		var promise = questionService.getAll();
 		promise.success(function(data) {
 			data.forEach(function(question){
@@ -45,33 +45,31 @@ angular.module('app')
 		});     
 	}
 	
-	getQuestions();
-	
+	$scope.getQuestions();
+	$rootScope.refresh = $scope.getQuestions;
+
 	$scope.ouvrirModelSuppresion = function(question){
 		$rootScope.questionToBeDeleted = question;
-		$scope.etat = null;
-		console.log(question);
 		$modal.open({
-			templateUrl: 'myModalContent.html',
+			templateUrl: 'myModalContentForQuestion.html',
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,questionService) {
+				$scope.etat = null;
 				$scope.annulerSuppresion = function () {
 					$modalInstance.dismiss('cancel');
 				};
 				$scope.doSupprimer = function(){
-					console.log($rootScope.questionToBeDeleted);
 					var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.question.idQuestion);
 					promise.success(function(status){
 	    				$scope.message = 'Question supprimé';
-	    				getQuestions();
+	    				$rootScope.refresh();
 					}).error(function(data,status){
 						$scope.message = 'Suppresion Impossible !';
 					});
 					$scope.etat = "done";
 				};
 			}
-		});	
+		});
 	}
-
 	}]);
 })();

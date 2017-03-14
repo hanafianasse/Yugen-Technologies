@@ -10,4 +10,6 @@ import fr.univbrest.dosi.spi.bean.Authentification;
 public interface AuthentificationRepository extends PagingAndSortingRepository<Authentification,Long>{
 	Authentification findByNoEtudiant(@Param("noEtudiant") String noEtudiant);
 	Authentification findByNoEnseignant(BigDecimal noEnseignant);
+	Authentification findByLoginConnection(String loginConnection);
+	
 }

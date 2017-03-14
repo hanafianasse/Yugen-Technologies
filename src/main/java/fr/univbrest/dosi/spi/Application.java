@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 /**
  * @author DOSI
  *
@@ -18,22 +20,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan
 @EnableAutoConfiguration
 @Configuration
-// @PropertySource("classpath:/data/jdbc-dev.properties")
 @EnableJpaRepositories
 @EnableTransactionManagement
 @Import(RepositoryRestMvcConfiguration.class)
-public class Application extends WebMvcConfigurerAdapter {
+@EnableSwagger2
+public class Application extends WebMvcConfigurerAdapter
+{
 	/**
 	 *
 	 * @param args
-	 *            lancemant
+	 *            Init project
 	 */
-	public static void main(final String[] args) {
+	public static void main(final String[] args)
+	{
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
-	public final void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/client/").addResourceLocations("classpath:/.tmp/");
+	public final void addResourceHandlers(final ResourceHandlerRegistry registry)
+	{
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations(
+				"classpath:/META-INF/resources/");
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations(
+				"classpath:/META-INF/resources/webjars/");
+
+		registry.addResourceHandler("/**")
+				.addResourceLocations("classpath:/client/")
+				.addResourceLocations("classpath:/.tmp/");
 	}
 }
