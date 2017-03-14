@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Authentification;
+import fr.univbrest.dosi.spi.bean.User;
 import fr.univbrest.dosi.spi.dao.AuthentificationRepository;
 
 @Service
@@ -43,6 +44,14 @@ public class AuthentificationService {
 	public Authentification updateAuthentification(
 			final Authentification authentification) {
 		return authentificationReposity.save(authentification);
+	}
+	
+	public Authentification authentifier(final String login, final String pwd) {
+		final Authentification user = authentificationReposity.findByLoginConnection(login);
+		if (user != null && user.getMotPasse().equals(pwd)) {
+			return user;
+		}
+		return null;
 	}
 
 }
