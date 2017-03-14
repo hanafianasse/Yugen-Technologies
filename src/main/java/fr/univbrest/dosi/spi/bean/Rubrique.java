@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.sun.istack.NotNull;
 
 import java.math.BigDecimal;
 
