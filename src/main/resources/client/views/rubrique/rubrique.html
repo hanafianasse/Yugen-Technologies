@@ -17,10 +17,10 @@ f<div class="page page-table" data-ng-controller="RubriqueController">
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="q in mesRubriques " class="Rubrique">
+                <tr data-ng-repeat="q in mesrubriques " class="Rubrique">
                     <td ng-click="">{{q.designation}}</td>
                     
-                    <td><a href="#TODO"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                    <td><a href="#/admin/ajoutrubrique"><span class="glyphicon glyphicon-pencil"></span></a></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(q)"></span></td>
                 </tr>
             </tbody>
@@ -31,7 +31,7 @@ f<div class="page page-table" data-ng-controller="RubriqueController">
 <script type="text/ng-template" id="myModalContent.html">
 <div class="modal-header">
   <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
-  <h4 class="modal-title">Confirmation</h4>
+  <h4> class="modal-title">Confirmation</h4>
 </div>
 <div class="modal-body">
     <p ng-if="etat == null" >Confirmer la suppression ?</p>

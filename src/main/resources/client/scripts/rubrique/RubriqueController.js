@@ -2,8 +2,7 @@
  * 
  */
 
-
-angular.module('app').controller('RubriqueController', ['$scope','$routeParams','$http','RubriqueService',function ($scope,$routeParams,$http, RubriqueService) {
+angular.module('app').controller('RubriqueController', ['$scope','$route','$rootScope','$routeParams','$http','RubriqueService',function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService) {
 
     $scope.mesrubriques = [];
 
@@ -11,6 +10,7 @@ angular.module('app').controller('RubriqueController', ['$scope','$routeParams',
         var promise = RubriqueService.getAll();
         promise.success(function(data) {
             $scope.mesrubriques = data;
+            console.log( $scope.mesrubriques);
         }).error(function(data) {
             console.log("get rubriques : erreur");
         });
@@ -18,7 +18,7 @@ angular.module('app').controller('RubriqueController', ['$scope','$routeParams',
     
     $rootScope.refresh = $scope.getRubriques;
     
-    $scope.ouvrirModelSuppresion = function(rubrique){
+ /*   $scope.ouvrirModelSuppresion = function(rubrique){
         //console.log(qualificatif);
         $rootScope.etat = null;
         $rootScope.rubriqueToBeDeleted = rubrique;
@@ -31,7 +31,7 @@ angular.module('app').controller('RubriqueController', ['$scope','$routeParams',
                 };
                 $scope.doSupprimer = function(){
                   //  console.log(" here ::: --->>> "+$rootScope.QualificatifToBeDeleted.idQualificatif);
-                    var promise = QualificatifService.deleteQualificatif($rootScope.QualificatifToBeDeleted.idQualificatif);
+                    var promise = RubriqueService.deleteRubrique($rootScope.rubriqueToBeDeleted.idrubrique);
                     promise.success(function(status){
                         $rootScope.message = "Rubrique supprimé";
                         $rootScope.etat = "done";
@@ -52,7 +52,7 @@ angular.module('app').controller('RubriqueController', ['$scope','$routeParams',
        RubriqueService.addRubrique($scope.rubrique);
         $location.path("/admin/rubrique");
 
-    }
+    }*/
     
     
 
