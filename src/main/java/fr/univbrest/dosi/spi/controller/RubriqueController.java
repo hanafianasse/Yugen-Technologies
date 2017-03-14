@@ -15,7 +15,7 @@ import fr.univbrest.dosi.spi.bean.Rubrique;
 import fr.univbrest.dosi.spi.service.RubriqueService;
 
 /**
- * @author DOSI
+ * @author Red1
  *
  */
 @RestController
