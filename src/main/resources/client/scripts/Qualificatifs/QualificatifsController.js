@@ -9,7 +9,7 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9]/gi,
+            r = /[^a-z0-9éàçèù\/]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
@@ -46,7 +46,6 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
                     $modalInstance.dismiss('cancel');
                 };
                 $scope.doSupprimer = function(){
-                    console.log(" here ::: --->>> "+$rootScope.QualificatifToBeDeleted.idQualificatif);
                     var promise = QualificatifService.deleteQualificatif($rootScope.QualificatifToBeDeleted.idQualificatif);
                     promise.success(function(status){
                         $rootScope.message = "Qualificatif supprimé";
@@ -61,18 +60,17 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
             }
         });
     }
-    $scope.addQualificatif=function () {
-
-        $scope.qualificatif["Content-Type"]="application/json";
-        QualificatifService.addQualificatif($scope.qualificatif);
-        $location.path("/admin/qualificatif");
-
+    $scope.addQualificatif = function () {
+        var promise = QualificatifService.addQualificatif($scope.qualificatif);
+        promise.success(function(){
+            $location.path("/admin/qualificatif");
+        }).error(function(){
+            console.log('add qualificatif : error');
+        });
     }
 
     $scope.cancel = function() {
-
         $location.path('/admin/qualificatif');
-
     }
 
 

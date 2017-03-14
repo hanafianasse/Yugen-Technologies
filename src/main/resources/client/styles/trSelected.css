@@ -29,3 +29,20 @@ background-color: #FEEFB3;
 color: #D8000C;
 background-color: #FFBABA;
 }
+
+
+.bg-warning {
+	color: #f0ad4e
+}
+
+.bg-danger {
+	color: #d9534f
+}
+
+.bg-success {
+	color: #337ab7
+}
+
+.bg-info{
+	color: #5cb85c
+}

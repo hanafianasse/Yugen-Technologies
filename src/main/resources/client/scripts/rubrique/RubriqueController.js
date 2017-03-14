@@ -7,7 +7,7 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9]/gi,
+            r = /[^a-z0-9éàçèù\/]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
