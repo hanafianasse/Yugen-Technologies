@@ -4,7 +4,18 @@
 
 angular.module('app').controller('RubriqueController', ['$scope','$route','$rootScope','$routeParams','$http','RubriqueService','$modal','$location',
 function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$location) {
-console.log("laa");
+
+    $('input').on('input', function() {
+        var c = this.selectionStart,
+            r = /[^a-z0-9]/gi,
+            v = $(this).val();
+        if(r.test(v)) {
+            $(this).val(v.replace(r, ''));
+            c--;
+        }
+        this.setSelectionRange(c, c);
+    });
+    
     $scope.getRubriques = function(){   
         var promise = RubriqueService.getAll();
         promise.success(function(data) {

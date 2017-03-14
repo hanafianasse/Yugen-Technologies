@@ -17,6 +17,8 @@
 					redirectTo : '/dashboard'
 				}).when('/admin/enseignants', {
 					templateUrl : 'views/enseignants/list.html'
+				}).when('/admin/enseignantsConnected', {
+					templateUrl : 'views/enseignants/pagevierge.html'
 				}).when('/admin/enseignant/:id', {
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
@@ -156,7 +158,7 @@
 						if(data.role == "ADM"){
 							$location.path("/");
 						}else{
-							$location.path("/views/enseignants/details.html");
+							$location.path("/admin/enseignantsConnected");
 						}
 						$rootScope.firstConnection = false;
 					}
