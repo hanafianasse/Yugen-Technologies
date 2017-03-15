@@ -3,7 +3,7 @@
  */
 angular.module('app').controller('DashboardController', ['$scope', '$location','$routeParams', 'EtudiantsService', 'formationService','promotionService','enseignantsFactory',function ($scope,$route,$routeParams,EtudiantsService, formationService,PromotionsService,enseignantsFactory) {
 
-    $scope.nbEnseignant = null;
+
 
     function getNbEnseignant() {
         enseignantsFactory.getNbEnseignant().then(function (response) {
@@ -26,5 +26,27 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
 
     };
     getNbEtudiant();
+
+    function getNbFormations() {
+        formationService.getNbFormations().then(function (response) {
+            $scope.nbFormation = response.data;
+            console.log($scope.nbFormation);
+        }, function (error) {
+            console.log("get nbFormation : erreur");
+        });
+
+    };
+    getNbFormations();
+
+    function getNbPromotion() {
+        PromotionsService.getNbPromotion().then(function (response) {
+            $scope.nbPromotion = response.data;
+            console.log($scope.nbPromotion);
+        }, function (error) {
+            console.log("get nbPromotion : erreur");
+        });
+
+    };
+    getNbPromotion();
 
 }]);
