@@ -4,10 +4,10 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
     $scope.status;
     $scope.error = false;
     $scope.success = false;
-        
+
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9éàçèù\-\/]/gi,
+            r = /[^a-z0-9éàçèù@.\-\/]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
@@ -15,30 +15,30 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
         }
         this.setSelectionRange(c, c);
     });
-        
+
     //Récuperation des domaines par UNIVERSITE
     var promise = domaineService.getDomaine("UNIVERSITE");
-	promise.success(function(data) { 
+	promise.success(function(data) {
 		console.log("récupération du domaine UNIVERSITE terminé");
 		$scope.domaineUniv = data;
 		console.log($scope.domaineUniv);
 	}).error(function(data) {
 		console.log("get domaine : erreur");
 	});
-	
-	
+
+
     //Récuperation des domaines par PAYS
     var promise = domaineService.getDomaine("PAYS");
-	promise.success(function(data) { 
+	promise.success(function(data) {
 		console.log("récupération du domaine PAYS terminé");
 		$scope.domainePays = data;
 		console.log($scope.domainePays);
 	}).error(function(data) {
 		console.log("get domaine : erreur");
 	});
-    
-    
-    
+
+
+
     $scope.codeFormation = $routeParams.codeFormation;
     $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
     $scope.ajouterEtudiant = function (etudiant) {
@@ -53,7 +53,7 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
             			promotionPK : maPromotion.promotionPK,
             			formation : {
             				codeFormation : $scope.codeFormation
-            			} 
+            			}
             		}
             }
             console.log($scope.promotionEtudiant);
