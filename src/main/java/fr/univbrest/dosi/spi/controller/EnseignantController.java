@@ -207,4 +207,11 @@ public class EnseignantController {
 		enseignantService.updateEnseignant(enseignant);
 		return "l'enseignant " + enseignant.getNom() + " " + enseignant.getPrenom() + " est modifier";
 	}
+	
+	//Nombre des enseignants
+			@RequestMapping(value = "/enseignant/nombreEnseignants")
+			public int nombreEnseignants() {
+				return enseignantService.nombreEnseignants();
+			}
+	
 }

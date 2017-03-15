@@ -1,11 +1,19 @@
 package fr.univbrest.dosi.spi.bean;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
-
 import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -21,17 +29,18 @@ public class Rubrique implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_seq_gen6")
-	@SequenceGenerator(name="my_seq_gen6", sequenceName="RUB_SEQ")
-    @Column(name="ID_RUBRIQUE")
+	@GeneratedValue(generator="MY_SEQ",strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="MY_SEQ",sequenceName="RUB_SEQ", allocationSize=1)
+	@Column(name="ID_RUBRIQUE")
 	private long idRubrique;
 
 	private String designation;
-
+	
+	@JsonIgnore
 	@Column(name="NO_ENSEIGNANT")
 	private BigDecimal noEnseignant;
 
-	private BigDecimal ordre;
+	private BigInteger ordre;
 
 	@Column(name="TYPE")
 	private String type;
@@ -63,12 +72,12 @@ public class Rubrique implements Serializable {
 		this.noEnseignant = noEnseignant;
 	}
 
-	public BigDecimal getOrdre() {
+	public BigInteger getOrdre() {
 		return this.ordre;
 	}
 
-	public void setOrdre(BigDecimal ordre) {
-		this.ordre = ordre;
+	public void setOrdre(BigInteger i) {
+		this.ordre =  i;
 	}
 
 	public String getType() {
