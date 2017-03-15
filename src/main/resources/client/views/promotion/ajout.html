@@ -80,14 +80,14 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2">E-mail<span style="color: red"> *</span></label>
                     <div class="col-sm-10">
-                        <input type="email" maxlength="255" class="form-control" ng-model="etudiant.email" required>
+                        <input type="email" class="form-control" ng-model="etudiant.email" required>
                         
                     </div>                    
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2">E-mail UBO</label>
+                    <label class="col-sm-2">E-mail UBO</label>
                     <div class="col-sm-10">
-                        <input type="email" maxlength="255" class="form-control" ng-model="etudiant.emailUbo">
+                        <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.emailUbo">
                     </div>                    
                 </div>
                 <div class="form-group">

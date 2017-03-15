@@ -106,8 +106,7 @@
 					templateUrl : 'views/pages/signin.html',
 					notLoggedNeeded : true
 				}).when('/admin/UpdateRubrique/:idRubrique', {
-					templateUrl : 'views/rubrique/UpdateRubrique.html',
-					notLoggedNeeded : true
+					templateUrl : 'views/rubrique/UpdateRubrique.html'
 				}).when('/pages/signup', {
 					templateUrl : 'views/pages/signup.html',
 					notLoggedNeeded : true

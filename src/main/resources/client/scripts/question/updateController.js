@@ -34,7 +34,6 @@ angular.module('app')
 		});
 
 		$scope.update = function(){
-			console.log('je suis hna');
 			console.log($scope.question);
 			var promise = questionService.updateQuestion($scope.question);
 			promise.success(function(data){
