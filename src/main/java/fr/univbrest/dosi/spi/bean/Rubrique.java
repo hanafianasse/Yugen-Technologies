@@ -3,7 +3,6 @@ package fr.univbrest.dosi.spi.bean;
 import java.io.Serializable;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 

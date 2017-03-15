@@ -41,5 +41,11 @@ public class RubriqueService {
 		return rubriqueRepository.save(rubrique);
 
 	}
+	public final Rubrique GetRubrique(long id) {
+		return rubriqueRepository.findOne(id);
+
+	}
+	
+	
 
 }
