@@ -68,7 +68,8 @@
     <!--<div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>-->
     <section ng-if="promotions.length != 0 && $root.promotionselected != null" class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiants</strong>
-          <span class="add fa fa-user-plus pull-right" ng-click="ajouterEtudiant()"></span>
+          <a href="#/admin/promotion/ajout/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}"><span class="add fa fa-user-plus pull-right"></span></a>
+          <!-- ajout des parametres /{{codeformation}}/{{anneeuniv}} -->
         </div>
         <div class="scrollbar" style="overflow-x: hidden; overflow-y:auto; max-height: 250px;">
         <table class="table table-hover table-responsive">
@@ -104,8 +105,8 @@
                     <td ng-click="">{{e.telephone}}</td>
                     <td ng-click="">{{e.email}}</td>
                     <td ng-click="">{{e.nationalite}}</td>
-                    <td ng-click="">{{e.universiteOrigine}}</td>
-                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+					<td ng-click="">{{e.universiteOrigine}}</td>                    
+                    <td><a href="#/admin/promotion/modif/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}/{{e.noEtudiant}}"><span style="color:#008080" class="fa fa-pencil-square-o"></span></a></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
             </tbody>

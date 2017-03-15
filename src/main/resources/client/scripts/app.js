@@ -23,6 +23,7 @@
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
 					templateUrl : 'views/formations/list.html'
+                }).when('/admin/formation/:id', {
 				}).when('/admin/formation/:id', {
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/questionsStandard', {
@@ -37,7 +38,11 @@
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
 					templateUrl : 'views/promotion/list.html'
-                }) .when('/admin/qualificatif', {
+				}).when('/admin/promotion/ajout/:codeFormation/:anneeUniversitaire', {
+					templateUrl : 'views/promotion/ajout.html'
+				}).when('/admin/promotion/modif/:codeFormation/:anneeUniversitaire/:noEtudiant', {
+					templateUrl : 'views/promotion/modif.html'
+				}).when('/admin/qualificatif', {
                     templateUrl : 'views/qualificatif/list.html'
 				}).when('/admin/qualificatif/AjouterQualificatif', {
                     templateUrl : 'views/qualificatif/details.html'
