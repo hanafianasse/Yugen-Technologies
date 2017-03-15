@@ -20,55 +20,22 @@
   
   app.factory('enseignantsFactory', ['$http',function($http){
     var list = function() {
-        //var defer = $q.defer();
-
+        
         return  $http.get('http://localhost:8090/ens')
-        /*.then(function(response) {
-           defer.resolve(response.data);
-         });
-
-         return defer.promise;*/
        };
-    	/*[ 
-      // TODO Constituer la liste des enseignants ici
-      {
-    	  no_enseignant : "1", nom : "SALIOU", prenom : "Philippe", 
-    	  email :"philippe.saliou@gmail.com", sexe : "H", adresse :"6 rue de l'Argoat" ,
-    	  code_postal : "29860", ville : "LE DRENNEC", telephone : "06.29.24.01.00",
-    	  pays : "FR", type : "MCF"
-    		  
-      },
-      {
-    	  no_enseignant : "2", nom : "LALLALI", prenom : "Mounir", 
-    	  email :"mouni.lallali@gmail.com", sexe : "H", adresse :"18rue Jean Jaurès" ,
-    	  code_postal : "29200", ville : "BREST", telephone : "06.32.03.56.32",
-    	  pays : "FR", type : "MCF"
-      },
-      {
-    	  no_enseignant : "3", nom : "LEROUX", prenom : "Pierre", 
-    	  email :"pileroux@gmail.com" , sexe : "H", adresse :"65 route de Gouesnou" ,
-    	  code_postal : "29200", ville : "BREST", telephone : "06.45.95.47.29",
-    	  pays : "FR", type : "INT"
-      }
-    ];*/
-            
+    	     
     var details = [ 
       // Constituer le délail de la liste des enseignants ici
     ];
 
     return {
-      // renvoi la liste de tous les enseignants
-      all:list,// function() { //return list; 
-
-     // },
-      // renvoi l'enseignant avec le no_enseignant demandé
+      all:list,
+      
+			// renvoi l'enseignant avec le no_enseignant demandé
       get: function(noEnseignant) { 
     	  // TODO retourner les enseignants
-    	  console.log("TODO : get enseignant",noEnseignant);
-    	  //return list.retourValue("no_enseignant",idx);
     	  return  $http.get('http://localhost:8090/getens/'+noEnseignant);
-    	  
-   	  },
+    	},
       set: function(enseignant) {
         var idx = enseignant.noEnseignant;
         // si modification d'un enseignant existant
@@ -133,7 +100,12 @@
       getUE : function(noEnseignant){
 	      var url = "http://localhost:8090/getuebyenseignant/"+noEnseignant;
 		  return $http.get(url);
-      }
+      },
+
+			getNbEnseignant : function(){
+				var url = "http://localhost:8090/enseignant/nombreEnseignants";
+				return $http.get(url);
+			}
     };
   }]);
 
