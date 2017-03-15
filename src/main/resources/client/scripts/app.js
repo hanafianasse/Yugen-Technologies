@@ -17,6 +17,8 @@
 					redirectTo : '/dashboard'
 				}).when('/admin/enseignants', {
 					templateUrl : 'views/enseignants/list.html'
+				}).when('/admin/enseignantsConnected', {
+					templateUrl : 'views/enseignants/pagevierge.html'
 				}).when('/admin/enseignant/:id', {
 					templateUrl : 'views/enseignants/details.html'
 				}).when('/admin/formations', {
@@ -26,6 +28,12 @@
 					templateUrl : 'views/formations/details.html'
 				}).when('/admin/questionsStandard', {
 					templateUrl : 'views/question/list.html'
+				}).when('/admin/RubriqueStandard', {
+					templateUrl : 'views/rubrique/rubrique.html'
+				}).when('/admin/ajoutrubrique', {
+					templateUrl : 'views/rubrique/Ajoutrubrique.html'		
+				}).when('/admin/questionsStandard/maj/:idQuestionToBeUpdated', {
+					templateUrl : 'views/question/update.html'
 				}).when('/admin/ue', {
 					templateUrl : 'views/ue/list.html'
 				}).when('/admin/promotion', {
@@ -34,7 +42,13 @@
 					templateUrl : 'views/promotion/ajout.html'
 				}).when('/admin/promotion/modif/:codeFormation/:anneeUniversitaire/:noEtudiant', {
 					templateUrl : 'views/promotion/modif.html'
-				}).when('/admin/ue/:id', {
+				}).when('/admin/qualificatif', {
+                    templateUrl : 'views/qualificatif/list.html'
+				}).when('/admin/qualificatif/AjouterQualificatif', {
+                    templateUrl : 'views/qualificatif/details.html'
+                }).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
+                    templateUrl: 'views/qualificatif/updateQualificatif.html'
+                }).when('/admin/ue/:id', {
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/newQuesstion', {
 					templateUrl : 'views/question/ajouter.html'
@@ -91,6 +105,9 @@
 				}).when('/pages/signin', {
 					templateUrl : 'views/pages/signin.html',
 					notLoggedNeeded : true
+				}).when('/admin/UpdateRubrique/:idRubrique', {
+					templateUrl : 'views/rubrique/UpdateRubrique.html',
+					notLoggedNeeded : true
 				}).when('/pages/signup', {
 					templateUrl : 'views/pages/signup.html',
 					notLoggedNeeded : true
@@ -121,31 +138,35 @@
 					templateUrl : 'views/pages/contact.html'
 				}).when('/tasks', {
 					templateUrl : 'views/tasks/tasks.html'
-				});/*
-					 * .otherwise({ redirectTo: '/404' });
-					 */
-				$urlRouterProvider.otherwise(function($injector, $location) {
-					var AuthService = $injector.get('AuthService');
-
-					AuthService.getUser().success(function(data) {
-						if (data) {
-							$location.path("/dashboard");
-						} else {
-							$location.path("/pages/signin");
-						}
-
-					}).error(function(data) {
-						$location.path("/pages/signin");
-					});
-
+				}).when('/404', {
+					templateUrl : 'views/pages/404.html'
+				}).when('/500', {
+					templateUrl : 'views/pages/500.html'
+				}).otherwise({
+					redirectTo: '/404'
 				});
-			} ]).run(function($rootScope, $route, $location, AuthService) {
+			}]).run(function($rootScope, $route, $location, AuthService) {
 		$rootScope.$on("$routeChangeStart", function(e, to) {
-			if (to.notLoggedNeeded) {
+			if( $rootScope.firstConnection === undefined){
+				$rootScope.firstConnection = true;
+			}
+			if (to != null && to.notLoggedNeeded) {
 				return;
 			}
 			AuthService.getUser().success(function(data) {
 				if (data) {
+					if($rootScope.firstConnection){
+						// if first cnx
+						console.log(data);
+						console.log(data.role);
+						$rootScope.connectedUser = data;
+						if(data.role == "ADM"){
+							$location.path("/");
+						}else{
+							$location.path("/admin/enseignantsConnected");
+						}
+						$rootScope.firstConnection = false;
+					}
 					e.preventDefault();
 				} else {
 					$location.path("/pages/signin");
@@ -155,5 +176,4 @@
 			});
 		});
 	});
-
 }).call(this);

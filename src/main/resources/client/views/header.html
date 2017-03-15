@@ -18,18 +18,22 @@
     <div class="top-nav" ng-controller="AuthenticationController">
         <ul class="nav-left list-unstyled">
             <li>
-                <a href="#/" data-toggle-min-nav
+                <a style="color:black" href="#/" data-toggle-min-nav
                              class="toggle-min"
                              ><i class="fa fa-bars"></i></a>
             </li>
+        </ul> 
+    </div>
+    <div class="top-nav" ng-controller="AuthenticationController">
+        <ul class="nav-left list-unstyled pull-right">
             <li class="dropdown text-normal nav-profile"  dropdown is-open="status.isopenProfile">
-                <a href="javascript:;" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                    <img src="{{userimg}}" alt="" class="img-circle img30_30">
+                <a style="color:black" href="javascript:;" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                     <span class="hidden-xs">
-                        <span>{{username}}</span>
+                        <span>{{$root.connectedUser.pseudoConnection}}</span>
                     </span>
+                    <img src="../images/connectedUserIcone.png" alt="" class="img-circle img30_30">
                 </a>
-                <ul class="dropdown-menu dropdown-dark with-arrow">
+                <ul class="dropdown-menu dropdown-dark with-arrow" style="margin-left : -58px">
                     <li>
                         <a ng-click="deconnexion()">
                             <i class="fa fa-sign-out"></i>
@@ -39,150 +43,5 @@
                 </ul>
             </li>
         </ul> 
-
-        <!--<ul class="nav-right pull-right list-unstyled">
-            <li class="dropdown" dropdown is-open="status.isopenComment">
-                <a href="javascript:;" class="dropdown-toggle bg-orange" dropdown-toggle ng-disabled="disabled">
-                    <i class="fa fa-comment-o"></i>
-                    <span class="badge badge-info">2</span>
-                </a>
-                <div class="dropdown-menu pull-right with-arrow panel panel-default">
-                    <div class="panel-heading">
-                        You have 2 messages.
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-info"><i class="fa fa-comment-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Jane sent you a message</span>
-                                    <span class="text-muted">3 hours ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-danger"><i class="fa fa-comment-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Lynda sent you a mail</span>
-                                    <span class="text-muted">9 hours ago</span>
-                                </div>
-                            </a>
-                        </li>                       
-                    </ul>
-                    <div class="panel-footer">
-                        <a href="javascript:;">Show all messages.</a>
-                    </div>
-                </div>
-            </li>
-            <li class="dropdown" dropdown is-open="status.isopenEmail">
-                <a href="javascript:;" class="dropdown-toggle bg-warning" dropdown-toggle ng-disabled="disabled">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge badge-info">3</span>
-                </a>
-                <div class="dropdown-menu pull-right with-arrow panel panel-default">
-                    <div class="panel-heading">
-                        You have 3 mails.
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-warning"><i class="fa fa-envelope-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Lisa sent you a mail</span>
-                                    <span class="text-muted block">2min ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-info"><i class="fa fa-envelope-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Jane sent you a mail</span>
-                                    <span class="text-muted">3 hours ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-success"><i class="fa fa-envelope-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Lynda sent you a mail</span>
-                                    <span class="text-muted">9 hours ago</span>
-                                </div>
-                            </a>
-                        </li>                       
-                    </ul>
-                    <div class="panel-footer">
-                        <a href="javascript:;">Show all mails.</a>
-                    </div>
-                </div>
-            </li>
-            <li class="dropdown" dropdown is-open="status.isopenBell">
-                <a href="javascript:;" class="dropdown-toggle bg-success" dropdown-toggle ng-disabled="disabled">
-                    <i class="fa fa-bell-o nav-icon"></i>
-                    <span class="badge badge-info">3</span>
-                </a>
-                <div class="dropdown-menu pull-right with-arrow panel panel-default">
-                    <div class="panel-heading">
-                        You have 3 notifications.
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-success"><i class="fa fa-bell-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">New tasks needs to be done</span>
-                                    <span class="text-muted block">2min ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-info"><i class="fa fa-bell-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">Change your password</span>
-                                    <span class="text-muted">3 hours ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="javascript:;" class="media">
-                                <span class="media-left media-icon">
-                                    <span class="square-icon sm bg-danger"><i class="fa fa-bell-o"></i></span>
-                                </span>
-                                <div class="media-body">
-                                    <span class="block">New feature added</span>
-                                    <span class="text-muted">9 hours ago</span>
-                                </div>
-                            </a>
-                        </li>                       
-                    </ul>
-                    <div class="panel-footer">
-                        <a href="javascript:;">Show all notifications.</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="#/tasks" class="bg-info">
-                    <i class="fa fa-tasks"></i>
-                </a>
-            </li>
-        </ul> -->
     </div>
-
 </header>

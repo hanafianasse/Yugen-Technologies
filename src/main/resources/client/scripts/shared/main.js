@@ -1,15 +1,15 @@
 (function() {
   'use strict';
   angular.module('app.controllers', ['app.auth']).controller('AppCtrl', [
-    '$scope', '$location', 'AuthService', function($scope, $location, AuthService) {
+    '$scope', '$location', 'AuthService','$rootScope', function($scope, $location, AuthService,$rootScope) {
       $scope.isSpecificPage = function() {
         var path;
         path = $location.path();
         return _.contains(['/404', '/pages/500', '/pages/login', '/pages/signin', '/pages/signin1', '/pages/signin2', '/pages/signup', '/pages/signup1', '/pages/signup2', '/pages/forgot', '/pages/lock-screen'], path);
       };
       $scope.deconnexion = function() {
-    	  
-    	  AuthService.deconnexion().success(function() {
+    	  $rootScope.firstConnection = true;
+        AuthService.deconnexion().success(function() {
     		  $location.path('/pages/signin');
     	  });
     	  
@@ -25,7 +25,8 @@
       };
     }
   ]).controller('NavCtrl', [
-    '$scope', 'taskStorage', 'filterFilter', function($scope, taskStorage, filterFilter) {
+    '$scope', 'taskStorage', 'filterFilter','$rootScope',function($scope, taskStorage, filterFilter,$rootScope) {
+      //$scope.user = $rootScope.connectedUser;/////
       var tasks;
       tasks = $scope.tasks = taskStorage.get();
       $scope.taskRemainingCount = filterFilter(tasks, {

@@ -3,7 +3,7 @@
 angular.module('app')
     .factory('formationService', ['$http', function ($http) {
 
-        var urlBase = 'http://localhost:8090/formations';
+        var urlBase = 'http://localhost:8090/formation';
         var dataFactory = {};
 
         dataFactory.getAll = function () {

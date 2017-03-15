@@ -14,6 +14,8 @@
 		<class>fr.univbrest.dosi.spi.bean.UniteEnseignementPK</class>
 		<class>fr.univbrest.dosi.spi.bean.Qualificatif</class>
 		<class>fr.univbrest.dosi.spi.bean.Authentification</class>
-		<class>fr.univbrest.dosi.spi.bean.Question</class>		
+		<class>fr.univbrest.dosi.spi.bean.Question</class>	
+		<class>fr.univbrest.dosi.spi.bean.CgRefCode</class>		
+		<class>fr.univbrest.dosi.spi.bean.Rubrique</class>
 	</persistence-unit>
 </persistence>
