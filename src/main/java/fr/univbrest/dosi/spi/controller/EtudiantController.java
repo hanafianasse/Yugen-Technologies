@@ -93,8 +93,8 @@ public class EtudiantController
 	
 	//Nombre des etudiants
 			@RequestMapping(value = "/nombreEtudiants")
-			public int nombreEtudiants() {
-				return etudiantService.nombreEtudiants();
+			public String nombreEtudiants() {
+				return String.valueOf(etudiantService.nombreEtudiants());
 			}
 	
 }

@@ -190,9 +190,9 @@ public class EnseignantController
 
 	// Nombre des enseignants
 	@RequestMapping(value = "/enseignant/nombreEnseignants", method = RequestMethod.GET)
-	public int nombreEnseignants()
+	public String nombreEnseignants()
 	{
-		return enseignantService.nombreEnseignants();
+		return String.valueOf(enseignantService.nombreEnseignants());
 	}
 
 }
