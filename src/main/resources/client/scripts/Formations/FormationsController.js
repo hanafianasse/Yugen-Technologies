@@ -29,7 +29,7 @@
     var list = function() {
         //var defer = $q.defer();
 
-       return  $http.get('http://localhost:8090/frm')
+       return  $http.get('http://localhost:8090/formation')
        /*.then(function(response) {
           defer.resolve(response.data);
         });
@@ -70,7 +70,7 @@
     return {
       // renvoi la liste de tous les enseignants
       all: function() { // TODO retourner la liste 
-    	  return  $http.get('http://localhost:8090/formations') //list,//;
+    	  return  $http.get('http://localhost:8090/formation') //list,//;
     	  //console.log("TODO : retourner la liste des formations", formation);
     	  },
       // renvoi l'enseignant avec le code demandé
@@ -93,13 +93,13 @@
         	//return list.push(formation);
         //} else { // si ajout d'un nouvel formation
           // TODO ajouter un formation à la liste
-        	$http.post('http://localhost:8090/formation/ajouterformation',formation);
+        	$http.post('http://localhost:8090/formation',formation);
         	//return list.push(formation);
         //}
       },
       delete: function(formation) { 
         console.log("TODO : supprimer formation", formation.codeFormation);
-        $http.get('http://localhost:8090/formation/delete/'+formation.codeFormation);
+        $http.get('http://localhost:8090/formation'+formation.codeFormation);
   	    //$http.get('http://localhost:8090/formation/delete/'+codeformation)
         //list.removeValue("code",formation.code);
   	  	//return list;
