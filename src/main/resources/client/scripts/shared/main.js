@@ -9,10 +9,12 @@
       };
       $scope.deconnexion = function() {
     	  $rootScope.firstConnection = true;
+        $rootScope.connectedUser = null;
+        
         AuthService.deconnexion().success(function() {
     		  $location.path('/pages/signin');
     	  });
-    	  
+
       };
       
       $scope.login = function() {

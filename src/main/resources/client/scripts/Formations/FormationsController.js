@@ -186,7 +186,7 @@
       $scope.submit = function(){
     	  formationsFactory.set($scope.formation);        
           $scope.edit = false;  
-          $location.path('/admin/formations'); 
+          $location.path('/admin/formation'); 
         }
       
       // TODO coder une fonction submit permettant de modifier une formation et rediriger vers /admin/formations 
@@ -195,7 +195,7 @@
       // annule l'édition
       $scope.cancel = function(){ 
     	  $scope.formations = {};
-          $location.path('/admin/formations');
+          $location.path('/admin/formation');
     	  /*if(!$scope.formation.codeFormation){
           $location.path('/admin/formations');
       } else {

@@ -60,5 +60,11 @@ public class PromotionService {
 		final Iterable<Promotion> promotions = promotionRepository.findAll();
 		return promotions;
 	}
+	
 
+	public int nombrePromotions() {
+		List<Promotion> listPromotions = (List<Promotion>) promotionRepository.findAll();
+		return listPromotions.size();
+	}
+	
 }
