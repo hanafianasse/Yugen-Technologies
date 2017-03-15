@@ -75,8 +75,9 @@ public class PromotionController
 	{
 		promotionService.deletePromotion(promotionPK);
 	}
+	
 	//Nombre de promotions
-	@RequestMapping(value = "/nombrePromotions")
+	@RequestMapping(value = "/nombrePromotions", method = RequestMethod.GET)
 	public int nombrePromotions() {
 		return promotionService.nombrePromotions();
 	}

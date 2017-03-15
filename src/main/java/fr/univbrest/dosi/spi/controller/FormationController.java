@@ -49,7 +49,8 @@ public class FormationController
 	 * @return une formation
 	 */
 	@RequestMapping(method = RequestMethod.PUT)
-	public final Formation updateFormation(@RequestBody final Formation formation)
+	public final Formation updateFormation(
+			@RequestBody final Formation formation)
 	{
 		return formationService.updateFormation(formation);
 	}
@@ -61,7 +62,8 @@ public class FormationController
 	 * @return une formation
 	 */
 	@RequestMapping(value = "/{codeFormation}", method = RequestMethod.GET)
-	public final Formation getFormation(@PathVariable(value = "codeFormation") final String codeFormation)
+	public final Formation getFormation(
+			@PathVariable(value = "codeFormation") final String codeFormation)
 	{
 		return formationService.getFormation(codeFormation);
 
@@ -74,7 +76,8 @@ public class FormationController
 	 * @return une liste de promotion
 	 */
 	@RequestMapping(value = "/{codeFormation}/promotion", method = RequestMethod.GET)
-	public final List<Promotion> getPromotionsduneFormation(@PathVariable(value = "codeFormation") final String codeFormation)
+	public final List<Promotion> getPromotionsduneFormation(
+			@PathVariable(value = "codeFormation") final String codeFormation)
 	{
 		return formationService.getPromotions(codeFormation);
 	}
@@ -95,14 +98,16 @@ public class FormationController
 	 *            l'id de formation
 	 */
 	@RequestMapping(value = "/delete/{codeformation}", method = RequestMethod.DELETE)
-	public final void deleteFormation(@PathVariable("codeformation") final String codeFormation)
+	public final void deleteFormation(
+			@PathVariable("codeformation") final String codeFormation)
 	{
 		formationService.deleteFormation(codeFormation);
 	}
-	
-	//Nombre de formations
-		@RequestMapping(value = "/nombreFormations")
-		public int nombreFormations() {
-			return formationService.nombreFormations();
-		}
+
+	// Nombre de formations
+	@RequestMapping(value = "/nombreFormations", method = RequestMethod.GET)
+	public int nombreFormations()
+	{
+		return formationService.nombreFormations();
+	}
 }

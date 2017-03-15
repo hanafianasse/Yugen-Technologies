@@ -30,6 +30,10 @@ angular.module('app')
             return $http.get(urlBase + '/' + id + '/promotion');
         };
 
+        dataFactory.getNbFormations = function() {
+            return $http.get(urlBase + '/nombreFormations');
+        }
+        
         return dataFactory;
     }]);
 
