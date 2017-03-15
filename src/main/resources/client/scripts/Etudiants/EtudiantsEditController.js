@@ -9,7 +9,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
 //Récuperation des domaines par UNIVERSITE
         var promise = domaineService.getDomaine("UNIVERSITE");
     	promise.success(function(data) { 
-    		console.log("récupération du domaine terminé");
+    		console.log("récupération du domaine UNIVERSITE terminé");
     		$scope.domaineUniv = data;
     		console.log($scope.domaineUniv);
     	}).error(function(data) {
@@ -17,18 +17,15 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     	});
     	
     	
-    	//Récuperation des domaines par UNIVERSITE
-        var promise = domaineService.getDomaine("UNIVERSITE");
+//Récuperation des domaines par PAYS
+        var promise = domaineService.getDomaine("PAYS");
     	promise.success(function(data) { 
-    		console.log("récupération du domaine terminé");
-    		$scope.domaineUniv = data;
-    		console.log($scope.domaineUniv);
+    		console.log("récupération du domaine PAYS terminé");
+    		$scope.domainePays = data;
+    		console.log($scope.domainePays);
     	}).error(function(data) {
     		console.log("get domaine : erreur");
     	});
-
-        
-        
             
         
 //Initialisation des champs        
@@ -56,7 +53,6 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
         
 //création de la variable etudiant
         $scope.modifierEtudiant = function (etudiant) {
-        	console.log($scope.etudiant.noEtudiant);
         	console.log('je suis dans la methode put');
           var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
         	promise.success(function(data) {
@@ -77,6 +73,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
                     $scope.status = 'Modification étudiant effectuée!';
                     $scope.error = false;
                     $scope.success = true;
+                    $location.path('/admin/promotion');
                 }, function (error) {
                     $scope.success = false;
                     $scope.error = true;

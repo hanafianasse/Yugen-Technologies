@@ -1,10 +1,35 @@
 //Controlleur de la page qui ajoute un étudiant
-angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService',
-    function ($scope, $location, EtudiantsService,$routeParams,promotionService) {
+angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService',
+    function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService) {
         $scope.status;
         $scope.error = false;
         $scope.success = false;
         console.log('ana hna');
+        
+        
+      //Récuperation des domaines par UNIVERSITE
+        var promise = domaineService.getDomaine("UNIVERSITE");
+    	promise.success(function(data) { 
+    		console.log("récupération du domaine UNIVERSITE terminé");
+    		$scope.domaineUniv = data;
+    		console.log($scope.domaineUniv);
+    	}).error(function(data) {
+    		console.log("get domaine : erreur");
+    	});
+    	
+    	
+//Récuperation des domaines par PAYS
+        var promise = domaineService.getDomaine("PAYS");
+    	promise.success(function(data) { 
+    		console.log("récupération du domaine PAYS terminé");
+    		$scope.domainePays = data;
+    		console.log($scope.domainePays);
+    	}).error(function(data) {
+    		console.log("get domaine : erreur");
+    	});
+        
+        
+        
         $scope.codeFormation = $routeParams.codeFormation;
         $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
         $scope.ajouterEtudiant = function (etudiant) {
