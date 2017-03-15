@@ -50,4 +50,10 @@ public class FormationService {
 		Formation formation = formationRepository.findOne(codeFormation);
 		return (List<Promotion>) formation.getPromotionCollection();
 	}
+	/*
+	public int nombreFormations() {
+		List<Formation> listFormations = (List<Formation>) formationRepository.findAll();
+		return listFormations.size();
+	}
+	*/
 }

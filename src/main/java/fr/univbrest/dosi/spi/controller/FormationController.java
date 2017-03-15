@@ -99,4 +99,10 @@ public class FormationController
 	{
 		formationService.deleteFormation(codeFormation);
 	}
+	/*
+	//Nombre de formations
+		@RequestMapping(value = "/nombreFormations")
+		public int nombreFormations() {
+			return formationService.nombreFormations();
+		}*/
 }
