@@ -18,6 +18,9 @@
 
 	// Affiche les promotions
 	$scope.select = function(formation){
+		if($rootScope.promotionselected != null){
+			$rootScope.promotionselected = null;
+		}
 		for(var index = 0; index < $scope.formations.length; index++) {
 			var tr = document.getElementById(($scope.formations[index]).codeFormation);
 			tr.classList.remove("trSelected");

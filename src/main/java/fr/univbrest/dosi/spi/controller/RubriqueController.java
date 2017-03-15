@@ -46,15 +46,18 @@ public class RubriqueController {
 	
 
 	
+
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public final Iterable<Rubrique> GetRubrique() {
+
 		final Iterable<Rubrique> rubriques = rubriqueService.listRubriques();
 		return rubriques;
 	}
 
 	
-	@RequestMapping(value = "/delete/{id_rubrique}",method = RequestMethod.DELETE, headers = "Accept=application/json")
-	public final void removeRubrique(@PathVariable("id_rubrique") final Long id_rubrique) {
+	
+	@RequestMapping(value = "/delete/{idRubrique}",method = RequestMethod.DELETE, headers = "Accept=application/json")
+	public final void removeRubrique(@PathVariable("idRubrique") final Long id_rubrique) {
 		rubriqueService.deleteRubrique(id_rubrique);
 	}
 	

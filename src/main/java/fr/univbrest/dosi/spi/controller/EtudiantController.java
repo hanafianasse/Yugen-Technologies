@@ -67,6 +67,11 @@ public class EtudiantController
 	{
 		return etudiantService.getEtudiant(noEtudiant);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/size")
+	public int size(){
+		return this.getAll().size();
+	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/delete/{noEtudiant}")
 	public void deleteEtudiant(@PathVariable("noEtudiant") String noEtudiant)
