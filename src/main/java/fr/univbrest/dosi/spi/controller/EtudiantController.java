@@ -64,9 +64,10 @@ public class EtudiantController
 	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/size")
-	public int size(){
+	public int size()
+	{
 		return this.getAll().size();
 	}
 
@@ -90,11 +91,12 @@ public class EtudiantController
 		etudiant.setPromotion(promotion);
 		return etudiantService.updateEtudiant(etudiant);
 	}
-	
-	//Nombre des etudiants
-			@RequestMapping(value = "/nombreEtudiants")
-			public int nombreEtudiants() {
-				return etudiantService.nombreEtudiants();
-			}
-	
+
+	// Nombre des etudiants
+	@RequestMapping(value = "/nombreEtudiants", method = RequestMethod.GET)
+	public int nombreEtudiants()
+	{
+		return etudiantService.nombreEtudiants();
+	}
+
 }

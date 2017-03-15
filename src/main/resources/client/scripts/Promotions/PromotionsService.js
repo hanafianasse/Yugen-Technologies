@@ -29,6 +29,11 @@ angular.module('app')
             return $http.get(urlBase+'/'+CodeFormation+'/'+anneeUniversitaire);
         };
 
+        dataFactory.getNbPromotion = function()
+        {
+            return $http.get(urlBase + '/nombrePromotions');
+        }
+
         return dataFactory;
     }]);
 
