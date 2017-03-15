@@ -59,8 +59,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		@NamedQuery(name = "Etudiant.findByGroupeAnglais", query = "SELECT e FROM Etudiant e WHERE e.groupeAnglais = :groupeAnglais") })
 public class Etudiant implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id
-	
+	@Id	
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 50)

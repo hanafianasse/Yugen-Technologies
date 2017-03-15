@@ -13,7 +13,7 @@ angular.module('app')
         dataFactory.getEtudiant = function (id) {
             return $http.get(urlBase + '/' + id);
         };
-
+        
         dataFactory.addEtudiant = function (entity) {
             return $http.post(urlBase, entity);
         };
