@@ -10,7 +10,7 @@ angular.module('app')
         };
 
         dataFactory.getPromotion = function (id1,id2) {
-            return $http.get('http://localhost:8090/getpromotionby/'+'/'+id1+'/'+ id2);
+            return $http.get(urlBase+'/getpromotionby/'+id1+'/'+ id2);
         };
 
         dataFactory.addPromotion = function (entity) {

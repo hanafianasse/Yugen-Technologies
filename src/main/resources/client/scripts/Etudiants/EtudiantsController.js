@@ -4,8 +4,17 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
         $scope.status;
         $scope.error = false;
         $scope.success = false;
-        console.log('ana hna');
         
+    $('input').on('input', function() {
+        var c = this.selectionStart,
+            r = /[^a-z0-9éàçèù\/]/gi,
+            v = $(this).val();
+        if(r.test(v)) {
+            $(this).val(v.replace(r, ''));
+            c--;
+        }
+        this.setSelectionRange(c, c);
+    });
         
       //Récuperation des domaines par UNIVERSITE
         var promise = domaineService.getDomaine("UNIVERSITE");
@@ -52,6 +61,7 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
                     $scope.status = 'Insertion étudiant effectuée!';
                     $scope.error = false;
                     $scope.success = true;
+                    $location.path('/admin/promotion');
                 }, function (error) {
                     $scope.success = false;
                     $scope.error = true;

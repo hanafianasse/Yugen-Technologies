@@ -8,13 +8,13 @@
 	$scope.formations = null;
 	$scope.promotions = null;
 	$scope.etudiants = null;
-	
+	$rootScope.promotionselected = null;
 //Récupération de toutes les formations
 	var promise = formationService.getAll();
 	promise.success(function(data) {
 		$scope.formations = data;
 	}).error(function(data) {
-		console.log("get formtions : erreur");
+		console.log("get formtions: erreur");
 	});
 
 	// Affiche les promotions
