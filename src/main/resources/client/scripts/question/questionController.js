@@ -32,17 +32,28 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 
 			var qualificatifDefered = $q.all(qualificatifRequestsPromise);
 			qualificatifDefered.then(function(data){
+				console.log(questions);
+				console.log(qualificatifs);
 				for(var index = 0 ; index < questions.length; index++){
 					var uneQuestion = {
 						question: '',
 						qualificatif : ''
 					}
 					uneQuestion.question = questions[index];
-					uneQuestion.qualificatif = qualificatifs[index];
+					uneQuestion.qualificatif = findById(qualificatifs,questions[index].idQualificatif);
 					$scope.mesQuestions.push(uneQuestion);				
 				}
 			});
 		});     
+	}
+
+	function findById(tableau,val){
+		for(var index = 0; index < tableau.length ;index++){
+			if(tableau[index].idQualificatif == val){
+				return tableau[index];
+			}
+		}
+		return null; // will never happen ! ask anasse
 	}
 	
 	$scope.getQuestions();

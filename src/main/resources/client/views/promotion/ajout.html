@@ -41,7 +41,7 @@
                 
                <div class="form-group">
                     <label class="col-sm-2">Sexe<span style="color: red"> *</span></label>
-                    <div class="col-sm-10" required>
+                    <div class="col-sm-10" ng-init="etudiant.sexe='H'">
                         <label class="ui-radio"><input name="radio1" type="radio" value="H" ng-model="etudiant.sexe" checked><span>Homme</span></label>
                         <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="etudiant.sexe" ><span>Femme</span></label>
                     </div>                    
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2">Date de Naissance<span style="color: red"> *</span></label>
                     <div class="col-sm-10">
-                    	<input type="date" class="form-control" ng-model="etudiant.dateNaissance" required>
+                    	<input type="text" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" class="form-control" ng-model="etudiant.dateNaissance" placeholder='JJ-MM-AAAA' required>
                     </div>                    
                 </div>
                 <div class="form-group">
@@ -80,14 +80,14 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2">E-mail<span style="color: red"> *</span></label>
                     <div class="col-sm-10">
-                        <input type="email" maxlength="255" class="form-control" ng-model="etudiant.email" required>
+                        <input type="email" class="form-control" ng-model="etudiant.email" required>
                         
                     </div>                    
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2">E-mail UBO</label>
+                    <label class="col-sm-2">E-mail UBO</label>
                     <div class="col-sm-10">
-                        <input type="email" maxlength="255" class="form-control" ng-model="etudiant.emailUbo">
+                        <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.emailUbo">
                     </div>                    
                 </div>
                 <div class="form-group">

@@ -9,7 +9,7 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9éàçèù\/]/gi,
+            r = /[^a-z0-9éàçèù\-\/]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
