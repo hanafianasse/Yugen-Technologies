@@ -145,9 +145,19 @@
 			if( $rootScope.firstConnection === undefined){
 				$rootScope.firstConnection = true;
 			}
-			if (to != null && to.notLoggedNeeded) {
-				return;
+			if (to != null && to.notLoggedNeeded) 
+			{
+				if($rootScope.connectedUser != null)
+				{
+					if($rootScope.connectedUser.role == "ADM")
+							$location.path("/");
+					else
+							$location.path("/admin/enseignantsConnected");
+				}
+				else
+					return;
 			}
+			
 			AuthService.getUser().success(function(data) {
 				if (data) {
 					if($rootScope.firstConnection){
