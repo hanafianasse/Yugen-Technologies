@@ -103,7 +103,11 @@
   	    //$http.get('http://localhost:8090/formation/delete/'+codeformation)
         //list.removeValue("code",formation.code);
   	  	//return list;
+      },
+      getNbFormation: function(formation){
+        $http.get("http://localhost:8090/formation/nombreFormations");
       }
+      
     };
   }]);
 
