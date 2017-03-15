@@ -907,7 +907,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #0d0d0d;
+  color: rgba(104, 223, 240, 0.85);
   text-decoration: underline;
 }
 a:focus {
@@ -10846,7 +10846,7 @@ lesshat-selector {
 }
 #nav a {
   font-size: 13px;
-  color: #767676;
+  color: #aeb2b7;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -10869,7 +10869,7 @@ lesshat-selector {
 }
 #nav > li.open > a,
 #nav > li:hover > a {
-  background-color: #191b24;
+  background-color: rgba(104, 223, 240, 0.85);
   color: #fafafa;
 }
 #nav > li.open > .fa,
@@ -10877,7 +10877,7 @@ lesshat-selector {
   color: #fafafa;
 }
 #nav > li.active > a {
-  background-color: #31c0be;
+  background-color: rgba(104, 223, 240, 0.85);
   color: #fafafa;
 }
 #nav > li.active > .fa {
@@ -10906,7 +10906,7 @@ lesshat-selector {
   right: 15px;
 }
 #nav ul {
-  background-color: #242633;
+  background-color: rgba(36, 38, 51, 0.73);
   display: none;
 }
 #nav ul a {
@@ -10918,7 +10918,7 @@ lesshat-selector {
 }
 #nav ul li:hover a,
 #nav ul li.active a {
-  color: #31c0be;
+  color: rgba(104, 223, 240, 0.85);
 }
 #nav ul li:last-child > a {
   border-bottom: 0;
@@ -11278,4 +11278,11 @@ lesshat-selector {
 {
   border-radius: 10px;
   background-color: #ccc;
+}
+
+#nav > li.active > .fa-caret-right{
+  -ms-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  transform:rotate(90deg);
 }
