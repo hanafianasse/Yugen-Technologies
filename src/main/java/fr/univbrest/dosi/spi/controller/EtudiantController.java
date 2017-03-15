@@ -90,4 +90,11 @@ public class EtudiantController
 		etudiant.setPromotion(promotion);
 		return etudiantService.updateEtudiant(etudiant);
 	}
+	
+	//Nombre des etudiants
+			@RequestMapping(value = "/nombreEtudiants")
+			public int nombreEtudiants() {
+				return etudiantService.nombreEtudiants();
+			}
+	
 }

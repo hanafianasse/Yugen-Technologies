@@ -13,7 +13,6 @@ import fr.univbrest.dosi.spi.bean.Enseignant;
  * @author DOSI
  *
  */
-@RepositoryRestResource(collectionResourceRel = "enseignant", path = "enseignant")
 public interface EnseignantRepository extends PagingAndSortingRepository<Enseignant, Integer> {
 	/**
 	 * 

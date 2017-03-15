@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Enseignant;
+import fr.univbrest.dosi.spi.bean.Etudiant;
 import fr.univbrest.dosi.spi.dao.EnseignantRepository;
 import fr.univbrest.dosi.spi.exception.SPIException;
 
@@ -133,5 +134,11 @@ public class EnseignantService {
 			throw new SPIException("l'enseignant que vous souhaitez modifier n'exsite pas ");
 		}
 	}
+	
+	public int nombreEnseignants() {
+		List<Enseignant> listEnseignants =  (List<Enseignant>) enseignantRepository.findAll();
+		return listEnseignants.size();
+	}
+	
 
 }
