@@ -11295,9 +11295,12 @@ lesshat-selector {
   background-color: #ccc;
 }
 
-#nav > li.active > .fa-caret-right{
+#nav > li.open > .fa-caret-right,
+#nav > li.active > .fa-caret-right
+{
   -ms-transform:rotate(90deg);
   -moz-transform:rotate(90deg);
   -webkit-transform:rotate(90deg);
   transform:rotate(90deg);
 }
+
