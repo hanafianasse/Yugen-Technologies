@@ -42,7 +42,7 @@
                <div class="form-group">
                     <label class="col-sm-2">Sexe<span style="color: red"> *</span></label>
                     <div class="col-sm-10" required>
-                        <label class="ui-radio"><input name="radio1" type="radio" value="H" ng-model="etudiant.sexe" checked><span>Homme</span></label>
+                        <label class="ui-radio"><input name="radio1" type="radio" value="M" ng-model="etudiant.sexe" checked><span>Homme</span></label>
                         <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="etudiant.sexe" ><span>Femme</span></label>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2">Téléphone</label>
                     <div class="col-sm-10">
-                        <input type="number" maxlength="20" placeholder="xx xx xx xx xx" class="form-control"  pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" ng-model="etudiant.telephone">
+                        <input type="tel" ng-model="etudiant.telephone" maxlength="20" placeholder="xx xx xx xx xx" class="form-control"  pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" >
                     </div>
                 </div>
                 <div class="form-group">
