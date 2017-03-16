@@ -1,11 +1,17 @@
-<header class="clearfix">
+<header class="clearfix" ng-controller="AuthenticationController">
 
     <!-- Logo -->
     <div class="logo">
-        <a href="#/">
-            <span class="logo-icon glyphicon glyphicon-fire"></span>
-            <span>SPI</span>
-        </a>
+        <div class="sidebar-toggle-box">
+            <a style="color:black" href="#/" data-toggle-min-nav class="toggle-min"><i class="fa fa-bars"></i></a>
+        </div>
+
+        <div class="sidebar-logo">
+            <a href="#/">
+                <img src="images/logo_4.png" width="50px" height="50px" />
+                <span>SPI</span>
+            </a>
+        </div>
     </div>
 
     <!-- needs to be put after logo to make it working-->
@@ -15,18 +21,19 @@
         <span class="icon-bar"></span>
     </div>
 
-    <div class="top-nav" ng-controller="AuthenticationController">
+    <!--
+    <div class="top-nav">
         <ul class="nav-left list-unstyled">
             <li>
-                <a style="color:black" href="#/" data-toggle-min-nav
-                             class="toggle-min"
-                             ><i class="fa fa-bars"></i></a>
+                <a style="color:black" href="#/" data-toggle-min-nav class="toggle-min"><i class="fa fa-bars"></i></a>
             </li>
-        </ul> 
+        </ul>
     </div>
-    <div class="top-nav" ng-controller="AuthenticationController">
+    -->
+
+    <div class="top-nav">
         <ul class="nav-left list-unstyled pull-right">
-            <li class="dropdown text-normal nav-profile"  dropdown is-open="status.isopenProfile">
+            <li class="dropdown text-normal nav-profile" dropdown is-open="status.isopenProfile">
                 <a style="color:black" href="javascript:;" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                     <span class="hidden-xs">
                         <span>{{$root.connectedUser.pseudoConnection}}</span>
@@ -42,6 +49,6 @@
                     </li>
                 </ul>
             </li>
-        </ul> 
+        </ul>
     </div>
 </header>
