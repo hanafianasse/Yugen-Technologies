@@ -28,6 +28,10 @@ angular.module('app')
 
         };
 
+        dataFactory.getNbEtudiant = function (){
+            return $http.get(urlBase + '/nombreEtudiants')
+        }
+
         return dataFactory;
     }]);
 

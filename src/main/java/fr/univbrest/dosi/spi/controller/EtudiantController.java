@@ -23,8 +23,7 @@ import fr.univbrest.dosi.spi.service.PromotionService;
 @RestController
 @RequestMapping(value = "/etudiant")
 @Api(value = "etudiant", description = "Description de la ressource etudiant.")
-public class EtudiantController
-{
+public class EtudiantController {
 
 	@Autowired
 	private EtudiantService etudiantService;
@@ -36,14 +35,12 @@ public class EtudiantController
 	private AuthentificationService authentificationService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Etudiant> getAll()
-	{
+	public List<Etudiant> getAll() {
 		return etudiantService.getAll();
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant)
-	{
+	public Etudiant addEtudiant(@RequestBody PromotionEtudiant promotionEtudiant) {
 		Promotion promotion = promotionService.getPromotion(promotionEtudiant
 				.getPromotion().getPromotionPK());
 		Etudiant etudiant = promotionEtudiant.getEtudiant();
@@ -55,18 +52,19 @@ public class EtudiantController
 	public List<Etudiant> getEtudiantByPromotion(
 			@PathVariable("codeFormation") String codeFormation,
 			@PathVariable("anneeUniversitaire") String anneeUniversitaire) {
-				PromotionPK promotionPk = new PromotionPK(codeFormation,anneeUniversitaire);
-				Promotion promotion = promotionService.getPromotion(promotionPk);
-					return etudiantService.getEtudiantByPromotion(promotion);
+		PromotionPK promotionPk = new PromotionPK(codeFormation,
+				anneeUniversitaire);
+		Promotion promotion = promotionService.getPromotion(promotionPk);
+		return etudiantService.getEtudiantByPromotion(promotion);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{noEtudiant}")
 	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/size")
-	public int size(){
+	public int size() {
 		return this.getAll().size();
 	}
 
@@ -90,11 +88,11 @@ public class EtudiantController
 		etudiant.setPromotion(promotion);
 		return etudiantService.updateEtudiant(etudiant);
 	}
-	
-	//Nombre des etudiants
-			@RequestMapping(value = "/nombreEtudiants")
-			public int nombreEtudiants() {
-				return etudiantService.nombreEtudiants();
-			}
-	
+
+	// Nombre des etudiants
+	@RequestMapping(value = "/nombreEtudiants")
+	public String nombreEtudiants() {
+		return String.valueOf(etudiantService.nombreEtudiants());
+	}
+
 }

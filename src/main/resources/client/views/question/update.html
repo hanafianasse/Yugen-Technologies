@@ -24,7 +24,6 @@
                     <label for="" class="col-sm-2">Qualificatif</label>
                     <div class="col-sm-10">
                         <select class="form-control" data-ng-model="question.idQualificatif" required>
-                            <option disabled selected>Min - Max</option>
                             <option data-ng-repeat="q in qualificatifs" value="{{q.idQualificatif}}" >{{q.minimal}} - {{q.maximal}}</option>
                         </select>
                     </div>

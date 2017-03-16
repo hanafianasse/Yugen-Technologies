@@ -1,4 +1,4 @@
-<div class="page page-dashboard" data-ng-controller="DashboardCtrl" xmlns="http://www.w3.org/1999/html">
+<div class="page page-dashboard" data-ng-controller="DashboardController" xmlns="http://www.w3.org/1999/html">
 
     <!-- stats -->
     <div>
@@ -18,7 +18,7 @@
                     <i class="fa fa-graduation-cap  fa-1x"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">450</p>
+                    <p class="size-h2">{{nbEtudiant}}</p>
                     <p class="text-muted"><span data-i18n="Etudiants"></span></p>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <i class="fa fa-book"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">42</p>
+                    <p class="size-h2">{{nbFormation}}</p>
                     <p class="text-muted"><span data-i18n="Formations"></span></p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <i class="fa fa-university"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">25<span class="size-h4"></span></p>
+                    <p class="size-h2">8<span class="size-h4"></span></p>
                     <p class="text-muted"><span data-i18n="Unités d'Enseignement"></span></p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                    <img class="icon icons8-Training-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACE0lEQVRoge2ZIVIDQRBFkUiOAFUIJAKBiIhAIDForpADROARHIAbAFWICOQKBCICBRdARiAQiIiH2E7VkMzs9O50B0Ltr1oz6f39X3XtTpLZ2uq1gQIGwASYyTUBhgV+ABhGVDUdAXNWNQfGHT3XCyKTiEGEGkrtdabOQ3dakHuF2b3UXvhmjksL8qrwepXaQ+fMUWlB3hReC5A958xRaUEmCq+J1B47Z45KCzJE/7Bf+sdelQpEAo4bfC6lZgf4WE/0n1KDBJMx2RCBbeCI+nWdm7YtiJeAk1KYJvMd4AqYAl/AS0PtQ4fec6ACdsWjaCNNBRsA75H6s0ht6b5Ric9RiUlqEjEIiEyFbtMI9RX07awYyFXmntOg1mLPePKayDRzTxXUVgW958ATcODyjFA/2DkN5cobKoTHW0t5X0ViGi3C++4jkZqzLoalwdoqC9I2VA9SqB4kZ2gXsV3fHiRlaBexXd8eJGVoF7Fd3x4kZWgXsV3ffwnyHHw+3WSQAfVvkilw0hBq1GTolDcl9Z/Y0cCp9T+rHiTtV0l5+Euzyt9ZKEsQ4FxKb4O1W1k79+SwBlkJHYNzkRVIU+C1TMUQJBl2LVOxANEEdZ+KEUg2pPtUSkHaBHSdigGIOpzrVKhPp0J9yvryMdvMvLmlgJulwI+yvnzwefPbWRsF7FN/G/7k5ynT4lRrJp/v/3LUXn9O3/2WrzBu7jdoAAAAAElFTkSuQmCC" width="45" height="45">
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">6</p>
+                    <p class="size-h2">{{nbEnseignant}}</p>
                     <p class="text-muted"><span data-i18n="Enseignants"></span></p>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <i class="fa fa-users"></i>
                 </span>
                 <div class="box-info">
-                    <p class="size-h2">450</p>
+                    <p class="size-h2">{{nbPromotion}}</p>
                     <p class="text-muted"><span data-i18n="Promotions"></span></p>
                 </div>
             </div>
