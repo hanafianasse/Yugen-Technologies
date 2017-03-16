@@ -3032,7 +3032,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: rgba(104, 223, 240, 0.85);
+  background-color: rgb(64, 193, 211);
   border-color: #2cacaa;
 }
 .btn-primary:hover,
@@ -6623,11 +6623,11 @@ a.bg-orange:hover {
   color: #ffffff;
 }
 .bg-warning {
-  background-color: #eec95a;
+  background-color: #FDD835;
   color: #ffffff;
 }
 .bg-danger {
-  background-color: #e87352;
+  background-color: #ee5a5a;
   color: #ffffff;
 }
 .bg-orange {
@@ -10163,7 +10163,7 @@ tr.formation:hover {
 }
 .add {
   cursor: pointer;
-  color: rgb(104, 165, 240);
+  color: rgb(64, 193, 211);
 }
 .add:hover {
   color: rgba(104, 223, 240, 0.85);
@@ -10467,7 +10467,7 @@ lesshat-selector {
 .page-signup .signin-header,
 .page-forgot .signin-header {
   padding: 25px 0;
-  background-color: #dfe0e6;
+  background-color: rgba(223, 224, 230, 0.82);
 }
 .page-signin .logo,
 .page-signup .logo,
@@ -11293,7 +11293,8 @@ lesshat-selector {
 {
   border-radius: 10px;
   background-color: #ccc;
-}
+}+
+
 
 #nav > li.open > .fa-caret-right,
 #nav > li.active > .fa-caret-right
