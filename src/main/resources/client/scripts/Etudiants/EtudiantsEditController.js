@@ -58,6 +58,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
         var dateNaissance = new Date($scope.etudiant.dateNaissance);
         var maxDateFormatted = dateNaissance.getFullYear() +
             '/' + dateNaissance.getMonth()+'/' +dateNaissance.getDate();
+       
 
 	}).error(function(data) {
 		console.log("get etudiant : erreur");
