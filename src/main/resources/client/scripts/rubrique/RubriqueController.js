@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 angular.module('app').controller('RubriqueController', ['$scope','$route','$rootScope','$routeParams','$http','RubriqueService','$modal','$location',
@@ -15,8 +15,8 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
         }
         this.setSelectionRange(c, c);
     });
-    
-    $scope.getRubriques = function(){   
+
+    $scope.getRubriques = function(){
         var promise = RubriqueService.getAll();
         promise.success(function(data) {
             $scope.mesrubriques = data;
@@ -26,14 +26,14 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
             console.log("get rubriques : erreur");
         });
     };
-    
+
     $scope.getRubriques();
-    
+
     $rootScope.refresh =$scope.getRubriques	;
-    	
-    
-    	
-    	
+
+
+
+
     $scope.ouvrirModelSuppresion = function(rubrique){
         $rootScope.etat = null;
         $rootScope.rubriqueToBeDeleted = rubrique;
@@ -59,7 +59,7 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
             }
         });
     }
-    
+
     if ($routeParams.idRubrique!=null){
     	 var promise = RubriqueService.getRubrique($routeParams.idRubrique);
          promise.success(function(data){
@@ -70,10 +70,11 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
              console.log(" rubrique : error");
          });
     }
-    
-    
-    
+
+
+
     $scope.addRubrique=function () {
+        $scope.rubrique.type = 'RBS';
         var promise = RubriqueService.addRubrique($scope.rubrique);
         promise.success(function(data){
             $location.path("/admin/RubriqueStandard");
@@ -81,8 +82,9 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
             console.log(" rubrique : error");
         });
     }
-    
+
     $scope.update = function(){
+        $scope.rubrique.type = 'RBS';
 		var promise = RubriqueService.updateRubrique($scope.rubrique);
 		promise.success(function(data){
 			$location.path("/admin/RubriqueStandard");

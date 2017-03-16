@@ -17,7 +17,7 @@ angular.module('app')
 			}
 			this.setSelectionRange(c, c);
 		});
-				
+
 		var promise = QualificatifService.getAll();
 		promise.success(function(data) {
 			$scope.qualificatifs = data;
@@ -35,7 +35,8 @@ angular.module('app')
 
 		$scope.update = function(){
 			console.log($scope.question);
-			var promise = questionService.updateQuestion($scope.question);
+            $scope.question.type = 'QUS';
+            var promise = questionService.updateQuestion($scope.question);
 			promise.success(function(data){
 				$location.path('/admin/questionsStandard');
 			}).error(function(status){

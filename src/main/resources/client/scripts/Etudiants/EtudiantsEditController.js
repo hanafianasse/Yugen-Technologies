@@ -2,6 +2,7 @@
 angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService','$filter',
     function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService,$filter) {
 
+
     $('input').on('input', function() {
         var c = this.selectionStart,
             r = /[^a-z0-9êéàçèù@ ()+.\-\/]/gi,
@@ -11,6 +12,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
             c--;
         }
         this.setSelectionRange(c, c);
+
     });
 
     $scope.status;
@@ -51,7 +53,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     promise.success(function(data) {
     	console.log("récupération de l'étudiant terminé");
     	$scope.etudiant = data;
-        $scope.etudiant.dateNaissance = $filter('date')($scope.etudiant.dateNaissance,'MM-dd-yyyy');
+        console.log($scope.etudiant.dateNaissance);
     	console.log($scope.etudiant);
         var dateNaissance = new Date($scope.etudiant.dateNaissance);
         var maxDateFormatted = dateNaissance.getFullYear() +
@@ -67,7 +69,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
       var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
     	promise.success(function(data) {
     		var maPromotion = data;
-            $scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
+            //$scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
             $scope.promotionEtudiant = {
             		etudiant : $scope.etudiant,
             		promotion : {
