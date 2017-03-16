@@ -7,6 +7,17 @@ angular.module('app')
 	.controller('UpdateQuestionController', ['$scope','$routeParams','$http','QualificatifService','questionService','domaineService','$location',
 	function ($scope,$routeParams,$http,QualificatifService,questionService,domaineService,$location) {
 
+		$('input').on('input', function() {
+			var c = this.selectionStart,
+            r = /[^a-z0-9éàçèù\-\/]/gi,
+				v = $(this).val();
+			if(r.test(v)) {
+				$(this).val(v.replace(r, ''));
+				c--;
+			}
+			this.setSelectionRange(c, c);
+		});
+				
 		var promise = QualificatifService.getAll();
 		promise.success(function(data) {
 			$scope.qualificatifs = data;
@@ -23,7 +34,6 @@ angular.module('app')
 		});
 
 		$scope.update = function(){
-			console.log('je suis hna');
 			console.log($scope.question);
 			var promise = questionService.updateQuestion($scope.question);
 			promise.success(function(data){

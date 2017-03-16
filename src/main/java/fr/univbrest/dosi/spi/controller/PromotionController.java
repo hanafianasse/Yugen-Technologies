@@ -54,11 +54,18 @@ public class PromotionController
 				anneeUniversitaire);
 		return promotionService.getEtudiants(promotionPk);
 	}
+	
+	@RequestMapping(value = "/getpromotionby/{codeFormation}/{anneeUniversitaire}",method = RequestMethod.GET,produces="application/json")
+	 public final Promotion getPromotion(
+			 @PathVariable(value="codeFormation") final String CodeFormation,
+			 @PathVariable(value="anneeUniversitaire") final String anneeUniversitaire){
+		PromotionPK promotionPk = new PromotionPK(CodeFormation,anneeUniversitaire);
+		return promotionService.getPromotion(promotionPk);
+	}
 
 	// Ajouter une nouvelle promotion
 	@RequestMapping(method = RequestMethod.POST)
-	public Promotion addPromotion(@RequestBody Promotion promotion)
-	{
+	public Promotion addPromotion(@RequestBody Promotion promotion){
 		return promotionService.addPromotion(promotion);
 	}
 
@@ -74,6 +81,12 @@ public class PromotionController
 	public void deletePromotion(@RequestBody PromotionPK promotionPK)
 	{
 		promotionService.deletePromotion(promotionPK);
+	}
+	
+	//Nombre de promotions
+	@RequestMapping(value = "/nombrePromotions", method = RequestMethod.GET)
+	public int nombrePromotions() {
+		return promotionService.nombrePromotions();
 	}
 
 }

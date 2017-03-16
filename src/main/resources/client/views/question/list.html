@@ -2,7 +2,7 @@
 
     <section class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Questions Standards</strong>
-        <a href="#/admin/newQuesstion"><span class="add fa fa-user-plus pull-right"></span></a>
+        <a href="#/admin/newQuesstion"><span class="add fa fa-plus pull-right"></span></a>
         </div>
     <div style="overflow: auto ;max-height: 600px;">
         <table class="table table-hover table-responsive">
@@ -13,7 +13,7 @@
                     </div></th>
                     <th><div class="th">
                         Min
-                    </div></th>                    
+                    </div></th>
                     <th><div class="th">
                         Max
                     </div></th>
@@ -46,7 +46,6 @@
 </div>
 <div class="modal-footer">
   <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
-  <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
   <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
 </div>
 </script>

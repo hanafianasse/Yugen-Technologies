@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Etudiant;
+import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.dao.EtudiantRepository;
 
@@ -54,4 +55,10 @@ public class EtudiantService {
 		return  (List<Etudiant>) etudiantRepository.findAll();
 		
 	}
+	
+	public int nombreEtudiants() {
+		List<Etudiant> listEtudiants = (List<Etudiant>) etudiantRepository.findAll();
+		return listEtudiants.size();
+	}
+	
 }

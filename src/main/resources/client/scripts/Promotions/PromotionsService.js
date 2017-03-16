@@ -9,8 +9,8 @@ angular.module('app')
             return $http.get(urlBase);
         };
 
-        dataFactory.getPromotion = function (id) {
-            return $http.get(urlBase, id);
+        dataFactory.getPromotion = function (id1,id2) {
+            return $http.get(urlBase+'/getpromotionby/'+id1+'/'+ id2);
         };
 
         dataFactory.addPromotion = function (entity) {
@@ -28,6 +28,11 @@ angular.module('app')
         dataFactory.getEtudiants = function (CodeFormation,anneeUniversitaire) {
             return $http.get(urlBase+'/'+CodeFormation+'/'+anneeUniversitaire);
         };
+
+        dataFactory.getNbPromotion = function()
+        {
+            return $http.get(urlBase + '/nombrePromotions');
+        }
 
         return dataFactory;
     }]);

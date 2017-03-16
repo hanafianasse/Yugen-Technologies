@@ -48,10 +48,10 @@
                       <div class="th">Année Universitaire</div>
                     </th>
                     <th>
-                      <div class="th">Date Rentrée</div>
+                      <div class="th">Date de Rentrée</div>
                   </th>
                   <th>
-                    <div class="th">Lieu Rentrée</div>
+                    <div class="th">Lieu de Rentré</div>
                   </th>
                 </tr>
             </thead>
@@ -65,14 +65,15 @@
         </table>
         </div>
     </section>
-    <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
-    <section class="panel panel-default table-dynamic" ng-if="etudiants">
+    <!--<div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>-->
+    <section ng-if="promotions.length != 0 && $root.promotionselected != null" class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiants</strong>
-          <span class="add fa fa-user-plus pull-right" ng-click="ajouterEtudiant()"></span>
+          <a href="#/admin/promotion/ajout/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}"><span class="add fa fa-user-plus pull-right"></span></a>
+          <!-- ajout des parametres /{{codeformation}}/{{anneeuniv}} -->
         </div>
-        <div style="overflow: auto ;max-height: 250px;">
+        <div class="scrollbar" style="overflow-x: hidden; overflow-y:auto; max-height: 250px;">
         <table class="table table-hover table-responsive">
-            <thead>
+            <thead ng-if="etudiants.length != 0">
                 <tr>
                     <th>
                       <div class="th">Nom</div>
@@ -96,18 +97,20 @@
                   <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
+            <tbody ng-if="etudiants.length != 0">
                 <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
                     <td ng-click="">{{e.email}}</td>
                     <td ng-click="">{{e.nationalite}}</td>
-                    <td ng-click="">{{e.universiteOrigine}}</td>
-                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+					<td ng-click="">{{e.universiteOrigine}}</td>                    
+                    <td><a href="#/admin/promotion/modif/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}/{{e.noEtudiant}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                     <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
                 </tr>
             </tbody>
+        </div>
         </table>
     </div>
     </section>
@@ -126,7 +129,6 @@
 </div>
 <div class="modal-footer">
   <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
-  <button ng-if="etat != null" type="button" class="btn btn-primary pull-left" ng-click="annulerSuppresion()">Ok</button>
   <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
 </div>
 </script>

@@ -8,16 +8,21 @@
 	$scope.formations = null;
 	$scope.promotions = null;
 	$scope.etudiants = null;
-
+	$rootScope.promotionselected = null;
+//Récupération de toutes les formations
 	var promise = formationService.getAll();
 	promise.success(function(data) {
 		$scope.formations = data;
 	}).error(function(data) {
-		console.log("get formtions : erreur");
+		console.log("get formtions: erreur");
 	});
 
 	// Affiche les promotions
 	$scope.select = function(formation){
+		$scope.selectedCodeFormation = formation.codeFormation;
+		if($rootScope.promotionselected != null){
+			$rootScope.promotionselected = null;
+		}
 		for(var index = 0; index < $scope.formations.length; index++) {
 			var tr = document.getElementById(($scope.formations[index]).codeFormation);
 			tr.classList.remove("trSelected");
@@ -47,6 +52,7 @@
 	}
 
 	$scope.selectEtudiants = function(promotion){
+		$scope.selectedAnneeUniversitaire = promotion.promotionPK.anneeUniversitaire;
 		$rootScope.promotionselected = promotion;
 		for(var index = 0; index < $scope.promotions.length; index++) {
 			console.log(($scope.promotions[index]).promotionPK.anneeUniversitaire);
@@ -59,6 +65,7 @@
 		promise.success(function(data,status) {
 			$scope.etudiants = data;
 			for(var index = 0; index < $scope.etudiants.length; index++){
+				console.log($scope.etudiants[index].noEtudiant);
 				if($scope.etudiants[index].telephone == null){
 					$scope.etudiants[index].telephone = "--";
 				}

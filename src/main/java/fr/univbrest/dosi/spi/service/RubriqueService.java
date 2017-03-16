@@ -2,8 +2,10 @@ package fr.univbrest.dosi.spi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import fr.univbrest.dosi.spi.bean.Rubrique;
 import fr.univbrest.dosi.spi.dao.RubriqueRepository;
+
 /**
  * 
  * @author Red1
@@ -12,10 +14,15 @@ import fr.univbrest.dosi.spi.dao.RubriqueRepository;
  */
 
 @Service
-public class RubriqueService  {
+public class RubriqueService {
 
 	@Autowired
 	private RubriqueRepository rubriqueRepository;
+
+	public final Rubrique getRubrique(final Long idRubrique) {
+		Rubrique rubrique = rubriqueRepository.findOne(idRubrique);
+		return rubrique;
+	}
 
 	public final Rubrique addRubrique(final Rubrique rubrique) {
 		return rubriqueRepository.save(rubrique);
@@ -34,5 +41,11 @@ public class RubriqueService  {
 		return rubriqueRepository.save(rubrique);
 
 	}
+	public final Rubrique GetRubrique(long id) {
+		return rubriqueRepository.findOne(id);
+
+	}
+	
+	
 
 }

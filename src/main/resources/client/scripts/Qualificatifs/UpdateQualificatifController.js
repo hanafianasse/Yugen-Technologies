@@ -8,6 +8,17 @@ angular.module('app').controller('UpdateQualificatifCtrl', ['$scope', '$location
     $scope.idQualificatif = $routeParams.idQualificatif;
     $scope.qualificatif;
 
+    $('input').on('input', function() {
+        var c = this.selectionStart,
+            r = /[^a-z0-9éàçèù\/]/gi,
+            v = $(this).val();
+        if(r.test(v)) {
+            $(this).val(v.replace(r, ''));
+            c--;
+        }
+        this.setSelectionRange(c, c);
+    });
+
     $scope.updateQualificatif = function (qualificatif) {
         QualificatifService.updateQualificatif(qualificatif).then(function (response) {
             $location.path("/admin/qualificatif");

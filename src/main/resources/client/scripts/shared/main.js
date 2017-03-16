@@ -9,16 +9,18 @@
       };
       $scope.deconnexion = function() {
     	  $rootScope.firstConnection = true;
+        $rootScope.connectedUser = null;
+
         AuthService.deconnexion().success(function() {
     		  $location.path('/pages/signin');
     	  });
-    	  
+
       };
-      
+
       $scope.login = function() {
     	  $location.path('/pages/signin');
       };
-      
+
       return $scope.main = {
         brand: 'Square',
         name: 'Lisa Doe'
@@ -36,7 +38,7 @@
         return $scope.taskRemainingCount = count;
       });
     }
-  ]).controller('DashboardCtrl', ['$scope', function($scope) {}]);
+  ])
 
 }).call(this);
 
