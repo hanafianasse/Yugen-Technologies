@@ -27,6 +27,7 @@ angular.module('app')
 
 		$scope.ajouter = function(){
 			$scope.question.noEnseignant = null;
+            $scope.question.type = 'QUS';
 			console.log($scope.question);
 			var promise = questionService.addQuestion($scope.question);
 			promise.success(function(data){
