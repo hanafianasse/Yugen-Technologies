@@ -33,15 +33,11 @@
 					templateUrl : 'views/promotion/list.html'
                 }) .when('/admin/qualificatif', {
                     templateUrl : 'views/qualificatif/list.html'
-<<<<<<< HEAD
-				}).when('/admin/ue/:id', {
-=======
 				}).when('/admin/qualificatif/AjouterQualificatif', {
                     templateUrl : 'views/qualificatif/details.html'
                 }).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
                     templateUrl: 'views/qualificatif/updateQualificatif.html'
                 }).when('/admin/ue/:id', {
->>>>>>> 96940b3ce9510d51304df903aae68d5641c2057e
 					templateUrl : 'views/ue/details.html'
                 }).when('/admin/newQuesstion', {
 					templateUrl : 'views/question/ajouter.html'
