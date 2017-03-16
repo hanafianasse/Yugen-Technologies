@@ -43,7 +43,7 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
     $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
     $scope.ajouterEtudiant = function (etudiant) {
         console.log(" anasse chuf hna ::: " + $scope.etudiant.dateNaissance);
-        $scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
+       // $scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
     	var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
     	promise.success(function(data) {
     		var maPromotion = data;

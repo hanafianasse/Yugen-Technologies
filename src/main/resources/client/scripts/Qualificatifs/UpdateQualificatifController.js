@@ -10,7 +10,7 @@ angular.module('app').controller('UpdateQualificatifCtrl', ['$scope', '$location
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9éàçèù\/]/gi,
+            r = /[^a-z0-9êéàçèù .\-]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
