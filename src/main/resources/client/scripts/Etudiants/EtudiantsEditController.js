@@ -48,18 +48,14 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
 
 
-    //Récupération des donnée etudiant
+    //Récupération des données etudiant
     var promise = EtudiantsService.getEtudiant($scope.noEtudiant);
     promise.success(function(data) {
     	console.log("récupération de l'étudiant terminé");
     	$scope.etudiant = data;
+        $scope.etudiant.dateNaissance.toString("yyyy-MM-dd");
         console.log($scope.etudiant.dateNaissance);
     	console.log($scope.etudiant);
-        var dateNaissance = new Date($scope.etudiant.dateNaissance);
-        var maxDateFormatted = dateNaissance.getFullYear() +
-            '/' + dateNaissance.getMonth()+'/' +dateNaissance.getDate();
-       
-
 	}).error(function(data) {
 		console.log("get etudiant : erreur");
 	});
