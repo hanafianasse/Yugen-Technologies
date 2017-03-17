@@ -13,6 +13,14 @@
 	var promise = formationService.getAll();
 	promise.success(function(data) {
 		$scope.formations = data;
+		for(var index = 0; index < $scope.formations.length ;index++){
+			if($scope.formations[index].doubleDiplome == 'O'){
+				$scope.formations[index].doubleDiplome = 'Oui';
+			}
+			if($scope.formations[index].doubleDiplome == 'N'){
+				$scope.formations[index].doubleDiplome = 'Non';
+			}
+		}
 	}).error(function(data) {
 		console.log("get formtions: erreur");
 	});
