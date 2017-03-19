@@ -4,131 +4,147 @@
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Formations</strong>
         </div>
         <div style="overflow: auto ;max-height: 250px;">
-        <table class="table table-hover table-responsive">
-            <thead>
-                <tr>
-                    <th><div class="th">
-                        Code
-                    </div></th>
-                    <th><div class="th">
-                        Diplôme / année
-                    </div></th>
-                    <th><div class="th">
-                        Nom formation
-                    </div></th>
-                    <th><div class="th">
-                        Double diplôme
-                    </div></th>
-                    <th><div class="th">
-                        Accréditation
-                    </div></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : 'n0Annee'" class="formation">
-                    <td ng-click="select(f)">{{f.codeFormation}}</td>
-                    <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
-                    <td ng-click="select(f)">{{f.nomFormation}}</td>
-                    <td ng-click="select(f)">{{f.doubleDiplome}}</td>
-                    <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} - {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th">
+                                Code
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Diplôme / année
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Nom formation
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Double diplôme
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Accréditation
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : 'n0Annee'" class="formation">
+                        <td ng-click="select(f)">{{f.codeFormation}}</td>
+                        <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
+                        <td ng-click="select(f)">{{f.nomFormation}}</td>
+                        <td ng-click="select(f)">{{f.doubleDiplome}}</td>
+                        <td ng-click="select(f)">{{f.debutAccreditation | date: "dd/MM/yyyy"}} - {{f.finAccreditation | date: "dd/MM/yyyy"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
     <div ng-if="promotions.length == 0" class="success">Aucune promotion pour cette formation</div>
     <section class="panel panel-default table-dynamic" ng-if="promotions">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Promotions</strong>
         </div>
         <div style="overflow: auto ;max-height: 250px;">
-        <table class="table table-hover table-responsive">
-            <thead>
-                <tr>
-                    <th>
-                      <div class="th">Année Universitaire</div>
-                    </th>
-                    <th>
-                      <div class="th">Date de Rentrée</div>
-                  </th>
-                  <th>
-                    <div class="th">Lieu de Rentré</div>
-                  </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="{{p.promotionPK.anneeUniversitaire}}" data-ng-repeat="p in promotions | orderBy : '-debutAnneeUniversitaire' " class="formation">
-                    <td ng-click="selectEtudiants(p)">{{p.promotionPK.anneeUniversitaire}}</td>
-                    <td ng-click="selectEtudiants(p)">{{p.dateRentree | date: "dd/MM/yyyy"}}</td>
-                    <td ng-click="selectEtudiants(p)">{{p.lieuRentree}}</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th">Année Universitaire</div>
+                        </th>
+                        <th>
+                            <div class="th">Nombre d'étudiants</div>
+                        </th>
+                        <th>
+                            <div class="th">Date de Rentrée</div>
+                        </th>
+                        <th>
+                            <div class="th">Lieu de Rentré</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="{{p.promotionPK.anneeUniversitaire}}" data-ng-repeat="p in promotions | orderBy : '-debutAnneeUniversitaire' " class="formation">
+                        <td ng-click="selectEtudiants(p)">{{p.promotionPK.anneeUniversitaire}}</td>
+                        <td ng-click ="selectEtudiant(p)">{{p.nombreEtudiants}}</td>
+                        <td ng-click="selectEtudiants(p)">{{p.dateRentree | date: "dd/MM/yyyy"}}</td>
+                        <td ng-click="selectEtudiants(p)">{{p.lieuRentree}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
     <!--<div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>-->
     <section ng-if="promotions.length != 0 && $root.promotionselected != null" class="panel panel-default table-dynamic">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiants</strong>
-          <a href="#/admin/promotion/ajout/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}"><span class="add fa fa-user-plus pull-right"></span></a>
-          <!-- ajout des parametres /{{codeformation}}/{{anneeuniv}} -->
+            <a href="#/admin/promotion/ajout/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}"><span class="add fa fa-user-plus pull-right"></span></a>
+            <!-- ajout des parametres /{{codeformation}}/{{anneeuniv}} -->
         </div>
         <div class="scrollbar" style="overflow-x: auto; overflow-y:auto; max-height: 250px;">
-        <table class="table table-hover table-responsive">
-            <thead ng-if="etudiants.length != 0">
-                <tr>
-                    <th>
-                      <div class="th">Nom</div>
-                    </th>
-                    <th>
-                      <div class="th">Prenom</div>
-                  </th>
-                  <th>
-                    <div class="th">Télephone</div>
-                  </th>
-                  <th>
-                    <div class="th">Email</div>
-                  </th>
-                  <th>
-                    <div class="th">Nationalité</div>
-                  </th>
-                  <th>
-                    <div class="th">Université d'origine</div>
-                  </th>
-                  <th></th>
-                  <th></th>
-                </tr>
-            </thead>
-            <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
-            <tbody ng-if="etudiants.length != 0">
-                <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
-                    <td ng-click="">{{e.nom}}</td>
-                    <td ng-click="">{{e.prenom}}</td>
-                    <td ng-click="">{{e.telephone}}</td>
-                    <td ng-click="">{{e.email}}</td>
-                    <td ng-click="">{{e.nationalite}}</td>
-					<td ng-click="">{{e.universiteOrigine}}</td>
-                    <td><a href="#/admin/promotion/modif/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}/{{e.noEtudiant}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                    <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
-                </tr>
-            </tbody>
+            <table class="table table-hover table-responsive">
+                <thead ng-if="etudiants.length != 0">
+                    <tr>
+                        <th>
+                            <div class="th">Nom</div>
+                        </th>
+                        <th>
+                            <div class="th">Prenom</div>
+                        </th>
+                        <th>
+                            <div class="th">Télephone</div>
+                        </th>
+                        <th>
+                            <div class="th">Email</div>
+                        </th>
+                        <th>
+                            <div class="th">Nationalité</div>
+                        </th>
+                        <th>
+                            <div class="th">Université d'origine</div>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
+                <tbody ng-if="etudiants.length != 0">
+                    <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
+                        <td ng-click="">{{e.nom}}</td>
+                        <td ng-click="">{{e.prenom}}</td>
+                        <td ng-click="">{{e.telephone}}</td>
+                        <td ng-click="">{{e.email}}</td>
+                        <td ng-click="">{{e.nationalite}}</td>
+                        <td ng-click="">{{e.universiteOrigine}}</td>
+                        <td>
+                            <a href="#/admin/promotion/modif/{{selectedCodeFormation}}/{{selectedAnneeUniversitaire}}/{{e.noEtudiant}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td><span class="remove fa fa-remove" ng-click="ouvrirModelSuppresion(e)"></span></td>
+                    </tr>
+                </tbody>
         </div>
         </table>
-    </div>
-    </section>
+</div>
+</section>
 </div>
 
 
 
 <script type="text/ng-template" id="myModalContent.html">
-<div class="modal-header">
-  <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
-  <h4 class="modal-title">Confirmation</h4>
-</div>
-<div class="modal-body">
-    <p ng-if="etat == null" >Confirmer la suppression ?</p>
-    <p ng-if="etat != null" >{{message}}</p>
-</div>
-<div class="modal-footer">
-  <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
-  <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
-</div>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+        <h4 class="modal-title">Confirmation</h4>
+    </div>
+    <div class="modal-body">
+        <p ng-if="etat == null">Confirmer la suppression ?</p>
+        <p ng-if="etat != null">{{message}}</p>
+    </div>
+    <div class="modal-footer">
+        <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
+        <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
+    </div>
 </script>
