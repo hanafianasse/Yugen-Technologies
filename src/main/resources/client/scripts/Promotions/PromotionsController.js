@@ -1,15 +1,14 @@
 (function() {
 	'use strict';
 	angular.module('app')
-		.controller('PromotionsController',[ '$scope', '$location', '$http','formationService','promotionService','EtudiantsService','$modal','$rootScope',function($scope, $location, $http,formationService,promotionService,EtudiantsService,$modal,$rootScope) {
-
-	console.log("je suis dans la promotion");
-
+		.controller('PromotionsController',[ '$scope', '$location', '$http','formationService','promotionService','EtudiantsService','$modal','$rootScope','$routeParams',function($scope, $location, $http,formationService,promotionService,EtudiantsService,$modal,$rootScope,$routeParams) {
+/*
 	$scope.formations = null;
 	$scope.promotions = null;
-	$scope.etudiants = null;
+	$scope.etudiants = null;*/
 	$rootScope.promotionselected = null;
-//Récupération de toutes les formations
+
+	//Récupération de toutes les formations
 	var promise = formationService.getAll();
 	promise.success(function(data) {
 		$scope.formations = data;
@@ -23,7 +22,7 @@
 		}
 	}).error(function(data) {
 		console.log("get formtions: erreur");
-	});
+	});	
 
 	// Affiche les promotions
 	$scope.select = function(formation){
@@ -63,7 +62,6 @@
 		$scope.selectedAnneeUniversitaire = promotion.promotionPK.anneeUniversitaire;
 		$rootScope.promotionselected = promotion;
 		for(var index = 0; index < $scope.promotions.length; index++) {
-			console.log(($scope.promotions[index]).promotionPK.anneeUniversitaire);
 			var tr = document.getElementById(($scope.promotions[index]).promotionPK.anneeUniversitaire);
 			tr.classList.remove("trSelected");
 		}
@@ -73,7 +71,6 @@
 		promise.success(function(data,status) {
 			$scope.etudiants = data;
 			for(var index = 0; index < $scope.etudiants.length; index++){
-				console.log($scope.etudiants[index].noEtudiant);
 				if($scope.etudiants[index].telephone == null){
 					$scope.etudiants[index].telephone = "--";
 				}
@@ -112,6 +109,27 @@
 					});
 				};
 			}
+		});
+	}
+
+	if($routeParams.anneeUniversitaire != null && $routeParams.codeFormation != null){
+		var promise = formationService.getFormation($routeParams.codeFormation);
+		promise.success(function(data){
+			$scope.select(data);
+			var anotherPromise = formationService.getPromotions($routeParams.codeFormation);
+			anotherPromise.success(function(data_){
+				var promotions = data_;
+				for(var index = 0; index < promotions.length ;index++){
+					if(promotions[index].promotionPK.anneeUniversitaire == $routeParams.anneeUniversitaire){
+						$scope.selectEtudiants(promotions[index]);
+						break;
+					}
+				}
+			}).error(function(statu){
+				console.log("get promotion : error");
+			});
+		}).error(function(statu){
+			console.log("get formation : error");
 		});
 	}
 } ]);

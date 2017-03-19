@@ -75,11 +75,14 @@
         <table class="table table-hover table-responsive">
             <thead ng-if="etudiants.length != 0">
                 <tr>
-                    <th>
-                      <div class="th">Nom</div>
-                    </th>
-                    <th>
-                      <div class="th">Prenom</div>
+                  <th>
+                    <div class="th"></div>
+                  </th>
+                  <th>
+                    <div class="th">Nom</div>
+                  </th>
+                  <th>
+                    <div class="th">Prenom</div>
                   </th>
                   <th>
                     <div class="th">Télephone</div>
@@ -100,6 +103,7 @@
             <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
             <tbody ng-if="etudiants.length != 0">
                 <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
+                    <td ng-click="">{{$index+1}}</td>
                     <td ng-click="">{{e.nom}}</td>
                     <td ng-click="">{{e.prenom}}</td>
                     <td ng-click="">{{e.telephone}}</td>
