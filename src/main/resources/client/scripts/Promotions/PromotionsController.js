@@ -26,6 +26,7 @@
 
 	// Affiche les promotions
 	$scope.select = function(formation){
+		$rootScope.selectedFormation = formation;
 		$scope.selectedCodeFormation = formation.codeFormation;
 		if($rootScope.promotionselected != null){
 			$rootScope.promotionselected = null;
@@ -91,6 +92,7 @@
 	}
 
 	$rootScope.selectEtudiants = $scope.selectEtudiants;
+	$rootScope.selectPromotions = $scope.select;
 
     	$scope.ouvrirModelSuppresion = function(etudiant){
 		$rootScope.EtudiantToBeDeleted = etudiant;
@@ -100,11 +102,9 @@
 			backdrop: true,
 			controller: function ($scope, $modalInstance,$rootScope,EtudiantsService) {
 				$scope.annulerSuppresion = function () {
-
 					$modalInstance.dismiss('cancel');
 					$rootScope.selectEtudiants($rootScope.promotionselected);
 					$modalInstance.dismiss('cancel');
-
 				};
 				$scope.doSupprimer = function(){
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
@@ -112,6 +112,9 @@
 	    			promise.success(function(status){
 						$rootScope.message = "Etudiant supprimé";
 						$rootScope.etat = "done";
+						var selectedPromotion =  $rootScope.promotionselected;
+						$rootScope.selectPromotions($rootScope.selectedFormation);
+						$rootScope.promotionselected = selectedPromotion;
 						$rootScope.selectEtudiants($rootScope.promotionselected);
 					}).error(function(data,status){
 						$rootScope.message = "impossible de supprimer cet étudiant(e)";
