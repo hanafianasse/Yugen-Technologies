@@ -13,7 +13,7 @@ angular.module('app')
         dataFactory.getEtudiant = function (id) {
             return $http.get(urlBase + '/' + id);
         };
-        
+
         dataFactory.addEtudiant = function (entity) {
             return $http.post(urlBase, entity);
         };
@@ -23,13 +23,15 @@ angular.module('app')
         };
 
         dataFactory.deleteEtudiant = function (id) {
-
             return $http.delete(urlBase + '/delete/' + id);
-
         };
 
-        dataFactory.getNbEtudiant = function (){
+        dataFactory.getNbEtudiant = function () {
             return $http.get(urlBase + '/nombreEtudiants')
+        }
+
+        dataFactory.getNbEtudiantParPromotion = function (codeFormation, anneeUniversitaire) {
+            return $http.get(urlBase + '/nombreEtudiants/' + codeFormation + '/' + anneeUniversitaire);
         }
 
         return dataFactory;

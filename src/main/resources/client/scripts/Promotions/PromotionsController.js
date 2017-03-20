@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('app')
-		.controller('PromotionsController',[ '$scope', '$location', '$http','formationService','promotionService','EtudiantsService','$modal','$rootScope','$routeParams',function($scope, $location, $http,formationService,promotionService,EtudiantsService,$modal,$rootScope,$routeParams) {
+		.controller('PromotionsController',[ '$scope', '$location', '$http','$q','formationService','promotionService','EtudiantsService','$modal','$rootScope','$routeParams',function($scope, $location, $http, $q, formationService,promotionService,EtudiantsService,$modal,$rootScope,$routeParams) {
 /*
 	$scope.formations = null;
 	$scope.promotions = null;
@@ -53,6 +53,16 @@
 				};
 				$scope.promotions.push(promotion);
 			}
+
+			$q.all(promise).then(function () {
+				angular.forEach($scope.promotions, function(promotion) {
+					EtudiantsService.getNbEtudiantParPromotion(promotion.promotionPK.codeFormation, promotion.promotionPK.anneeUniversitaire).success(function (data) {
+						promotion.nombreEtudiants = data;
+					}, function (error) {
+						console.log("GetNombreEtudiantParPromotion: Error");
+					});
+				});
+			});
 		}).error(function(data,status){
 			console.log("get promotion d'une formation : erreur");
 		});
