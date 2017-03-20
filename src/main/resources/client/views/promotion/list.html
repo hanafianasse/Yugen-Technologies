@@ -71,7 +71,7 @@
                 <tbody>
                     <tr id="{{p.promotionPK.anneeUniversitaire}}" data-ng-repeat="p in promotions | orderBy : '-debutAnneeUniversitaire' " class="formation">
                         <td ng-click="selectEtudiants(p)">{{p.promotionPK.anneeUniversitaire}}</td>
-                        <td ng-click ="selectEtudiant(p)">{{p.nombreEtudiants}}</td>
+                        <td ng-click="selectEtudiants(p)">{{p.nombreEtudiants}}</td>
                         <td ng-click="selectEtudiants(p)">{{p.dateRentree | date: "dd/MM/yyyy"}}</td>
                         <td ng-click="selectEtudiants(p)">{{p.lieuRentree}}</td>
                     </tr>
