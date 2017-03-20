@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label for="" class="col-sm-2">Designation</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="rubrique.designation" maxlength="32" required>
+                    <input type="text" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="rubrique.designation" maxlength="32" required>
                 </div>
             </div>
             <input type="submit" value="Modifier" class="btn btn-primary"></input>

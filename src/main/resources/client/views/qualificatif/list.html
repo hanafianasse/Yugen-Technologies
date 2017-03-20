@@ -18,7 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="{{q.idQualificatif}}" data-ng-repeat='q in qualificatifs' >
+                <tr id="{{q.idQualificatif}}" data-ng-repeat="q in qualificatifs| orderBy :['maximal', 'minimal']" >
                     <td>{{q.maximal}}</td>
                     <td>{{q.minimal}}</td>
                     <td><a href="#/admin/qualificatif/updateQualificatif/{{q.idQualificatif}}"><span class="glyphicon glyphicon-pencil" ></span></a></td>

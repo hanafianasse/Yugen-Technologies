@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="q in mesQuestions track by $index" class="formation">
+                <tr data-ng-repeat="q in mesQuestions |orderBy : 'question.intitule' ">
                     <td ng-click="">{{q.question.intitule}}</td>
                     <td ng-click="">{{q.qualificatif.minimal}}</td>
                     <td ng-click="">{{q.qualificatif.maximal}}</td>
