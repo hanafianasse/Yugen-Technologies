@@ -36,7 +36,8 @@
             <li class="dropdown text-normal nav-profile" dropdown is-open="status.isopenProfile">
                 <a style="color:black" href="javascript:;" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                     <span class="hidden-xs">
-                        <span>{{$root.connectedUser.pseudoConnection}}</span>
+                        <span ng-if="$root.connectedUser.role == 'ENS' ">{{$root.connectedUserAsEns.nom}} {{$root.connectedUserAsEns.prenom}}</span>
+                        <span ng-if="$root.connectedUser.role == 'ADM' ">Administrateur</span>
                     </span>
                     <img src="../images/connectedUserIcone.png" alt="" class="img-circle img30_30">
                 </a>

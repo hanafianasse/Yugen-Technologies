@@ -15,45 +15,39 @@ import fr.univbrest.dosi.spi.bean.User;
 import fr.univbrest.dosi.spi.exception.SPIException;
 import fr.univbrest.dosi.spi.service.UserService;
 
+
 @RestController
+@RequestMapping(value = "/user")
 @Api(value = "user", description = "Description de la ressource user.")
-public class UserController
-{
+public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/auth", method = RequestMethod.POST, headers = "Accept=application/json")
-	public void authentifier(final HttpServletRequest request,
-			@RequestBody final User user)
-	{
-		final User users = userService.authentifier(user.getUsername(),
-				user.getPwd());
-
-		if (users != null)
-		{
-			request.getSession().setAttribute("user", users);
-		} else
-		{
-			request.getSession().removeAttribute("user");
-			throw new SPIException("impossible de s'authentifier");
-		}
-
-	}
-
-	@RequestMapping(value = "/user")
+	@RequestMapping( method = RequestMethod.GET)
 	public User users(final HttpServletRequest request,
-			final HttpServletResponse response)
-	{
+			final HttpServletResponse response) {
 		final User user = (User) request.getSession().getAttribute("user");
 		return user;
-
 	}
-
-	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
-	public void authentifier(final HttpServletRequest request)
-	{
-		request.getSession().removeAttribute("user");
-	}
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

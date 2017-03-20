@@ -42,7 +42,7 @@ public class AuthentificationController {
 
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public void authentifier(final HttpServletRequest request) {
-		request.getSession().removeAttribute("authentification");
+		request.getSession().removeAttribute("user");
 	}
 
 }

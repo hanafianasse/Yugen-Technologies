@@ -1,155 +1,148 @@
 <div class="page" ng-controller="editEtudiantsCtrl">
-  <div class="panel panel-default ens-edit">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
-    <div class="panel-body">
-        <!-- Consultation -->
-        <div class="media animate" ng-hide="edit">
-
-        <!-- Creation -->
-        <div>
-<form class="form-horizontal" ng-submit="modifierEtudiant()">
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Numéro Etudiant<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="50" class="form-control" ng-model="etudiant.noEtudiant" required>
+    <div class="panel panel-default ens-edit">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
+        <div class="panel-body">
+            <form class="form-horizontal" ng-submit="modifierEtudiant()">
+                <div class="col-md-6 vertical-line">
+                    <div class="form-group">
+                        <label class="col-sm-4">Numéro Etudiant<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="50" class="form-control" ng-model="etudiant.noEtudiant" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Code Formation<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" disabled="disabled" ng-model="codeFormation">
+                    <div class="form-group">
+                        <label  class="col-sm-4">Code Formation<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" disabled="disabled" ng-model="codeFormation">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Année Universitaire<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" disabled="disabled" ng-model="anneeUniversitaire" required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Année Universitaire<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" disabled="disabled" ng-model="anneeUniversitaire" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Nom<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.nom" required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Nom<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="45" pattern="^[^-\s\déèàçêù][\w\s-]+$" class="form-control" ng-model="etudiant.nom" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2">Prénom<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.prenom" required>
+                    <div class="form-group">
+                        <label class="col-sm-4">Prénom<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.prenom" required>
+                        </div>
                     </div>
-                </div>
-
-               <div class="form-group">
-                    <label class="col-sm-2">Sexe<span style="color: red"> *</span></label>
-                    <div class="col-sm-10" ng-init="etudiant.sexe='M'">
-                        <label class="ui-radio"><input name="radio1" type="radio" value="M" ng-model="etudiant.sexe" checked><span>Homme</span></label>
-                        <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="etudiant.sexe" ><span>Femme</span></label>
+                    <div class="form-group">
+                        <label class="col-sm-4">Sexe<span style="color: red"> *</span></label>
+                        <div class="col-sm-8" ng-init="etudiant.sexe='M'">
+                            <label class="ui-radio"><input name="radio1" type="radio" value="M" ng-model="etudiant.sexe" checked><span>Homme</span></label>
+                            <label class="ui-radio"><input name="radio1" type="radio" value="F" ng-model="etudiant.sexe" ><span>Femme</span></label>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Date de Naissance<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="date"  class="form-control" ng-model="etudiant.dateNaissance" placeholder='JJ-MM-AAAA' required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Date de Naissance<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="date"  class="form-control" ng-model="etudiant.dateNaissance" placeholder='JJ-MM-AAAA' required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Lieu de Naissance<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.lieuNaissance" required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Lieu de Naissance<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.lieuNaissance" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Nationalité<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.nationalite" required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Nationalité<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.nationalite" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Téléphone</label>
-                    <div class="col-sm-10">
-                        <input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20"  class="form-control"   ng-model="etudiant.telephone">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Mobile</label>
-                    <div class="col-sm-10">
-                        <input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20" class="form-control"  ng-model="etudiant.mobile">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">E-mail<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.email" required>
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2">E-mail UBO</label>
-                    <div class="col-sm-10">
-                        <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.emailUbo">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Adresse<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.adresse" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Code postal</label>
-                    <div class="col-sm-10">
-                        <input type="text" pattern="[0-9]*" maxlength="10" class="form-control" ng-model="etudiant.codePostal">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2">Ville<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.ville" required>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Téléphone</label>
+                        <div class="col-sm-8">
+                            <input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20"  class="form-control"   ng-model="etudiant.telephone">
+                        </div>
                     </div>
                 </div>
 
-
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Pays Origine<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                         <select class="form-control" ng-model="etudiant.paysOrigine" required>
-                            <option disabled selected value>Pays Origine</option>
-                            <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
-                        </select>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label  class="col-sm-4">Mobile</label>
+                        <div class="col-sm-8">
+                            <input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20" class="form-control"  ng-model="etudiant.mobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">E-mail<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4">E-mail UBO</label>
+                        <div class="col-sm-8">
+                            <input type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}" class="form-control" ng-model="etudiant.emailUbo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Adresse<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.adresse" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Code postal</label>
+                        <div class="col-sm-8">
+                            <input type="text" pattern="[0-9]*" maxlength="10" class="form-control" ng-model="etudiant.codePostal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4">Ville<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.ville" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Pays Origine<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="etudiant.paysOrigine" required>
+                                <option disabled selected value>Pays Origine</option>
+                                <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Université Origine<span style="color: red"> *</span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control" ng-model="etudiant.universiteOrigine" required>
+                                <option disabled selected value>Université Origine</option>
+                                <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Groupe TP</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" ng-model="etudiant.groupeTp" min="1" max="2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-4">Groupe Anglais</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" ng-model="etudiant.groupeAnglais" value="0" min="1" max="2">
+                        </div>
                     </div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Université Origine<span style="color: red"> *</span></label>
-                    <div class="col-sm-10">
-                         <select class="form-control" ng-model="etudiant.universiteOrigine" required>
-                            <option disabled selected value>Université Origine</option>
-                            <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Groupe TP</label>
-                    <div class="col-sm-10">
-                    <input type="number" class="form-control" ng-model="etudiant.groupeTp" min="1" max="2">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2">Groupe Anglais</label>
-                    <div class="col-sm-10">
-                      <input type="number" class="form-control" ng-model="etudiant.groupeAnglais" value="0" min="1" max="2">
-                    </div>
-                </div>
-                <input type="submit" value="Modifier" class="btn btn-primary"></input>
-                <a class="btn btn-danger pull-right" href="#/admin/promotion"> Annuler</a>
-        </form>
+                <div class="col-md-12">
+                    <input type="submit" value="Modifier" class="btn btn-primary"></input>
+                    <a class="btn btn-danger pull-right" href="#/admin/promotion/{{anneeUniversitaire}}/{{codeFormation}}"> Annuler</a>
+                </div>                
+            </form>
         </div>
     </div>
-  </div>
 </div>
 
 
+                
