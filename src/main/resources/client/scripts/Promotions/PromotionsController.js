@@ -110,14 +110,20 @@
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
 					var promise = EtudiantsService.deleteEtudiant($rootScope.EtudiantToBeDeleted.noEtudiant);
 	    			promise.success(function(status){
-						$rootScope.message = "Etudiant supprimé";
+
+	    				$modalInstance.dismiss('cancel');
+						//$rootScope.message = "Etudiant supprimé";
+						//$rootScope.etat = "done";
+
 						$rootScope.etat = "done";
 						var selectedPromotion =  $rootScope.promotionselected;
 						$rootScope.selectPromotions($rootScope.selectedFormation);
 						$rootScope.promotionselected = selectedPromotion;
+						
+
 						$rootScope.selectEtudiants($rootScope.promotionselected);
 					}).error(function(data,status){
-						$rootScope.message = "impossible de supprimer cet étudiant(e)";
+						$rootScope.message = "Impossible de supprimer l'étudiant(e) choisi(e) !";
  						$rootScope.etat = "not done";
 					});
 				};

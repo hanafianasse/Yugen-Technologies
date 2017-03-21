@@ -70,7 +70,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-6">
                     <div class="form-group">
                         <label  class="col-sm-4">Mobile</label>
@@ -113,7 +112,7 @@
 						<div class="col-sm-8">
 							<select class="form-control" ng-model="etudiant.paysOrigine" required>
 								<option disabled selected value>Pays Origine</option>
-								<option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+								<option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 							</select>
 						</div>
 					</div>
@@ -122,7 +121,7 @@
 						<div class="col-sm-8">
 							<select class="form-control" ng-model="etudiant.universiteOrigine" required>
 								<option disabled selected value>Université Origine</option>
-								<option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+								<option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 							</select>
 						</div>
 					</div>

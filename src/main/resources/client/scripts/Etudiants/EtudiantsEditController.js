@@ -14,6 +14,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
         this.setSelectionRange(c, c);
     });
 
+
     $scope.status;
     $scope.error = false;
     $scope.success = false;
