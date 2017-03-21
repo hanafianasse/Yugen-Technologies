@@ -33,6 +33,9 @@ public class RubriqueEvaluationControllerTest
 		/**
 		 * Instanciation d'une nouvelle rubriqueEvaluation
 		 */
+		//Evaluation evaluation = new Evaluation();
+		//evaluation.setIdEvaluation(9999);
+		
 		
 	}
 	
