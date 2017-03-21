@@ -17,5 +17,6 @@
 		<class>fr.univbrest.dosi.spi.bean.Question</class>	
 		<class>fr.univbrest.dosi.spi.bean.CgRefCode</class>		
 		<class>fr.univbrest.dosi.spi.bean.Rubrique</class>
+		<class>fr.univbrest.dosi.spi.bean.RubriqueEvaluation</class>
 	</persistence-unit>
 </persistence>
