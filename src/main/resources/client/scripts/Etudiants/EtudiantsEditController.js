@@ -15,6 +15,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
 
     });
 
+
     $scope.status;
     $scope.error = false;
     $scope.success = false;

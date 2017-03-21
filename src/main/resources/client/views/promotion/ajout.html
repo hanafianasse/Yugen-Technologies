@@ -7,7 +7,7 @@
 
         <!-- Creation -->
         <div>
-            <form class="form-horizontal" ng-submit="ajouterEtudiant()">
+            <form class="form-horizontal" data-toggle="validator" ng-submit="ajouterEtudiant()">
                 <div class="form-group">
                     <label for="" class="col-sm-2">Numéro Etudiant<span style="color: red"> *</span></label>
                     <div class="col-sm-10">
@@ -115,7 +115,7 @@
                     <div class="col-sm-10">
 						 <select class="form-control" ng-model="etudiant.paysOrigine" required>
                             <option disabled selected value>Pays Origine</option>
-						    <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+						    <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 						</select>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                     <div class="col-sm-10">
 						 <select class="form-control" ng-model="etudiant.universiteOrigine" required>
                             <option disabled selected value>Université Origine</option>
-						    <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+						    <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 						</select>
                     </div>
                 </div>
