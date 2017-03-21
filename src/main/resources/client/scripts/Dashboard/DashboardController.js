@@ -8,7 +8,6 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
     function getNbEnseignant() {
         enseignantsFactory.getNbEnseignant().then(function (response) {
             $scope.nbEnseignant = response.data;
-            console.log($scope.nbEnseignant);
         }, function (error) {
             console.log("get nbEnseignant : erreur");
         });
@@ -19,7 +18,6 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
     function getNbEtudiant() {
         EtudiantsService.getNbEtudiant().then(function (response) {
             $scope.nbEtudiant = response.data;
-            console.log($scope.nbEtudiant);
         }, function (error) {
             console.log("get nbEtudiant : erreur");
         });
@@ -30,7 +28,6 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
     function getNbFormations() {
         formationService.getNbFormations().then(function (response) {
             $scope.nbFormation = response.data;
-            console.log($scope.nbFormation);
         }, function (error) {
             console.log("get nbFormation : erreur");
         });
@@ -41,7 +38,6 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
     function getNbPromotion() {
         PromotionsService.getNbPromotion().then(function (response) {
             $scope.nbPromotion = response.data;
-            console.log($scope.nbPromotion);
         }, function (error) {
             console.log("get nbPromotion : erreur");
         });

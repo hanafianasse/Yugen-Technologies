@@ -11,5 +11,5 @@ public interface AuthentificationRepository extends PagingAndSortingRepository<A
 	Authentification findByNoEtudiant(@Param("noEtudiant") String noEtudiant);
 	Authentification findByNoEnseignant(BigDecimal noEnseignant);
 	Authentification findByLoginConnection(String loginConnection);
-	
+	Authentification findByPseudoConnection(String pseudoConnection);
 }

@@ -53,7 +53,7 @@ angular.module('app.auth', [])
 		},
 		deconnexion : function() {
 			config = {
-				url : '/deconnexion',
+				url : 'authentification/deconnexion',
 				method : "GET"
 			}
 			return $http(config);

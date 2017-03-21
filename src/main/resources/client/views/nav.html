@@ -3,22 +3,69 @@
     <!--<div>
         <img style="display : block; margin : auto;" width="200px" height="200px" src="images/logo_3.png">
     </div>-->
-    <ul id="nav"
-        data-ng-controller="NavCtrl"
-        data-slim-scroll
-        data-collapse-nav
-        data-highlight-active>
-        <li><a href="#/dashboard"> <i class="fa fa-dashboard"></i><span data-i18n="Tableau de bord"></span> </a></li>
+    <ul id="nav" data-ng-controller="NavCtrl" data-slim-scroll data-collapse-nav data-highlight-active>
         <li>
-            <a  href="#/admin"><i class="fa fa-book"></i><span data-i18n="Administration"></span></a>
+            <a href="#/dashboard">
+                <i class="fa fa-dashboard"></i>
+                <span data-i18n="Tableau de bord"></span>
+            </a>
+        </li>
+        <li ng-show="$root.connectedUser.role == 'ADM' ">
+            <a href="#/administration">
+                <i class="fa fa-book"></i>
+                <span data-i18n="Administration"></span>
+            </a>
             <ul>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/enseignants"><i class="fa fa-caret-right"></i><span data-i18n="Enseignants"></span></a></li>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/formations"><i class="fa fa-caret-right"></i><span data-i18n="Formations"></span></a></li>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/ue"><i class="fa fa-caret-right"></i><span data-i18n="UE"></span></a></li>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/promotion"><i class="fa fa-caret-right"></i><span data-i18n="Promotions"></span></a></li>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/qualificatif"><i class="fa fa-caret-right"></i><span data-i18n="Qualificatifs"></span></a></li>
-                <li ng-if="$root.connectedUser.role == 'ADM' "><a href="#/admin/questionsStandard"><i class="fa fa-caret-right"></i><span data-i18n="Questions Standard"></span></a></li>
-                 <li ng-if="$root.connectedUser.role == 'ADM' " ><a href="#/admin/RubriqueStandard"><i class="fa fa-caret-right"></i><span data-i18n="Rubriques Standard"></span></a></li>
+                <li>
+                    <a href="#/admin/enseignants">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Enseignants"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/admin/formations">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Formations"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/admin/ue">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="UE"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/admin/promotion">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Promotions"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li ng-show="$root.connectedUser.role == 'ADM' ">
+            <a href="#/evaluation">
+                <i class="glyphicon glyphicon-tasks"></i>
+                <span data-i18n="Evaluation"></span>
+            </a>
+            <ul>
+                <li>
+                    <a href="#/admin/qualificatif">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Qualificatifs"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/admin/questionsStandard">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Questions Standards"></span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="#/admin/RubriqueStandard">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Rubriques Standards"></span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

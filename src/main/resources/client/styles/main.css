@@ -11295,6 +11295,7 @@ lesshat-selector {
   background-color: #ccc;
 }
 
+
 #nav > li.open > .fa-caret-right,
 #nav > li.active > .fa-caret-right
 {
@@ -11315,3 +11316,8 @@ lesshat-selector {
   font-size: 26px;
 }
 
+.vertical-line {
+  border-right-width: 3px;
+  border-right-style: solid;
+  border-right-color: #eeeeee;
+}

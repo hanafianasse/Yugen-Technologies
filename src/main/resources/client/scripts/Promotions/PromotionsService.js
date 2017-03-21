@@ -33,7 +33,7 @@ angular.module('app')
         {
             return $http.get(urlBase + '/nombrePromotions');
         }
-
+        
         return dataFactory;
     }]);
 
