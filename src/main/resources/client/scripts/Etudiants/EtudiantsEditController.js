@@ -12,21 +12,17 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
             c--;
         }
         this.setSelectionRange(c, c);
-
     });
 
 
     $scope.status;
     $scope.error = false;
     $scope.success = false;
-    console.log('je suis dans le controller modifier étudiant');
 
     //Récuperation des domaines par UNIVERSITE
     var promise = domaineService.getDomaine("UNIVERSITE");
 	promise.success(function(data) {
-		console.log("récupération du domaine UNIVERSITE terminé");
 		$scope.domaineUniv = data;
-		console.log($scope.domaineUniv);
 	}).error(function(data) {
 		console.log("get domaine : erreur");
 	});
@@ -35,9 +31,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     //Récuperation des domaines par PAYS
     var promise = domaineService.getDomaine("PAYS");
 	promise.success(function(data) {
-		console.log("récupération du domaine PAYS terminé");
 		$scope.domainePays = data;
-		console.log($scope.domainePays);
 	}).error(function(data) {
 		console.log("get domaine : erreur");
 	});
@@ -67,7 +61,6 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
       var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
     	promise.success(function(data) {
     		var maPromotion = data;
-            //$scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
             $scope.promotionEtudiant = {
             		etudiant : $scope.etudiant,
             		promotion : {
@@ -79,11 +72,10 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
             }
             EtudiantsService.updateEtudiant($scope.promotionEtudiant)
             .then(function (response) {
-
                 $scope.status = 'Modification étudiant effectuée!';
                 $scope.error = false;
                 $scope.success = true;
-                $location.path('/admin/promotion');
+                $location.path('/admin/promotion/'+$scope.promotionEtudiant.promotion.promotionPK.anneeUniversitaire+'/'+$scope.promotionEtudiant.promotion.promotionPK.codeFormation);
             }, function (error) {
                 $scope.success = false;
                 $scope.error = true;
@@ -96,7 +88,6 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
 
     $scope.closeAlert = function () {
         $scope.error = false;
-
         if ($scope.success) {
             $scope.success = false;
             $location.path('/admin/promotion');

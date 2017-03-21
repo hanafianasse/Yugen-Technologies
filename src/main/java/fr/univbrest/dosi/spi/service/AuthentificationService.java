@@ -51,6 +51,10 @@ public class AuthentificationService {
 		if (user != null && user.getMotPasse().equals(pwd)) {
 			return user;
 		}
+		final Authentification user_ = authentificationReposity.findByPseudoConnection(login);
+		if (user_ != null && user_.getMotPasse().equals(pwd)) {
+			return user_;
+		}
 		return null;
 	}
 
