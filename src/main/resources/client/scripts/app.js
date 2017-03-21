@@ -38,6 +38,8 @@
 				templateUrl: 'views/ue/list.html'
 			}).when('/admin/promotion', {
 				templateUrl: 'views/promotion/list.html'
+			}).when('/admin/promotion/:anneeUniversitaire/:codeFormation', {
+				templateUrl: 'views/promotion/list.html'
 			}).when('/admin/promotion/ajout/:codeFormation/:anneeUniversitaire', {
 				templateUrl: 'views/promotion/ajout.html'
 			}).when('/admin/promotion/modif/:codeFormation/:anneeUniversitaire/:noEtudiant', {
@@ -144,7 +146,7 @@
 			}).otherwise({
 				redirectTo: '/404'
 			});
-		}]).run(function ($rootScope, $route, $location, AuthService) {
+		}]).run(function ($rootScope, $route, $location, AuthService,enseignantsFactory) {
 			$rootScope.$on("$routeChangeStart", function (e, to) {
 				if ($rootScope.firstConnection === undefined) {
 					$rootScope.firstConnection = true;
@@ -170,10 +172,18 @@
 						if ($rootScope.firstConnection) {
 							// if first cnx
 							$rootScope.connectedUser = data;
+							if($rootScope.connectedUser.role == 'ENS'){
+								var promise = enseignantsFactory.get($rootScope.connectedUser.noEnseignant);
+								promise.success(function(data){
+									$rootScope.connectedUserAsEns = data;
+								}).error(function(statu){
+									console.log("get enseignants : error");
+								});
+							}
 							if (data.role == "ADM") {
 								$location.path("/");
 							} else {
-								$location.path("/admin/enseignantsConnected");
+								$location.path("/dashboard");
 							}
 							$rootScope.firstConnection = false;
 						}

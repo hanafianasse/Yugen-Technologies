@@ -42,7 +42,6 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
     $scope.codeFormation = $routeParams.codeFormation;
     $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
     $scope.ajouterEtudiant = function (etudiant) {
-        console.log(" anasse chuf hna ::: " + $scope.etudiant.dateNaissance);
        // $scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
     	var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
     	promise.success(function(data) {
@@ -62,7 +61,8 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
                 $scope.status = 'Insertion étudiant effectuée!';
                 $scope.error = false;
                 $scope.success = true;
-                $location.path('/admin/promotion');
+                //$location.path('/admin/promotion');
+                $location.path('/admin/promotion/'+$scope.promotionEtudiant.promotion.promotionPK.anneeUniversitaire+'/'+$scope.promotionEtudiant.promotion.promotionPK.codeFormation);
             }, function (error) {
                 $scope.success = false;
                 $scope.error = true;

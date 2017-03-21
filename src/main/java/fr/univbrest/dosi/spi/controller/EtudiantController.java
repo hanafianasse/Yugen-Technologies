@@ -1,8 +1,16 @@
 package fr.univbrest.dosi.spi.controller;
 
+import fr.univbrest.dosi.spi.bean.Etudiant;
+import fr.univbrest.dosi.spi.bean.Promotion;
+import fr.univbrest.dosi.spi.bean.PromotionEtudiant;
+import fr.univbrest.dosi.spi.bean.PromotionPK;
+import fr.univbrest.dosi.spi.service.AuthentificationService;
+import fr.univbrest.dosi.spi.service.EtudiantService;
+import fr.univbrest.dosi.spi.service.PromotionService;
 import io.swagger.annotations.Api;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,14 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import fr.univbrest.dosi.spi.bean.Etudiant;
-import fr.univbrest.dosi.spi.bean.Promotion;
-import fr.univbrest.dosi.spi.bean.PromotionEtudiant;
-import fr.univbrest.dosi.spi.bean.PromotionPK;
-import fr.univbrest.dosi.spi.service.AuthentificationService;
-import fr.univbrest.dosi.spi.service.EtudiantService;
-import fr.univbrest.dosi.spi.service.PromotionService;
 
 @RestController
 @RequestMapping(value = "/etudiant")
@@ -89,10 +89,21 @@ public class EtudiantController {
 		return etudiantService.updateEtudiant(etudiant);
 	}
 
-	// Nombre des etudiants
+	// Nombre des etudiants total
 	@RequestMapping(value = "/nombreEtudiants")
 	public String nombreEtudiants() {
 		return String.valueOf(etudiantService.nombreEtudiants());
+	}
+	
+	/**
+	 * Nombre des etudiants par promotion
+	 * 
+	 * @return int casted to string 
+	 */
+	@RequestMapping(value = "/nombreEtudiants/{codeFormation}/{anneeUniversitaire}", method = RequestMethod.GET)
+	public String nombreEtudiantsParFormation(@PathVariable("codeFormation") String codeFormation, @PathVariable("anneeUniversitaire") String anneeUniversitaire)
+	{
+		return String.valueOf(etudiantService.getAll().stream().filter(e -> e.getPromotion().getFormation().getCodeFormation().equals(codeFormation) && e.getPromotion().getPromotionPK().getAnneeUniversitaire().equals(anneeUniversitaire)).collect(Collectors.toList()).size());
 	}
 
 }
