@@ -1,5 +1,11 @@
 package fr.univbrest.dosi.spi.dao;
 
-public class EvaluationRepository {
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import fr.univbrest.dosi.spi.bean.Evaluation;
+
+
+public interface EvaluationRepository  extends PagingAndSortingRepository <Evaluation, Long>{
+	
 
 }
