@@ -2,6 +2,7 @@
 angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService','$filter',
     function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService,$filter) {
 
+
     $('input').on('input', function() {
         var c = this.selectionStart,
             r = /[^a-z0-9êéàçèù@ ()+.\-\/]/gi,
@@ -11,6 +12,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
             c--;
         }
         this.setSelectionRange(c, c);
+
     });
 
     $scope.status;
@@ -46,17 +48,15 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     $scope.anneeUniversitaire = $routeParams.anneeUniversitaire;
 
 
-    //Récupération des donnée etudiant
+    //Récupération des données etudiant
     var promise = EtudiantsService.getEtudiant($scope.noEtudiant);
     promise.success(function(data) {
     	console.log("récupération de l'étudiant terminé");
     	$scope.etudiant = data;
-        $scope.etudiant.dateNaissance = $filter('date')($scope.etudiant.dateNaissance,'MM-dd-yyyy');
+        $scope.etudiant.dateNaissance.toString("yyyy-MM-dd");
+        console.log($scope.etudiant.dateNaissance);
     	console.log($scope.etudiant);
-        var dateNaissance = new Date($scope.etudiant.dateNaissance);
-        var maxDateFormatted = dateNaissance.getFullYear() +
-            '/' + dateNaissance.getMonth()+'/' +dateNaissance.getDate();
-
+        //$scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
 	}).error(function(data) {
 		console.log("get etudiant : erreur");
 	});
@@ -67,7 +67,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
       var promise = promotionService.getPromotion($scope.codeFormation,$scope.anneeUniversitaire);
     	promise.success(function(data) {
     		var maPromotion = data;
-            $scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
+            //$scope.etudiant.dateNaissance = new Date($scope.etudiant.dateNaissance);
             $scope.promotionEtudiant = {
             		etudiant : $scope.etudiant,
             		promotion : {

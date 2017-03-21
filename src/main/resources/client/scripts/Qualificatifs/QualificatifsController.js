@@ -8,6 +8,20 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
     $scope.qualificatifs = [];
 
 
+
+    $('input').on('input', function() {
+        var c = this.selectionStart,
+            r = /[^a-z0-9êéàçèù \-]/gi,
+            v = $(this).val();
+        if(r.test(v)) {
+            $(this).val(v.replace(r, ''));
+            c--;
+        }
+        this.setSelectionRange(c, c);
+    });
+
+
+
     $scope.getQualificatifs = function(){
 
         console.log("je suis dans qualificatif");

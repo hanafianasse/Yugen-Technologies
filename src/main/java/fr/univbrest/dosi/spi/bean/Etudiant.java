@@ -83,7 +83,7 @@ public class Etudiant implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "DATE_NAISSANCE")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	@Basic(optional = false)
 	@NotNull

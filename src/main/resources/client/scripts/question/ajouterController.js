@@ -9,7 +9,7 @@ angular.module('app')
 
 		$('input').on('input', function() {
 			var c = this.selectionStart,
-            r = /[^a-z0-9éàçèù\-\/]/gi,
+            r = /[^a-z0-9êéàçèù \-]/gi,
 				v = $(this).val();
 			if(r.test(v)) {
 				$(this).val(v.replace(r, ''));
@@ -27,6 +27,7 @@ angular.module('app')
 
 		$scope.ajouter = function(){
 			$scope.question.noEnseignant = null;
+            $scope.question.type = 'QUS';
 			console.log($scope.question);
 			var promise = questionService.addQuestion($scope.question);
 			promise.success(function(data){
