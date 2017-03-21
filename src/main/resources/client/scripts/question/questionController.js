@@ -72,10 +72,10 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 				$scope.doSupprimer = function(){
 					var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.question.idQuestion);
 					promise.success(function(status){
-	    				$scope.message = 'Question supprimé';
+	    				//$scope.message = 'Question supprimé';
 	    				$rootScope.refresh();
 					}).error(function(data,status){
-						$scope.message = 'Suppresion Impossible !';
+						$scope.message = 'Impossible de supprimer la question choisie !';
 					});
 					$scope.etat = "done";
 				};

@@ -1,6 +1,6 @@
 //Controlleur de la page qui modifie un étudiant
-angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService','$filter',
-    function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService,$filter) {
+angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'EtudiantsService','$routeParams','promotionService','domaineService','$filter','$rootScope','$modal',
+    function ($scope, $location, EtudiantsService,$routeParams,promotionService,domaineService,$filter,$rootScope,$modal) {
 
 
     $('input').on('input', function() {
@@ -13,6 +13,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
         }
         this.setSelectionRange(c, c);
     });
+
 
     $scope.status;
     $scope.error = false;
@@ -47,6 +48,7 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
     promise.success(function(data) {
     	console.log("récupération de l'étudiant terminé");
     	$scope.etudiant = data;
+        $rootScope.noEtudiantOld = $scope.etudiant.noEtudiant;
         $scope.etudiant.dateNaissance.toString("yyyy-MM-dd");
         console.log($scope.etudiant.dateNaissance);
     	console.log($scope.etudiant);
@@ -69,13 +71,22 @@ angular.module('app').controller('editEtudiantsCtrl', ['$scope', '$location', 'E
             			}
             		}
             }
-            EtudiantsService.updateEtudiant($scope.promotionEtudiant)
+            EtudiantsService.updateEtudiant($scope.promotionEtudiant,$rootScope.noEtudiantOld)
             .then(function (response) {
                 $scope.status = 'Modification étudiant effectuée!';
                 $scope.error = false;
                 $scope.success = true;
                 $location.path('/admin/promotion/'+$scope.promotionEtudiant.promotion.promotionPK.anneeUniversitaire+'/'+$scope.promotionEtudiant.promotion.promotionPK.codeFormation);
             }, function (error) {
+                $modal.open({
+                    templateUrl: 'myModalContent_EditEtudiant.html',
+                    backdrop: true,
+                    controller: function ($scope, $modalInstance) {
+                        $scope.annulerSuppresion = function () {
+                            $modalInstance.dismiss('cancel');
+                        };
+                    }
+                });
                 $scope.success = false;
                 $scope.error = true;
                 $scope.status = 'Erreur lors de la modification de l\'etudiant: ' + error.message;
