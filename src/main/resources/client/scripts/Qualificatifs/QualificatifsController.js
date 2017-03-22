@@ -47,12 +47,14 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
                 };
                 $scope.doSupprimer = function(){
                     var promise = QualificatifService.deleteQualificatif($rootScope.QualificatifToBeDeleted.idQualificatif);
-                    promise.success(function(status){
-                        $rootScope.message = "Qualificatif supprimé";
-                        $rootScope.etat = "done";
-                        $rootScope.refresh();
+                   promise.success(function(status){
+                	    $rootScope.refresh();
+                	    $modalInstance.dismiss('cancel');
+                       // $rootScope.message = "Qualificatif supprimé";
+                        //$rootScope.etat = "done";
+                       
                     }).error(function(data,status){
-                        $rootScope.message = "impossible de supprimer cet Qualificatif";
+                        $rootScope.message = "Impossible de supprimer le qualificatif choisi !";
                         $rootScope.etat = "not done";
                     });
 

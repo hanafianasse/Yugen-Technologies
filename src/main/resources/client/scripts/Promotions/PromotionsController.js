@@ -9,8 +9,8 @@
 	$rootScope.promotionselected = null;
 
 	//Récupération de toutes les formations
-	var promise = formationService.getAll();
-	promise.success(function(data) {
+	var promiseFormation = formationService.getAll();
+	promiseFormation.success(function(data) {
 		$scope.formations = data;
 		for(var index = 0; index < $scope.formations.length ;index++){
 			if($scope.formations[index].doubleDiplome == 'O'){
@@ -110,14 +110,20 @@
 					console.log($rootScope.EtudiantToBeDeleted.noEtudiant);
 					var promise = EtudiantsService.deleteEtudiant($rootScope.EtudiantToBeDeleted.noEtudiant);
 	    			promise.success(function(status){
-						$rootScope.message = "Etudiant supprimé";
+
+	    				$modalInstance.dismiss('cancel');
+						//$rootScope.message = "Etudiant supprimé";
+						//$rootScope.etat = "done";
+
 						$rootScope.etat = "done";
 						var selectedPromotion =  $rootScope.promotionselected;
 						$rootScope.selectPromotions($rootScope.selectedFormation);
 						$rootScope.promotionselected = selectedPromotion;
+						
+
 						$rootScope.selectEtudiants($rootScope.promotionselected);
 					}).error(function(data,status){
-						$rootScope.message = "impossible de supprimer cet étudiant(e)";
+						$rootScope.message = "Impossible de supprimer l'étudiant(e) choisi(e) !";
  						$rootScope.etat = "not done";
 					});
 				};
@@ -125,26 +131,30 @@
 		});
 	}
 
-	if($routeParams.anneeUniversitaire != null && $routeParams.codeFormation != null){
-		var promise = formationService.getFormation($routeParams.codeFormation);
-		promise.success(function(data){
-			$scope.select(data);
-			var anotherPromise = formationService.getPromotions($routeParams.codeFormation);
-			anotherPromise.success(function(data_){
-				var promotions = data_;
-				for(var index = 0; index < promotions.length ;index++){
-					if(promotions[index].promotionPK.anneeUniversitaire == $routeParams.anneeUniversitaire){
-						$scope.selectEtudiants(promotions[index]);
-						break;
+	$q.all(promiseFormation).then(function(){
+		if($routeParams.anneeUniversitaire != null && $routeParams.codeFormation != null){
+			var promise = formationService.getFormation($routeParams.codeFormation);
+			promise.success(function(data){
+				$scope.select(data);
+				var anotherPromise = formationService.getPromotions($routeParams.codeFormation);
+				anotherPromise.success(function(data_){
+					var promotions = data_;
+					for(var index = 0; index < promotions.length ;index++){
+						if(promotions[index].promotionPK.anneeUniversitaire == $routeParams.anneeUniversitaire){
+							$scope.selectEtudiants(promotions[index]);
+							break;
+						}
 					}
-				}
+				}).error(function(statu){
+					console.log("get promotion : error");
+				});
 			}).error(function(statu){
-				console.log("get promotion : error");
+				console.log("get formation : error");
 			});
-		}).error(function(statu){
-			console.log("get formation : error");
-		});
-	}
+		}
+	});
+
+
 } ]);
 
 })();

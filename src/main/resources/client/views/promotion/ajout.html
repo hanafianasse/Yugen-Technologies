@@ -66,16 +66,15 @@
 					<div class="form-group">
 						<label  class="col-sm-4">Téléphone</label>
 						<div class="col-sm-8">
-							<input type="tel"  minlength="10" maxlength="20"  class="form-control"   ng-model="etudiant.telephone">
+							<input type="tel" pattern="^([^-\s][()\- x+]*\d[()\- x+]*){4,16}$" minlength="10" maxlength="22"  class="form-control"   ng-model="etudiant.telephone">
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-6">
                     <div class="form-group">
                         <label  class="col-sm-4">Mobile</label>
                         <div class="col-sm-8">
-                            <input type="tel"  minlength="10" maxlength="20" class="form-control"  ng-model="etudiant.mobile">
+                            <input type="tel" pattern="^([^-\s][()\- x+]*\d[()\- x+]*){4,16}$" minlength="10" maxlength="22" class="form-control"  ng-model="etudiant.mobile">
                         </div>
                     </div>
 					<div class="form-group">
@@ -113,7 +112,7 @@
 						<div class="col-sm-8">
 							<select class="form-control" ng-model="etudiant.paysOrigine" required>
 								<option disabled selected value>Pays Origine</option>
-								<option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+								<option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 							</select>
 						</div>
 					</div>
@@ -122,7 +121,7 @@
 						<div class="col-sm-8">
 							<select class="form-control" ng-model="etudiant.universiteOrigine" required>
 								<option disabled selected value>Université Origine</option>
-								<option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+								<option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
 							</select>
 						</div>
 					</div>

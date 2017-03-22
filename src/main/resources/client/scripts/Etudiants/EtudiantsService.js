@@ -18,8 +18,8 @@ angular.module('app')
             return $http.post(urlBase, entity);
         };
 
-        dataFactory.updateEtudiant = function (entity) {
-            return $http.put(urlBase, entity)
+        dataFactory.updateEtudiant = function (entity,oldEntityId) {
+            return $http.put(urlBase +'/'+oldEntityId, entity);
         };
 
         dataFactory.deleteEtudiant = function (id) {

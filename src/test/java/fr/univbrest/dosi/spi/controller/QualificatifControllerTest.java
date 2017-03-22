@@ -3,9 +3,6 @@
  */
 package fr.univbrest.dosi.spi.controller;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,8 +32,7 @@ public class QualificatifControllerTest
 	String url = "http://localhost:8090/qualificatif";
 
 	@Test
-	public void doitAjouterQualificatif() throws ClientProtocolException,
-			IOException
+	public void doitAjouterQualificatif()
 	{
 		/**
 		 * Instanciation d'un nouveau qualificatif

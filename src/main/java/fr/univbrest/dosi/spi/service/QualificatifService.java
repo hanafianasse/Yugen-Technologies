@@ -33,6 +33,7 @@ public class QualificatifService
 
 	public Qualificatif updateQualificatif(Qualificatif qualificatif)
 	{
+		//Vérification que le qualificatif à modifier existe
 		if (qualificatifRepository.exists(qualificatif.getIdQualificatif()))
 			return qualificatifRepository.save(qualificatif);
 		else
@@ -41,6 +42,7 @@ public class QualificatifService
 
 	public void deleteQualificatif(long idQualificatif)
 	{
+		//Vérification que le qualificatif à supprimer existe
 		if (qualificatifRepository.exists(idQualificatif))
 			qualificatifRepository.delete(qualificatifRepository
 					.findOne(idQualificatif));
