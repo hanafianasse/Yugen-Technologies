@@ -68,5 +68,20 @@
                 </li>
             </ul>
         </li>
+        <li ng-show="$root.connectedUser.role == 'ENS' ">
+            <a href="#/evaluation">
+                <i class="glyphicon glyphicon-tasks"></i>
+                <span data-i18n="Gestion Evaluation"></span>
+            </a>
+            <ul>
+                <li>
+                    <a href="#/admin/evaluation">
+                        <i class="fa fa-caret-right"></i>
+                        <span data-i18n="Evaluations"></span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </div>

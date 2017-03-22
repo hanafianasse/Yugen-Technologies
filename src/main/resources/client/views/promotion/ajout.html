@@ -29,13 +29,13 @@
 					<div class="form-group">
 						<label  class="col-sm-4">Nom<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="45" pattern="^[^-\s\déèàçêù][\w\s-]+$" class="form-control" ng-model="etudiant.nom" required>
+							<input type="text" maxlength="45" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.nom" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-4">Prénom<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.prenom" required>
+							<input type="text" maxlength="45" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.prenom" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -54,19 +54,19 @@
 					<div class="form-group">
 						<label  class="col-sm-4">Lieu de Naissance<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.lieuNaissance" required>
+							<input type="text" maxlength="245" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.lieuNaissance" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label  class="col-sm-4">Nationalité<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="45" pattern="^[^-\s\d][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.nationalite" required>
+							<input type="text" maxlength="45" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.nationalite" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label  class="col-sm-4">Téléphone</label>
 						<div class="col-sm-8">
-							<input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20"  class="form-control"   ng-model="etudiant.telephone">
+							<input type="tel"  minlength="10" maxlength="20"  class="form-control"   ng-model="etudiant.telephone">
 						</div>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <label  class="col-sm-4">Mobile</label>
                         <div class="col-sm-8">
-                            <input type="tel" pattern="[ 0-9 ]*" minlength="10" maxlength="20" class="form-control"  ng-model="etudiant.mobile">
+                            <input type="tel"  minlength="10" maxlength="20" class="form-control"  ng-model="etudiant.mobile">
                         </div>
                     </div>
 					<div class="form-group">
@@ -93,7 +93,7 @@
 					<div class="form-group">
 						<label  class="col-sm-4">Adresse<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.adresse" required>
+							<input type="text" maxlength="245" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.adresse" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -105,7 +105,7 @@
 					<div class="form-group">
 						<label class="col-sm-4">Ville<span style="color: red"> *</span></label>
 						<div class="col-sm-8">
-							<input type="text" maxlength="245" pattern="^[^-\s][\w\s-éèàçêù]+$" class="form-control" ng-model="etudiant.ville" required>
+							<input type="text" maxlength="245"pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" ng-model="etudiant.ville" required>
 						</div>
 					</div>
 					<div class="form-group">
