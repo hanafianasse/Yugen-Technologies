@@ -1,14 +1,7 @@
 
 
 angular.module('app')
-
-
-
-
-    .factory('QualificatifService', ['$http','$location', function ($http,$location) {
-
-
-
+    .factory('QualificatifService', ['$http', function ($http) {
         var urlBase = 'http://localhost:8090/qualificatif';
         var dataFactory = {};
 
@@ -22,10 +15,6 @@ angular.module('app')
 
         dataFactory.addQualificatif = function (entity) {
             return $http.post(urlBase, entity);
-
-
-
-
         };
 
         dataFactory.updateQualificatif = function (entity) {
@@ -33,14 +22,7 @@ angular.module('app')
         };
 
         dataFactory.deleteQualificatif = function (id) {
-
             return $http.delete(urlBase + '/' + id);
-
-
-            return $http.delete(urlBase + '/' + id);
-
-
-
         };
 
         return dataFactory;

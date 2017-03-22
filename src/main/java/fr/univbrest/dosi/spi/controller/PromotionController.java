@@ -7,9 +7,14 @@ import fr.univbrest.dosi.spi.bean.PromotionPK;
 import fr.univbrest.dosi.spi.service.PromotionService;
 import io.swagger.annotations.Api;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,11 +32,10 @@ public class PromotionController
 	private PromotionService promotionService;
 
 	// afficher ttes les promotions
-	@RequestMapping(produces = "application/json", value = "/promotions")
+	@RequestMapping(produces = "application/json",method = RequestMethod.GET)
 	public final Collection<Promotion> getAll()
 	{
 		return (Collection<Promotion>) promotionService.listPromotions();
-
 	}
 
 	// afficher les promotions d'une formation spécifique
@@ -87,6 +91,39 @@ public class PromotionController
 	@RequestMapping(value = "/nombrePromotions", method = RequestMethod.GET)
 	public int nombrePromotions() {
 		return promotionService.nombrePromotions();
+	}
+	
+	//Récupération des promotions de l'année en cours
+	@RequestMapping(value = "/promotionsEnCours", method = RequestMethod.GET)
+	public Collection<Promotion> getPromotionsEnCours()
+	{
+		//DatetimeFormatter qui va permettre de convertir les dates sous format String en LocalDate
+		DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY");
+		
+		//Date actuelle
+		LocalDate actualDate = new DateTime().toLocalDate();
+		
+		//Liste des promotions en cours à retourner
+		List<Promotion> promotionsEnCours = new ArrayList<Promotion>();
+		
+		for(Promotion p: promotionService.listPromotions())
+		{
+			//Récupération des bornes de l'année universitaire sous forme d'objets LocalDate
+			LocalDate minDate = dtf.parseLocalDate(p.getPromotionPK().getAnneeUniversitaire().substring(0, 4));
+			LocalDate maxDate = dtf.parseLocalDate(p.getPromotionPK().getAnneeUniversitaire().substring(5, 9));
+			
+			//Configuration de la date de début de l'année universitaire
+			minDate = minDate.plusMonths(8);
+			
+			//Configuration de la date de fin de l'année universitaire
+			maxDate = maxDate.plusMonths(7);
+			maxDate = maxDate.plusDays(30);
+			
+			if(!actualDate.isBefore(minDate) && !actualDate.isAfter(maxDate))
+				promotionsEnCours.add(p);
+		}
+		
+		return promotionsEnCours;
 	}
 
 }

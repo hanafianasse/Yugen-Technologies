@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal) {
+angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService) {
 
     console.log('je suis la');
     /************************** info Generale Start  ************************************/
@@ -23,6 +23,14 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
 			}
 		}
     };
+
+    var promise = promotionService.getAll();
+    promise.success(function(data) {
+        $scope.promotions = data;
+    }).error(function(data) {
+        console.log("get promotions : erreur");
+    });
+
     /************************** info Generale End  ************************************/
 
 
