@@ -79,14 +79,13 @@ public class EtudiantController {
 		etudiantService.deleteEtudiant(noEtudiant);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Etudiant updateEtudiant(
-			@RequestBody PromotionEtudiant promotionEtudiant) {
+	@RequestMapping(value = "/{oldNoEtudiant}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Etudiant updateEtudiant(@RequestBody PromotionEtudiant promotionEtudiant,@PathVariable("oldNoEtudiant") String oldNoEtudiant) {
 		Promotion promotion = promotionService.getPromotion(promotionEtudiant
 				.getPromotion().getPromotionPK());
 		Etudiant etudiant = promotionEtudiant.getEtudiant();
 		etudiant.setPromotion(promotion);
-		return etudiantService.updateEtudiant(etudiant);
+		return etudiantService.updateEtudiant(etudiant,oldNoEtudiant);
 	}
 
 	// Nombre des etudiants total
