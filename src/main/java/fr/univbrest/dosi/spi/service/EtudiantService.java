@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Etudiant;
-import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.bean.Promotion;
 import fr.univbrest.dosi.spi.dao.EtudiantRepository;
+import fr.univbrest.dosi.spi.exception.SPIException;
 
 /**
  * @author DOSI
@@ -22,11 +22,11 @@ public class EtudiantService {
 
 	@Autowired
 	public EtudiantService(EtudiantRepository entrepot) {
-		this.etudiantRepository=entrepot;
+		this.etudiantRepository = entrepot;
 	}
 
 	public final Etudiant addEtudiant(final Etudiant etudiant) {
-	
+
 		return etudiantRepository.save(etudiant);
 	}
 
@@ -41,24 +41,34 @@ public class EtudiantService {
 	public final Etudiant getEtudiant(final String noEtudiant) {
 		return etudiantRepository.findOne(noEtudiant);
 	}
-	
-	public final List<Etudiant> getAll(){
-		
+
+	public final List<Etudiant> getAll() {
+
 		return (List<Etudiant>) etudiantRepository.findAll();
 	}
-	
-	public final Etudiant updateEtudiant(final Etudiant etudiant){
-		return etudiantRepository.save(etudiant);
+
+	public final Etudiant updateEtudiant(final Etudiant etudiant, final String oldNoEtudiant) {
+		if (etudiant.getNoEtudiant().equals(oldNoEtudiant)) {
+			return etudiantRepository.save(etudiant);
+		} else {
+			if (getEtudiant(etudiant.getNoEtudiant()) == null) {
+				System.out.println("je suis la ");
+				deleteEtudiant(oldNoEtudiant);
+				return etudiantRepository.save(etudiant);
+			}
+			throw new SPIException("Error : noEtudiant existe déjà ");
+		}
 	}
-	
-	public final List<Etudiant> getEtudiantByPromotion(Promotion promotion){
-		return  (List<Etudiant>) etudiantRepository.findAll();
-		
+
+	public final List<Etudiant> getEtudiantByPromotion(Promotion promotion) {
+		return (List<Etudiant>) etudiantRepository.findAll();
+
 	}
-	
+
 	public int nombreEtudiants() {
-		List<Etudiant> listEtudiants = (List<Etudiant>) etudiantRepository.findAll();
+		List<Etudiant> listEtudiants = (List<Etudiant>) etudiantRepository
+				.findAll();
 		return listEtudiants.size();
 	}
-	
+
 }

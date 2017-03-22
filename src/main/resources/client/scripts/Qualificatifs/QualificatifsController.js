@@ -11,7 +11,7 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9êéàçèù \-]/gi,
+            r = /[^a-z0-9êéàçèù '\-]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
@@ -51,12 +51,14 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
                 $scope.doSupprimer = function(){
                     console.log(" here ::: --->>> "+$rootScope.QualificatifToBeDeleted.idQualificatif);
                     var promise = QualificatifService.deleteQualificatif($rootScope.QualificatifToBeDeleted.idQualificatif);
-                    promise.success(function(status){
-                        $rootScope.message = "Qualificatif supprimé";
-                        $rootScope.etat = "done";
-                        $rootScope.refresh();
+                   promise.success(function(status){
+                	    $rootScope.refresh();
+                	    $modalInstance.dismiss('cancel');
+                       // $rootScope.message = "Qualificatif supprimé";
+                        //$rootScope.etat = "done";
+                       
                     }).error(function(data,status){
-                        $rootScope.message = "impossible de supprimer cet Qualificatif";
+                        $rootScope.message = "Impossible de supprimer le qualificatif choisi !";
                         $rootScope.etat = "not done";
                     });
 

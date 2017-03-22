@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2">Intitulé <span style="color: red"> *</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" maxlength="64" ng-model="question.intitule" required>
+                        <input type="text" pattern="[\S][a-zA-Z0-9'\sêéàçèù]*$" class="form-control" maxlength="64" ng-model="question.intitule" required>
                     </div>
                 </div>
                 <div class="form-group">

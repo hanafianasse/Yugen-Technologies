@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="q in mesrubriques " class="Rubrique">
+                <tr data-ng-repeat="q in mesrubriques | orderBy:'designation'" class="Rubrique">
                     <td ng-click="">{{q.designation}}</td>
 
                     <td><a href="#/admin/UpdateRubrique/{{q.idRubrique}}"><span class="glyphicon glyphicon-pencil"></span></a></td>

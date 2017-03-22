@@ -50,7 +50,11 @@
 				templateUrl: 'views/qualificatif/details.html'
 			}).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
 				templateUrl: 'views/qualificatif/updateQualificatif.html'
-			}).when('/admin/ue/:id', {
+			}).when('/admin/evaluation', {
+                templateUrl: 'views/evaluation/list.html'
+            }).when('/admin/evaluation/Ajout', {
+                templateUrl: 'views/evaluation/ajout.html'
+            }).when('/admin/ue/:id', {
 				templateUrl: 'views/ue/details.html'
 			}).when('/admin/newQuesstion', {
 				templateUrl: 'views/question/ajouter.html'

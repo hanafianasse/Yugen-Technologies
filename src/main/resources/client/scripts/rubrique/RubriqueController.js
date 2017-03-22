@@ -7,7 +7,7 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
 
     $('input').on('input', function() {
         var c = this.selectionStart,
-            r = /[^a-z0-9êéàçèù \-]/gi,
+            r = /[^a-z0-9êéàçèù '\-]/gi,
             v = $(this).val();
         if(r.test(v)) {
             $(this).val(v.replace(r, ''));
@@ -47,11 +47,11 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
                 $scope.doSupprimer = function(){
                     var promise = RubriqueService.deleteRubrique($rootScope.rubriqueToBeDeleted.idRubrique);
                     promise.success(function(status){
-                        $rootScope.message = "Rubrique supprimé";
-                        $rootScope.etat = "done";
+                       /* $rootScope.message = "Rubrique supprimé";
+                        $rootScope.etat = "done";*/
                         $rootScope.refresh();
                     }).error(function(data,status){
-                        $rootScope.message = "impossible de supprimer cette Rubrique";
+                        $rootScope.message = "Impossible de supprimer la rubrique choisie !";
                         $rootScope.etat = "not done";
                     });
 

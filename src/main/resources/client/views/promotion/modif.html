@@ -109,7 +109,7 @@
                         <div class="col-sm-8">
                             <select class="form-control" ng-model="etudiant.paysOrigine" required>
                                 <option disabled selected value>Pays Origine</option>
-                                <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                                <option data-ng-repeat = "u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
                             </select>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                         <div class="col-sm-8">
                             <select class="form-control" ng-model="etudiant.universiteOrigine" required>
                                 <option disabled selected value>Université Origine</option>
-                                <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                                <option data-ng-repeat = "u in domaineUniv" value="{{u.rvAbbreviation}}">{{u.rvMeaning}}</option>
                             </select>
                         </div>
                     </div>
@@ -145,4 +145,15 @@
 </div>
 
 
-                
+<script type="text/ng-template" id="myModalContent_EditEtudiant.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+        <h4 class="modal-title">Avertisement</h4>
+    </div>
+    <div class="modal-body">
+        <p>Vous avez choisi un numero étudiant qui existe déjà</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
+    </div>
+</script>
