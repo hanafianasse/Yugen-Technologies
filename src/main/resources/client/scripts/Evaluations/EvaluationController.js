@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('app').controller('EvaluationsCtrl', ['$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal',function ($scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal) {
+angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal) {
 
     console.log('je suis la');
     /************************** info Generale Start  ************************************/
@@ -29,21 +29,47 @@ angular.module('app').controller('EvaluationsCtrl', ['$scope','$route','$rootSco
 
 
     /************************** Rubrique Start ************************************/
+    var promise = RubriqueService.getAll();
+    promise.success(function (data){
+      $scope.rubriques = data;
+       console.log($scope.rubriques);
+    }).error(function(statut){
+       console.log("et rubriques erreur");
+    });
+    
+    $scope.selectRubrique = function(){
+        var myObject = {"rubrique" : ""};
+        myObject.rubrique = getRubriqueById($scope.selectedIdRubrique);
+        $scope.models.lists.mesRubriquesSelected.push(myObject);  
+        $scope.selectedIdRubrique = null; 
+    }
     $scope.models = {
         selected: null,
-        lists: {"A": [], "B": []}
+        lists: {"mesRubriquesSelected": []}
     };
-
-    // Generate initial model
-    for (var i = 1; i <= 3; ++i) {
-        $scope.models.lists.A.push({label: "Item A" + i});
-        $scope.models.lists.B.push({label: "Item B" + i});
-    }
-
     // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
     }, true);
+
+    var getRubriqueById = function(id){
+        for(var i = 0; i < $scope.rubriques.length;i++){
+            if($scope.rubriques[i].idRubrique == id){
+                return $scope.rubriques[i];
+            }
+        }
+        return null;
+    }
+
+    $scope.deleteRubrique = function(idRubrique){
+        for(var i = 0 ; i < $scope.models.lists.mesRubriquesSelected.length ; i++){
+            if($scope.models.lists.mesRubriquesSelected[i].rubrique.idRubrique == idRubrique){
+                console.log($scope.models.lists.mesRubriquesSelected[i]);
+                $scope.models.lists.mesRubriquesSelected.splice(i,1);
+                break;
+            }
+        }
+    }
 
     /************************** Rubrique End ************************************/
 
