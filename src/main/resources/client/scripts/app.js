@@ -2,7 +2,7 @@
 	'use strict';
 	var app = angular.module(
 		'app',
-		['ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart',
+		['dndLists','ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart',
 			'mgo-angular-wizard', 'textAngular', 'ui.tree',
 			'ngTagsInput', 'app.authentication', 'app.enseignants',
 			'app.formations', 'app.ue', 'app.ui.ctrls',
@@ -143,7 +143,7 @@
 				templateUrl: 'views/pages/404.html'
 			}).when('/500', {
 				templateUrl: 'views/pages/500.html'
-			}).otherwise({
+			}).	otherwise({
 				redirectTo: '/404'
 			});
 		}]).run(function ($rootScope, $route, $location, AuthService,enseignantsFactory) {
