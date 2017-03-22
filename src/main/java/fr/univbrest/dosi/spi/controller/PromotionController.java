@@ -27,7 +27,7 @@ public class PromotionController
 	private PromotionService promotionService;
 
 	// afficher ttes les promotions
-	@RequestMapping(produces = "application/json", value = "/promotions")
+	@RequestMapping(produces = "application/json",method = RequestMethod.GET)
 	public final Collection<Promotion> getAll()
 	{
 		return (Collection<Promotion>) promotionService.listPromotions();
