@@ -2,7 +2,7 @@
 angular.module('app')
 	.controller('QuestionController',[ '$scope', '$location', '$http','questionService','QualificatifService','$q','$modal','$rootScope',
 function($scope, $location, $http,questionService,QualificatifService,$q,$modal,$rootScope) {
-	
+
 
  	$scope.getQuestions = function(){
 		var questions = new Array();
@@ -41,10 +41,15 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 					}
 					uneQuestion.question = questions[index];
 					uneQuestion.qualificatif = findById(qualificatifs,questions[index].idQualificatif);
-					$scope.mesQuestions.push(uneQuestion);				
-				}
+					$scope.mesQuestions.push(uneQuestion);
+				}/*
+                console.log($scope.mesQuestions);
+                $scope.mesQuestions.sort(function(a, b){
+                    return a.question.intitule-b.question.intitule;
+                });
+                console.log($scope.mesQuestions);*/
 			});
-		});     
+		});
 	}
 
 	function findById(tableau,val){
@@ -55,7 +60,7 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 		}
 		return null; // will never happen ! ask anasse
 	}
-	
+
 	$scope.getQuestions();
 	$rootScope.refresh = $scope.getQuestions;
 

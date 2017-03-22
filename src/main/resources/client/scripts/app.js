@@ -2,7 +2,7 @@
 	'use strict';
 	var app = angular.module(
 		'app',
-		['ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart',
+		['dndLists','ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart',
 			'mgo-angular-wizard', 'textAngular', 'ui.tree',
 			'ngTagsInput', 'app.authentication', 'app.enseignants',
 			'app.formations', 'app.ue', 'app.ui.ctrls',
@@ -50,7 +50,11 @@
 				templateUrl: 'views/qualificatif/details.html'
 			}).when('/admin/qualificatif/updateQualificatif/:idQualificatif', {
 				templateUrl: 'views/qualificatif/updateQualificatif.html'
-			}).when('/admin/ue/:id', {
+			}).when('/admin/evaluation', {
+                templateUrl: 'views/evaluation/list.html'
+            }).when('/admin/evaluation/Ajout', {
+                templateUrl: 'views/evaluation/ajout.html'
+            }).when('/admin/ue/:id', {
 				templateUrl: 'views/ue/details.html'
 			}).when('/admin/newQuesstion', {
 				templateUrl: 'views/question/ajouter.html'

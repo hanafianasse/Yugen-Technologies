@@ -13,7 +13,7 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
             $(this).val(v.replace(r, ''));
             c--;
         }
-        this.setSelectionRange(c, c);
+       // this.setSelectionRange(c, c);
     });
 
     //Récuperation des domaines par UNIVERSITE
