@@ -116,7 +116,7 @@
 			<version>2.5.0</version>
 		</dependency>
 		<!-- END-Rest assured -->
-		
+
 		<!-- Swagger dependencies -->
 		<dependency>
 			<groupId>io.swagger</groupId>
@@ -134,6 +134,15 @@
 			<version>2.4.0</version>
 		</dependency>
 		<!-- END-Swagger -->
+
+		<!-- Joda Time library -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.7</version>
+		</dependency>
+		<!-- END-Joda Time -->
+
 	</dependencies>
 
 	<build>
