@@ -25,12 +25,81 @@
                         <td ng-click="select(evaluation)">{{evaluation.anneeUniversitaire}}</td>
                     </tr> 
                 </tbody>
-
             </table>
+       </div>
+    </section>
+    
+    
+   
+    <div ng-if="rubriques">
+    	<h1>{{evaCodeFormation}} Evaluation d'un enseignement</h1>
+    
+    
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Informations</strong>
+            <a href="#/admin/evaluation/Ajout"><span class="add fa fa-plus pull-right"></span></a>
         </div>
+        <div style="overflow: auto ;max-height: 600px;">
+            <table class="table table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th><div class="th">
+                        Unité d'Enseignement
+                    </div></th>
+                    <th><div class="th">
+                        Elément Constitutif
+                    </div></th>
+                    <th><div class="th">
+                        Période
+                    </div></th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>{{evaCodeUe}}</td>
+                        <td>{{evaCodeEc}}</td>
+                        <td>{{evaPeriode}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+       </div>
+    </section>
+    
+    
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Rubriques</strong>
+            <a href="#/admin/evaluation/Ajout"><span class="add fa fa-plus pull-right"></span></a>
+        </div>
+        <div style="overflow: auto ;max-height: 600px;">
+            <table class="table table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th><div class="th">
+                       Designation
+                    </div></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                
+                <!-- Affichage evaluation -->
+                <tbody>
+                    <tr data-ng-repeat="rubrique in rubriques | orderBy:'designation'">
+                        <td>{{rubrique.designation}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+       </div>
+    </section>
+    </div>
+    
 </div>
-</section>
-</div>
+	
+	
+	
+	
+	
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">

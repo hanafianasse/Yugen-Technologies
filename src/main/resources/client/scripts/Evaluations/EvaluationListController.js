@@ -17,10 +17,29 @@ promiseEvaluation.success(function(data) {
 	console.log("get evaluation: erreur");
 });
 
-//recupération des rubriques 
 
+
+//Recupération des rubriques 
 $scope.select = function(evaluation){
+	$scope.evaCodeFormation = evaluation.codeFormation;
+	
+	$scope.evaCodeUe = evaluation.codeUe;
+	$scope.evaCodeEc = evaluation.codeEc;
+	$scope.evaPeriode = evaluation.periode;
+	
+	console.log($scope.evaCodeFormation);
 	console.log('affichage des rubriques liées a l\'évaluation'+ evaluation.designation);
+	$rootScope.selectedEvaluation = evaluation.idEvaluation;
+	$scope.selectIdEvaluation = evaluation.idEvaluation;
+	console.log($scope.selectIdEvaluation);
+	
+	var promiseRubrique = RubriqueService.getRubriqueEvaluation($scope.selectIdEvaluation);
+	promiseRubrique.success(function(data) {
+		$scope.rubriques = data;
+		console.log($scope.rubriques);
+	}).error(function(data) {
+		console.log("get rubrique: erreur");
+	});
 	
 	
 }

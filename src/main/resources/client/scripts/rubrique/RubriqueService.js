@@ -11,7 +11,12 @@ angular.module('app')
         dataFactory.getRubrique = function (id) {
             return $http.get(urlBase + '/' + id);
         };
+        
+        dataFactory.getRubriqueEvaluation = function (id) {
+            return $http.get(urlBase + '/getRubriqueByIdEvaluation/' + id);
+        };
 
+        
         dataFactory.addRubrique = function (entity) {
             return $http.post(urlBase, entity);
         };
