@@ -64,6 +64,11 @@ public class RubriqueController {
 		return rubriqueService.getRubrique(idRubrique);
 	}
 	
+	/**
+	 * 
+	 * @param idEvaluation
+	 * @return la liste des rubriques d'une évaluation
+	 */
 	@RequestMapping(value = "/getRubriqueByIdEvaluation/{idEvaluation}", method = RequestMethod.GET)
 	public Set<Rubrique> getRubriqueByIdEvaluation(@PathVariable("idEvaluation") Long idEvaluation)
 	{
