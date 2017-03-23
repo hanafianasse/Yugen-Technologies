@@ -144,14 +144,14 @@ public class EnseignantController
 	 *            l'id de l'enseignant
 	 * @return liste des unite enseignant
 	 */
-
+/*
 	@RequestMapping(value = "/getuebyenseignant/{noenseignant}", method = RequestMethod.GET)
 	public final List<UniteEnseignement> getUEByEnseignant(
 			@PathVariable("noenseignant") final Integer noEnseignant)
 	{
 		return uniteEnseignementService.getUEByEnseignant(noEnseignant);
 	}
-
+*/
 	public UniteEnseignementService getUniteEnseignementService()
 	{
 		return uniteEnseignementService;
