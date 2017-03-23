@@ -147,7 +147,7 @@
 				templateUrl: 'views/pages/404.html'
 			}).when('/500', {
 				templateUrl: 'views/pages/500.html'
-			}).otherwise({
+			}).	otherwise({
 				redirectTo: '/404'
 			});
 		}]).run(function ($rootScope, $route, $location, AuthService,enseignantsFactory) {

@@ -3,6 +3,8 @@
  */
 package fr.univbrest.dosi.spi.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,12 @@ public class RubriqueEvaluationService
 	public Iterable<RubriqueEvaluation> getAll()
 	{
 		return rubriqueEvaluationRepository.findAll();
+	}
+	
+	//Liste des RubriqueEvaluations par l'id de l'évaluation
+	public Iterable<RubriqueEvaluation> getRubriqueEvaluationByIdEvaluation(BigDecimal idEvaluation)
+	{
+		return rubriqueEvaluationRepository.findByIdEvaluation(idEvaluation);
 	}
 	
 }

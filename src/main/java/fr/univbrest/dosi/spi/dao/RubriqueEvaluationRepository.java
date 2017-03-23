@@ -3,6 +3,9 @@
  */
 package fr.univbrest.dosi.spi.dao;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import fr.univbrest.dosi.spi.bean.RubriqueEvaluation;
@@ -14,5 +17,5 @@ import fr.univbrest.dosi.spi.bean.RubriqueEvaluation;
  */
 public interface RubriqueEvaluationRepository  extends PagingAndSortingRepository<RubriqueEvaluation, Long>
 {
-
+	List<RubriqueEvaluation> findByIdEvaluation(BigDecimal idEvaluation);
 }
