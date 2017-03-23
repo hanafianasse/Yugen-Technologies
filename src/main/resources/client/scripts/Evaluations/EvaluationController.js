@@ -24,7 +24,7 @@ angular.module('app').controller('EvaluationsCtrl', ['$scope','$route','$rootSco
 		}
     };
 
-    var promise = promotionService.getAll();
+    var promise = promotionService.getPromotionsEnCours();
     promise.success(function(data) {
         $scope.promotions = data;
     }).error(function(data) {
