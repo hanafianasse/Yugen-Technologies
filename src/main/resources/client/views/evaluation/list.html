@@ -17,6 +17,14 @@
                     <th></th>
                 </tr>
                 </thead>
+                
+                <!-- Affichage evaluation -->
+                <tbody>
+                    <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
+                        <td ng-click="select(evaluation)">{{evaluation.designation}}</td>
+                        <td ng-click="select(evaluation)">{{evaluation.anneeUniversitaire}}</td>
+                    </tr> 
+                </tbody>
 
             </table>
         </div>
@@ -30,7 +38,7 @@
         <h4 class="modal-title">Confirmation</h4>
     </div>
     <div class="modal-body">
-        <p ng-if="etat == null" >Confirmer la suppression ?</p>
+        <p ng-if="etat == null" >Voulez-vous confirmer la suppression ?</p>
         <p ng-if="etat != null" >{{message}}</p>
     </div>
     <div class="modal-footer">
