@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.bean.UniteEnseignement;
 import fr.univbrest.dosi.spi.bean.UniteEnseignementPK;
 import fr.univbrest.dosi.spi.dao.UniteEnseignementRepository;
@@ -65,8 +64,8 @@ public class UniteEnseignementService
 	}
 
 	// Liste des UE d'une formation
-	public List<UniteEnseignement> findByFormation(Formation formation)
+	public List<UniteEnseignement> getByUniteEnseignementPK_CodeFormation(String codeFormation)
 	{
-		return uniteEnseignementRepository.findByFormation(formation);
+		return uniteEnseignementRepository.findByUniteEnseignementPK_CodeFormation(codeFormation);
 	}
 }

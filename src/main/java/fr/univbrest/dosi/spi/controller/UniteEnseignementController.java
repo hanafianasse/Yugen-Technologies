@@ -3,9 +3,13 @@
  */
 package fr.univbrest.dosi.spi.controller;
 
+import fr.univbrest.dosi.spi.bean.UniteEnseignement;
+import fr.univbrest.dosi.spi.bean.UniteEnseignementPK;
+import fr.univbrest.dosi.spi.service.UniteEnseignementService;
 import io.swagger.annotations.Api;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.univbrest.dosi.spi.bean.UniteEnseignement;
-import fr.univbrest.dosi.spi.service.UniteEnseignementService;
-
 /**
  * @author Chobaz
  *
- * 22 mars 2017
+ *         22 mars 2017
  */
 @RestController
 @RequestMapping(value = "/uniteEnseignement")
@@ -31,7 +32,8 @@ public class UniteEnseignementController
 	private UniteEnseignementService uniteEnseignementService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public UniteEnseignement addUniteEnseignement(@RequestBody UniteEnseignement uniteEnseignement)
+	public UniteEnseignement addUniteEnseignement(
+			@RequestBody UniteEnseignement uniteEnseignement)
 	{
 		return uniteEnseignementService.addUniteEnseignement(uniteEnseignement);
 	}
@@ -40,28 +42,42 @@ public class UniteEnseignementController
 	public UniteEnseignement updateUniteEnseignement(
 			@RequestBody UniteEnseignement uniteEnseignement)
 	{
-		return uniteEnseignementService.updateUniteEnseignement(uniteEnseignement);
+		return uniteEnseignementService
+				.updateUniteEnseignement(uniteEnseignement);
 	}
 
-	@RequestMapping(value = "/{idUniteEnseignement}", method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE)
 	public void deleteUniteEnseignement(
-			@PathVariable("idUniteEnseignement") Long idUniteEnseignement)
+			@RequestBody UniteEnseignementPK uniteEnseignementPK)
 	{
-		uniteEnseignementService.deleteUniteEnseignement(idUniteEnseignement);
+		uniteEnseignementService.deleteUniteEnseignement(uniteEnseignementPK);
 	}
 
-	@RequestMapping(value = "/{idUniteEnseignement}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{codeFormation}/{codeUe}", method = RequestMethod.GET)
 	public UniteEnseignement getUniteEnseignement(
-			@PathVariable("idUniteEnseignement") Long idUniteEnseignement)
+			@PathVariable("codeFormation") String codeFormation,
+			@PathVariable("codeUe") String codeUe)
 	{
-		return uniteEnseignementService.getUniteEnseignement(idUniteEnseignement);
+		UniteEnseignementPK uniteEnseignementPK = new UniteEnseignementPK(
+				codeFormation, codeUe);
+
+		return uniteEnseignementService
+				.getUniteEnseignement(uniteEnseignementPK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Collection<UniteEnseignement> getAll()
 	{
-		return (Collection<UniteEnseignement>) uniteEnseignementService.getAll();
+		return (Collection<UniteEnseignement>) uniteEnseignementService
+				.getAll();
+	}
+
+	@RequestMapping(value = "getByCodeFormation/{codeFormation}", method = RequestMethod.GET)
+	public List<UniteEnseignement> getByCodeFormation(
+			@PathVariable("codeFormation") String codeFormation)
+	{
+		return uniteEnseignementService
+				.getByUniteEnseignementPK_CodeFormation(codeFormation);
 	}
 
 }
-
