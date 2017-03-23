@@ -1,9 +1,7 @@
 
 
 angular.module('app')
-
     .factory('QualificatifService', ['$http', function ($http) {
-
         var urlBase = 'http://localhost:8090/qualificatif';
         var dataFactory = {};
 
