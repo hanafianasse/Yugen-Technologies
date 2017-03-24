@@ -14,6 +14,10 @@ angular.module('app')
             return $http.get(urlBase + '/' + id);
         };
 
+        dataFactory.getRubriqueEvaluationByIdEva = function (id) {
+            return $http.get(urlBase + '/getByIdEvaluation/' + id);
+        };
+        
         dataFactory.addRubriqueEvaluation = function (entity) {
             return $http.post(urlBase, entity);
         };
