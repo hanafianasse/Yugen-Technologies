@@ -134,6 +134,11 @@
 			<version>2.4.0</version>
 		</dependency>
 		<!-- END-Swagger -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.10.4</version>
+		</dependency>
 
 		<!-- Joda Time library -->
 		<dependency>
@@ -142,7 +147,6 @@
 			<version>2.9.7</version>
 		</dependency>
 		<!-- END-Joda Time -->
-
 	</dependencies>
 
 	<build>

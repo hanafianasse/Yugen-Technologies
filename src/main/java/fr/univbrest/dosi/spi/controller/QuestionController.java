@@ -1,22 +1,22 @@
 package fr.univbrest.dosi.spi.controller;
 
+import fr.univbrest.dosi.spi.bean.Question;
+import fr.univbrest.dosi.spi.bean.QuestionEvaluation;
+import fr.univbrest.dosi.spi.service.QuestionEvaluationService;
+import fr.univbrest.dosi.spi.service.QuestionService;
 import io.swagger.annotations.Api;
 
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import fr.univbrest.dosi.spi.bean.Etudiant;
-import fr.univbrest.dosi.spi.bean.Promotion;
-import fr.univbrest.dosi.spi.bean.PromotionEtudiant;
-import fr.univbrest.dosi.spi.bean.Question;
-import fr.univbrest.dosi.spi.service.QuestionService;
 
 @RestController
 @RequestMapping(value = "/question")
@@ -26,6 +26,9 @@ public class QuestionController
 
 	@Autowired
 	private QuestionService questionService;
+
+	@Autowired
+	private QuestionEvaluationService questionEvaluationService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Question> getAll()
@@ -55,6 +58,23 @@ public class QuestionController
 	public Question getQuestion(@PathVariable("IdQuestion") Long idqst)
 	{
 		return questionService.getQuestion(idqst);
+	}
+	
+	/**
+	 * 
+	 * @param idRubriqueEvaluation
+	 * @return la liste des questions d'une rubrique d'une évaluation
+	 */
+	@RequestMapping(value = "/getQuestionByIdRubriqueEvaluation/{idRubriqueEvaluation}", method = RequestMethod.GET)
+	public Set<Question> getQuestionByIdRubriqueEvaluation(@PathVariable("idRubriqueEvaluation") Long idRubriqueEvaluation)
+	{
+		Set<Question> questions = new HashSet<Question>();
+		
+		for(QuestionEvaluation qe : questionEvaluationService.getQuestionEvaluationByIdRubriqueEvaluation(new BigDecimal(idRubriqueEvaluation)))
+			if(qe.getIdQuestion() != null)
+				questions.add(questionService.getQuestion(qe.getIdQuestion().longValue()));
+		
+		return questions;
 	}
 
 }
