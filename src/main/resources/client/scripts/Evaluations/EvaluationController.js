@@ -37,6 +37,9 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
 
 
     /************************** Rubrique Start ************************************/
+
+    var RubriqueShowed = [];
+
     var promise = RubriqueService.getAll();
     promise.success(function (data){
       $scope.rubriques = data;
@@ -100,6 +103,7 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
             for(var j = 0; j < $scope.models.lists.mesRubriquesSelected.length ;j++){
                 if($rootScope.QuestionSelected[index].idRubrique == $scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique){
                     $scope.models.lists.mesRubriquesSelected[j].questions.push($rootScope.QuestionSelected[index].question);
+                    RubriqueShowed.push($scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique);
                 }
             }
         }
@@ -119,6 +123,24 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
     }
 
     $rootScope.refresh = $scope.addQuestionsToRubrique;
+
+
+    $scope.rubriqueClicked = function(idRubrique){
+        var bool = false;
+        RubriqueShowed.forEach(function(item, index){
+            if(item == idRubrique){
+                RubriqueShowed.splice(index,1);
+                bool = true;
+            }
+        });
+        
+        if(!bool)
+            RubriqueShowed.push(idRubrique);
+    }
+
+    $scope.verifyShowedRubriques = function(idRubrique){
+        return RubriqueShowed.includes(idRubrique);
+    }
 
     $scope.openModalAddQuestion = function(idRubrique){
         if($rootScope.QuestionSelected.length != 0){

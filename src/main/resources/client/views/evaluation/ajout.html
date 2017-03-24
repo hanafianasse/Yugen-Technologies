@@ -93,10 +93,10 @@
                                     dnd-effect-allowed="move">
                                         <button type="button" class="fermer pull-right" ng-click="deleteRubrique(item.rubrique.idRubrique)">&times;</button>
                                         <button type="button" class="plus pull-right" ng-click="openModalAddQuestion(item.rubrique.idRubrique)">&#43;</button>
-                                        {{item.rubrique.designation}}
+                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">{{item.rubrique.designation}}</div>
                                         
                                 </li>
-                                <div dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
+                                <div ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
                                     <li ng-if="item.questions.length != 0"
                                         dnd-type="rubriqueIndex"
                                         ng-repeat="question in item.questions"
