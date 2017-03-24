@@ -8,36 +8,64 @@ import org.springframework.stereotype.Service;
 import fr.univbrest.dosi.spi.bean.UniteEnseignement;
 import fr.univbrest.dosi.spi.bean.UniteEnseignementPK;
 import fr.univbrest.dosi.spi.dao.UniteEnseignementRepository;
+import fr.univbrest.dosi.spi.exception.SPIException;
 
 /**
  * @author DOSI
  *
  */
 @Service
-public class UniteEnseignementService {
-
-	@Autowired
+public class UniteEnseignementService
+{
 	private UniteEnseignementRepository uniteEnseignementRepository;
 
-	public void addUnitEnseignement(final UniteEnseignement uniteEnseignement) {
-		uniteEnseignementRepository.save(uniteEnseignement);
+	@Autowired
+	public UniteEnseignementService(UniteEnseignementRepository entrepot)
+	{
+		this.uniteEnseignementRepository = entrepot;
 	}
 
-	public final void deletUnitEnseignement(final UniteEnseignementPK uniteEnseignementPK) {
-		uniteEnseignementRepository.delete(uniteEnseignementPK);
+	public UniteEnseignement addUniteEnseignement(
+			UniteEnseignement uniteEnseignement)
+	{
+		return uniteEnseignementRepository.save(uniteEnseignement);
 	}
 
-	public Boolean existUnitEnseignement(final UniteEnseignementPK uniteEnseignementPK) {
-		return uniteEnseignementRepository.exists(uniteEnseignementPK);
+	public UniteEnseignement updateUniteEnseignement(
+			UniteEnseignement uniteEnseignement)
+	{
+		// Vérification que l'uniteEnseignement à modifier existe
+		if (uniteEnseignementRepository.exists(uniteEnseignement
+				.getUniteEnseignementPK()))
+			return uniteEnseignementRepository.save(uniteEnseignement);
+		else
+			throw new SPIException("UniteEnseignement introuvable !");
 	}
 
-	public final List<UniteEnseignement> getUEByEnseignant(final Integer noEnseignant) {
-
-		return uniteEnseignementRepository.findByNoEnseignant(noEnseignant);
-
+	public void deleteUniteEnseignement(UniteEnseignementPK uniteEnseignementPK)
+	{
+		// Vérification que l'uniteEnseignement à supprimer existe
+		if (uniteEnseignementRepository.exists(uniteEnseignementPK))
+			uniteEnseignementRepository.delete(uniteEnseignementRepository
+					.findOne(uniteEnseignementPK));
+		else
+			throw new SPIException("UniteEnseignement introuvable !");
 	}
 
-	public final UniteEnseignement uniteEnseignement(final UniteEnseignementPK uniteEnseignementPK) {
+	public UniteEnseignement getUniteEnseignement(
+			UniteEnseignementPK uniteEnseignementPK)
+	{
 		return uniteEnseignementRepository.findOne(uniteEnseignementPK);
+	}
+
+	public Iterable<UniteEnseignement> getAll()
+	{
+		return uniteEnseignementRepository.findAll();
+	}
+
+	// Liste des UE d'une formation
+	public List<UniteEnseignement> getByUniteEnseignementPK_CodeFormation(String codeFormation)
+	{
+		return uniteEnseignementRepository.findByUniteEnseignementPK_CodeFormation(codeFormation);
 	}
 }

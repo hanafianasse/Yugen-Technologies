@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -31,7 +33,8 @@ public class Evaluation implements Serializable {
 
 	@Column(name="CODE_FORMATION")
 	private String codeFormation;
-
+	
+	
 	@Column(name="CODE_UE")
 	private String codeUe;
 

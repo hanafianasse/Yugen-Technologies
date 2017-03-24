@@ -6,59 +6,75 @@
             </strong>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" ng-submit="">
-                <div class="col-md-6 vertical-line">
+            <form class="form-horizontal" ng-submit="addEvaluation()">
+                <div class="col-md-6 ">
                     <div class="form-group">
                         <label class="col-sm-4">Promotion<span style="color: red"> *</span></label>
                         <div class="col-sm-8">
-                            <select class="form-control" ng-model="etudiant.paysOrigine" required>
-                                <option disabled selected value>Promotion</option>
-                                <option data-ng-repeat="u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                            <select class="form-control" ng-model="codeFormation" ng-change="selectUE()" required>
+                                <option disabled selected value></option>
+                                <option data-ng-repeat="p in promotions" value="{{p.promotionPK.codeFormation}}">{{p.promotionPK.codeFormation}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4">Unité d'enseignement<span style="color: red"> *</span></label>
+                        <label class="col-sm-4">UE<span style="color: red"> *</span></label>
                         <div class="col-sm-8">
-                            <select class="form-control" ng-model="etudiant.paysOrigine" required>
-                                <option disabled selected value>Unité d'enseignement</option>
-                                <option data-ng-repeat="u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
+                            <select class="form-control" ng-model="selectedIdUE" ng-change="selectEC()" required>
+                                <option disabled selected value></option>
+                                <option data-ng-repeat="u in UE" value="{{u.uniteEnseignementPK.codeUe}}">{{u.uniteEnseignementPK.codeUe}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4">Elément constitutif<span style="color: red"> *</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="etudiant.paysOrigine" required>
-                                <option disabled selected value>Unité d'enseignement</option>
-                                <option data-ng-repeat="u in domainePays" value="{{u.rvAbbreviation}}">{{u.rvAbbreviation}}</option>
-                            </select>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-4">Désignation<span style="color: red"> *</span></label>
+                        <label class="col-sm-4">Période<span style="color: red"> *</span></label>
                         <div class="col-sm-8">
-                            <input type="text" maxlength="45" class="form-control"  required>
+                            <input type="text" maxlength="45" class="form-control"  ng-model="evaluation.periode ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4">Période<span style="color: red"> *</span></label>
+                        <label class="col-sm-4">EC<span style="color: red"> *</span></label>
                         <div class="col-sm-8">
-                            <div class="col-sm-1">de</div>
-                            <div class="col-sm-3">
-                                <input type="month" class="form-control "  required>
-                            </div>
-                            <div class="col-sm-1">à</div>
-                            <div class="col-sm-3">
-                                <input type="month" class="form-control" required>
-                            </div>
+                            <select class="form-control" ng-model="selectedIdEc" >
+                                <option disabled selected value></option>
+                                <option data-ng-repeat="e in EC" value="{{e.elementConstitutifPK.codeEc}}">{{e.elementConstitutifPK.codeEc}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <input type="submit" value="Ajouter" class="btn btn-primary"></input>
+                    <div class="form-group">
+                        <label class="col-sm-2">Désignation<span style="color: red"> *</span></label>
+                        <div class="col-sm-10">
+
+                                <input type="text" class="form-control" ng-model="evaluation.designation" required>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-2">Disponibilité<span style="color: red"> *</span></label>
+                        <div class="col-sm-10">
+                            <div class="col-sm-1">De</div>
+                            <div class="col-sm-5" >
+                                <input type="date" class="form-control " ng-model="evaluation.debutReponse" required>
+                            </div>
+                            <div class="reponse_fin">
+                            <div class="col-sm-1" >À</div>
+                            <div class="col-sm-5" >
+                                <input type="date" class="form-control" ng-model="evaluation.finReponse" required>
+                            </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <input type="submit" value="Valider" class="btn btn-primary"></input>
                     <a class="btn btn-danger pull-right" href="#/admin/promotion/{{anneeUniversitaire}}/{{codeFormation}}"> Annuler</a>
                 </div>
           </form>

@@ -9,7 +9,7 @@ import fr.univbrest.dosi.spi.bean.Evaluation;
 import fr.univbrest.dosi.spi.dao.EvaluationRepository;
 /**
  * 
- * @author red1 & marwane
+ * @author red1 & Marwane
  *
  */
 
@@ -26,6 +26,17 @@ public Evaluation getEvaluation (long idEvaluation) {
 public Iterable<Evaluation > listEvaluations () {
 	Iterable<Evaluation > evaluations =evaluationRepository.findAll();
 	return evaluations;
+}
+
+public void deleteEvaluation (final long idEvaluation){
+	evaluationRepository.delete(idEvaluation);
+}
+ 
+public Evaluation addEvaluation (final Evaluation evaluation){
+	return evaluationRepository.save(evaluation);
+}
+public Evaluation updateEvaluation (final Evaluation evaluation){
+	return evaluationRepository.save(evaluation);
 }
 
 }

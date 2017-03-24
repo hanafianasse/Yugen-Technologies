@@ -7,6 +7,7 @@ import fr.univbrest.dosi.spi.bean.QuestionEvaluation;
 import fr.univbrest.dosi.spi.service.QuestionEvaluationService;
 import io.swagger.annotations.Api;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,12 @@ public class QuestionEvaluationController
 	public Collection<QuestionEvaluation> getAll()
 	{
 		return (Collection<QuestionEvaluation>) questionEvaluationService.getAll();
+	}
+	
+	@RequestMapping(value = "/getByIdRubriqueEvaluation/{idRubriqueEvaluation}", method = RequestMethod.GET)
+	public Collection<QuestionEvaluation> getQuestionEvaluationByIdRubriqueEvaluation(@PathVariable("idRubriqueEvaluation") Long idRubriqueEvaluation)
+	{
+		return (Collection<QuestionEvaluation>) questionEvaluationService.getQuestionEvaluationByIdRubriqueEvaluation(new BigDecimal(idRubriqueEvaluation));
 	}
 
 }
