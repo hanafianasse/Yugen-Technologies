@@ -83,7 +83,7 @@ public class UniteEnseignement implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "uniteEnseignement",fetch=FetchType.LAZY)
     private Collection<ElementConstitutif> elementConstitutifCollection;
 
-    public UniteEnseignement() {
+    public UniteEnseignement() { 
     }
 
     public UniteEnseignement(UniteEnseignementPK uniteEnseignementPK) {

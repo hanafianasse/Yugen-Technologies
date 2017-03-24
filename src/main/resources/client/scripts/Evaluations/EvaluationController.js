@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService) {
+angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService','UEService','ECService',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService,UEService,ECService) {
 
     console.log('je suis la');
     /************************** info Generale Start  ************************************/
@@ -24,42 +24,82 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
 		}
     };
 
-    var promise = promotionService.getAll();
+    var promise = promotionService.getPromotionsEnCours();
     promise.success(function(data) {
         $scope.promotions = data;
     }).error(function(data) {
         console.log("get promotions : erreur");
     });
 
+    $scope.selectUE=function () {
+        var promise = UEService.getByCodeFormation($scope.codeFormation);
+        promise.success(function(data) {
+            $scope.UE = data;
+        }).error(function(data) {
+            console.log("get UE : erreur");
+        });
+
+    }
+    $scope.selectEC=function () {
+        var promise = ECService.getByCodeUe($scope.selectedIdUE);
+        promise.success(function(data) {
+            $scope.EC = data;
+        }).error(function(data) {
+            console.log("get EC : erreur");
+        });
+
+    }
+
+    $scope.addEvaluation=function () {
+
+        $scope.evaluation["Content-Type"]="application/json";
+        EvaluationService.addEvaluation($scope.evaluation);
+       // $location.path("/admin/qualificatif");
+
+    }
     /************************** info Generale End  ************************************/
 
 
 
 
     /************************** Rubrique Start ************************************/
+
+    var RubriqueShowed = [];
+
     var promise = RubriqueService.getAll();
     promise.success(function (data){
       $scope.rubriques = data;
-       console.log($scope.rubriques);
     }).error(function(statut){
-       console.log("et rubriques erreur");
+       console.log("get rubriques erreur");
     });
-    
+
     $scope.selectRubrique = function(){
-        var myObject = {"rubrique" : ""};
+        var myObject = {"rubrique" : "","questions":[]};
         myObject.rubrique = getRubriqueById($scope.selectedIdRubrique);
-        $scope.models.lists.mesRubriquesSelected.push(myObject);  
-        $scope.selectedIdRubrique = null; 
+        $scope.models.lists.mesRubriquesSelected.push(myObject);
+        $scope.selectedIdRubrique = null;
     }
+
     $scope.models = {
         selected: null,
         lists: {"mesRubriquesSelected": []}
     };
-    // Model to JSON for demo purpose
+
+    // Model to JSON for demo purpose (generet the new list)
     $scope.$watch('models', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
     }, true);
 
+    $scope.modelsQuestion = {
+        selected: null,
+        lists: {"mesQuestionsSelected": $scope.models.lists.mesRubriquesSelected.questions}
+    };
+
+    $scope.$watch('modelsQuestion', function(model) {
+        $scope.modelAsJson = angular.toJson(model, true);
+    }, true);
+
+    //this is a local function
     var getRubriqueById = function(id){
         for(var i = 0; i < $scope.rubriques.length;i++){
             if($scope.rubriques[i].idRubrique == id){
@@ -77,6 +117,125 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
                 break;
             }
         }
+    }
+
+    if($rootScope.QuestionSelected == undefined){
+        $rootScope.QuestionSelected = [];
+    }
+
+    $scope.addQuestionsToRubrique = function(){
+        for(var index = 0 ; index < $rootScope.QuestionSelected.length ;index++){
+            for(var j = 0; j < $scope.models.lists.mesRubriquesSelected.length ;j++){
+                if($rootScope.QuestionSelected[index].idRubrique == $scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique){
+                    $scope.models.lists.mesRubriquesSelected[j].questions.push($rootScope.QuestionSelected[index].question);
+                    RubriqueShowed.push($scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique);
+                }
+            }
+        }
+        console.log($scope.models.lists.mesRubriquesSelected);
+    }
+
+    $scope.deleteQuestionFromRubrique = function(idRubrique,idQuestion){
+        console.log(idRubrique + " " + idQuestion);
+        for(var i = 0 ; i < $scope.models.lists.mesRubriquesSelected.length; i++){
+            for(var j = 0 ; j < $scope.models.lists.mesRubriquesSelected[i].questions.length ; j++ ){
+                if($scope.models.lists.mesRubriquesSelected[i].rubrique.idRubrique == idRubrique
+                && $scope.models.lists.mesRubriquesSelected[i].questions[j].idQuestion == idQuestion ){
+                    $scope.models.lists.mesRubriquesSelected[i].questions.splice(j,1);
+                }
+            }
+        }
+    }
+
+    $rootScope.refresh = $scope.addQuestionsToRubrique;
+
+
+    $scope.rubriqueClicked = function(idRubrique){
+        var bool = false;
+        RubriqueShowed.forEach(function(item, index){
+            if(item == idRubrique){
+                RubriqueShowed.splice(index,1);
+                bool = true;
+            }
+        });
+        
+        if(!bool)
+            RubriqueShowed.push(idRubrique);
+    }
+
+    $scope.verifyShowedRubriques = function(idRubrique){
+        return RubriqueShowed.includes(idRubrique);
+    }
+
+    $scope.openModalAddQuestion = function(idRubrique){
+        if($rootScope.QuestionSelected.length != 0){
+            $rootScope.QuestionSelected = [];
+        }
+        console.log($rootScope.QuestionSelected);
+        $rootScope.selectedIdRubrique = idRubrique;
+        $modal.open({
+            templateUrl: 'AddQuestionModalContent.html',
+            backdrop: false,
+            controller: function ($scope, $modalInstance,$rootScope,questionService) {
+                $scope.annuler = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+
+                // get questions and add them to the select input
+                var promise = questionService.getAll();
+                promise.success(function (data){
+                  $scope.questions = data;
+                }).error(function(statut){
+                   console.log("get questions : erreur");
+                });
+
+                $scope.models = {
+                    selected: null,
+                    lists: {"mesQuestionsSelected": []}
+                };
+
+                var getQuestionById = function(id){
+                    for(var i = 0; i < $scope.questions.length ; i++){
+                        if($scope.questions[i].idQuestion == id){
+                            return $scope.questions[i];
+                        }
+                    }
+                    return null;
+                }
+
+                $scope.selectQuestion = function(){
+                    var myObject = {"question" : ""};
+                    myObject.question = getQuestionById($scope.selectedIdQuestion);;
+                    $scope.models.lists.mesQuestionsSelected.push(myObject);  
+                    $scope.selectedIdQuestion = null; 
+                }
+
+                // add question to the dnd list
+                $scope.deleteQuestion = function(idQuestion){
+                    for(var i = 0 ; i < $scope.models.lists.mesQuestionsSelected.length ; i++){
+                        if($scope.models.lists.mesQuestionsSelected[i].question.idQuestion == idQuestion){
+                            $scope.models.lists.mesQuestionsSelected.splice(i,1);
+                            break;
+                        }
+                    }
+                }
+
+                $scope.validerLesQuestions = function(){
+                    for(var index = 0; index < $scope.models.lists.mesQuestionsSelected.length ;index++){
+                        var myObject = {"idRubrique": "","question":""}
+                        myObject.idRubrique = $rootScope.selectedIdRubrique;
+                        myObject.question = $scope.models.lists.mesQuestionsSelected[index].question;
+                        $rootScope.QuestionSelected.push(myObject);                        
+                    }
+                    $rootScope.refresh();
+                    $modalInstance.dismiss('cancel');
+                }
+
+
+
+
+            }
+        });
     }
 
     /************************** Rubrique End ************************************/
