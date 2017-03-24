@@ -7,7 +7,4 @@ angular.module('app').controller('EvaluationListCtrl', ['$scope','$route','$root
 
 
 
-
-
-
 }]);
