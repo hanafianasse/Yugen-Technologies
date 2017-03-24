@@ -16,7 +16,7 @@ angular.module('app')
             return $http.get(urlBase + '/' + id);
         };
 
-        dataFactory.addQualificatif = function (entity) {
+        dataFactory.addEvaluation = function (entity) {
             return $http.post(urlBase, entity);
 
         };

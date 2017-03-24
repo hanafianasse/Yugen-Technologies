@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService) {
+angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService','UEService','ECService',function (RubriqueService,$scope,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService,UEService,ECService) {
 
     console.log('je suis la');
     /************************** info Generale Start  ************************************/
@@ -31,6 +31,32 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
         console.log("get promotions : erreur");
     });
 
+    $scope.selectUE=function () {
+        var promise = UEService.getByCodeFormation($scope.codeFormation);
+        promise.success(function(data) {
+            $scope.UE = data;
+        }).error(function(data) {
+            console.log("get UE : erreur");
+        });
+
+    }
+    $scope.selectEC=function () {
+        var promise = ECService.getByCodeUe($scope.selectedIdUE);
+        promise.success(function(data) {
+            $scope.EC = data;
+        }).error(function(data) {
+            console.log("get EC : erreur");
+        });
+
+    }
+
+    $scope.addEvaluation=function () {
+
+        $scope.evaluation["Content-Type"]="application/json";
+        EvaluationService.addEvaluation($scope.evaluation);
+       // $location.path("/admin/qualificatif");
+
+    }
     /************************** info Generale End  ************************************/
 
 
@@ -44,12 +70,12 @@ angular.module('app').controller('EvaluationsCtrl', ['RubriqueService','$scope',
     }).error(function(statut){
        console.log("et rubriques erreur");
     });
-    
+
     $scope.selectRubrique = function(){
         var myObject = {"rubrique" : ""};
         myObject.rubrique = getRubriqueById($scope.selectedIdRubrique);
-        $scope.models.lists.mesRubriquesSelected.push(myObject);  
-        $scope.selectedIdRubrique = null; 
+        $scope.models.lists.mesRubriquesSelected.push(myObject);
+        $scope.selectedIdRubrique = null;
     }
     $scope.models = {
         selected: null,
