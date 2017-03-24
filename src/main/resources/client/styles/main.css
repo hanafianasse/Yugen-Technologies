@@ -5646,7 +5646,7 @@ a.list-group-item-danger.active:focus {
   cursor: pointer;
   -webkit-opacity: 0.5;
   -moz-opacity: 0.5;
-  opacity: 0.5;
+  opacity: 5.5; /* it was : 0.5*/
   filter: alpha(opacity=50);
 }
 button.close {
@@ -11408,3 +11408,28 @@ tr.formation:hover {
     margin-right: 5px;
 }
 
+/*************************************************************************/
+
+/*created by Anasse : Do not change ! */
+
+.plus{
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  margin-right: 10px;
+  color: #62c8da;
+  opacity:1;
+  font-size:14px;
+}
+.fermer{
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  color: #ff0000;
+  opacity:1;
+  font-size:14px;
+}

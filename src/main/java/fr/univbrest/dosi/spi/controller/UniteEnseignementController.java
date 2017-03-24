@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package fr.univbrest.dosi.spi.controller;
 
 import fr.univbrest.dosi.spi.bean.UniteEnseignement;
@@ -79,5 +77,6 @@ public class UniteEnseignementController
 		return uniteEnseignementService
 				.getByUniteEnseignementPK_CodeFormation(codeFormation);
 	}
+
 
 }
