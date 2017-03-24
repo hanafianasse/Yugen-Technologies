@@ -17,7 +17,7 @@ angular.module('app')
         };
 
         dataFactory.addEvaluation = function (entity) {
-            return $http.post(urlBase, entity);
+            return $http.post(urlBase+'/addEvaluation', entity);
 
         };
 
