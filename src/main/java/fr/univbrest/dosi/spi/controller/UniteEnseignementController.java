@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/uniteEnseignement")
 @Api(value = "uniteEnseignement", description = "Description de la ressource uniteEnseignement.")
+
 public class UniteEnseignementController
 {
 	@Autowired
