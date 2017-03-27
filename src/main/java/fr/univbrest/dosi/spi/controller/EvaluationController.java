@@ -48,6 +48,11 @@ public class EvaluationController {
 	public final Evaluation editEvaluation(@RequestBody final Evaluation evaluation) {
 		return evaluationService.updateEvaluation(evaluation);
 	}
+	// Nombre des evaluations
+		@RequestMapping(value = "/nombreEvaluations", method = RequestMethod.GET)
+		public String nombreEvaluations()
+		{
+			return String.valueOf(evaluationService.nombreEvaluations());		}
 	
 
 }

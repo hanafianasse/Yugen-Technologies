@@ -1,0 +1,69 @@
+<div class="page" data-ng-controller="infoEtudiantCtrl">
+  <div class="panel panel-default ens-edit">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
+    <div class="panel-body">
+        <!-- Consultation -->
+        <div class="media animate" ng-hide="edit">
+            
+            <div class="media-body"> 
+                <ul class="list-unstyled list-info">
+                    <li>
+                        <span class="icon glyphicon glyphicon-user"></span>
+                        <label>Nom</label>
+                        {{etudiant.sexe == "M" ? 'M.' : 'Mme'}} {{etudiant.nom}} {{etudiant.prenom}}  <br/>
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>E-mail</label>                        
+                        {{etudiant.emailUbo}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-home"></span>
+                        <label>Adresse</label>
+                        {{etudiant.adresse}} {{etudiant.codePostal}} {{etudiant.ville}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-earphone"></span>
+                        <label>Téléphone</label>
+                        {{etudiant.telephone}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label>Pays</label>
+                        {{etudiant.paysOrigine}}
+                    </li>                    
+                </ul>                
+            </div>
+           
+            </div>
+               <div class="row">
+                <div class="col-md-6" >            
+                    <div class="panel-body table-responsive" >
+                        <strong><span class="fa fa-graduation-cap"></span> Promotions</strong>
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <th>Année</th>
+                                    <th>Code</th>
+                                    <th>Designation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="p in enseignant.promotions">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+            </div>
+            </div>
+            
+           
+        
+
