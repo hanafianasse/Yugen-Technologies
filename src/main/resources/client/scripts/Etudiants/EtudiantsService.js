@@ -33,6 +33,15 @@ angular.module('app')
         dataFactory.getNbEtudiantParPromotion = function (codeFormation, anneeUniversitaire) {
             return $http.get(urlBase + '/nombreEtudiants/' + codeFormation + '/' + anneeUniversitaire);
         }
+        
+     
+        	
+        /*dataFactory.get= function(noEtudiant) {
+          	  
+          	  return  $http.get('http://localhost:8090/getetu/'+noEtudiant);
+          	};*/
+        	
+       
 
         return dataFactory;
     }]);
