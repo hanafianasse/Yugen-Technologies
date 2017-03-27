@@ -30,6 +30,7 @@ angular.module('app')
             return $http.get(urlBase + '/nombreEtudiants')
         }
 
+
         dataFactory.getNbEtudiantParPromotion = function (codeFormation, anneeUniversitaire) {
             return $http.get(urlBase + '/nombreEtudiants/' + codeFormation + '/' + anneeUniversitaire);
         }

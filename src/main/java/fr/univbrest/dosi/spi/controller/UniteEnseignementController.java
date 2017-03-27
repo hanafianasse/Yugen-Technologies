@@ -77,6 +77,12 @@ public class UniteEnseignementController
 		return uniteEnseignementService
 				.getByUniteEnseignementPK_CodeFormation(codeFormation);
 	}
-
+	
+	// Nombre des UE
+			@RequestMapping(value = "/nombreUE", method = RequestMethod.GET)
+			public String nombreUE()
+			{
+				return String.valueOf(uniteEnseignementService.nombreUE());		}
+		
 
 }
