@@ -12,7 +12,7 @@ angular.module('app')
             return $http.get(urlBase);
         };
 
-        dataFactory.getQualificatif = function (id) {
+        dataFactory.getEvaluation = function (id) {
             return $http.get(urlBase + '/' + id);
         };
 
@@ -20,17 +20,16 @@ angular.module('app')
             return $http.post(urlBase+'/addEvaluation', entity);
 
         };
-
-        dataFactory.updateQualificatif = function (entity) {
+        dataFactory.getNbEvaluations = function () {
+            return $http.get(urlBase + '/nombreEvaluations')
+        };
+        dataFactory.updateEvaluation = function (entity) {
             return $http.put(urlBase, entity)
         };
 
-        dataFactory.deleteQualificatif = function (id) {
-
-            return $http.delete(urlBase + '/' + id);
-
-
-        };
+        dataFactory.getEvaluationByPromotion=function (codeFormation,anneeUniversitaire) {
+            return $http.get(urlBase + '/evaluationByPromotion/'+ codeFormation + '/' + anneeUniversitaire)
+        }
 
         return dataFactory;
     }]);

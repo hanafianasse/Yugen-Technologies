@@ -38,6 +38,7 @@
                     <span class="hidden-xs">
                         <span ng-if="$root.connectedUser.role == 'ENS' ">{{$root.connectedUserAsEns.nom}} {{$root.connectedUserAsEns.prenom}}</span>
                         <span ng-if="$root.connectedUser.role == 'ADM' ">Administrateur</span>
+                        <span ng-if="$root.connectedUser.role == 'ETU' ">{{$root.connectedUserAsEtu.nom}} {{$root.connectedUserAsEtu.prenom}}</span>
                     </span>
                     <img src="../images/connectedUserIcone.png" alt="" class="img-circle img30_30">
                 </a>

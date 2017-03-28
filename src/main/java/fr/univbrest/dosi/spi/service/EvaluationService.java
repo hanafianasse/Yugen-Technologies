@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.Evaluation;
+import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.dao.EvaluationRepository;
 /**
  * 
@@ -39,5 +40,9 @@ public Evaluation updateEvaluation (final Evaluation evaluation){
 	return evaluationRepository.save(evaluation);
 }
 
+public int nombreEvaluations() {
+	List<Evaluation> listEvaluations = (List<Evaluation>) evaluationRepository.findAll();
+	return listEvaluations.size();
+}
 }
 
