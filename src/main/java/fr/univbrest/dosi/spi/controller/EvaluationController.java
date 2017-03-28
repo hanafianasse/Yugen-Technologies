@@ -54,5 +54,10 @@ public class EvaluationController {
 		{
 			return String.valueOf(evaluationService.nombreEvaluations());		}
 	
-
+	//Récupérer evaluation par promotion
+		@RequestMapping(value="/evaluationByPromotion/{codeFormation}/{anneeUniversitaire}" , method = RequestMethod.GET)
+		public Iterable<Evaluation> evaluationByPromotion(@PathVariable final String codeFormation, @PathVariable final String anneeUniversitaire){
+			return evaluationService.listEvaluations();
+		}
+		
 }

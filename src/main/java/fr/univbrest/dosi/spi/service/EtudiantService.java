@@ -56,7 +56,7 @@ public class EtudiantService {
 				deleteEtudiant(oldNoEtudiant);
 				return etudiantRepository.save(etudiant);
 			}
-			throw new SPIException("Error : noEtudiant existe déjà ");
+			throw new SPIException("Error : noEtudiant existe dï¿½jï¿½ ");
 		}
 	}
 
@@ -70,5 +70,8 @@ public class EtudiantService {
 				.findAll();
 		return listEtudiants.size();
 	}
-
+	public Promotion getPromotionEtudiant(String noEtudiant){
+		Promotion promotionEtudiant=etudiantRepository.findOne(noEtudiant).getPromotion();
+		return promotionEtudiant;
+	}
 }

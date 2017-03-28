@@ -163,7 +163,7 @@
 						if(data) {
 							if (data.role === "ADM")
 								$location.path("/");
-							
+
 							else
 								$location.path("/admin/enseignantsConnected");
 						}
@@ -196,7 +196,7 @@
 									console.log("get etudiants : error");
 								});
 							}
-							
+
 							 else {
 								$location.path("/dashboard");
 							}

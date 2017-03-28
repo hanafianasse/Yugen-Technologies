@@ -1,69 +1,114 @@
+
+
 <div class="page" data-ng-controller="infoEtudiantCtrl">
-  <div class="panel panel-default ens-edit">
-    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
-    <div class="panel-body">
-        <!-- Consultation -->
-        <div class="media animate" ng-hide="edit">
-            
-            <div class="media-body"> 
-                <ul class="list-unstyled list-info">
-                    <li>
-                        <span class="icon glyphicon glyphicon-user"></span>
-                        <label>Nom</label>
-                        {{etudiant.sexe == "M" ? 'M.' : 'Mme'}} {{etudiant.nom}} {{etudiant.prenom}}  <br/>
-                    </li>
-                    <li>
-                        <span class="icon glyphicon glyphicon-envelope"></span>
-                        <label>E-mail</label>                        
-                        {{etudiant.emailUbo}}
-                    </li>
-                    <li>
-                        <span class="icon glyphicon glyphicon-home"></span>
-                        <label>Adresse</label>
-                        {{etudiant.adresse}} {{etudiant.codePostal}} {{etudiant.ville}}
-                    </li>
-                    <li>
-                        <span class="icon glyphicon glyphicon-earphone"></span>
-                        <label>Téléphone</label>
-                        {{etudiant.telephone}}
-                    </li>
-                    <li>
-                        <span class="icon glyphicon glyphicon-flag"></span>
-                        <label>Pays</label>
-                        {{etudiant.paysOrigine}}
-                    </li>                    
-                </ul>                
-            </div>
-           
-            </div>
-               <div class="row">
-                <div class="col-md-6" >            
-                    <div class="panel-body table-responsive" >
-                        <strong><span class="fa fa-graduation-cap"></span> Promotions</strong>
-                        <table class="table" >
-                            <thead>
-                                <tr>
-                                    <th>Année</th>
-                                    <th>Code</th>
-                                    <th>Designation</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="p in enseignant.promotions">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>                    
-                            </tbody>
-                        </table>
-                    </div>
+    <center><h1 style="font-family: 'Ruda'">{{promotion.promotionPK.codeFormation}} {{promotion.promotionPK.anneeUniversitaire}}</h1></center>
+    <div class="panel panel-default ens-edit">
+
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Etudiant</strong></div>
+        <div class="panel-body">
+            <!-- Consultation -->
+            <div class="media animate">
+                <div class="media-body col-md-12">
+                    <ul class="list-unstyled list-info" >
+                        <div class="col-md-6">
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>Nom</label>
+                                {{etudiant.sexe == "M" ? 'M.' : 'Mme'}} {{etudiant.nom}} {{etudiant.prenom}}  <br/>
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-envelope"></span>
+                                <label>E-mail UBO</label>
+                                {{etudiant.emailUbo}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-home"></span>
+                                <label>E-mail</label>
+                                {{etudiant.email}}
+                            </li>
+                        </div>
+                        <div class="col-md-6">
+                            <li>
+                                <span class="icon glyphicon glyphicon-home"></span>
+                                <label>Adresse</label>
+                                {{etudiant.adresse}} {{etudiant.codePostal}} {{etudiant.ville}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-earphone"></span>
+                                <label>Téléphone</label>
+                                {{etudiant.telephone}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-flag"></span>
+                                <label>Pays</label>
+                                {{etudiant.paysOrigine}}
+                            </li>
+                        </div>
+                    </ul>
                 </div>
-                
             </div>
-            </div>
-            </div>
-            </div>
-            
-           
-        
+        </div>
+    </div>
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Evaluations</strong></div>
+        <div style="overflow: auto ;max-height: 250px;">
+            <table class="table table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th>
+                        <div class="th">
+                            Désignation
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            UE
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            EC
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Etat
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Début Réponse
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Fin Réponse
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="th">
+
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ev in evaluations">
+                    <td>{{ev.designation}}</td>
+                    <td>{{ev.codeUe}}</td>
+                    <td>{{ev.codeEc}}</td>
+                    <td>{{ev.etat}}</td>
+                    <td>{{ev.debutReponse}}</td>
+                    <td>{{ev.finReponse}}</td>
+                    <td><span class="glyphicon glyphicon-edit"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
 
