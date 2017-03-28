@@ -49,10 +49,13 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     }
 
     $scope.addEvaluation=function () {
+
+        var selectRubriqueInput = document.getElementById("selectRubrique");
+        selectRubriqueInput.removeAttribute("disabled");
+
         $scope.evaluation.noEnseignant = $rootScope.connectedUser.noEnseignant;
         $scope.evaluation.anneeUniversitaire = "2016-2017";
         $scope.evaluation.noEvaluation = 1;
-        console.log($scope.evaluation);
         var promise = EvaluationService.addEvaluation($scope.evaluation);
         promise.success(function(data){
             console.log(data);
@@ -76,7 +79,13 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
 
     /************************** Rubrique Start ************************************/
 
+    
+
+    var selectRubriqueInput = document.getElementById("selectRubrique");    
+    selectRubriqueInput.setAttribute("disabled","");
+
     var RubriqueShowed = [];
+
 
     var promise = RubriqueService.getAll();
     promise.success(function (data){
@@ -85,33 +94,21 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
        console.log("get rubriques erreur");
     });
 
-    var getOrdreOfRubriqueById = function(idRubrique){
-        var _index = null;
-        angular.forEach($scope.models.lists.mesRubriquesSelected,function(item,index){
-            if($scope.models.lists.mesRubriquesSelected[index].rubrique.idRubrique == idRubrique){
-                _index = index;
-            }
-        });
-        return _index + 1;
-    } 
-
     $scope.selectRubrique = function(){
-        var myObject = {"rubrique" : "","questions":[]};
+        var myObject = {"rubrique" : "","questions":[],"idRubriqueEvaluation":""};
         myObject.rubrique = getRubriqueById($scope.selectedIdRubrique);
-        $scope.models.lists.mesRubriquesSelected.push(myObject);
-        
         // call web service add rubriqueEvaluation
         var rubriqueEvaluation = {
             'designation'  : null,
             'idEvaluation' : $rootScope.addedEvaluationId,
             'idRubrique'   : myObject.rubrique.idRubrique,
-            'ordre'        : getOrdreOfRubriqueById($scope.selectedIdRubrique)
+            'ordre'        : $scope.models.lists.mesRubriquesSelected.length + 1
         }
         $scope.selectedIdRubrique = null;
-        console.log(rubriqueEvaluation);
         var promise = RubriqueEvaluationsService.addRubriqueEvaluation(rubriqueEvaluation);
         promise.success(function(data){
-            console.log("good");
+            myObject.idRubriqueEvaluation = data.idRubriqueEvaluation;
+            $scope.models.lists.mesRubriquesSelected.push(myObject);
         }).error(function(status){
             console.log("post rubrique evaluation error");
         });
@@ -125,7 +122,8 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     // Model to JSON for demo purpose (generet the new list)
     $scope.$watch('models', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
-        console.log($scope.models.mesRubriquesSelected);
+        setAllRubriqueEvaluationNewOrdre();
+        setAllQuestionEvaluationNewOrdre();
     }, true);
 
     $scope.modelsQuestion = {
@@ -136,6 +134,73 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     $scope.$watch('modelsQuestion', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
     }, true);
+
+    var setAllQuestionEvaluationNewOrdre = function(){
+        var promises = [];
+        var QuestionEvaluations = [];
+        angular.forEach($scope.models.lists.mesRubriquesSelected,function(UneRubriqueSelected,j){
+            angular.forEach(UneRubriqueSelected.questions,function(item,index){
+                var promise = QuestionEvaluationsService.getQuestionEvaluation(item.idQuestionEvaluation);
+                promises.push(promise);
+                promise.success(function(data){
+                    QuestionEvaluations.push(data);
+                }).error(function(statu){
+                    console.log('get QuestionEvaluation : error');
+                });
+            });
+            $q.all(promises).then(function(data){
+                angular.forEach($scope.models.lists.mesRubriquesSelected,function(UneRubriqueSelected,j){
+                    angular.forEach(UneRubriqueSelected.questions,function(item,index){
+                        for(var i = 0 ; i < QuestionEvaluations.length; i++){
+                            if(QuestionEvaluations[i].idQuestionEvaluation == item.idQuestionEvaluation){
+                                if(QuestionEvaluations[i].ordre != index + 1){
+                                    QuestionEvaluations[i].ordre = index + 1;
+                                    QuestionEvaluationsService.updateQuestionEvaluation(QuestionEvaluations[i]).success(function(data){
+                                        console.log(data);
+                                    }).error(function(){
+                                        console.log("update Rubrique Evaluation : Error");
+                                    })
+                                }
+                            }
+                        }
+                    });
+                });
+                QuestionEvaluations = [];
+            });
+        });
+
+    }
+
+    var setAllRubriqueEvaluationNewOrdre = function(){
+        var promises = [];
+        var RubriqueEvaluations = [];
+        angular.forEach($scope.models.lists.mesRubriquesSelected,function(item,index){
+            var promise = RubriqueEvaluationsService.getRubriqueEvaluation(item.idRubriqueEvaluation);
+            promises.push(promise);
+            promise.success(function(data){
+                RubriqueEvaluations.push(data);
+            }).error(function(statu){
+                console.log('get rubriqueEvaluation : error');
+            });
+        });
+        $q.all(promises).then(function(data){
+            angular.forEach($scope.models.lists.mesRubriquesSelected,function(item,index){
+                for(var i = 0 ; i < RubriqueEvaluations.length; i++){
+                    if(RubriqueEvaluations[i].idRubriqueEvaluation == item.idRubriqueEvaluation){
+                        if(RubriqueEvaluations[i].ordre != index + 1){
+                            RubriqueEvaluations[i].ordre = index + 1;
+                            RubriqueEvaluationsService.updateRubriqueEvaluation(RubriqueEvaluations[i]).success(function(data){
+                                console.log(data);
+                            }).error(function(){
+                                console.log("update Rubrique Evaluation : Error");
+                            })
+                        }
+                    }
+                }
+            });
+            RubriqueEvaluations = [];
+        });
+    }
 
     //this is a local function
     var getRubriqueById = function(id){
@@ -151,7 +216,6 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
         for(var i = 0 ; i < $scope.models.lists.mesRubriquesSelected.length ; i++){
             if($scope.models.lists.mesRubriquesSelected[i].rubrique.idRubrique == idRubrique){
                 //delete from DB
-                console.log($scope.models.lists.mesRubriquesSelected[i]);
                 var promise = RubriqueEvaluationsService.getAll();
                 $q.all(promise).then(function(){
                     promise.success(function(data){
@@ -177,25 +241,27 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     }
 
     if($rootScope.QuestionSelected == undefined){
-        $rootScope.QuestionSelected = [];
+        $rootScope.QuestionSelected = "";
     }
 
     $scope.addQuestionsToRubrique = function(){
-        for(var index = 0 ; index < $rootScope.QuestionSelected.length ;index++){
             for(var j = 0; j < $scope.models.lists.mesRubriquesSelected.length ;j++){
-                if($rootScope.QuestionSelected[index].idRubrique == $scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique){
-                    $scope.models.lists.mesRubriquesSelected[j].questions.push($rootScope.QuestionSelected[index].question);
+                if($rootScope.QuestionSelected.idRubriqueEvaluation == $scope.models.lists.mesRubriquesSelected[j].idRubriqueEvaluation){
+                    var QuestionWithQuestionIdEvaluation = {"question":"","idQuestionEvaluation":""};
+                    QuestionWithQuestionIdEvaluation.question = $rootScope.QuestionSelected.question;
+                    QuestionWithQuestionIdEvaluation.idQuestionEvaluation = $rootScope.QuestionSelected.idQuestionEvaluation;
+                    $scope.models.lists.mesRubriquesSelected[j].questions.push(QuestionWithQuestionIdEvaluation);
                     RubriqueShowed.push($scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique);
                 }
             }
-        }
+        
     }
 
     $scope.deleteQuestionFromRubrique = function(idRubrique,idQuestion){
         for(var i = 0 ; i < $scope.models.lists.mesRubriquesSelected.length; i++){
             for(var j = 0 ; j < $scope.models.lists.mesRubriquesSelected[i].questions.length ; j++ ){
                 if($scope.models.lists.mesRubriquesSelected[i].rubrique.idRubrique == idRubrique
-                && $scope.models.lists.mesRubriquesSelected[i].questions[j].idQuestion == idQuestion ){
+                && $scope.models.lists.mesRubriquesSelected[i].questions[j].question.idQuestion == idQuestion ){
                     // delete from DB
                     var promise = RubriqueEvaluationsService.getAll();
                     promise.success(function(data){
@@ -249,11 +315,15 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     }
 
     $scope.openModalAddQuestion = function(idRubrique){
-        if($rootScope.QuestionSelected.length != 0){
-            $rootScope.QuestionSelected = [];
+        if($rootScope.QuestionSelected != ""){
+            $rootScope.QuestionSelected = "";
         }
-        console.log($rootScope.QuestionSelected);
         $rootScope.selectedIdRubrique = idRubrique;
+        for(var i = 0 ; i < $scope.models.lists.mesRubriquesSelected.length ; i++ ){
+            if($scope.models.lists.mesRubriquesSelected[i].rubrique.idRubrique == idRubrique){
+                $rootScope.lengthOfQuestionOfSelectedRubrique = $scope.models.lists.mesRubriquesSelected[i].questions.length;
+            }
+        }
         $modal.open({
             templateUrl: 'AddQuestionModalContent.html',
             backdrop: false,
@@ -288,7 +358,8 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                     var myObject = {"question" : ""};
                     myObject.question = getQuestionById($scope.selectedIdQuestion);;
                     $scope.models.lists.mesQuestionsSelected.push(myObject);  
-                    $scope.selectedIdQuestion = null; 
+                    $scope.selectedIdQuestion = null;
+                    $scope.validerLesQuestions();
                 }
 
                 // add question to the dnd list
@@ -302,26 +373,30 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                 }
 
                 $scope.validerLesQuestions = function(){
+                var addedQuestionEvaPromises = [];
                     for(var index = 0; index < $scope.models.lists.mesQuestionsSelected.length ;index++){
-                        var myObject = {"idRubrique": "","question":""}
+                        var myObject = {"idRubrique": "","question":"","idQuestionEvaluation":"","idRubriqueEvaluation":""}
                         myObject.idRubrique = $rootScope.selectedIdRubrique;
                         myObject.question = $scope.models.lists.mesQuestionsSelected[index].question;
-                        // add to DB
-                       // angular.forEach(myObject.question,function(uneQuestion,index){
-                            var promise = RubriqueEvaluationsService.getAll();
-                            promise.success(function(data){
-                                angular.forEach(data,function(item,index){
+                            var promiseRubEva = RubriqueEvaluationsService.getAll();
+                            promiseRubEva.success(function(data){
+                                angular.forEach(data,function(item){
                                     if(item.idRubrique == $rootScope.selectedIdRubrique && item.idEvaluation == $rootScope.addedEvaluationId){
+                                        $rootScope.lengthOfQuestionOfSelectedRubrique++;
                                         var QuestionEvaluation = {
                                             'idQualificatif' : null,
                                             'idQuestion' : myObject.question.idQuestion,
                                             'idRubriqueEvaluation' :item.idRubriqueEvaluation,
                                             'intitule': null,
-                                            'ordre':index
+                                            'ordre': $rootScope.lengthOfQuestionOfSelectedRubrique
                                         }
-                                        var promise = QuestionEvaluationsService.addQuestionEvaluation(QuestionEvaluation);
-                                        promise.success(function(){
-                                            console.log('Question Added');
+                                        var promiseQstEva = QuestionEvaluationsService.addQuestionEvaluation(QuestionEvaluation);
+                                        addedQuestionEvaPromises.push(promiseQstEva);
+                                        promiseQstEva.success(function(data){
+                                            myObject.idQuestionEvaluation = data.idQuestionEvaluation;
+                                            myObject.idRubriqueEvaluation = item.idRubriqueEvaluation;
+                                            // local add
+                                            $rootScope.QuestionSelected = myObject;
                                         }).error(function(){
                                             console.log('Add Question : error');
                                         }); 
@@ -330,11 +405,12 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                             }).error(function(){
                                 console.log("get rubriqueEvaluation error");
                             }); 
-                       // });
-                        // local add
-                        $rootScope.QuestionSelected.push(myObject);                        
                     }
-                    $rootScope.refresh();
+                    $q.all(promiseRubEva).then(function(){
+                        $q.all(addedQuestionEvaPromises).then(function(){
+                            $rootScope.refresh();
+                        });
+                    });
                     $modalInstance.dismiss('cancel');
                 }
 
