@@ -20,6 +20,7 @@ promiseEvaluation.success(function(data) {
 //Recupération des rubriques
 $scope.select = function(evaluation){
 	
+	$scope.longueur = null;
 	$scope.evaCodeFormation = evaluation.codeFormation;
 	$scope.evaCodeUe = evaluation.codeUe;
 	$scope.evaCodeEc = evaluation.codeEc;
@@ -133,6 +134,15 @@ $scope.select = function(evaluation){
 				
 				console.log($scope.rubriques);
 			})
+			
+			if($scope.rubriques.length != 0){
+				$scope.longueur = true;
+				console.log($scope.longueur);
+			}	
+				else{
+						$scope.longueur = false;
+					}
+					
 	
 }	
 }]);
