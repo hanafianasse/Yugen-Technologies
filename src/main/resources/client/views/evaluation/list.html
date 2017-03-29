@@ -13,28 +13,32 @@
                     <th><div class="th">
                         Promotion
                     </div></th>
-                    <th></th>
-                    <th></th>
+                    <th>
+                        <div class="th">
+
+                        </div>
+                    </th>
                 </tr>
                 </thead>
-                
+
                 <!-- Affichage evaluation -->
                 <tbody>
                     <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
                         <td ng-click="select(evaluation)">{{evaluation.designation}}</td>
                         <td ng-click="select(evaluation)">{{evaluation.anneeUniversitaire}}</td>
-                    </tr> 
+                        <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    </tr>
                 </tbody>
             </table>
        </div>
     </section>
-    
-    
-   
+
+
+
     <div ng-if="rubriques.length">
-    	<h3 style="text-align:center"><strong>{{evaCodeFormation}} Evaluation d'un enseignement</strong></h2>
-    
-    
+    	<h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
+
+
     <section class=" panel panel-default ">
         <div class="panel-heading"><strong> Informations</strong> </div>
          <div class="panel-body"style="text-align: center;">
@@ -51,44 +55,48 @@
 					</div>
 					</ul>
 				</div>
-        
+
     </section>
-    
-  
+
+
     <section class="panel panel-default">
-        
+
       <div class="panel-body">
         <div class =" col-md-12" style="overflow: auto ;">
-            <table class="table table-hover table-responsive">
-             
-                <div class="container" style="padding-left:0px;margin-left:0px;">
-                        <ul class="list-group " >
-                            <div ng-repeat="rubrique in rubriques">
-                                <li class="list-group-item" style="background-color:#eee">
-                                        <div >{{rubrique.designation}}</div>
-                                        
-                                </li>
-                                <div>
-                                    <li class="list-group-item" data-ng-repeat="question in rubrique.questions">
-                                        {{question.intitule}}
-                                    </li>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-       
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Minimum</th>
+                        <th>Maximum</th>
+                    </tr>
+                </thead>
+
+                <tbody ng-repeat="rubrique in rubriques | orderBy :'ordre'" >
+                    <tr style="background-color: #f6f6f6">
+                        <td>{{rubrique.designation}}</td>
+                        <td colspan="2"></td>
+                    </tr>
+
+                    <tr ng-repeat="question in rubrique.questions | orderBy :'ordre' ">
+                        <td>{{question.intitule}}</td>
+                        <td>{{question.qualificatif.minimal}}</td>
+                        <td>{{question.qualificatif.maximal}}</td>
+                    </tr>
+                </tbody>
             </table>
-       </div>
-       </div>
+        </div>
+      </div>
     </section>
     </div>
-    
+
 </div>
-	
-	
-	
-	
-	
+
+
+
+
+
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
