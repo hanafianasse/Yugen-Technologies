@@ -115,7 +115,10 @@
                                     dnd-effect-allowed="move">
                                         <button type="button" class="fermer pull-right" ng-click="deleteRubrique(item.rubrique.idRubrique)">&times;</button>
                                         <button type="button" class="plus pull-right" ng-click="openModalAddQuestion(item.rubrique.idRubrique)">&#43;</button>
-                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">{{item.rubrique.designation}}</div>
+                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">
+                                            {{item.rubrique.designation}}
+                                            <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
+                                        </div>
                                         
                                 </li>
                                 <div ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueId]" dnd-list="item.questions">

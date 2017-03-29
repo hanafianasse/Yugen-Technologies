@@ -11451,5 +11451,5 @@ tr.formation:hover {
 }
 
 .drop-down-question{
-  transition: transform 400ms ease;
+  /*Ajout de l'animation du menu drop-down*/
 }
