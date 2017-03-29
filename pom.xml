@@ -147,6 +147,11 @@
 			<version>2.9.7</version>
 		</dependency>
 		<!-- END-Joda Time -->
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>3.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

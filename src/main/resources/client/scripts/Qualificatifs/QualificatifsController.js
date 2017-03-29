@@ -49,7 +49,6 @@ angular.module('app').controller('QualificatifsCtrl', ['$scope','$route','$rootS
                     $modalInstance.dismiss('cancel');
                 };
                 $scope.doSupprimer = function(){
-                    console.log(" here ::: --->>> "+$rootScope.QualificatifToBeDeleted.idQualificatif);
                     var promise = QualificatifService.deleteQualificatif($rootScope.QualificatifToBeDeleted.idQualificatif);
                    promise.success(function(status){
                 	    $rootScope.refresh();

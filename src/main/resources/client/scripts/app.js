@@ -17,6 +17,8 @@
 				redirectTo: '/dashboard'
 			}).when('/admin/enseignants', {
 				templateUrl: 'views/enseignants/list.html'
+			}).when('/admin/etudiants/:id', {
+				templateUrl: 'views/etudiants/details.html'
 			}).when('/admin/enseignantsConnected', {
 				templateUrl: 'views/enseignants/pagevierge.html'
 			}).when('/admin/enseignant/:id', {
@@ -145,12 +147,14 @@
 				templateUrl: 'views/tasks/tasks.html'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
+			}).when('/update/evaluation/:idEvaluation', {
+				templateUrl: 'views/evaluation/update.html'
 			}).when('/500', {
 				templateUrl: 'views/pages/500.html'
 			}).	otherwise({
 				redirectTo: '/404'
 			});
-		}]).run(function ($rootScope, $route, $location, AuthService,enseignantsFactory) {
+		}]).run(function ($rootScope, $route, $location, AuthService,enseignantsFactory,EtudiantsService) {
 			$rootScope.$on("$routeChangeStart", function (e, to) {
 				if ($rootScope.firstConnection === undefined) {
 					$rootScope.firstConnection = true;
@@ -161,6 +165,7 @@
 						if(data) {
 							if (data.role === "ADM")
 								$location.path("/");
+
 							else
 								$location.path("/admin/enseignantsConnected");
 						}
@@ -184,9 +189,17 @@
 									console.log("get enseignants : error");
 								});
 							}
-							if (data.role == "ADM") {
-								$location.path("/");
-							} else {
+							if($rootScope.connectedUser.role == 'ETU'){
+								var promise = EtudiantsService.getEtudiant($rootScope.connectedUser.noEtudiant);
+								promise.success(function(data){
+									$rootScope.connectedUserAsEtu = data;
+									$location.path("/admin/etudiants/"+ $rootScope.connectedUser.noEtudiant);
+								}).error(function(statu){
+									console.log("get etudiants : error");
+								});
+							}
+
+							 else {
 								$location.path("/dashboard");
 							}
 							$rootScope.firstConnection = false;

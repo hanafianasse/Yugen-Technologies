@@ -4,7 +4,8 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
     $scope.status;
     $scope.error = false;
     $scope.success = false;
-
+    
+    
     $('input').on('input', function() {
         var c = this.selectionStart,
             r = /[^a-z0-9êéàçèù@ ()+.\-\/]/gi,
@@ -16,21 +17,24 @@ angular.module('app').controller('addEtudiantsCtrl', ['$scope', '$location', 'Et
        // this.setSelectionRange(c, c);
     });
 
+ 
+
     //Récuperation des domaines par UNIVERSITE
     var promise = domaineService.getDomaine("UNIVERSITE");
 	promise.success(function(data) {
-		console.log("récupération du domaine UNIVERSITE terminé");
+		//console.log("récupération du domaine UNIVERSITE terminé");
 		$scope.domaineUniv = data;
 		console.log($scope.domaineUniv);
 	}).error(function(data) {
 		console.log("get domaine : erreur");
 	});
 
+   
 
     //Récuperation des domaines par PAYS
     var promise = domaineService.getDomaine("PAYS");
 	promise.success(function(data) {
-		console.log("récupération du domaine PAYS terminé");
+		//console.log("récupération du domaine PAYS terminé");
 		$scope.domainePays = data;
 		console.log($scope.domainePays);
 	}).error(function(data) {

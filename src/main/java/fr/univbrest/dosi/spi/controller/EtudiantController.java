@@ -58,7 +58,7 @@ public class EtudiantController {
 		return etudiantService.getEtudiantByPromotion(promotion);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{noEtudiant}")
+	@RequestMapping(method = RequestMethod.GET, value = "/{noEtudiant}", produces = "application/json")
 	public Etudiant getEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
 		return etudiantService.getEtudiant(noEtudiant);
 	}
@@ -104,5 +104,13 @@ public class EtudiantController {
 	{
 		return String.valueOf(etudiantService.getAll().stream().filter(e -> e.getPromotion().getFormation().getCodeFormation().equals(codeFormation) && e.getPromotion().getPromotionPK().getAnneeUniversitaire().equals(anneeUniversitaire)).collect(Collectors.toList()).size());
 	}
-
+	
+	/**
+	 * Récupérer promotion étudiant
+	 */
+	@RequestMapping(value = "/getPromotionEtudiant/{noEtudiant}", method = RequestMethod.GET)
+	public Promotion getPromotionEtudiant(@PathVariable("noEtudiant") String noEtudiant) {
+		return etudiantService.getPromotionEtudiant(noEtudiant);
+	}
+	
 }

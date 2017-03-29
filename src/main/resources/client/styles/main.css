@@ -11318,9 +11318,21 @@ tr.formation:hover {
 .vertical-line {
   border-right-width: 3px;
   border-right-style: solid;
+<<<<<<< HEAD
   border-right-color: #eeeeee;
 }
 
+=======
+
+  border-right-color: #eeeeee;
+}
+
+
+
+
+}
+
+>>>>>>> a1e6496cb275b6106103c2eba7f2a25512ab7afd
 /********************************************/
 
 /**
