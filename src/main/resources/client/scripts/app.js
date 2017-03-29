@@ -147,6 +147,8 @@
 				templateUrl: 'views/tasks/tasks.html'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
+			}).when('/update/evaluation/:idEvaluation', {
+				templateUrl: 'views/evaluation/update.html'
 			}).when('/500', {
 				templateUrl: 'views/pages/500.html'
 			}).	otherwise({

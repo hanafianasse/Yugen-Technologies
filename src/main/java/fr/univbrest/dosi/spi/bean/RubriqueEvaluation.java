@@ -1,7 +1,9 @@
 package fr.univbrest.dosi.spi.bean;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 
 
@@ -15,6 +17,9 @@ import java.math.BigDecimal;
 public class RubriqueEvaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
+	@GeneratedValue(generator="REV_SEQ",strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="REV_SEQ",sequenceName="REV_SEQ", allocationSize=1)
 	@Id
 	@Column(name="ID_RUBRIQUE_EVALUATION")
 	private long idRubriqueEvaluation;
