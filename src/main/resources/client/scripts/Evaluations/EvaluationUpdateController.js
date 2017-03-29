@@ -6,19 +6,24 @@
 angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','QuestionEvaluationsService','RubriqueEvaluationsService','RubriqueService','$scope','$q','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService','UEService','ECService','domaineService',
     function (questionService,QuestionEvaluationsService,RubriqueEvaluationsService,RubriqueService,$scope,$q,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService,UEService,ECService,domaineService) {
 
+    var promeseDomaineAndPromotionEncours = [];
 
-
-
+    var promise = RubriqueService.getAll();
+    promise.success(function (data){
+      $scope.rubriques = data;
+    }).error(function(statut){
+       console.log("get rubriques erreur");
+    });
 
 
 
     /************************** info Generale Start  ************************************/
 
-    $scope.selectUE = function () {
-        var promise = UEService.getByCodeFormation($scope.evaluation.codeFormation);
+    $scope.selectUE = function (codeFormation) {
+        var promise = UEService.getByCodeFormation(codeFormation /*$scope.evaluation.codeFormation*/);
+        promeseDomaineAndPromotionEncours.push(promise);
         promise.success(function(data) {
             $scope.UE = data;
-            $scope.selectEC();
         }).error(function(data) {
             console.log("get UE : erreur");
         });
@@ -31,7 +36,6 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
         }).error(function(data) {
             console.log("get EC : erreur");
         });
-
     }
 
     $scope.updateEvaluation=function () {
@@ -93,7 +97,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
     $scope.$watch('models', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
         setAllRubriqueEvaluationNewOrdre();
-        setAllQuestionEvaluationNewOrdre();
+        setAllQuestionEvaluationNewOrdre();            
     }, true);
 
     $scope.modelsQuestion = {
@@ -126,7 +130,6 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                                 if(QuestionEvaluations[i].ordre != index + 1){
                                     QuestionEvaluations[i].ordre = index + 1;
                                     QuestionEvaluationsService.updateQuestionEvaluation(QuestionEvaluations[i]).success(function(data){
-                                        console.log(data);
                                     }).error(function(){
                                         console.log("update Rubrique Evaluation : Error");
                                     })
@@ -160,7 +163,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                         if(RubriqueEvaluations[i].ordre != index + 1){
                             RubriqueEvaluations[i].ordre = index + 1;
                             RubriqueEvaluationsService.updateRubriqueEvaluation(RubriqueEvaluations[i]).success(function(data){
-                                console.log(data);
+                   
                             }).error(function(){
                                 console.log("update Rubrique Evaluation : Error");
                             })
@@ -393,76 +396,111 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
 
     /************************** Rubrique End ************************************/
 
+    $scope.mesRubriquesSelected = [];
+
+    console.log("Update Eva Ctrl is Working");
 
 
-    var promise = EvaluationService.getAll();
-    promise.success(function(evaluations){
-        angular.forEach(evaluations,function(evaluation,i){
-            if(evaluation.idEvaluation == $routeParams.idEvaluation){
-                $scope.evaluation = evaluation;
-                RubriqueEvaluationsService.getAll().success(function(lesRubriqueEvaluation){
-                    angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
-                        if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
-                            RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
-                            var mesQuestions = [];
-                            QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
-                                angular.forEach(LesQuestionsEvaluation,function(uneQuestionEvaluation,k){
-                                    if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubriqueEvaluation){
-                                        questionService.getQuestion(uneQuestionEvaluation.idQuestion).success(function(qst){
-                                            var myQstObject = {
-                                                "question" : qst,
-                                                "idQuestionEvaluation" : uneQuestionEvaluation.idQuestionEvaluation
-                                            }
-                                            mesQuestions.push(myQstObject);
-                                        }).error(function(status){
-                                            console.log('');
-                                        });
-                                    }
-                                });
-                                var myObject = {
-                                    "idRubriqueEvaluation":rubriqueEvaluation.idRubriqueEvaluation,
-                                    "rubrique": data,
-                                    "questions":mesQuestions
-                                }
-                                $scope.models.lists.mesRubriquesSelected.push(myObject); 
-                            }).error(function(status){
-
-                            });
-
-                            }).error(function(status){
-
-                            });
-                        }
-                    })
-                }).error(function(){
-
-                });
-            }
-        });
-    }).error(function(status){
-        console.log('get evaluation : error');
-    });
-
-
-        var promise = domaineService.getDomaine('ETAT-EVALUATION');
+    var promise = domaineService.getDomaine('ETAT-EVALUATION');
+    promeseDomaineAndPromotionEncours.push(promise);
     promise.success(function(data){
         $scope.etatsEvaluation = data;
     }).error(function(status){
         console.log('get Etat evaluation (domaine) : error');
     });
 
-    var promise = RubriqueService.getAll();
-    promise.success(function (data){
-      $scope.rubriques = data;
-    }).error(function(statut){
-       console.log("get rubriques erreur");
-    });
-
     var promise = promotionService.getPromotionsEnCours();
+    promeseDomaineAndPromotionEncours.push(promise);
     promise.success(function(data) {
         $scope.promotions = data;
-        $scope.selectUE();
     }).error(function(data) {
         console.log("get promotions : erreur");
     });
+
+    $q.all(promeseDomaineAndPromotionEncours).then(function(){
+        var promise = EvaluationService.getAll();
+        promise.success(function(evaluations){
+            angular.forEach(evaluations,function(evaluation,i){
+                if(evaluation.idEvaluation == $routeParams.idEvaluation){
+                    var promise = UEService.getByCodeFormation(evaluation.codeFormation /*$scope.evaluation.codeFormation*/);
+                    promeseDomaineAndPromotionEncours.push(promise);
+                    promise.success(function(data) {
+                        $scope.UE = data;
+                        var promise = ECService.getByCodeUe(evaluation.codeUe);
+                        promise.success(function(data) {
+                            $scope.EC = data;
+                            $scope.getEvaluationWithRubAndQst();
+                        }).error(function(data) {
+                            console.log("get EC : erreur");
+                        });   
+                    }).error(function(data) {
+                        console.log("get UE : erreur");
+                    });
+                    //$scope.selectUE(evaluation.codeFormation);
+                }
+            });
+        });
+    });
+
+
+
+
+    $scope.getEvaluationWithRubAndQst = function(){
+        var promise = EvaluationService.getAll();
+        promise.success(function(evaluations){
+            angular.forEach(evaluations,function(evaluation,i){
+                if(evaluation.idEvaluation == $routeParams.idEvaluation){
+                    $scope.evaluation = evaluation;
+                    RubriqueEvaluationsService.getAll().success(function(lesRubriqueEvaluation){
+                        lesRubriqueEvaluation.sort(function(a,b){
+                            return a.ordre - b.ordre;
+                        });
+                        angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
+                            if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
+                                RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
+                                    var mesQuestions = [];
+                                    QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
+                                        LesQuestionsEvaluation.sort(function(a,b){
+                                            return a.ordre - b.ordre;
+                                        });
+                                        angular.forEach(LesQuestionsEvaluation,function(uneQuestionEvaluation,k){
+                                            if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubriqueEvaluation){
+                                                var promese = questionService.getQuestion(uneQuestionEvaluation.idQuestion);
+                                                promese.success(function(qst){
+                                                    var myQstObject = {
+                                                        "question" : qst,
+                                                        "idQuestionEvaluation" : uneQuestionEvaluation.idQuestionEvaluation
+                                                    }
+                                                    mesQuestions.push(myQstObject);
+                                                }).error(function(status){
+                                                });
+                                            }
+                                        });
+                                        var myObject = {
+                                            "idRubriqueEvaluation":rubriqueEvaluation.idRubriqueEvaluation,
+                                            "rubrique": data,
+                                            "questions":mesQuestions
+                                        }
+                                        $scope.mesRubriquesSelected.push(myObject);                                    
+                                    }).error(function(status){
+
+                                    });
+                                }).error(function(status){
+
+                                });
+                            }
+                        })
+                    }).error(function(){
+
+                    });
+                }
+            });
+            $scope.models.lists.mesRubriquesSelected = $scope.mesRubriquesSelected;
+        }).error(function(status){
+            console.log('get evaluation : error');
+        });
+    }
+
+
+
 }]);
