@@ -1,4 +1,4 @@
-<div class="page page-table" data-ng-controller="EvaluationsCtrl">
+<div class="page page-table" data-ng-controller="EvaluationsUpdateCtrl">
 <div class="panel panel-default ens-edit">
         <div class="panel-heading">
             <strong>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="simpleDemo">
                         <ul dnd-allowed-types="['rubrique']" dnd-list="models.lists.mesRubriquesSelected" style="padding-left: 0px;">
-                            <div ng-repeat="item in models.lists.mesRubriquesSelected" ng-init="rubriqueId = item.rubrique.idRubrique.toString()">
+                            <div ng-repeat="item in models.lists.mesRubriquesSelected | orderBy : 'item.ordre' " ng-init="rubriqueId = item.rubrique.idRubrique.toString()">
                                 <li style="background-color:#eee"
                                     dnd-draggable="item"
                                     dnd-type="'rubrique'"
@@ -121,7 +121,7 @@
                                 <div ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueId]" dnd-list="item.questions">
                                     <li ng-if="item.questions.length != 0"
                                         dnd-type="rubriqueId"
-                                        ng-repeat="question in item.questions"
+                                        ng-repeat="question in item.questions | orderBy : 'question.question.ordre' "
                                         dnd-draggable="question"
                                         dnd-moved="item.questions.splice($index, 1)"
                                         dnd-effect-allowed="move">

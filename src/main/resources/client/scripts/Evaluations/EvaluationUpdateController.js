@@ -3,42 +3,28 @@
  */
 'use strict';
 
-angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService','RubriqueEvaluationsService','RubriqueService','$scope','$q','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService','UEService','ECService','domaineService',
-    function (QuestionEvaluationsService,RubriqueEvaluationsService,RubriqueService,$scope,$q,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService,UEService,ECService,domaineService) {
+angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','QuestionEvaluationsService','RubriqueEvaluationsService','RubriqueService','$scope','$q','$route','$rootScope','$routeParams','$http','$location','EvaluationService','$modal','promotionService','UEService','ECService','domaineService',
+    function (questionService,QuestionEvaluationsService,RubriqueEvaluationsService,RubriqueService,$scope,$q,$route,$rootScope,$routeParams,$http,$location, EvaluationService,$modal,promotionService,UEService,ECService,domaineService) {
+
+
+
+
+
+
 
     /************************** info Generale Start  ************************************/
 
-    var promise = domaineService.getDomaine('ETAT-EVALUATION');
-    promise.success(function(data){
-        $scope.etatsEvaluation = data;
-        $scope.evaluation = {};
-        $scope.evaluation.etat = "ELA";
-        angular.forEach($scope.etatsEvaluation,function(item,index){
-            if(item.rvAbbreviation == 'ELA'){
-                $scope.etatsEvaluation.splice(index,1);
-            }
-        });
-    }).error(function(status){
-        console.log('get Etat evaluation (domaine) : error');
-    });
-
-    var promise = promotionService.getPromotionsEnCours();
-    promise.success(function(data) {
-        $scope.promotions = data;
-    }).error(function(data) {
-        console.log("get promotions : erreur");
-    });
-
-    $scope.selectUE=function () {
+    $scope.selectUE = function () {
         var promise = UEService.getByCodeFormation($scope.evaluation.codeFormation);
         promise.success(function(data) {
             $scope.UE = data;
+            $scope.selectEC();
         }).error(function(data) {
             console.log("get UE : erreur");
         });
-
     }
-    $scope.selectEC=function () {
+
+    $scope.selectEC = function () {
         var promise = ECService.getByCodeUe($scope.evaluation.codeUe);
         promise.success(function(data) {
             $scope.EC = data;
@@ -48,10 +34,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
 
     }
 
-    $scope.addEvaluation=function () {
-
-        var selectRubriqueInput = document.getElementById("selectRubrique");
-        selectRubriqueInput.removeAttribute("disabled");
+    $scope.updateEvaluation=function () {
 
         $scope.evaluation.noEnseignant = $rootScope.connectedUser.noEnseignant;
         $scope.evaluation.anneeUniversitaire = "2016-2017";
@@ -79,20 +62,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
 
     /************************** Rubrique Start ************************************/
 
-    
-
-    var selectRubriqueInput = document.getElementById("selectRubrique");    
-    selectRubriqueInput.setAttribute("disabled","");
-
     var RubriqueShowed = [];
-
-
-    var promise = RubriqueService.getAll();
-    promise.success(function (data){
-      $scope.rubriques = data;
-    }).error(function(statut){
-       console.log("get rubriques erreur");
-    });
 
     $scope.selectRubrique = function(){
         var myObject = {"rubrique" : "","questions":[],"idRubriqueEvaluation":""};
@@ -422,4 +392,77 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
     }
 
     /************************** Rubrique End ************************************/
+
+
+
+    var promise = EvaluationService.getAll();
+    promise.success(function(evaluations){
+        angular.forEach(evaluations,function(evaluation,i){
+            if(evaluation.idEvaluation == $routeParams.idEvaluation){
+                $scope.evaluation = evaluation;
+                RubriqueEvaluationsService.getAll().success(function(lesRubriqueEvaluation){
+                    angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
+                        if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
+                            RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
+                            var mesQuestions = [];
+                            QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
+                                angular.forEach(LesQuestionsEvaluation,function(uneQuestionEvaluation,k){
+                                    if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubriqueEvaluation){
+                                        questionService.getQuestion(uneQuestionEvaluation.idQuestion).success(function(qst){
+                                            var myQstObject = {
+                                                "question" : qst,
+                                                "idQuestionEvaluation" : uneQuestionEvaluation.idQuestionEvaluation
+                                            }
+                                            mesQuestions.push(myQstObject);
+                                        }).error(function(status){
+                                            console.log('');
+                                        });
+                                    }
+                                });
+                                var myObject = {
+                                    "idRubriqueEvaluation":rubriqueEvaluation.idRubriqueEvaluation,
+                                    "rubrique": data,
+                                    "questions":mesQuestions
+                                }
+                                $scope.models.lists.mesRubriquesSelected.push(myObject); 
+                            }).error(function(status){
+
+                            });
+
+                            }).error(function(status){
+
+                            });
+                        }
+                    })
+                }).error(function(){
+
+                });
+            }
+        });
+    }).error(function(status){
+        console.log('get evaluation : error');
+    });
+
+
+        var promise = domaineService.getDomaine('ETAT-EVALUATION');
+    promise.success(function(data){
+        $scope.etatsEvaluation = data;
+    }).error(function(status){
+        console.log('get Etat evaluation (domaine) : error');
+    });
+
+    var promise = RubriqueService.getAll();
+    promise.success(function (data){
+      $scope.rubriques = data;
+    }).error(function(statut){
+       console.log("get rubriques erreur");
+    });
+
+    var promise = promotionService.getPromotionsEnCours();
+    promise.success(function(data) {
+        $scope.promotions = data;
+        $scope.selectUE();
+    }).error(function(data) {
+        console.log("get promotions : erreur");
+    });
 }]);

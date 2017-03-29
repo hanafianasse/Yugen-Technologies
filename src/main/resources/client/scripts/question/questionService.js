@@ -11,6 +11,10 @@ angular.module('app')
         dataFactory.getQuestion = function (id) {
             return $http.get(urlBase +'/'+id);
         };
+        
+        dataFactory.getQuestionEvaluation = function (id) {
+            return $http.get(urlBase +'/getQuestionByIdRubriqueEvaluation/'+id);
+        };
 
         dataFactory.addQuestion = function (entity) {
             return $http.post(urlBase,entity);

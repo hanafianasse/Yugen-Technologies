@@ -27,7 +27,9 @@ angular.module('app')
             return $http.put(urlBase, entity)
         };
 
-
+        dataFactory.getEvaluationByPromotion=function (codeFormation,anneeUniversitaire) {
+            return $http.get(urlBase + '/evaluationByPromotion/'+ codeFormation + '/' + anneeUniversitaire)
+        }
 
         return dataFactory;
     }]);
