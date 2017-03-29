@@ -20,6 +20,8 @@
 		<class>fr.univbrest.dosi.spi.bean.RubriqueEvaluation</class>
 		<class>fr.univbrest.dosi.spi.bean.Evaluation</class>
 		<class>fr.univbrest.dosi.spi.bean.QuestionEvaluation</class>
+		<class>fr.univbrest.dosi.spi.bean.RubriqueQuestion</class>
+		<class>fr.univbrest.dosi.spi.bean.RubriqueQuestionPK</class>
 
 	</persistence-unit>
 </persistence>
