@@ -56,6 +56,7 @@ angular.module('app').controller('infoEtudiantCtrl', ['$scope', '$location', 'Et
                  }
                  if(item.etat != 'ELA'){
                  $scope.evaluations.push(item);}
+                 console.log( $scope.evaluations);
              })
 
          })
