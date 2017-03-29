@@ -11318,6 +11318,11 @@ tr.formation:hover {
 .vertical-line {
   border-right-width: 3px;
   border-right-style: solid;
+<<<<<<< HEAD
+  border-right-color: #eeeeee;
+}
+
+=======
 
   border-right-color: #eeeeee;
 }
@@ -11327,6 +11332,7 @@ tr.formation:hover {
 
 }
 
+>>>>>>> a1e6496cb275b6106103c2eba7f2a25512ab7afd
 /********************************************/
 
 /**
@@ -11438,4 +11444,12 @@ tr.formation:hover {
   color: #ff0000;
   opacity:1;
   font-size:14px;
+}
+
+.chevron-icon{
+  margin-right: 7px;
+}
+
+.drop-down-question{
+  /*Ajout de l'animation du menu drop-down*/
 }

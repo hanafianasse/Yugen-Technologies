@@ -107,18 +107,21 @@
                     </div>
                     <div class="simpleDemo">
                         <ul dnd-allowed-types="['rubrique']" dnd-list="models.lists.mesRubriquesSelected" style="padding-left: 0px;">
-                            <div ng-repeat="item in models.lists.mesRubriquesSelected" ng-init="rubriqueId = item.rubrique.idRubrique.toString()">
-                                <li style="background-color:#eee"
+                            <div class="drop-down-question" ng-repeat="item in models.lists.mesRubriquesSelected" ng-init="rubriqueIndex = $index.toString()">                               <li style="background-color:#eee"
                                     dnd-draggable="item"
                                     dnd-type="'rubrique'"
                                     dnd-moved="models.lists.mesRubriquesSelected.splice($index, 1)"
                                     dnd-effect-allowed="move">
                                         <button type="button" class="fermer pull-right" ng-click="deleteRubrique(item.rubrique.idRubrique)">&times;</button>
                                         <button type="button" class="plus pull-right" ng-click="openModalAddQuestion(item.rubrique.idRubrique)">&#43;</button>
-                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">{{item.rubrique.designation}}</div>
+                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">
+                                            {{item.rubrique.designation}}
+                                            <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
+                                        </div>
                                         
                                 </li>
-                                <div ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueId]" dnd-list="item.questions">
+
+                                <div class="drop-down-question" ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
                                     <li ng-if="item.questions.length != 0"
                                         dnd-type="rubriqueId"
                                         ng-repeat="question in item.questions"
@@ -159,9 +162,7 @@
                     <li ng-repeat="item in models.lists.mesQuestionsSelected"
                         dnd-draggable="item"
                         dnd-moved="models.lists.mesQuestionsSelected.splice($index, 1)"
-                        dnd-effect-allowed="move"
-                        dnd-selected="models.selected = item"
-                        ng-class=" {'selected': models.selected === item}">
+                        dnd-effect-allowed="move">
                             <button type="button" class="fermer pull-right" ng-click="deleteQuestion(item.question.idQuestion)">&times;</button>
                             {{item.question.intitule}}
                     </li>
