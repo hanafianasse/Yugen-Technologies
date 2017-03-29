@@ -407,7 +407,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                             var mesQuestions = [];
                             QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
                                 angular.forEach(LesQuestionsEvaluation,function(uneQuestionEvaluation,k){
-                                    if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubrique){
+                                    if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubriqueEvaluation){
                                         questionService.getQuestion(uneQuestionEvaluation.idQuestion).success(function(qst){
                                             var myQstObject = {
                                                 "question" : qst,
