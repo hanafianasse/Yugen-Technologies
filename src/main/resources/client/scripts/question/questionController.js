@@ -64,28 +64,35 @@ function($scope, $location, $http,questionService,QualificatifService,$q,$modal,
 	$scope.getQuestions();
 	$rootScope.refresh = $scope.getQuestions;
 
-	$scope.ouvrirModelSuppresion = function(question){
-		$rootScope.questionToBeDeleted = question;
-		$modal.open({
-			templateUrl: 'myModalContentForQuestion.html',
-			backdrop: true,
-			controller: function ($scope, $modalInstance,$rootScope,questionService) {
-				$scope.etat = null;
-				$scope.annulerSuppresion = function () {
-					$modalInstance.dismiss('cancel');
-				};
-				$scope.doSupprimer = function(){
-					var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.question.idQuestion);
-					promise.success(function(status){
-	    				//$scope.message = 'Question supprimé';
-	    				$rootScope.refresh();
-					}).error(function(data,status){
-						$scope.message = 'Impossible de supprimer la question choisie !';
-					});
-					$scope.etat = "done";
-				};
-			}
-		});
-	}
+
+    $scope.ouvrirModelSuppresion = function(question){
+        console.log(question);
+        $rootScope.etat = null;
+        $rootScope.questionToBeDeleted = question;
+        $modal.open({
+            templateUrl: 'myModalContent.html',
+            backdrop: true,
+            controller: function ($scope, $modalInstance,$rootScope,questionService) {
+                $scope.annulerSuppresion = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+                $scope.doSupprimer = function(){
+                    var promise = questionService.deleteQuestion($rootScope.questionToBeDeleted.question.idQuestion);
+                    promise.success(function(status){
+                        $rootScope.refresh();
+                        $modalInstance.dismiss('cancel');
+                        // $rootScope.message = "Qualificatif supprimé";
+                        //$rootScope.etat = "done";
+
+                    }).error(function(data,status){
+                        $rootScope.message = "Impossible de supprimer la question  choisi !";
+                        $rootScope.etat = "not done";
+                    });
+
+                };
+            }
+        });
+    }
+
 	}]);
 })();

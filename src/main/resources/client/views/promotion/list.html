@@ -114,7 +114,7 @@
                   <th></th>
                 </tr>
             </thead>
-            <div ng-if="etudiants.length == 0" class="success">Pas d'etudiant dans cette formation</div>
+            <div ng-if="etudiants.length == 0" class="success">Pas d'étudiant dans cette formation</div>
             <tbody ng-if="etudiants.length != 0">
                 <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
                     <td ng-click="">{{$index+1}}</td>
