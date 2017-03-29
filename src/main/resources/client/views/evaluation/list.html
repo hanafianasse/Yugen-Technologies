@@ -33,8 +33,6 @@
        </div>
     </section>
 
-
-
     <div ng-if="rubriques.length">
     	<h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
 
@@ -90,6 +88,8 @@
       </div>
     </section>
     </div>
+
+<div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
 
 </div>
 

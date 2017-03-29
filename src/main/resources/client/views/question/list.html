@@ -41,11 +41,12 @@
         <h4 class="modal-title">Confirmation</h4>
     </div>
     <div class="modal-body">
-        <p ng-if="etat == null" >Confirmer la suppression ?</p>
+        <p ng-if="etat == null" >Êtes-vous sûr de vouloir supprimer cette question ?</p>
         <p ng-if="etat != null" >{{message}}</p>
     </div>
     <div class="modal-footer">
         <button ng-if="etat == null" type="button" class="btn btn-danger pull-left" ng-click="doSupprimer()">Supprimer</button>
         <button type="button" class="btn btn-primary" ng-click="annulerSuppresion()">Fermer</button>
     </div>
+
 </script>

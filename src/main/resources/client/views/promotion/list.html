@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : 'n0Annee'" class="formation">
+                    <tr id="{{f.codeFormation}}" data-ng-repeat="f in formations | orderBy : ['n0Annee','nomFormation']" class="formation">
                         <td ng-click="select(f)">{{f.codeFormation}}</td>
                         <td ng-click="select(f)">{{f.diplome}}{{f.n0Annee}}</td>
                         <td ng-click="select(f)">{{f.nomFormation}}</td>
@@ -46,7 +46,7 @@
             </table>
         </div>
     </section>
-    <div ng-if="promotions.length == 0" class="success">Aucune promotion pour cette formation</div>
+    <div ng-if="promotions.length == 0" class="success">Il n'y a pas de promotions pour cette formation</div>
     <section class="panel panel-default table-dynamic" ng-if="promotions">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Promotions</strong>
         </div>
@@ -114,7 +114,7 @@
                   <th></th>
                 </tr>
             </thead>
-            <div ng-if="etudiants.length == 0" class="success">Pas d'étudiant dans cette formation</div>
+            <div ng-if="etudiants.length == 0" class="success">Il n'y a pas d'étudiants pour cette promotion</div>
             <tbody ng-if="etudiants.length != 0">
                 <tr id="e.noEtudiant" data-ng-repeat="e in etudiants | orderBy : 'nom' " class="formation">
                     <td ng-click="">{{$index+1}}</td>
@@ -139,10 +139,10 @@
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
         <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
-        <h4 class="modal-title">Confirmation</h4>
+        <h4 class="modal-title">Confirmation de la suppression</h4>
     </div>
     <div class="modal-body">
-        <p ng-if="etat == null">Confirmer la suppression ?</p>
+        <p ng-if="etat == null">Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
         <p ng-if="etat != null">{{message}}</p>
     </div>
     <div class="modal-footer">
