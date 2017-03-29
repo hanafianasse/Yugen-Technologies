@@ -16,7 +16,9 @@ angular.module('app')
             return $http.get(urlBase + '/getByCodeFormation/' + id);
         };
 
-
+        dataFactory.getNbUE = function () {
+            return $http.get(urlBase + '/nombreUE')
+        }
         return dataFactory;
     }]);
 

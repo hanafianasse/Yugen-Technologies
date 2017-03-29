@@ -15,7 +15,6 @@ promiseEvaluation.success(function(data) {
 	console.log("get evaluation: erreur");
 });
 
-
 /********************FONCTION DE RECUPERATION**************************/
 
 //Recupération des rubriques

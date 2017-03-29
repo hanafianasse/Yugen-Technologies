@@ -1,7 +1,7 @@
 /**
  * Created by DOSI on 15/03/2017.
  */
-angular.module('app').controller('DashboardController', ['$scope', '$location','$routeParams', 'EtudiantsService', 'formationService','promotionService','enseignantsFactory',function ($scope,$route,$routeParams,EtudiantsService, formationService,PromotionsService,enseignantsFactory) {
+angular.module('app').controller('DashboardController', ['$scope', '$location','$routeParams', 'EtudiantsService', 'formationService','promotionService','enseignantsFactory','EvaluationService','UEService',function ($scope,$route,$routeParams,EtudiantsService, formationService,PromotionsService,enseignantsFactory,EvaluationService,UEService) {
 
 
 
@@ -45,4 +45,23 @@ angular.module('app').controller('DashboardController', ['$scope', '$location','
     };
     getNbPromotion();
 
+    function getNbEvaluation() {
+        EvaluationService.getNbEvaluations().then(function (response) {
+            $scope.nbEvaluations = response.data;
+        }, function (error) {
+            console.log("get nbEvae : erreur");
+        });
+
+    };
+    getNbEvaluation();
+
+    function getNbUE() {
+        UEService.getNbUE().then(function (response) {
+            $scope.NbUE = response.data;
+        }, function (error) {
+            console.log("get nbUE : erreur");
+        });
+
+    };
+    getNbUE();
 }]);

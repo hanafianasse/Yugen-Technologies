@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.univbrest.dosi.spi.bean.Evaluation;
 import fr.univbrest.dosi.spi.bean.UniteEnseignement;
 import fr.univbrest.dosi.spi.bean.UniteEnseignementPK;
 import fr.univbrest.dosi.spi.dao.UniteEnseignementRepository;
@@ -67,5 +68,10 @@ public class UniteEnseignementService
 	public List<UniteEnseignement> getByUniteEnseignementPK_CodeFormation(String codeFormation)
 	{
 		return uniteEnseignementRepository.findByUniteEnseignementPK_CodeFormation(codeFormation);
+	}
+	
+	public int nombreUE() {
+		List<UniteEnseignement> listUEs = (List<UniteEnseignement>) uniteEnseignementRepository.findAll();
+		return listUEs.size();
 	}
 }

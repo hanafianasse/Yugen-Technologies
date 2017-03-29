@@ -22,6 +22,9 @@
 		<class>fr.univbrest.dosi.spi.bean.QuestionEvaluation</class>
 		<class>fr.univbrest.dosi.spi.bean.RubriqueQuestion</class>
 		<class>fr.univbrest.dosi.spi.bean.RubriqueQuestionPK</class>
+		<class>fr.univbrest.dosi.spi.bean.ReponseQuestion</class>
+		<class>fr.univbrest.dosi.spi.bean.ReponseQuestionPK</class>
+		<class>fr.univbrest.dosi.spi.bean.ReponseEvaluation</class>
 
 	</persistence-unit>
 </persistence>
