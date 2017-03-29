@@ -50,6 +50,7 @@ function ($scope,$route,$rootScope,$routeParams,$http, RubriqueService,$modal,$l
                        /* $rootScope.message = "Rubrique supprimé";
                         $rootScope.etat = "done";*/
                         $rootScope.refresh();
+                        $modalInstance.dismiss('cancel');
                     }).error(function(data,status){
                         $rootScope.message = "Impossible de supprimer la rubrique choisie !";
                         $rootScope.etat = "not done";
