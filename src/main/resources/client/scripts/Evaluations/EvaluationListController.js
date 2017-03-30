@@ -6,6 +6,9 @@ angular.module('app').controller('EvaluationListCtrl', ['$scope','$route','$root
 
 console.log("je suis dans EvaluationListController");
 
+$scope.evaId = 0;
+
+
 //Recupération de toutes les évaluations
 var promiseEvaluation = EvaluationService.getAll();
 promiseEvaluation.success(function(data) {
@@ -17,16 +20,16 @@ promiseEvaluation.success(function(data) {
 
 /********************FONCTION DE RECUPERATION**************************/
 
-//Recupération des rubriques
+//Recupération des rubriques et question et qualificatif
 $scope.select = function(evaluation){
-	
-	$scope.longueur = null;
+
 	$scope.evaCodeFormation = evaluation.codeFormation;
 	$scope.evaCodeUe = evaluation.codeUe;
 	$scope.evaCodeEc = evaluation.codeEc;
 	$scope.evaPeriode = evaluation.periode;
 	$scope.evaId = evaluation.idEvaluation;
-
+	
+	
 	$scope.rubriqueEva = [];
 	$scope.Questions = [];
 	$scope.rubriques = [];
@@ -34,6 +37,11 @@ $scope.select = function(evaluation){
 	var promessesRubriques = [];
 	var promessesQuestions = [];
 	var promessesQualificatifs = [];
+	
+	$scope.isActive = '';
+	$scope.selectLine = function (group) {
+	    $scope.check = group.title
+	};
 	
 	RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
 	).then(
@@ -134,14 +142,6 @@ $scope.select = function(evaluation){
 				
 				console.log($scope.rubriques);
 			})
-			
-			if($scope.rubriques.length != 0){
-				$scope.longueur = true;
-				console.log($scope.longueur);
-			}	
-				else{
-						$scope.longueur = false;
-					}
 					
 	
 }	
