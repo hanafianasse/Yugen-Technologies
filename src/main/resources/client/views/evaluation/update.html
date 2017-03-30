@@ -1,4 +1,9 @@
 <div class="page page-table" data-ng-controller="EvaluationsUpdateCtrl">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:10px; padding-left:20px" >
+            <h5><a href="#/admin/evaluation"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Liste des Evaluations</a></h5>
+        </div>
+    </div>
 <div class="panel panel-default ens-edit">
         <div class="panel-heading">
             <strong>
@@ -59,7 +64,7 @@
                     <div class="form-group">
                         <label class="col-sm-2">Etat<span style="color: red"> *</span></label>
                         <div class="col-sm-4">
-                            <select class="form-control" ng-model="evaluation.etat" ng-change="selectUE()" required>
+                            <select class="form-control" ng-model="evaluation.etat" required>
                                 <option selected value="ELA">En Cours d'élaboration</option>
                                 <option data-ng-repeat="et in etatsEvaluation" value="{{et.rvAbbreviation}}">{{et.rvMeaning}}</option>
                             </select>
