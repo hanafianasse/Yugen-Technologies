@@ -2,6 +2,9 @@
 
 angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsService','$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function (QuestionEvaluationsService,$scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
 
+    $scope.uneEvaluationEstActive = false;
+
+
 //Recupération de toutes les évaluations
     var promiseEvaluation = EvaluationService.getAll();
     promiseEvaluation.success(function(data) {
@@ -154,6 +157,8 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
     }
 
     $scope.getEvaluationWithRubAndQst = function(evaluation){
+
+        $scope.uneEvaluationEstActive = true;
 
         if(evaluation.codeEc == null){
             evaluation.codeEc = "-- --";
