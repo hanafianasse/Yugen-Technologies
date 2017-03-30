@@ -3,6 +3,7 @@
 angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsService','$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function (QuestionEvaluationsService,$scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
 
     $scope.uneEvaluationEstActive = false;
+    var RubriqueShowed = [];
 
 
 //Recupération de toutes les évaluations
@@ -16,7 +17,6 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
     /********************FONCTION DE RECUPERATION**************************/
 
     $scope.evaId = 0;
-    var RubriqueShowed = [];
 
 //Recupération des rubriques
     $scope.select = function(evaluation){
@@ -181,6 +181,7 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
             });
             angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
                 if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
+                    RubriqueShowed.push(rubriqueEvaluation.idRubrique);
                     RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
                         var mesQuestions = [];
                         QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
