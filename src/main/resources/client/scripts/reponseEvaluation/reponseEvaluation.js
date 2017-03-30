@@ -88,22 +88,21 @@ angular.module('app').controller('EvaluationreponseCtrl', ['$scope', '$route', '
 					$q.all(promessesQuestions).then(function (reponsesPromessesQuestions) {
 						for (var i = 0; i < $scope.rubriques.length; i++) {
 							for (var j = 0; j < $scope.rubriques[i].questionsEvaluation.length; j++) {
-								angular.forEach(reponsesPromessesQuestions[i], function (q, index) {
-									angular.forEach(q, function(questionData){
-										if ($scope.rubriques[i].questionsEvaluation[j].idQuestion != null && $scope.rubriques[i].questionsEvaluation[j].idQuestion == questionData.idQuestion) {
+								for (var k = 0; k < reponsesPromessesQuestions.length; k++) {
+									for (var l = 0; l < reponsesPromessesQuestions[k].data.length; l++) {
+										if ($scope.rubriques[i].questionsEvaluation[j].idQuestion == reponsesPromessesQuestions[k].data[l].idQuestion) {
 											var question = {}
-											question.idQualificatif = questionData.idQualificatif;
-											question.idQuestion = questionData.idQuestion;
-											question.intitule = questionData.intitule;
-											question.type = questionData.type;
+											question.idQualificatif = reponsesPromessesQuestions[k].data[l].idQualificatif;
+											question.idQuestion = reponsesPromessesQuestions[k].data[l].idQuestion;
+											question.intitule = reponsesPromessesQuestions[k].data[l].intitule;
+											question.type = reponsesPromessesQuestions[k].data[l].type;
 
 											$scope.rubriques[i].questions.push(question);
 
-											promessesQualificatifs.push(QualificatifService.getQualificatif(questionData.idQualificatif));
+											promessesQualificatifs.push(QualificatifService.getQualificatif(reponsesPromessesQuestions[k].data[l].idQualificatif));
 										}
-									})
-									
-								});
+									}
+								}
 							}
 						}
 					})
