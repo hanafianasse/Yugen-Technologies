@@ -1,190 +1,201 @@
 <div class="page page-table" data-ng-controller="EvaluationsCtrl">
-<div class="panel panel-default ens-edit">
-        <div class="panel-heading">
-            <strong>
-            <span class="glyphicon glyphicon-th"></span> Evaluation
-            </strong>
-        </div>
-        <div class="panel-body">
-            <form class="form-horizontal" ng-submit="addEvaluation()">
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label class="col-sm-4">Promotion<span style="color: red"> *</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="evaluation.codeFormation" ng-change="selectUE()" required>
-                                <option disabled selected value></option>
-                                <option data-ng-repeat="p in promotions" value="{{p.promotionPK.codeFormation}}">{{p.promotionPK.codeFormation}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4">UE<span style="color: red"> *</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="evaluation.codeUe" ng-change="selectEC()" required>
-                                <option disabled selected value></option>
-                                <option data-ng-repeat="u in UE" value="{{u.uniteEnseignementPK.codeUe}}">{{u.uniteEnseignementPK.codeUe}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-sm-4">Période</label>
-                        <div class="col-sm-8">
-                            <input type="text" maxlength="45" class="form-control"  ng-model="evaluation.periode ">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4">EC</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="evaluation.codeEc" >
-                                <option disabled selected value></option>
-                                <option data-ng-repeat="e in EC" value="{{e.elementConstitutifPK.codeEc}}">{{e.elementConstitutifPK.codeEc}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-2">Désignation<span style="color: red"> *</span></label>
-                        <div class="col-sm-10">
-
-                                <input type="text" class="form-control" ng-model="evaluation.designation" required>
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="col-sm-2">Etat<span style="color: red"> *</span></label>
-                        <div class="col-sm-4">
-                            <select class="form-control" ng-model="evaluation.etat" ng-change="selectUE()" required>
-                                <option selected value="ELA">En Cours d'élaboration</option>
-                                <option data-ng-repeat="et in etatsEvaluation" value="{{et.rvAbbreviation}}">{{et.rvMeaning}}</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="col-sm-4">De</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control"  ng-model="evaluation.debutReponse ">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="col-sm-4">À</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control"  ng-model="evaluation.finReponse ">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <input type="submit" value="Valider" class="btn btn-primary"></input>
-                    <a class="btn btn-danger pull-right" href="#/admin/evaluation"> Annuler</a>
-                </div>
-          </form>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:10px; padding-left:20px" >
+            <h5><a href="#/admin/evaluation"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Liste des Evaluations</a></h5>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
 
-<div class="panel panel-default ens-edit">
-    <div class="panel-heading">
-        <strong>
-        <span class="glyphicon glyphicon-th"></span> Rubrique
-        </strong>
-    </div>
-    <div class="panel-body">
-        <form class="form-horizontal" ng-submit="">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <select id="selectRubrique" class="form-control" ng-model="selectedIdRubrique" ng-change="selectRubrique()" required>
-                                <option disabled selected value>Selectionner une rubrique</option>
-                                <option data-ng-repeat="r in rubriques" value="{{r.idRubrique}}">{{r.designation}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="simpleDemo">
-                        <ul dnd-allowed-types="['rubrique']" dnd-list="models.lists.mesRubriquesSelected" style="padding-left: 0px;">
-                            <div class="drop-down-question" ng-repeat="item in models.lists.mesRubriquesSelected" ng-init="rubriqueIndex = $index.toString()">                               <li style="background-color:#eee"
-                                    dnd-draggable="item"
-                                    dnd-type="'rubrique'"
-                                    dnd-moved="models.lists.mesRubriquesSelected.splice($index, 1)"
-                                    dnd-effect-allowed="move">
-                                        <button type="button" class="fermer pull-right" ng-click="deleteRubrique(item.rubrique.idRubrique)">&times;</button>
-                                        <button type="button" class="plus pull-right" ng-click="openModalAddQuestion(item.rubrique.idRubrique)">&#43;</button>
-                                        <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">
-                                            {{item.rubrique.designation}}
-                                            <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
-                                        </div>
-                                        
-                                </li>
-
-                                <div class="drop-down-question" ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
-                                    <li ng-if="item.questions.length != 0"
-                                        dnd-type="rubriqueId"
-                                        ng-repeat="question in item.questions"
-                                        dnd-draggable="question"
-                                        dnd-moved="item.questions.splice($index, 1)"
-                                        dnd-effect-allowed="move">
-                                        <button type="button" class="fermer pull-right" ng-click="deleteQuestionFromRubrique(item.rubrique.idRubrique,item.questions[$index].question.idQuestion)">&times;</button>
-                                        {{question.question.intitule}}
-                                    </li>
+            <div class="panel panel-default ens-edit">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span> Evaluation
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="addEvaluation()">
+                        <div class="col-md-6 ">
+                            <div class="form-group">
+                                <label class="col-sm-4">Promotion<span style="color: red"> *</span></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="evaluation.codeFormation" ng-change="selectUE()" required>
+                                        <option disabled selected value></option>
+                                        <option data-ng-repeat="p in promotions" value="{{p.promotionPK.codeFormation}}">{{p.promotionPK.codeFormation}}</option>
+                                    </select>
                                 </div>
                             </div>
-                        </ul>
-                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-4">UE<span style="color: red"> *</span></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="evaluation.codeUe" ng-change="selectEC()" required>
+                                        <option disabled selected value></option>
+                                        <option data-ng-repeat="u in UE" value="{{u.uniteEnseignementPK.codeUe}}">{{u.uniteEnseignementPK.codeUe}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4">Période</label>
+                                <div class="col-sm-8">
+                                    <input type="text" maxlength="45" class="form-control"  ng-model="evaluation.periode ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4">EC</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="evaluation.codeEc" >
+                                        <option disabled selected value></option>
+                                        <option data-ng-repeat="e in EC" value="{{e.elementConstitutifPK.codeEc}}">{{e.elementConstitutifPK.codeEc}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-sm-2">Désignation<span style="color: red"> *</span></label>
+                                <div class="col-sm-10">
+
+                                    <input type="text" class="form-control" ng-model="evaluation.designation" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-sm-2">Etat<span style="color: red"> *</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" ng-model="evaluation.etat" ng-change="selectUE()" required>
+                                        <option selected value="ELA">En Cours d'élaboration</option>
+                                        <option data-ng-repeat="et in etatsEvaluation" value="{{et.rvAbbreviation}}">{{et.rvMeaning}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="col-sm-4">De</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control"  ng-model="evaluation.debutReponse ">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-sm-4">À</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control"  ng-model="evaluation.finReponse ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="submit" value="Valider" class="btn btn-primary"></input>
+                            <a class="btn btn-danger pull-right" href="#/admin/evaluation"> Annuler</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
 
+            <div class="panel panel-default ens-edit">
+                <div class="panel-heading">
+                    <strong>
+                        <span class="glyphicon glyphicon-th"></span> Rubrique
+                    </strong>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <select id="selectRubrique" class="form-control" ng-model="selectedIdRubrique" ng-change="selectRubrique()" required>
+                                            <option disabled selected value>Selectionner une rubrique</option>
+                                            <option data-ng-repeat="r in rubriques" value="{{r.idRubrique}}">{{r.designation}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="simpleDemo">
+                                    <ul dnd-allowed-types="['rubrique']" dnd-list="models.lists.mesRubriquesSelected" style="padding-left: 0px;">
+                                        <div class="drop-down-question" ng-repeat="item in models.lists.mesRubriquesSelected" ng-init="rubriqueIndex = $index.toString()">                               <li style="background-color:#eee"
+                                                                                                                                                                                                             dnd-draggable="item"
+                                                                                                                                                                                                             dnd-type="'rubrique'"
+                                                                                                                                                                                                             dnd-moved="models.lists.mesRubriquesSelected.splice($index, 1)"
+                                                                                                                                                                                                             dnd-effect-allowed="move">
+                                            <button type="button" class="fermer pull-right" ng-click="deleteRubrique(item.rubrique.idRubrique)">&times;</button>
+                                            <button type="button" class="plus pull-right" ng-click="openModalAddQuestion(item.rubrique.idRubrique)">&#43;</button>
+                                            <div ng-click="rubriqueClicked(item.rubrique.idRubrique)">
+                                                {{item.rubrique.designation}}
+                                                <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
+                                            </div>
 
+                                        </li>
 
-<script type="text/ng-template" id="AddQuestionModalContent.html">
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="annuler()">&times;</button>
-        <h4 class="modal-title">Ajout des questions</h4>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <select class="form-control" ng-model="selectedIdQuestion" ng-change="selectQuestion()" required>
-                <option disabled selected value>Selectionner une question</option>
-                <option data-ng-repeat="q in questions" value="{{q.idQuestion}}">{{q.intitule}}</option>
-            </select>
-        </div>
-        <br><br>
-        <div class="row">
-            <div class="simpleDemo">
-                <ul dnd-list="models.lists.mesQuestionsSelected" style="padding-left: 0px;">
-                    <li ng-repeat="item in models.lists.mesQuestionsSelected"
-                        dnd-draggable="item"
-                        dnd-moved="models.lists.mesQuestionsSelected.splice($index, 1)"
-                        dnd-effect-allowed="move">
-                            <button type="button" class="fermer pull-right" ng-click="deleteQuestion(item.question.idQuestion)">&times;</button>
-                            {{item.question.intitule}}
-                    </li>
-                </ul>
+                                            <div class="drop-down-question" ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
+                                                <li ng-if="item.questions.length != 0"
+                                                    dnd-type="rubriqueId"
+                                                    ng-repeat="question in item.questions"
+                                                    dnd-draggable="question"
+                                                    dnd-moved="item.questions.splice($index, 1)"
+                                                    dnd-effect-allowed="move">
+                                                    <button type="button" class="fermer pull-right" ng-click="deleteQuestionFromRubrique(item.rubrique.idRubrique,item.questions[$index].question.idQuestion)">&times;</button>
+                                                    {{question.question.intitule}}
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
-    <!--
-    <div class="modal-footer">
-        <button type="button" class="btn btn-success pull-left" ng-click="validerLesQuestions()">Valider</button>
-        <button type="button" class="btn btn-primary" ng-click="annuler()">Annuler</button>
-    </div>-->
-</script>
 
 
 
-<script type="text/ng-template" id="ajoutEvaError.html">
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
-        <h4 class="modal-title">Erreur</h4>
-    </div>
-    <div class="modal-body">
-        <p>message here</p>
-    </div>
-</script>
+    <script type="text/ng-template" id="AddQuestionModalContent.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="annuler()">&times;</button>
+            <h4 class="modal-title">Ajout des questions</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <select class="form-control" ng-model="selectedIdQuestion" ng-change="selectQuestion()" required>
+                    <option disabled selected value>Selectionner une question</option>
+                    <option data-ng-repeat="q in questions" value="{{q.idQuestion}}">{{q.intitule}}</option>
+                </select>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="simpleDemo">
+                    <ul dnd-list="models.lists.mesQuestionsSelected" style="padding-left: 0px;">
+                        <li ng-repeat="item in models.lists.mesQuestionsSelected"
+                            dnd-draggable="item"
+                            dnd-moved="models.lists.mesQuestionsSelected.splice($index, 1)"
+                            dnd-effect-allowed="move">
+                            <button type="button" class="fermer pull-right" ng-click="deleteQuestion(item.question.idQuestion)">&times;</button>
+                            {{item.question.intitule}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success pull-left" ng-click="validerLesQuestions()">Valider</button>
+            <button type="button" class="btn btn-primary" ng-click="annuler()">Annuler</button>
+        </div>-->
+    </script>
+
+
+
+    <script type="text/ng-template" id="ajoutEvaError.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="annulerSuppresion()">&times;</button>
+            <h4 class="modal-title">Erreur</h4>
+        </div>
+        <div class="modal-body">
+            <p>message here</p>
+        </div>
+    </script>
