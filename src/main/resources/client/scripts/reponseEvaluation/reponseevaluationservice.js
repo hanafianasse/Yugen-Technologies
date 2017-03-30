@@ -1,10 +1,8 @@
 
 
 angular.module('app')
-
-    .factory('ReponseEvaluationService', ['$http','$location', function ($http,$location) {
-
-
+    .factory('ReponseEvaluationService', ['$http', function ($http) {
+        
         var urlBase = 'http://localhost:8090/reponseEvaluation';
         var dataFactory = {};
 
@@ -12,25 +10,28 @@ angular.module('app')
             return $http.get(urlBase);
         };
 
-        dataFactory.getreponseEvaluation = function (id) {
+        dataFactory.getReponseEvaluation = function (id) {
             return $http.get(urlBase + '/' + id);
         };
 
-        dataFactory.getreponseEvaluation = function (id,noetudiant) {
-            return $http.get(urlBase + '/' + id +'/'+noetudiant);
+        dataFactory.getReponseEvaluationByIdEvaluationNoEtudiant = function (idEvaluation, noEtudiant) {
+            return $http.get(urlBase + '/getReponseEvaluationByIdEvaluationNoEtudiant/' + idEvaluation + '/' + noEtudiant);
         };
 
-        dataFactory.addreponseEvaluation = function (entity) {
-            return $http.post(urlBase , entity);
+        dataFactory.addReponseEvaluation = function (entity) {
+            return $http.post(urlBase, entity);
 
         };
-        
-        dataFactory.updatereponseEvaluation = function (entity) {
+
+        dataFactory.updateReponseEvaluation = function (entity) {
             return $http.put(urlBase, entity)
         };
-        dataFactory.deletereponseEvaluation = function (id) {
-            return $http.delete(urlBase+'/'+"delete"+'/'+id, entity)
+
+        dataFactory.deleteReponseEvaluation = function (id) {
+            return $http.delete(urlBase + '/' + "delete" + '/' + id, entity)
         };
+
+        return dataFactory;
     }]);
 
 
