@@ -107,38 +107,46 @@ angular.module('app').controller('EvaluationreponseCtrl', ['$scope', '$route', '
 									$scope.rubriques[i].questions[j].qualificatif = reponse.data;
 							}
 						}
+
 					})
 
-
-				})
-		}
-
-		//Vérifier l'existence des réponses de l'étudiant
-		function verifierReponsesEtudiants() {
-			reponseEvaluationService.getReponseEvaluationByIdEvaluationNoEtudiant($scope.selectedeval.idEvaluation, $scope.etudiant.noEtudiant)
-				.then(
+					return ReponseEvaluationService.getReponseEvaluationByIdEvaluationNoEtudiant($scope.selectedeval.idEvaluation, $scope.etudiant.noEtudiant);
+				}
+				//Vérifier l'existence des réponses de l'étudiant
+				).then(
 				function (response) {
-					$scope.reponseEvaluation = (response.data != null) ? response.data : null;
+					if (response.data != null) {
+						$scope.reponseEvaluation = response.data;
 
-					var promessesReponsesQuestions = [];
+						var promessesReponsesQuestions = [];
 
-					for (var i = 0; i < $scope.rubriques.length; i++) {
-						for (var j = 0; j < $scope.rubriques[i].questions.length; j++) {
-							promessesReponsesQuestions.push(ReponseQuestionService.getReponseQuestion($scope.selectedeval.idEvaluation, $scope.rubriques[i].questions[j]));
+						for (var i = 0; i < $scope.rubriques.length; i++) {
+							for (var j = 0; j < $scope.rubriques[i].questions.length; j++) {
+								promessesReponsesQuestions.push(ReponseQuestionService.getReponseQuestion($scope.selectedeval.idEvaluation, $scope.rubriques[i].questions[j].idQuestion));
+							}
 						}
-					}
 
-					return $q.all(promessesReponsesQuestions);
+						$q.all(promessesReponsesQuestions).then(
+							function (response) {
+								for (var index = 0; index < response.length; index++) {
+									for (var i = 0; i < $scope.rubriques.length; i++) {
+										for (var j = 0; j < $scope.rubriques[i].questions.length; j++) {
+											if (response[index].data.id.idQuestionEvaluation == $scope.rubriques[i].questions[j].idQuestionEvaluation)
+												$scope.rubriques[i].questions[j].reponseQuestion = response[index].data;
+										}
+									}
+								}
+							}
+						)
+
+						console.log($scope.rubriques);
+					}
 				}, function (error) {
 					console.log("getReponseEvaluatioByIdEvaluationNoEtudiant: Error");
 					return error;
-				}
-				).then(
-					function(response) {
-						
-					}
-		)
-		
+				});
+
+
 		}
 
 		if ($rootScope.selectedeval != undefined) {
@@ -146,7 +154,6 @@ angular.module('app').controller('EvaluationreponseCtrl', ['$scope', '$route', '
 			$scope.etudiant = $rootScope.connectedUserAsEtu;
 
 			getDetailsEvaluation($scope.selectedeval);
-			verifierReponsesEtudiants();
 		}
 
 	}]);
