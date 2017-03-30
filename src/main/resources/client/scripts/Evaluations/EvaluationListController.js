@@ -33,10 +33,7 @@ $scope.select = function(evaluation){
 	var promessesRubriques = [];
 	var promessesQuestions = [];
 	var promessesQualificatifs = [];
-	var test = RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
-	);
-	console.log("hna");
-	console.log(test);
+	
 	RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
 	).then(
 			function(success) {
@@ -44,18 +41,9 @@ $scope.select = function(evaluation){
 					return a.ordre - b.ordre;
 				});
 				$scope.rubevaluations = success.data;
-
 				//Récupère l'objet rubrique_evaluation à partir de ID EVALUATION (tableau pour faire for)
-<<<<<<< HEAD
-			
 				angular.forEach($scope.rubevaluations, function(rubEval) {
 					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
-					
-					
-=======
-				angular.forEach($scope.rubevaluations, function(rubEval) {
-					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
->>>>>>> d81767889046be0521a6561a17d1d207121d1968
 					var rubrique = {
 							idRubrique: null, 
 							idRubriqueEvaluation: null, 
@@ -69,7 +57,6 @@ $scope.select = function(evaluation){
 					rubrique.idRubriqueEvaluation = rubEval.idRubriqueEvaluation;
 					
 					$scope.rubriques.push(rubrique);
-					
 					promessesRubriques.push(RubriqueService.getRubrique(rubEval.idRubrique));
 				});
 				
@@ -82,11 +69,6 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesRubriques) {
-<<<<<<< HEAD
-				console.log('------');
-				
-=======
->>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				var index = 0;
 				angular.forEach(reponsesPromessesRubriques, function(reponse) {
 					$scope.rubriques[index].designation = reponse.data.designation;
@@ -99,29 +81,15 @@ $scope.select = function(evaluation){
 					index ++;		    	
 				});
 					
-<<<<<<< HEAD
-				
-=======
->>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				/*Récuperation de toute les promesses*/
 				return $q.all(promessesQuestions);	
-				
 			},
 			function (error) {
 				console.log("get Rubrique: erreur2");
 			}
 	).then(
 			function(reponsesPromessesQuestions) {
-<<<<<<< HEAD
-				console.log('------R');
-				console.log("hadi");
-				console.log($scope.rubriques);
-				console.log(reponsesPromessesQuestions);
 				var index = 0;
-				
-=======
-				var index = 0;
->>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				
 				for(var i=0; i < reponsesPromessesQuestions.length; i++){
 					reponsesPromessesQuestions[i].data.sort(function(a,b){
@@ -140,7 +108,6 @@ $scope.select = function(evaluation){
 					}
 				};
 				
-
 				return $q.all(promessesQualificatifs);
 			},
 			function(error) {
@@ -157,7 +124,6 @@ $scope.select = function(evaluation){
 						}
 					}
 				})
-
 			})
 			
 			if($scope.rubriques.length != 0){
@@ -169,9 +135,6 @@ $scope.select = function(evaluation){
 					}
 					
 	
-<<<<<<< HEAD
-}	
-=======
 	}
 
     $scope.rubriqueClicked = function(idRubrique){
@@ -190,7 +153,6 @@ $scope.select = function(evaluation){
 	 $scope.verifyShowedRubriques = function(idRubrique){
         return RubriqueShowed.includes(idRubrique);
     }
->>>>>>> d81767889046be0521a6561a17d1d207121d1968
 
     $scope.getEvaluationWithRubAndQst = function(evaluation){
 	
