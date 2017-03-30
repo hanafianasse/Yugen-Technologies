@@ -1,10 +1,11 @@
+
 <div class="page page-table" data-ng-controller="EvaluationsCtrl">
-<div class="panel panel-default ens-edit">
+        <div class="panel panel-default">
         <div class="panel-heading">
             <strong>
-            <span class="glyphicon glyphicon-th"></span> Evaluation
-            </strong>
+            <span class="glyphicon glyphicon-th"></span> Evaluation</strong>
         </div>
+
         <div class="panel-body">
             <form class="form-horizontal" ng-submit="addEvaluation()">
                 <div class="col-md-6 ">
@@ -118,7 +119,7 @@
                                             {{item.rubrique.designation}}
                                             <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
                                         </div>
-                                        
+
                                 </li>
 
                                 <div class="drop-down-question" ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
@@ -185,6 +186,6 @@
         <h4 class="modal-title">Erreur</h4>
     </div>
     <div class="modal-body">
-        <p>message here</p>
+        <p>Il existe déjà une evaluation pour cette unité d'enseignement</p>
     </div>
 </script>

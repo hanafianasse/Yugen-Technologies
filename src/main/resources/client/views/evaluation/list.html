@@ -23,7 +23,7 @@
 
                 <!-- Affichage evaluation -->
                 <tbody>
-                    <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
+                    <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'" >
                         <td ng-click="select(evaluation)">{{evaluation.designation}}</td>
                         <td ng-click="select(evaluation)">{{evaluation.anneeUniversitaire}}</td>
                         <td><span class="glyphicon glyphicon-pencil"></span></td>
