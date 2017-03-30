@@ -5,6 +5,9 @@ import fr.univbrest.dosi.spi.bean.ReponseEvaluation;
 import fr.univbrest.dosi.spi.service.ReponseEvaluationService;
 import io.swagger.annotations.Api;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,5 +60,10 @@ import org.springframework.web.bind.annotation.RestController;
 			return ReponseEvaluationService.getReponseEvaluation(idReponseEvaluation);
 		}
 		
+		
+		@RequestMapping(value = "/getReponseEvaluationByIdEvaluationNoEtudiant/{idEvaluation}/{noEtudiant}",method = RequestMethod.GET,produces = "application/json")
+		public final ReponseEvaluation getReponseEvaluationByIdEvaluationNoEtudiant(@PathVariable(value = "idEvaluation") final Long idEvaluation, @PathVariable(value = "noEtudiant") final String noEtudiant) {
+			return ((List<ReponseEvaluation>) ReponseEvaluationService.getAllReponseEvaluation()).stream().filter((ReponseEvaluation re) -> re.getIdEvaluation().longValue() == idEvaluation && re.getNoEtudiant().equals(noEtudiant)).findAny().get();
+		}
 		
 }

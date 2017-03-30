@@ -15,9 +15,13 @@
 		['$routeProvider', function ($routeProvider, $urlRouterProvider) {
 			return $routeProvider.when('/', {
 				redirectTo: '/dashboard'
+			}).when('/admin/etudiants/reponseEvaluation', {
+				templateUrl: 'views/reponseEvaluation/reponseEvaluation.html'
 			}).when('/admin/enseignants', {
 				templateUrl: 'views/enseignants/list.html'
-			}).when('/admin/etudiants/:id', {
+			})
+			
+			.when('/admin/etudiants/:id', {
 				templateUrl: 'views/etudiants/details.html'
 			}).when('/admin/enseignantsConnected', {
 				templateUrl: 'views/enseignants/pagevierge.html'

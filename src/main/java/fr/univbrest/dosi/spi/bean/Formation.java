@@ -114,6 +114,7 @@ public class Formation implements Serializable {
         this.diplome = diplome;
     }
 
+   
     public short getN0Annee() {
         return n0Annee;
     }

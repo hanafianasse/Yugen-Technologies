@@ -3,11 +3,11 @@ angular.module('app').controller('infoEtudiantCtrl', ['$scope', '$location', 'Et
 
     	//Récupération d'un étudiant
     $scope.getEtudiant=function  () {
-   console.log("i'm here");
+   
     var promise=EtudiantsService.getEtudiant($rootScope.connectedUser.noEtudiant);
     promise.success(function(data){
         $scope.etudiant=data;
-        console.log(data);
+        
        if($scope.etudiant.telephone == null){
            $scope.etudiant.telephone="-- -- -- -- --"
         switch($scope.etudiant.paysOrigine){
@@ -42,7 +42,6 @@ angular.module('app').controller('infoEtudiantCtrl', ['$scope', '$location', 'Et
 
          promise.then(function (response) {
              $scope.promotion = response.data;
-             console.log(response.data);
              return EvaluationService.getEvaluationByPromotion($scope.promotion.promotionPK.codeFormation,$scope.promotion.promotionPK.anneeUniversitaire);
         },function (error) {
              console.log("getEval:erreur");
@@ -56,6 +55,7 @@ angular.module('app').controller('infoEtudiantCtrl', ['$scope', '$location', 'Et
                  }
                  if(item.etat != 'ELA'){
                  $scope.evaluations.push(item);}
+                 
              })
 
          })
@@ -72,4 +72,11 @@ angular.module('app').controller('infoEtudiantCtrl', ['$scope', '$location', 'Et
          }).error(function (data) {
              console.log("get promotion : erreur");
          })     }
+     
+     
+     $scope.select = function(evaluation){
+ 		$rootScope.selectedeval = evaluation;
+ 		
+ };
+ 
     }]);

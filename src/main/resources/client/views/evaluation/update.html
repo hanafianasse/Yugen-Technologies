@@ -1,4 +1,9 @@
 <div class="page page-table" data-ng-controller="EvaluationsUpdateCtrl">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:10px; padding-left:20px" >
+            <h5><a href="#/admin/evaluation"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Liste des Evaluations</a></h5>
+        </div>
+    </div>
 <div class="panel panel-default ens-edit">
         <div class="panel-heading">
             <strong>
@@ -6,7 +11,7 @@
             </strong>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" ng-submit="addEvaluation()">
+            <form class="form-horizontal" ng-submit="updateEvaluation()">
                 <div class="col-md-6 ">
                     <div class="form-group">
                         <label class="col-sm-4">Promotion<span style="color: red"> *</span></label>
@@ -59,7 +64,7 @@
                     <div class="form-group">
                         <label class="col-sm-2">Etat<span style="color: red"> *</span></label>
                         <div class="col-sm-4">
-                            <select class="form-control" ng-model="evaluation.etat" ng-change="selectUE()" required>
+                            <select class="form-control" ng-model="evaluation.etat" required>
                                 <option selected value="ELA">En Cours d'élaboration</option>
                                 <option data-ng-repeat="et in etatsEvaluation" value="{{et.rvAbbreviation}}">{{et.rvMeaning}}</option>
                             </select>
@@ -94,7 +99,7 @@
         </strong>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" ng-submit="">
+        <form class="form-horizontal">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
@@ -107,7 +112,7 @@
                     </div>
                     <div class="simpleDemo">
                         <ul dnd-allowed-types="['rubrique']" dnd-list="models.lists.mesRubriquesSelected" style="padding-left: 0px;">
-                            <div ng-repeat="item in models.lists.mesRubriquesSelected | orderBy : 'item.ordre' " ng-init="rubriqueId = item.rubrique.idRubrique.toString()">
+                            <div ng-repeat="item in models.lists.mesRubriquesSelected | orderBy : 'ordre' " ng-init="rubriqueId = item.rubrique.idRubrique.toString()">
                                 <li style="background-color:#eee"
                                     dnd-draggable="item"
                                     dnd-type="'rubrique'"
