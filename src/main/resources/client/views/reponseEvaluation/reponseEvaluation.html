@@ -1,6 +1,5 @@
-
-<div class="page page-table" data-ng-controller="EvaluationListCtrl">
-<h3 style="text-align:center"><strong>{{evaCodeFormation}} Evaluation d'un enseignement</strong></h3>
+<div class="page page-table" data-ng-controller="infoEtudiantCtrl">
+<h3 style="text-align:center"><strong>{{selectedeval.codeFormation}} Evaluation d'un enseignement</strong></h3>
     
     
     <section class=" panel panel-default ">
@@ -8,17 +7,75 @@
          <div class="panel-body"style="text-align: center;">
 
 					<div class="col-md-3">
-						<strong> Unité d'Enseignement :</strong> <span>{{evaCodeUe}}
+						<strong> Unité d'Enseignement :</strong> <span>{{selectedeval.codeUe}}
 						</span>
 					</div>
 					<div class="col-md-3">
-						<strong> Elément Constitutif :</strong><span>{{evaCodeEc}}</span>
+						<strong> Elément Constitutif :</strong><span>{{selectedeval.codeEc}}</span>
 					</div>
 					<div class="col-md-6">
-						<strong> Période :</strong> <span>{{evaPeriode}}</span>
+						<strong> Période :</strong> <span>{{selectedeval.periode}}</span>
 					</div>
 					</ul>
 				</div>
         
     </section>
-    </div>
+ </div>
+    
+ <div class="page page-table" data-ng-controller="EvaluationreponseCtrl">
+    <section class="panel panel-default" >
+   
+      <div class="panel-body">
+        <div class =" col-md-12" style="overflow: auto ;">
+        
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="head-table">
+                        <th></th>
+                        <th>Minimum</th>
+                       
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        
+                        <th>Maximum</th>
+                    </tr>
+                </thead>
+
+                <tbody ng-repeat="rubrique in rubriques | orderBy :'ordre'" >
+                    <tr style="background-color: #f6f6f6">
+                        <td>{{rubrique.designation}}</td>
+                       	<td colspan="7"></td>
+                    </tr>
+
+                    <tr ng-repeat="question in rubrique.questions | orderBy :'ordre' ">
+                        <td>{{question.intitule}}</td>
+                        <td>{{question.qualificatif.minimal}}</td>
+                        
+                        <td>
+                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                       	</td>
+                        <td>
+                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                       	</td>
+                        <td>
+                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                       	</td>
+                        <td>
+                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                       	</td>
+                        <td>
+                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                       	</td>
+                        
+                        <td>{{question.qualificatif.maximal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </section>
+</div>
+

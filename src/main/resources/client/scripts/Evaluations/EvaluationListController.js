@@ -33,16 +33,20 @@ $scope.select = function(evaluation){
 	var promessesRubriques = [];
 	var promessesQuestions = [];
 	var promessesQualificatifs = [];
-	
+	var test = RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
+	);
+	console.log("hna");
+	console.log(test);
 	RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
 	).then(
 			function(success) {
 				$scope.rubevaluations = success.data;
+
 				//Récupère l'objet rubrique_evaluation à partir de ID EVALUATION (tableau pour faire for)
-				console.log($scope.rubevaluations);
+			
 				angular.forEach($scope.rubevaluations, function(rubEval) {
 					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
-					console.log(rubEval);
+					
 					
 					var rubrique = {
 							idRubrique: null, 
@@ -58,6 +62,7 @@ $scope.select = function(evaluation){
 					
 					
 					$scope.rubriques.push(rubrique);
+					
 					promessesRubriques.push(RubriqueService.getRubrique(rubEval.idRubrique));
 				});
 				
@@ -71,7 +76,7 @@ $scope.select = function(evaluation){
 	).then(
 			function(reponsesPromessesRubriques) {
 				console.log('------');
-				console.log(reponsesPromessesRubriques);
+				
 				var index = 0;
 				angular.forEach(reponsesPromessesRubriques, function(reponse) {
 					$scope.rubriques[index].designation = reponse.data.designation;
@@ -81,11 +86,10 @@ $scope.select = function(evaluation){
 					index ++;		    	
 				});
 					
-				console.log('------');
-				console.log($scope.rubriques);
-				console.log('------');
+				
 				/*Récuperation de toute les promesses*/
 				return $q.all(promessesQuestions);	
+				
 			},
 			function (error) {
 				console.log("get Rubrique: erreur2");
@@ -93,9 +97,11 @@ $scope.select = function(evaluation){
 	).then(
 			function(reponsesPromessesQuestions) {
 				console.log('------R');
+				console.log("hadi");
+				console.log($scope.rubriques);
 				console.log(reponsesPromessesQuestions);
 				var index = 0;
-				console.log($scope.rubriques);
+				
 				
 				for(var i=0; i < reponsesPromessesQuestions.length; i++){
 					for(var j=0; j < reponsesPromessesQuestions[i].data.length; j++){
@@ -111,7 +117,6 @@ $scope.select = function(evaluation){
 					}
 				};
 				
-				console.log($scope.rubriques);
 				
 				return $q.all(promessesQualificatifs);
 			},
@@ -131,10 +136,12 @@ $scope.select = function(evaluation){
 					}
 				})
 				
-				console.log($scope.rubriques);
+				
 			})
 	
 }	
+
+
 }]);
 
 

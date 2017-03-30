@@ -11453,3 +11453,7 @@ tr.formation:hover {
 .drop-down-question{
   /*Ajout de l'animation du menu drop-down*/
 }
+
+.head-table{
+	text-align: center;
+} 	
