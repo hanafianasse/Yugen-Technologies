@@ -3,23 +3,23 @@
 
 angular.module('app').controller('EvaluationListCtrl', ['$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function ($scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
 
-
-console.log("je suis dans EvaluationListController");
-
 //Recupération de toutes les évaluations
 var promiseEvaluation = EvaluationService.getAll();
 promiseEvaluation.success(function(data) {
 	$scope.evaluations = data;
-	console.log($scope.evaluations);
 }).error(function(data) {
 	console.log("get evaluation: erreur");
 });
 
 /********************FONCTION DE RECUPERATION**************************/
 
+
+var RubriqueShowed = [];
+
 //Recupération des rubriques
 $scope.select = function(evaluation){
 	
+	$scope.longueur = null;
 	$scope.evaCodeFormation = evaluation.codeFormation;
 	$scope.evaCodeUe = evaluation.codeUe;
 	$scope.evaCodeEc = evaluation.codeEc;
@@ -43,11 +43,16 @@ $scope.select = function(evaluation){
 				$scope.rubevaluations = success.data;
 
 				//Récupère l'objet rubrique_evaluation à partir de ID EVALUATION (tableau pour faire for)
+<<<<<<< HEAD
 			
 				angular.forEach($scope.rubevaluations, function(rubEval) {
 					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
 					
 					
+=======
+				angular.forEach($scope.rubevaluations, function(rubEval) {
+					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
+>>>>>>> d81767889046be0521a6561a17d1d207121d1968
 					var rubrique = {
 							idRubrique: null, 
 							idRubriqueEvaluation: null, 
@@ -59,7 +64,6 @@ $scope.select = function(evaluation){
 					
 					rubrique.idRubrique = rubEval.idRubrique;
 					rubrique.idRubriqueEvaluation = rubEval.idRubriqueEvaluation;
-					
 					
 					$scope.rubriques.push(rubrique);
 					
@@ -75,18 +79,27 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesRubriques) {
+<<<<<<< HEAD
 				console.log('------');
 				
+=======
+>>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				var index = 0;
 				angular.forEach(reponsesPromessesRubriques, function(reponse) {
 					$scope.rubriques[index].designation = reponse.data.designation;
 					$scope.rubriques[index].ordre = reponse.data.ordre;
 					$scope.rubriques[index].type = reponse.data.type;
+
+					RubriqueShowed.push(reponse.data.idRubrique);
+
 					promessesQuestions.push(questionService.getQuestionEvaluation($scope.rubriques[index].idRubriqueEvaluation));		    
 					index ++;		    	
 				});
 					
+<<<<<<< HEAD
 				
+=======
+>>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				/*Récuperation de toute les promesses*/
 				return $q.all(promessesQuestions);	
 				
@@ -96,12 +109,16 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesQuestions) {
+<<<<<<< HEAD
 				console.log('------R');
 				console.log("hadi");
 				console.log($scope.rubriques);
 				console.log(reponsesPromessesQuestions);
 				var index = 0;
 				
+=======
+				var index = 0;
+>>>>>>> d81767889046be0521a6561a17d1d207121d1968
 				
 				for(var i=0; i < reponsesPromessesQuestions.length; i++){
 					for(var j=0; j < reponsesPromessesQuestions[i].data.length; j++){
@@ -117,7 +134,7 @@ $scope.select = function(evaluation){
 					}
 				};
 				
-				
+
 				return $q.all(promessesQualificatifs);
 			},
 			function(error) {
@@ -125,7 +142,6 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesQualificatifs){
-				console.log(reponsesPromessesQualificatifs);
 				angular.forEach(reponsesPromessesQualificatifs, function(reponse) {
 				//for(var index=0; index< reponsesPromessesQualificatifs.length; index++){
 					for(var i=0; i<$scope.rubriques.length; i++){
@@ -135,11 +151,40 @@ $scope.select = function(evaluation){
 						}
 					}
 				})
-				
-				
+
 			})
+			
+			if($scope.rubriques.length != 0){
+				$scope.longueur = true;
+				console.log($scope.longueur);
+			}	
+				else{
+						$scope.longueur = false;
+					}
+					
 	
+<<<<<<< HEAD
 }	
+=======
+	}
+
+    $scope.rubriqueClicked = function(idRubrique){
+        var bool = false;
+        RubriqueShowed.forEach(function(item, index){
+            if(item == idRubrique){
+                RubriqueShowed.splice(index,1);
+                bool = true;
+            }
+        });
+        
+        if(!bool)
+            RubriqueShowed.push(idRubrique);
+    }
+	
+	 $scope.verifyShowedRubriques = function(idRubrique){
+        return RubriqueShowed.includes(idRubrique);
+    }
+>>>>>>> d81767889046be0521a6561a17d1d207121d1968
 
 
 }]);

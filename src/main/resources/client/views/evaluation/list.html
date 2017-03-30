@@ -33,8 +33,6 @@
        </div>
     </section>
 
-
-
     <div ng-if="rubriques.length">
     	<h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
 
@@ -74,12 +72,15 @@
                 </thead>
 
                 <tbody ng-repeat="rubrique in rubriques | orderBy :'ordre'" >
-                    <tr style="background-color: #f6f6f6">
-                        <td>{{rubrique.designation}}</td>
+                    <tr ng-click="rubriqueClicked(rubrique.idRubrique)"  style="background-color: #f6f6f6">
+                        <td>
+                            {{rubrique.designation}}
+                            <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
+                        </td>
                         <td colspan="2"></td>
                     </tr>
 
-                    <tr ng-repeat="question in rubrique.questions | orderBy :'ordre' ">
+                    <tr ng-if="verifyShowedRubriques(rubrique.idRubrique)" ng-repeat="question in rubrique.questions | orderBy :'ordre' ">
                         <td>{{question.intitule}}</td>
                         <td>{{question.qualificatif.minimal}}</td>
                         <td>{{question.qualificatif.maximal}}</td>
@@ -90,6 +91,8 @@
       </div>
     </section>
     </div>
+
+<div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
 
 </div>
 
