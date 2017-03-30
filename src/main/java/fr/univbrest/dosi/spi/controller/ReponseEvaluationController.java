@@ -5,6 +5,7 @@ import fr.univbrest.dosi.spi.bean.ReponseEvaluation;
 import fr.univbrest.dosi.spi.service.ReponseEvaluationService;
 import io.swagger.annotations.Api;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,16 @@ import org.springframework.web.bind.annotation.RestController;
 		
 		@RequestMapping(value = "/getReponseEvaluationByIdEvaluationNoEtudiant/{idEvaluation}/{noEtudiant}",method = RequestMethod.GET,produces = "application/json")
 		public final ReponseEvaluation getReponseEvaluationByIdEvaluationNoEtudiant(@PathVariable(value = "idEvaluation") final Long idEvaluation, @PathVariable(value = "noEtudiant") final String noEtudiant) {
-			return ((List<ReponseEvaluation>) ReponseEvaluationService.getAllReponseEvaluation()).stream().filter((ReponseEvaluation re) -> re.getIdEvaluation().longValue() == idEvaluation && re.getNoEtudiant().equals(noEtudiant)).findAny().get();
+			List<ReponseEvaluation> reponseEvaluation = (List<ReponseEvaluation>) ReponseEvaluationService.getAllReponseEvaluation();
+			//List<ReponseEvaluation> mesReponseEvaluation = new ArrayList<>();
+			for(int i = 0 ; i < reponseEvaluation.size() ; i++){
+				if(reponseEvaluation.get(i).getIdEvaluation().longValue() == idEvaluation && reponseEvaluation.get(i).getNoEtudiant().equals(noEtudiant)  ){
+					return reponseEvaluation.get(i);
+					//mesReponseEvaluation.add(reponseEvaluation.get(i));
+				}
+			}
+			return null;
+			//return ((List<ReponseEvaluation>) ReponseEvaluationService.getAllReponseEvaluation()).stream().filter((ReponseEvaluation re) -> re.getIdEvaluation().longValue() == idEvaluation && re.getNoEtudiant().equals(noEtudiant)).findAny().get();
 		}
 		
 }

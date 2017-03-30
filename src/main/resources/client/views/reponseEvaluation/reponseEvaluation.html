@@ -44,30 +44,30 @@
                     </tr>
                 </thead>
 
-                <tbody ng-repeat="rubrique in rubriques | orderBy :'ordre'" >
+                <tbody ng-repeat="rubrique in rubriques | orderBy :'rubrique.rubrique.ordre'" >
                     <tr style="background-color: #f6f6f6">
-                        <td>{{rubrique.designation}}</td>
+                        <td>{{rubrique.rubrique.designation}}</td>
                        	<td colspan="7"></td>
                     </tr>
 
-                    <tr ng-repeat="question in rubrique.questions | orderBy :'ordre' ">
-                        <td>{{question.intitule}}</td>
+                    <tr ng-repeat="question in rubrique.questions | orderBy :'question.question.ordre' ">
+                        <td>{{question.question.intitule}}</td>
                         <td>{{question.qualificatif.minimal}}</td>
                         
                         <td>
-                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="1" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="2" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="3" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="4" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="5" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         
                         <td>{{question.qualificatif.maximal}}</td>
