@@ -12,7 +12,7 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
 
     /********************FONCTION DE RECUPERATION**************************/
 
-
+    $scope.evaId = 0;
     var RubriqueShowed = [];
 
 //Recupération des rubriques
@@ -224,4 +224,3 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
 
 
 }]);
-

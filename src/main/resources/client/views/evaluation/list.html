@@ -26,9 +26,9 @@
             <!-- Affichage evaluation -->
             <tbody>
                <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
-                  <td><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                </tr>
             </tbody>
          </table>
@@ -84,3 +84,4 @@
    </div>
    <div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
 </div>
+
