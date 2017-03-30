@@ -1,25 +1,25 @@
 
 'use strict';
 
-angular.module('app').controller('EvaluationListCtrl', ['$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function ($scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
-
-
-console.log("je suis dans EvaluationListController");
+angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsService','$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function (QuestionEvaluationsService,$scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
 
 //Recupération de toutes les évaluations
 var promiseEvaluation = EvaluationService.getAll();
 promiseEvaluation.success(function(data) {
 	$scope.evaluations = data;
-	console.log($scope.evaluations);
 }).error(function(data) {
 	console.log("get evaluation: erreur");
 });
 
 /********************FONCTION DE RECUPERATION**************************/
 
+
+var RubriqueShowed = [];
+
 //Recupération des rubriques
 $scope.select = function(evaluation){
 	
+	$scope.longueur = null;
 	$scope.evaCodeFormation = evaluation.codeFormation;
 	$scope.evaCodeUe = evaluation.codeUe;
 	$scope.evaCodeEc = evaluation.codeEc;
@@ -37,13 +37,13 @@ $scope.select = function(evaluation){
 	RubriqueEvaluationsService.getRubriqueEvaluationByIdEva($scope.evaId
 	).then(
 			function(success) {
+				success.data.sort(function(a,b){
+					return a.ordre - b.ordre;
+				});
 				$scope.rubevaluations = success.data;
 				//Récupère l'objet rubrique_evaluation à partir de ID EVALUATION (tableau pour faire for)
-				console.log($scope.rubevaluations);
 				angular.forEach($scope.rubevaluations, function(rubEval) {
 					/*rubEval represente un seul objet qui normalement est dans le tableau rubevaluations*/
-					console.log(rubEval);
-					
 					var rubrique = {
 							idRubrique: null, 
 							idRubriqueEvaluation: null, 
@@ -55,7 +55,6 @@ $scope.select = function(evaluation){
 					
 					rubrique.idRubrique = rubEval.idRubrique;
 					rubrique.idRubriqueEvaluation = rubEval.idRubriqueEvaluation;
-					
 					
 					$scope.rubriques.push(rubrique);
 					promessesRubriques.push(RubriqueService.getRubrique(rubEval.idRubrique));
@@ -70,20 +69,18 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesRubriques) {
-				console.log('------');
-				console.log(reponsesPromessesRubriques);
 				var index = 0;
 				angular.forEach(reponsesPromessesRubriques, function(reponse) {
 					$scope.rubriques[index].designation = reponse.data.designation;
 					$scope.rubriques[index].ordre = reponse.data.ordre;
 					$scope.rubriques[index].type = reponse.data.type;
+
+					RubriqueShowed.push(reponse.data.idRubrique);
+
 					promessesQuestions.push(questionService.getQuestionEvaluation($scope.rubriques[index].idRubriqueEvaluation));		    
 					index ++;		    	
 				});
 					
-				console.log('------');
-				console.log($scope.rubriques);
-				console.log('------');
 				/*Récuperation de toute les promesses*/
 				return $q.all(promessesQuestions);	
 			},
@@ -92,12 +89,12 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesQuestions) {
-				console.log('------R');
-				console.log(reponsesPromessesQuestions);
 				var index = 0;
-				console.log($scope.rubriques);
 				
 				for(var i=0; i < reponsesPromessesQuestions.length; i++){
+					reponsesPromessesQuestions[i].data.sort(function(a,b){
+						return a.ordre - b.ordre;
+					});
 					for(var j=0; j < reponsesPromessesQuestions[i].data.length; j++){
 						var question = {}
 						question.idQualificatif = reponsesPromessesQuestions[i].data[j].idQualificatif;
@@ -111,8 +108,6 @@ $scope.select = function(evaluation){
 					}
 				};
 				
-				console.log($scope.rubriques);
-				
 				return $q.all(promessesQualificatifs);
 			},
 			function(error) {
@@ -120,7 +115,6 @@ $scope.select = function(evaluation){
 			}
 	).then(
 			function(reponsesPromessesQualificatifs){
-				console.log(reponsesPromessesQualificatifs);
 				angular.forEach(reponsesPromessesQualificatifs, function(reponse) {
 				//for(var index=0; index< reponsesPromessesQualificatifs.length; index++){
 					for(var i=0; i<$scope.rubriques.length; i++){
@@ -130,11 +124,106 @@ $scope.select = function(evaluation){
 						}
 					}
 				})
-				
-				console.log($scope.rubriques);
 			})
+			
+			if($scope.rubriques.length != 0){
+				$scope.longueur = true;
+				console.log($scope.longueur);
+			}	
+				else{
+						$scope.longueur = false;
+					}
+					
 	
-}	
+	}
+
+    $scope.rubriqueClicked = function(idRubrique){
+        var bool = false;
+        RubriqueShowed.forEach(function(item, index){
+            if(item == idRubrique){
+                RubriqueShowed.splice(index,1);
+                bool = true;
+            }
+        });
+        
+        if(!bool)
+            RubriqueShowed.push(idRubrique);
+    }
+	
+	 $scope.verifyShowedRubriques = function(idRubrique){
+        return RubriqueShowed.includes(idRubrique);
+    }
+
+    $scope.getEvaluationWithRubAndQst = function(evaluation){
+	
+    if(evaluation.codeEc == null){
+    	evaluation.codeEc = "-- --";
+    }
+    if(evaluation.periode == null){
+    	evaluation.periode = "-- --";
+    }
+
+	$scope.longueur = null;
+	$scope.evaCodeFormation = evaluation.codeFormation;
+	$scope.evaCodeUe = evaluation.codeUe;
+	$scope.evaCodeEc = evaluation.codeEc;
+	$scope.evaPeriode = evaluation.periode;
+	$scope.evaId = evaluation.idEvaluation;
+
+    	$scope.rubriques = [];
+	    RubriqueEvaluationsService.getAll().success(function(lesRubriqueEvaluation){
+	        lesRubriqueEvaluation.sort(function(a,b){
+	            return a.ordre - b.ordre;
+	        });
+	        angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
+	            if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
+	                RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
+	                    var mesQuestions = [];
+	                    QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
+	                        LesQuestionsEvaluation.sort(function(a,b){
+	                            return a.ordre - b.ordre;
+	                        });
+	                        angular.forEach(LesQuestionsEvaluation,function(uneQuestionEvaluation,k){
+	                            if(uneQuestionEvaluation.idRubriqueEvaluation == rubriqueEvaluation.idRubriqueEvaluation){
+	                                var promese = questionService.getQuestion(uneQuestionEvaluation.idQuestion);
+	                                promese.success(function(qst){
+	                                	var promise = QualificatifService.getQualificatif(qst.idQualificatif).success(function(qualificatif){
+		                                    var myQstObject = {
+		                                        "question" : qst,
+		                                        "qualificatif" : qualificatif,
+	    	                                    "idQuestionEvaluation" : uneQuestionEvaluation.idQuestionEvaluation
+	        	                            }
+	                                    	mesQuestions.push(myQstObject);
+	                                	}).error(function(status){
+	                                		console.log("get qualificatif by id error");
+	                                	});
+
+
+
+	                                }).error(function(status){
+	                                });
+	                            }
+	                        });
+	                        var myObject = {
+	                            "idRubriqueEvaluation":rubriqueEvaluation.idRubriqueEvaluation,
+	                            "rubrique": data,
+	                            "questions":mesQuestions
+	                        }
+	                        $scope.rubriques.push(myObject);                                    
+	                    }).error(function(status){
+
+	                    });
+	                }).error(function(status){
+
+	                });
+	            }
+	        })
+	    }).error(function(){
+
+	    });
+    }
+
+
 }]);
 
 

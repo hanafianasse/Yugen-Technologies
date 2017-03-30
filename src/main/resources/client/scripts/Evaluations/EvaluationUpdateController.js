@@ -74,7 +74,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
         // call web service add rubriqueEvaluation
         var rubriqueEvaluation = {
             'designation'  : null,
-            'idEvaluation' : $rootScope.addedEvaluationId,
+            'idEvaluation' : $scope.evaluation.idEvaluation,
             'idRubrique'   : myObject.rubrique.idRubrique,
             'ordre'        : $scope.models.lists.mesRubriquesSelected.length + 1
         }
@@ -193,7 +193,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                 $q.all(promise).then(function(){
                     promise.success(function(data){
                         angular.forEach(data,function(item,index){
-                            if(item.idRubrique == idRubrique && item.idEvaluation == $rootScope.addedEvaluationId){
+                            if(item.idRubrique == idRubrique && item.idEvaluation == $scope.evaluation.idEvaluation){
                                 var promise = RubriqueEvaluationsService.deleteRubriqueEvaluation(item.idRubriqueEvaluation);
                                 promise.success(function(data){
                                     console.log("delete worked");
@@ -239,7 +239,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                     var promise = RubriqueEvaluationsService.getAll();
                     promise.success(function(data){
                         angular.forEach(data,function(rubriqueEvaluation,index){
-                            if(rubriqueEvaluation.idRubrique == idRubrique && rubriqueEvaluation.idEvaluation == $rootScope.addedEvaluationId){
+                            if(rubriqueEvaluation.idRubrique == idRubrique && rubriqueEvaluation.idEvaluation == $scope.evaluation.idEvaluation){
                                 var promise_ = QuestionEvaluationsService.getAll();
                                 promise_.success(function(LesQuestionEvaluations){
                                     angular.forEach(LesQuestionEvaluations,function(uneQuestionEvaluation,index){
@@ -354,7 +354,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                             var promiseRubEva = RubriqueEvaluationsService.getAll();
                             promiseRubEva.success(function(data){
                                 angular.forEach(data,function(item){
-                                    if(item.idRubrique == $rootScope.selectedIdRubrique && item.idEvaluation == $rootScope.addedEvaluationId){
+                                    if(item.idRubrique == $rootScope.selectedIdRubrique && item.idEvaluation == $rootScope.evaluation.idEvaluation){
                                         $rootScope.lengthOfQuestionOfSelectedRubrique++;
                                         var QuestionEvaluation = {
                                             'idQualificatif' : null,
@@ -451,6 +451,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
             angular.forEach(evaluations,function(evaluation,i){
                 if(evaluation.idEvaluation == $routeParams.idEvaluation){
                     $scope.evaluation = evaluation;
+                    $rootScope.evaluation = evaluation;
                     RubriqueEvaluationsService.getAll().success(function(lesRubriqueEvaluation){
                         lesRubriqueEvaluation.sort(function(a,b){
                             return a.ordre - b.ordre;

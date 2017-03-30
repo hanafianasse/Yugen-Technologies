@@ -1,86 +1,86 @@
 <div class="page page-table" data-ng-controller="EvaluationListCtrl">
-    <section class="panel panel-default table-dynamic">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Evaluations</strong>
-            <a href="#/admin/evaluation/Ajout"><span class="add fa fa-plus pull-right"></span></a>
-        </div>
-        <div style="overflow: auto ;max-height: 600px;">
-            <table class="table table-hover table-responsive">
-                <thead>
-                <tr>
-                    <th><div class="th">
-                       Designation
-                    </div></th>
-                    <th><div class="th">
+   <section class="panel panel-default table-dynamic">
+      <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Evaluations</strong>
+         <a href="#/admin/evaluation/Ajout"><span class="add fa fa-plus pull-right"></span></a>
+      </div>
+      <div style="overflow: auto ;max-height: 600px;">
+         <table class="table table-hover table-responsive">
+            <thead>
+               <tr>
+                  <th>
+                     <div class="th">
+                        Designation
+                     </div>
+                  </th>
+                  <th>
+                     <div class="th">
                         Promotion
-                    </div></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                
-                <!-- Affichage evaluation -->
-                <tbody>
-                    <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
-                        <td ng-click="select(evaluation)">{{evaluation.designation}}</td>
-                        <td ng-click="select(evaluation)">{{evaluation.anneeUniversitaire}}</td>
-                    </tr> 
-                </tbody>
-            </table>
-       </div>
-    </section>
-    
-    
-   
-    <div ng-if="rubriques.length">
-    	<h3 style="text-align:center"><strong>{{evaCodeFormation}} Evaluation d'un enseignement</strong></h2>
-    
-    
-    <section class=" panel panel-default ">
-        <div class="panel-heading"><strong> Informations</strong> </div>
-         <div class="panel-body"style="text-align: center;">
-
-					<div class="col-md-3">
-						<strong> Unité d'Enseignement :</strong> <span>{{evaCodeUe}}
-						</span>
-					</div>
-					<div class="col-md-3">
-						<strong> Elément Constitutif :</strong><span>{{evaCodeEc}}</span>
-					</div>
-					<div class="col-md-6">
-						<strong> Période :</strong> <span>{{evaPeriode}}</span>
-					</div>
-					</ul>
-				</div>
-        
-    </section>
-    
-  
-    <section class="panel panel-default">
-        
-      <div class="panel-body">
-        <div class =" col-md-12" style="overflow: auto ;">
-            <table class="table table-hover table-responsive">
-             
-                <div class="container" style="padding-left:0px;margin-left:0px;">
-                        <ul class="list-group " >
-                            <div ng-repeat="rubrique in rubriques">
-                                <li class="list-group-item" style="background-color:#eee">
-                                        <div >{{rubrique.designation}}</div>
-                                        
-                                </li>
-                                <div>
-                                    <li class="list-group-item" data-ng-repeat="question in rubrique.questions">
-                                        {{question.intitule}}
-                                    </li>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-       
-            </table>
-       </div>
-       </div>
-    </section>
-    </div>
-    
+                     </div>
+                  </th>
+                  <th>
+                     <div class="th">
+                     </div>
+                  </th>
+               </tr>
+            </thead>
+            <!-- Affichage evaluation -->
+            <tbody>
+               <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
+                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
+                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
+                  <td><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </section>
+   <h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
+   <section class=" panel panel-default ">
+      <div class="panel-heading"><strong> Informations</strong> </div>
+      <div class="panel-body"style="text-align: center;">
+         <div class="col-md-3">
+            <strong> Unité d'Enseignement :</strong> <span>{{evaCodeUe}}
+            </span>
+         </div>
+         <div class="col-md-3">
+            <strong> Elément Constitutif :</strong><span>{{evaCodeEc}}</span>
+         </div>
+         <div class="col-md-6">
+            <strong> Période :</strong> <span>{{evaPeriode}}</span>
+         </div>
+         </ul>
+      </div>
+   </section>
+   <div ng-if="rubriques.length">
+      <section class="panel panel-default">
+         <div class="panel-body">
+            <div class =" col-md-12" style="overflow: auto ;">
+               <table class="table table-bordered">
+                  <thead>
+                     <tr>
+                        <th></th>
+                        <th>Minimum</th>
+                        <th>Maximum</th>
+                     </tr>
+                  </thead>
+                  <tbody ng-repeat="rubrique in rubriques | orderBy :'rubrique.rubrique.ordre'" >
+                     <tr ng-click="rubriqueClicked(rubrique.rubrique.idRubrique)"  style="background-color: #f6f6f6">
+                        <td>
+                           {{rubrique.rubrique.designation}}
+                           <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(rubrique.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.rubrique.idRubrique) == false}"></i>
+                        </td>
+                        <td colspan="2"></td>
+                     </tr>
+                     <tr ng-if="verifyShowedRubriques(rubrique.rubrique.idRubrique)" ng-repeat="question in rubrique.questions | orderBy :'question.ordre' ">
+                        <td>{{question.question.intitule}}</td>
+                        <td>{{question.qualificatif.minimal}}</td>
+                        <td>{{question.qualificatif.maximal}}</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </section>
+   </div>
+   <div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
 </div>
