@@ -26,9 +26,9 @@
             <!-- Affichage evaluation -->
             <tbody>
                <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
-                  <td><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                </tr>
             </tbody>
          </table>
@@ -40,14 +40,14 @@
       <div class="panel-heading"><strong> Informations</strong> </div>
       <div class="panel-body"style="text-align: center;">
          <div class="col-md-3">
-            <strong> UnitÃ© d'Enseignement :</strong> <span>{{evaCodeUe}}
+            <strong> Unité d'Enseignement :</strong> <span>{{evaCodeUe}}
             </span>
          </div>
          <div class="col-md-3">
-            <strong> ElÃ©ment Constitutif :</strong> <span>{{evaCodeEc}}</span>
+            <strong> Elément Constitutif :</strong><span>{{evaCodeEc}}</span>
          </div>
          <div class="col-md-6">
-            <strong> PÃ©riode :</strong> <span>{{evaPeriode}}</span>
+            <strong> Période :</strong> <span>{{evaPeriode}}</span>
          </div>
          </ul>
       </div>
@@ -84,5 +84,5 @@
          </div>
       </section>
    </div>
-   <div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette Ã©valuation</div>
+   <div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
 </div>
