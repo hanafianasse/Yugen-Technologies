@@ -2,6 +2,10 @@
 
 angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsService','$scope','$route','$rootScope','$routeParams','$http','$location','$q','EvaluationService','RubriqueService','questionService', 'RubriqueEvaluationsService','QualificatifService','$modal',function (QuestionEvaluationsService,$scope,$route,$rootScope,$routeParams,$http,$location,$q, EvaluationService, RubriqueService, questionService, RubriqueEvaluationsService, QualificatifService,$modal) {
 
+    $scope.uneEvaluationEstActive = false;
+    var RubriqueShowed = [];
+
+
 //Recupération de toutes les évaluations
     var promiseEvaluation = EvaluationService.getAll();
     promiseEvaluation.success(function(data) {
@@ -12,8 +16,7 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
 
     /********************FONCTION DE RECUPERATION**************************/
 
-
-    var RubriqueShowed = [];
+    $scope.evaId = 0;
 
 //Recupération des rubriques
     $scope.select = function(evaluation){
@@ -155,6 +158,8 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
 
     $scope.getEvaluationWithRubAndQst = function(evaluation){
 
+        $scope.uneEvaluationEstActive = true;
+
         if(evaluation.codeEc == null){
             evaluation.codeEc = "-- --";
         }
@@ -176,6 +181,7 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
             });
             angular.forEach(lesRubriqueEvaluation,function(rubriqueEvaluation,j){
                 if(rubriqueEvaluation.idEvaluation == evaluation.idEvaluation){
+                    RubriqueShowed.push(rubriqueEvaluation.idRubrique);
                     RubriqueService.getRubrique(rubriqueEvaluation.idRubrique).success(function(data){
                         var mesQuestions = [];
                         QuestionEvaluationsService.getAll().success(function(LesQuestionsEvaluation){
@@ -224,4 +230,3 @@ angular.module('app').controller('EvaluationListCtrl', ['QuestionEvaluationsServ
 
 
 }]);
-

@@ -26,14 +26,15 @@
             <!-- Affichage evaluation -->
             <tbody>
                <tr data-ng-repeat="evaluation in evaluations | orderBy:'-'">
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
-                  <td ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
-                  <td><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.designation}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ng-click="getEvaluationWithRubAndQst(evaluation)">{{evaluation.anneeUniversitaire}}</td>
+                  <td ng-class="{'selected': evaluation.idEvaluation == evaId}" ><a href="#/update/evaluation/{{evaluation.idEvaluation}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                </tr>
             </tbody>
          </table>
       </div>
    </section>
+   <div ng-if="uneEvaluationEstActive">
    <h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
    <section class=" panel panel-default ">
       <div class="panel-heading"><strong> Informations</strong> </div>
@@ -51,6 +52,7 @@
          </ul>
       </div>
    </section>
+   </div>
    <div ng-if="rubriques.length">
       <section class="panel panel-default">
          <div class="panel-body">
@@ -83,4 +85,6 @@
       </section>
    </div>
    <div ng-if="rubriques.length == 0" class="success">Il n'y a pas de rubriques pour cette évaluation</div>
+
 </div>
+

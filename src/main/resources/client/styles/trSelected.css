@@ -1,9 +1,7 @@
 
-
 .trSelected {
 	background-color: rgba(104,223,240,0.32);
 }
-
 
 .info, .success, .warning, .error, .validation {
 border: 1px solid;
