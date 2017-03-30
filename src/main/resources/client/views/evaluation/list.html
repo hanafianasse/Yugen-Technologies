@@ -34,6 +34,7 @@
          </table>
       </div>
    </section>
+   <div ng-if="uneEvaluationEstActive">
    <h2 style="text-align:center"><strong> Evaluation {{evaCodeFormation}}</strong></h2>
    <section class=" panel panel-default ">
       <div class="panel-heading"><strong> Informations</strong> </div>
@@ -43,7 +44,7 @@
             </span>
          </div>
          <div class="col-md-3">
-            <strong> Elément Constitutif :</strong><span>{{evaCodeEc}}</span>
+            <strong> Elément Constitutif :</strong> <span>{{evaCodeEc}}</span>
          </div>
          <div class="col-md-6">
             <strong> Période :</strong> <span>{{evaPeriode}}</span>
@@ -51,6 +52,7 @@
          </ul>
       </div>
    </section>
+   </div>
    <div ng-if="rubriques.length">
       <section class="panel panel-default">
          <div class="panel-body">
