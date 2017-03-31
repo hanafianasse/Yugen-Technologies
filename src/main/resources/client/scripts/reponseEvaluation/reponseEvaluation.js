@@ -14,10 +14,10 @@ angular.module('app').controller('EvaluationreponseCtrl', ['$scope', '$route', '
     	promiseReponseEvaluation.success(function(reponseEvaluation){
 			if(reponseEvaluation.idReponseEvaluation == undefined){
 			    var ReponseEvaluation = {
-		        	"nom" : null, 
-		        	"prenom" : null, 
-		        	"commentaire" : null, 
-		        	"noEtudiant" : $scope.etudiant.noEtudiant, 
+		        	"nom" : null,
+		        	"prenom" : null,
+		        	"commentaire" : null,
+		        	"noEtudiant" : $scope.etudiant.noEtudiant,
 		        	"idEvaluation" : evaluation.idEvaluation
 		        }
 				ReponseEvaluationService.addReponseEvaluation(ReponseEvaluation).success(function(ReponseEvaluationAdded){
@@ -136,7 +136,13 @@ angular.module('app').controller('EvaluationreponseCtrl', ['$scope', '$route', '
 
 		//getDetailsEvaluation($scope.selectedeval);
 		$scope.getEvaluationWithRubAndQst($scope.selectedeval);
-		console.log($scope.rubriques);
+
+        if ($scope.selectedeval.etat== 'CLO'){
+            $scope.answerStatus = false;
+        }
+        else{
+            $scope.answerStatus = true;
+        }
 	}
 
 }]);

@@ -123,7 +123,7 @@
                                  </div>
                               </li>
                               <div class="drop-down-question"
-                                   ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" 
+                                   ng-if="verifyShowedRubriques(item.rubrique.idRubrique)"
                                    dnd-allowed-types="[rubriqueIndex]" dnd-list="item.questions">
                                  <li ng-if="item.questions.length != 0"
                                     dnd-type="rubriqueIndex"
@@ -187,3 +187,13 @@
        <p>Impossible d'ajouté l'évaluation</p>
    </div>
 </script>
+
+    <script type="text/ng-template" id="ajoutEvaSuccess.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="annuler()">&times;</button>
+            <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+            <p>L'évaluation est bien ajoutée</p>
+        </div>
+    </script>

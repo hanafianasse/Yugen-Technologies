@@ -11461,3 +11461,17 @@ tr.formation:hover {
 .inactive{
     background-color: rgba(255,255,255,0.85);
 }
+
+.radio-answer{
+    display: inline-block;
+}
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{
+    margin-left : 0px;
+    position: static;
+}
+
+.radio, .checkbox{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

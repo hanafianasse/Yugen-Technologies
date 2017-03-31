@@ -47,6 +47,15 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
         promise.success(function(data){
             console.log(data);
             $rootScope.addedEvaluationId = data.idEvaluation;
+            $modal.open({
+                templateUrl: 'updateEvaSuccess.html',
+                backdrop: true,
+                controller: function ($scope, $modalInstance,$rootScope,questionService) {
+                    $scope.annuler = function(){
+                        $modalInstance.dismiss('cancel');
+                    }
+                }
+            });
         }).error(function(data){
             $modal.open({
                 templateUrl: 'ajoutEvaError.html',
@@ -97,7 +106,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
     $scope.$watch('models', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
         setAllRubriqueEvaluationNewOrdre();
-        setAllQuestionEvaluationNewOrdre();            
+        setAllQuestionEvaluationNewOrdre();
     }, true);
 
     $scope.modelsQuestion = {
@@ -163,7 +172,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                         if(RubriqueEvaluations[i].ordre != index + 1){
                             RubriqueEvaluations[i].ordre = index + 1;
                             RubriqueEvaluationsService.updateRubriqueEvaluation(RubriqueEvaluations[i]).success(function(data){
-                   
+
                             }).error(function(){
                                 console.log("update Rubrique Evaluation : Error");
                             })
@@ -227,7 +236,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                     RubriqueShowed.push($scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique);
                 }
             }
-        
+
     }
 
     $scope.deleteQuestionFromRubrique = function(idRubrique,idQuestion){
@@ -253,7 +262,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                                         }
                                     })
                                 }).error(function(){
-                                    console.log("get question evaluation : error");            
+                                    console.log("get question evaluation : error");
                                 });
                             }
                         });
@@ -278,7 +287,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                 bool = true;
             }
         });
-        
+
         if(!bool)
             RubriqueShowed.push(idRubrique);
     }
@@ -330,7 +339,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                 $scope.selectQuestion = function(){
                     var myObject = {"question" : ""};
                     myObject.question = getQuestionById($scope.selectedIdQuestion);;
-                    $scope.models.lists.mesQuestionsSelected.push(myObject);  
+                    $scope.models.lists.mesQuestionsSelected.push(myObject);
                     $scope.selectedIdQuestion = null;
                     $scope.validerLesQuestions();
                 }
@@ -372,12 +381,12 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                                             $rootScope.QuestionSelected = myObject;
                                         }).error(function(){
                                             console.log('Add Question : error');
-                                        }); 
+                                        });
                                     }
                                 });
                             }).error(function(){
                                 console.log("get rubriqueEvaluation error");
-                            }); 
+                            });
                     }
                     $q.all(promiseRubEva).then(function(){
                         $q.all(addedQuestionEvaPromises).then(function(){
@@ -432,7 +441,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                             $scope.getEvaluationWithRubAndQst();
                         }).error(function(data) {
                             console.log("get EC : erreur");
-                        });   
+                        });
                     }).error(function(data) {
                         console.log("get UE : erreur");
                     });
@@ -482,7 +491,7 @@ angular.module('app').controller('EvaluationsUpdateCtrl', ['questionService','Qu
                                             "rubrique": data,
                                             "questions":mesQuestions
                                         }
-                                        $scope.mesRubriquesSelected.push(myObject);                                    
+                                        $scope.mesRubriquesSelected.push(myObject);
                                     }).error(function(status){
 
                                     });

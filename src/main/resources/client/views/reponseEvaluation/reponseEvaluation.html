@@ -1,7 +1,12 @@
 <div class="page page-table" data-ng-controller="infoEtudiantCtrl">
+
 <h3 style="text-align:center"><strong>{{selectedeval.codeFormation}} Evaluation d'un enseignement</strong></h3>
-    
-    
+
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:10px; padding-left:20px" >
+            <h5><a href="#/admin/etudiants/{{$root.connectedUser.noEtudiant}}"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Liste des Evaluations</a></h5>
+        </div>
+    </div>
     <section class=" panel panel-default ">
         <div class="panel-heading"><strong> Informations</strong> </div>
          <div class="panel-body"style="text-align: center;">
@@ -18,58 +23,58 @@
 					</div>
 					</ul>
 				</div>
-        
+
     </section>
  </div>
-    
+
  <div class="page page-table" data-ng-controller="EvaluationreponseCtrl">
     <section class="panel panel-default" >
-   
+
       <div class="panel-body">
         <div class =" col-md-12" style="overflow: auto ;">
-        
+
             <table class="table table-bordered">
                 <thead>
                     <tr class="head-table">
                         <th></th>
-                        <th>Minimum</th>
-                       
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        
+                        <th style="text-align: right;">Minimum</th>
+
+                        <th style="text-align: center;">1</th>
+                        <th style="text-align: center;">2</th>
+                        <th style="text-align: center;">3</th>
+                        <th style="text-align: center;">4</th>
+                        <th style="text-align: center;">5</th>
+
                         <th>Maximum</th>
                     </tr>
                 </thead>
 
-                <tbody ng-repeat="rubrique in rubriques | orderBy :'rubrique.rubrique.ordre'" >
+                <tbody ng-repeat="rubrique in rubriques | orderBy :'-rubrique.ordre'" >
                     <tr style="background-color: #f6f6f6">
                         <td>{{rubrique.rubrique.designation}}</td>
                        	<td colspan="7"></td>
                     </tr>
 
-                    <tr ng-repeat="question in rubrique.questions | orderBy :'question.question.ordre' ">
+                    <tr ng-repeat="question in rubrique.questions | orderBy :'-question.ordre' ">
                         <td>{{question.question.intitule}}</td>
-                        <td>{{question.qualificatif.minimal}}</td>
-                        
+                        <td style="text-align: right;">{{question.qualificatif.minimal}}</td>
+
                         <td>
-                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="1" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input class="radio-answer" ng-disabled="!answerStatus" type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="1" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="2" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input class="radio-answer" ng-disabled="!answerStatus" type="radio" ng-change="repondreAQuestion(question.reponseQuestion,2,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="2" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="3" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input class="radio-answer" ng-disabled="!answerStatus" type="radio" ng-change="repondreAQuestion(question.reponseQuestion,3,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="3" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="4" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input class="radio-answer" ng-disabled="!answerStatus" type="radio" ng-change="repondreAQuestion(question.reponseQuestion,4,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="4" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
                         <td>
-                        	<center><div class="radio"><input type="radio" ng-change="repondreAQuestion(question.reponseQuestion,1,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="5" name="{{$parent.$index}}{{$index}}"></div></center>
+                        	<center><div class="radio"><input class="radio-answer" ng-disabled="!answerStatus" type="radio" ng-change="repondreAQuestion(question.reponseQuestion,5,$parent.$index,$index)" ng-model="question.reponseQuestion.positionnement" value="5" name="{{$parent.$index}}{{$index}}"></div></center>
                        	</td>
-                        
+
                         <td>{{question.qualificatif.maximal}}</td>
                     </tr>
                 </tbody>

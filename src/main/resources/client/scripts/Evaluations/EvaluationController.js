@@ -60,6 +60,15 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
         promise.success(function(data){
             console.log(data);
             $rootScope.addedEvaluationId = data.idEvaluation;
+            $modal.open({
+                templateUrl: 'ajoutEvaSuccess.html',
+                backdrop: true,
+                controller: function ($scope, $modalInstance,$rootScope,questionService) {
+                    $scope.annuler = function(){
+                        $modalInstance.dismiss('cancel');
+                    }
+                }
+            });
         }).error(function(data){
             $modal.open({
                 templateUrl: 'ajoutEvaError.html',
@@ -79,9 +88,9 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
 
     /************************** Rubrique Start ************************************/
 
-    
 
-    var selectRubriqueInput = document.getElementById("selectRubrique");    
+
+    var selectRubriqueInput = document.getElementById("selectRubrique");
     selectRubriqueInput.setAttribute("disabled","");
 
     var RubriqueShowed = [];
@@ -254,7 +263,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                     RubriqueShowed.push($scope.models.lists.mesRubriquesSelected[j].rubrique.idRubrique);
                 }
             }
-        
+
     }
 
     $scope.deleteQuestionFromRubrique = function(idRubrique,idQuestion){
@@ -280,7 +289,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                                         }
                                     })
                                 }).error(function(){
-                                    console.log("get question evaluation : error");            
+                                    console.log("get question evaluation : error");
                                 });
                             }
                         });
@@ -305,7 +314,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                 bool = true;
             }
         });
-        
+
         if(!bool)
             RubriqueShowed.push(idRubrique);
     }
@@ -357,7 +366,7 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                 $scope.selectQuestion = function(){
                     var myObject = {"question" : ""};
                     myObject.question = getQuestionById($scope.selectedIdQuestion);;
-                    $scope.models.lists.mesQuestionsSelected.push(myObject);  
+                    $scope.models.lists.mesQuestionsSelected.push(myObject);
                     $scope.selectedIdQuestion = null;
                     $scope.validerLesQuestions();
                 }
@@ -399,12 +408,12 @@ angular.module('app').controller('EvaluationsCtrl', ['QuestionEvaluationsService
                                             $rootScope.QuestionSelected = myObject;
                                         }).error(function(){
                                             console.log('Add Question : error');
-                                        }); 
+                                        });
                                     }
                                 });
                             }).error(function(){
                                 console.log("get rubriqueEvaluation error");
-                            }); 
+                            });
                     }
                     $q.all(promiseRubEva).then(function(){
                         $q.all(addedQuestionEvaPromises).then(function(){

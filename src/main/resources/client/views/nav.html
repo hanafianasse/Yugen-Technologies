@@ -4,7 +4,7 @@
         <img style="display : block; margin : auto;" width="200px" height="200px" src="images/logo_3.png">
     </div>-->
     <ul id="nav" data-ng-controller="NavCtrl" data-slim-scroll data-collapse-nav data-highlight-active>
-        <li>
+        <li ng-show="$root.connectedUser.role != 'ETU' ">
             <a href="#/dashboard">
                 <i class="fa fa-dashboard"></i>
                 <span data-i18n="Tableau de bord"></span>
@@ -82,6 +82,13 @@
                 </li>
 
             </ul>
+        </li>
+        <li ng-show="$root.connectedUser.role == 'ETU' ">
+            <a href="#/admin/etudiants/{{$root.connectedUser.noEtudiant}}">
+                <i class="glyphicon glyphicon-tasks"></i>
+                <span data-i18n="Liste Evaluations"></span>
+            </a>
+
         </li>
     </ul>
 </div>

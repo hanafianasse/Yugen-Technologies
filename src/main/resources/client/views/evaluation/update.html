@@ -124,7 +124,7 @@
                                             {{item.rubrique.designation}}
                                             <i class="pull-left glyphicon chevron-icon" ng-class="{'glyphicon-chevron-down': verifyShowedRubriques(item.rubrique.idRubrique) == true, 'glyphicon-chevron-right': verifyShowedRubriques(item.rubrique.idRubrique) == false}"></i>
                                         </div>
-                                        
+
                                 </li>
                                 <div ng-if="verifyShowedRubriques(item.rubrique.idRubrique)" dnd-allowed-types="[rubriqueId]" dnd-list="item.questions">
                                     <li ng-if="item.questions.length != 0"
@@ -192,6 +192,16 @@
         <h4 class="modal-title">Erreur</h4>
     </div>
     <div class="modal-body">
-        <p>message here</p>
+        <p>Impossible de mettre à jour l'évaluation</p>
     </div>
 </script>
+
+    <script type="text/ng-template" id="updateEvaSuccess.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="annuler()">&times;</button>
+            <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+            <p>L'évaluation a bien été mise à jour</p>
+        </div>
+    </script>
